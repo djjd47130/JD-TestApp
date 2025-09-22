@@ -19,6 +19,8 @@ type
     pDetail: TPanel;
     lblCaption: TLabel;
     btnDetail: TJDFontButton;
+    pImage: TPanel;
+    Bevel1: TBevel;
   private
     FItem: ITMDBItem;
   public
@@ -38,7 +40,7 @@ constructor TfrmCommonListItem.Create(AOwner: TComponent);
 begin
   inherited;
   pDetail.Align:= alClient;
-
+  imgPicture.Align:= alClient;
 end;
 
 destructor TfrmCommonListItem.Destroy;

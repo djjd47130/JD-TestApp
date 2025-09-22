@@ -13,6 +13,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     Top = 33
     Width = 860
     Height = 521
+    VertScrollBar.Position = 1850
     VertScrollBar.Range = 3000
     VertScrollBar.Tracking = True
     Align = alClient
@@ -27,7 +28,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     OnMouseWheelUp = SBMouseWheelUp
     object pMovies: TPanel
       Left = 0
-      Top = 0
+      Top = -1850
       Width = 843
       Height = 671
       Align = alTop
@@ -735,7 +736,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pTV: TPanel
       Left = 0
-      Top = 671
+      Top = -1179
       Width = 843
       Height = 673
       Align = alTop
@@ -1438,7 +1439,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pMisc: TPanel
       Left = 0
-      Top = 1582
+      Top = -268
       Width = 843
       Height = 344
       Align = alTop
@@ -1757,7 +1758,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pConfig: TPanel
       Left = 0
-      Top = 1926
+      Top = 76
       Width = 843
       Height = 393
       Align = alTop
@@ -2172,7 +2173,7 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pPeople: TPanel
       Left = 0
-      Top = 1344
+      Top = -506
       Width = 843
       Height = 238
       Align = alTop
@@ -2447,9 +2448,6 @@ inherited frmTMDBHome: TfrmTMDBHome
       TabOrder = 0
       Text = 'User Login'
       OnClick = btnUserClick
-      ExplicitLeft = 630
-      ExplicitTop = -5
-      ExplicitHeight = 32
     end
   end
   object pUser: TPanel

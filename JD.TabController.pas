@@ -232,11 +232,26 @@ end;
 
 procedure TJDTabController.DeleteTab(const Index: Integer);
 begin
-  FItems.Delete(Index);
-  if Index > 0 then
-    ActiveTabIndex:= Index-1
-  else if TabCount > 0 then
-    ActiveTabIndex:= Index;
+  for var X := 0 to FItems.Count-1 do begin
+    if FItems[X].ChromeTab.Index = Index then begin
+
+      //FItems.Delete(Index);
+      //if Index > 0 then
+      //  ActiveTabIndex:= Index-1
+      //else if TabCount > 0 then
+      //  ActiveTabIndex:= Index;
+
+
+      FItems.Delete(X);
+      if X > 0 then
+        ActiveTabIndex:= X-1
+      else if TabCount > 0 then
+        ActiveTabIndex:= X;
+
+      Break;
+    end;
+  end;
+
 end;
 
 function TJDTabController.CreateTab(AClass: TfrmContentBaseClass;

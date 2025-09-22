@@ -4,7 +4,6 @@ unit uContentPageBase;
   TfrmContentPageBase - A tabular form intented to show a list of items with pagination capabilities.
 
   TODO:
-  - Eliminate TListView control and dependencies in favor of new list item concept
   - Change list item concept to be more general-purpose, not tied to TMDB
   - Go to top of list after refreashing / reloading
   - Implement optional images
@@ -170,6 +169,7 @@ begin
   HideDetail;
   UpdateFooter;
   PopulateResults;
+  sbItems.VertScrollBar.Position:= 0;
   Result:= True;
 end;
 
@@ -246,9 +246,17 @@ begin
   P.Parent:= sbItems;
   P.Align:= alTop;
   P.Top:= H + 1;
-  P.LoadItem(AItem);
   P.btnDetail.OnClick:= Self.lstResultsClick;
   Result:= P;
+
+  try
+    P.LoadItem(AItem);
+  except
+    on E: Exception do begin
+      //TODO
+    end;
+  end;
+
 end;
 
 procedure TfrmContentPageBase.PopulateResults;
@@ -268,7 +276,6 @@ begin
   finally
     sbItems.EnableAlign;
   end;
-
 end;
 
 procedure TfrmContentPageBase.PrepSearch;

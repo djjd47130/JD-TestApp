@@ -34,7 +34,6 @@ type
   TfrmAppSetup = class(TfrmContentBase)
     btnSave: TJDFontButton;
     Pages: TPageControl;
-    tabAPIAuth: TTabSheet;
     tabBrowser: TTabSheet;
     GroupBox1: TGroupBox;
     Panel3: TPanel;
@@ -43,31 +42,6 @@ type
     Panel4: TPanel;
     Label4: TLabel;
     ComboBox1: TComboBox;
-    sbTMDB: TScrollBox;
-    gbAPIAuthMethod: TGroupBox;
-    gbAPIAuthMethodAPIKey: TPanel;
-    Label1: TLabel;
-    txtAPIKey: TEdit;
-    gbAPIAuthMethodAccessToken: TPanel;
-    Label3: TLabel;
-    txtAccessToken: TEdit;
-    Panel2: TPanel;
-    rAuthToken: TRadioButton;
-    rAuthKey: TRadioButton;
-    btnValidateKey: TButton;
-    gbLocaleOptions: TGroupBox;
-    Panel6: TPanel;
-    Label5: TLabel;
-    cboLanguage: TComboBox;
-    Panel5: TPanel;
-    Label6: TLabel;
-    cboCountry: TComboBox;
-    Panel1: TPanel;
-    Label7: TLabel;
-    cboTimeZone: TComboBox;
-    pTMDBAuth: TfrmCommonCollapsePanel;
-    Label8: TLabel;
-    Label9: TLabel;
     tabGeneral: TTabSheet;
     GroupBox2: TGroupBox;
     Panel8: TPanel;
@@ -77,8 +51,6 @@ type
     Label10: TLabel;
     ComboBox3: TComboBox;
     procedure FormCreate(Sender: TObject);
-
-    procedure APIAuthMethodRadioClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure txtAPIKeyChange(Sender: TObject);
@@ -155,24 +127,12 @@ begin
   //Setup UI
   Pages.Align:= alClient;
 
-  sbTMDB.Align:= alClient;
-
-
 end;
 
 procedure TfrmAppSetup.FormShow(Sender: TObject);
 begin
   inherited;
   LoadSetup;
-  {
-  if not AppSetup.IsConfigured then begin
-    //TODO: Hide all other tabs...
-    Self.Pages.ActivePage:= tabAPIAuth;
-  end else begin
-
-    btnSave.Enabled:= False;
-  end;
-  }
 end;
 
 procedure TfrmAppSetup.Label9Click(Sender: TObject);
@@ -186,32 +146,16 @@ end;
 procedure TfrmAppSetup.LoadSetup;
 begin
 
+  //TODO
 
 end;
 
 procedure TfrmAppSetup.SaveSetup;
 begin
 
-  AppSetup.SaveSetup;
-end;
+  //TODO
 
-procedure TfrmAppSetup.APIAuthMethodRadioClick(Sender: TObject);
-var
-  T: Integer;
-  procedure HideAll;
-  begin
-    gbAPIAuthMethodAPIKey.Visible:= False;
-    gbAPIAuthMethodAccessToken.Visible:= False;
-  end;
-begin
-  inherited;
-  HideAll;
-  T:= TControl(Sender).Tag;
-  case T of
-    0: gbAPIAuthMethodAPIKey.Visible:= True;
-    1: gbAPIAuthMethodAccessToken.Visible:= True;
-  end;
-  btnSave.Enabled:= True;
+  AppSetup.SaveSetup;
 end;
 
 procedure TfrmAppSetup.btnSaveClick(Sender: TObject);

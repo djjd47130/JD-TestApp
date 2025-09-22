@@ -22,15 +22,9 @@ uses
   System.NetEncoding,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics,
 
-  JD.TMDB,
-  JD.TMDB.Intf,
-  JD.TMDB.Common,
-
   JD.TabController,
   uContentBase,
   uContentBrowser,
-  uTMDB,
-  uTMDBSetup,
 
   Jpeg, PngImage,
 
@@ -41,10 +35,13 @@ uses
   Vcl.Styles.Utils,
   Vcl.Styles.Fixes,
 
-  uTMDBLoginBrowser,
   uMainMenu,
   uAppSetup, System.ImageList, Vcl.ImgList, JD.Favicons, Vcl.AppEvnts, Vcl.Mask;
 
+
+const
+  MAIN_MENU_WIDTH_OPEN = 370;
+  MAIN_MENU_WIDTH_CLOSED = 70;
 
 
 type
@@ -90,6 +87,7 @@ type
     procedure ShowMenu(const Value: Boolean);
     property FullScreen: Boolean read FFullScreen write SetFullScreen;
     property ContentOnly: Boolean read FContentOnly write SetContentOnly;
+    function OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
   end;
 
 var
@@ -167,15 +165,15 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-  dmTMDB.PrepAPI;
-
-  //FMenu.EnableTMDBItems(False);
+  //Main Menu
+  //TODO: Populate menu with configured features...
 
 end;
 
 procedure TfrmMain.JDFavicons1LookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
   var Handled: Boolean);
 begin
+  //Tabs
   //TODO: Return image if not a web URL...
 
 end;
@@ -195,17 +193,29 @@ end;
 procedure TfrmMain.TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
 begin
   //Tabs
-  TabController.HandleTabChanged(ATab);
+  pContent.DisableAlign;
+  try
+    TabController.HandleTabChanged(ATab);
+  finally
+    pContent.EnableAlign;
+  end;
 end;
 
 procedure TfrmMain.TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
-var
-  T: TJDTabRef;
 begin
   //Tabs
   Handled:= True;
-  T:= TabController.CreateTab(TfrmContentBrowser);
-  (T.Content as TfrmContentBrowser).Navigate('https://google.com'); //TODO: Navigate to home page...
+  OpenNewBrowserTab;
+end;
+
+function TfrmMain.OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
+begin
+  //Tabs
+  var TURL:= URL;
+  if TURL = '' then
+    TURL:= 'https://google.com'; //TODO: Use default home page option...
+  Result:= TabController.CreateTab(TfrmContentBrowser);
+  (Result.Content as TfrmContentBrowser).Navigate(TURL);
   ShowMenu(False);
 end;
 
@@ -215,7 +225,7 @@ begin
   //Tabs
   Close:= False;
   TabController.DeleteTab(ATab.Index);
-  //TODO: This closes wrong tab if it has been moved...
+  //TODO: This closes wrong tab if one has been moved (wrong index)...
 
   //TODO: This often leaves behind a void where tab used to be...
 
@@ -260,17 +270,17 @@ end;
 procedure TfrmMain.ShowMenu(const Value: Boolean);
 begin
   //Main Menu
-  pMenu.DisableAlign;
+  Self.DisableAlign;
   try
     if Value then begin
       pMenu.Tag:= 1;
-      pMenu.Width:= 365;
+      pMenu.Width:= MAIN_MENU_WIDTH_OPEN;
     end else begin
       pMenu.Tag:= 0;
-      pMenu.Width:= 70;
+      pMenu.Width:= MAIN_MENU_WIDTH_CLOSED;
     end;
   finally
-    pMenu.EnableAlign;
+    Self.EnableAlign;
   end;
 end;
 

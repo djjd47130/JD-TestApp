@@ -1,14 +1,5 @@
 unit uContentBase;
 
-(*
-
-
-  TODO:
-  - Strip TMDB-related functionality to a new TMDB-specific base form.
-    - Update all TMDB-related forms to inherit from new form instead of core base
-
-*)
-
 interface
 
 uses

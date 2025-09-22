@@ -196,11 +196,12 @@ begin
   gbUserLogin.Align:= alClient;
   FAuthMethod:= 2;
 
-end;
 
-procedure TfrmTMDBHome.FormShow(Sender: TObject);
-begin
-  inherited;
+
+
+
+  //MOVED from FormShow...
+
   dmTMDB.PrepAPI;
 
   EnableTMDBItems(False);
@@ -208,8 +209,6 @@ begin
   //Check whether API is configured and accessible.
   //  If not, navigate to App Setup accordingly.
   var Configured:= TMDBSetup.IsConfigured;
-
-
 
   // TMDB Related
   if not Configured then begin
@@ -249,6 +248,14 @@ begin
       end;
     end;
   end;
+
+end;
+
+procedure TfrmTMDBHome.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  //
 
 end;
 
@@ -399,8 +406,7 @@ end;
 procedure TfrmTMDBHome.JDFontButton1Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentBrowser);
-  //TODO: Navigate to TMDB website...
+  frmMain.OpenNewBrowserTab('https://www.themoviedb.org/');
   //HideMenu;
 end;
 
@@ -643,7 +649,7 @@ end;
 procedure TfrmTMDBHome.JDFontButton49Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmTMDBSetup);
+  TabController.CreateTab(TfrmTMDBSetup, -1, 0);
   //HideMenu;
 end;
 

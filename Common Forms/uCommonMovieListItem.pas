@@ -6,6 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCommonListItem, JD.Common, JD.Ctrls, JD.Ctrls.FontButton, Vcl.StdCtrls,
   Vcl.ExtCtrls,
+  uTMDB,
   JD.TMDB.Intf, Vcl.Imaging.GIFImg, Vcl.Imaging.pngimage;
 
 type
@@ -17,17 +18,40 @@ type
   private
     { Private declarations }
   public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
     procedure LoadItem(const Item: ITMDBItem); override;
   end;
 
 var
   frmCommonMovieListItem: TfrmCommonMovieListItem;
 
+
 implementation
 
 {$R *.dfm}
 
 { TfrmCommonListItem1 }
+
+constructor TfrmCommonMovieListItem.Create(AOwner: TComponent);
+begin
+  inherited;
+
+  if imgPicture.Picture.Graphic <> nil then begin
+    if imgPicture.Picture.Graphic is TGIFImage then begin
+      //TGIFImage(imgPicture.Picture.Graphic).AnimationSpeed:= 50;
+      TGIFImage(imgPicture.Picture.Graphic).Animate:= True;
+    end;
+  end;
+
+end;
+
+destructor TfrmCommonMovieListItem.Destroy;
+begin
+
+  inherited;
+end;
 
 procedure TfrmCommonMovieListItem.LoadItem(const Item: ITMDBItem);
 begin
@@ -54,6 +78,16 @@ begin
     lblVoteAvg.Caption:= '';
   end;
 
+
+  //Image
+  if ITMDBMovie(Item).PosterPath <> '' then
+    TMDBDownloadImageAsync(ITMDBMovie(Item).PosterPath, imgPicture, 'w154',
+      procedure
+      begin
+        pImage.Color:= clBlack;
+      end);
+
 end;
+
 
 end.

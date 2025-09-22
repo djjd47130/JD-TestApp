@@ -24,12 +24,14 @@ type
     Label3: TLabel;
     pConfig: TPanel;
     Label4: TLabel;
-    JDFontButton3: TJDFontButton;
     JDFontButton49: TJDFontButton;
     JDFontButton1: TJDFontButton;
     JDFontButton24: TJDFontButton;
     JDFontButton2: TJDFontButton;
     JDFontButton4: TJDFontButton;
+    JDFontButton3: TJDFontButton;
+    JDFontButton5: TJDFontButton;
+    JDFontButton6: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure JDFontButton49Click(Sender: TObject);
     procedure CategoryPanelGroup1MouseWheelDown(Sender: TObject;
@@ -147,14 +149,14 @@ begin
             B.Margins.Right:= 5;
           end else begin
             B.ImagePosition:= fpImgLeft;
-            B.Margins.Left:= 20;
-            B.Margins.Right:= 20;
+            B.Margins.Left:= 10; // 20;
+            B.Margins.Right:= 10; // 20;
           end;
 
         end;
       end;
       if Value then begin
-        P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + 20;
+        P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + 2; // 20;
       end else begin
         P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + L.Height + 10;
       end;
@@ -197,21 +199,21 @@ end;
 procedure TfrmMainMenu.JDFontButton1Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentBrowser);
+  frmMain.OpenNewBrowserTab;
   HideMenu;
 end;
 
 procedure TfrmMainMenu.JDFontButton24Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmTMDBHome);
+  TabController.CreateTab(TfrmTMDBHome, -1, 0);
   HideMenu;
 end;
 
 procedure TfrmMainMenu.JDFontButton49Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmAppSetup);
+  TabController.CreateTab(TfrmAppSetup, -1, 0);
   HideMenu;
 end;
 

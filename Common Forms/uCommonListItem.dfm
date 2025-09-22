@@ -12,28 +12,26 @@ object frmCommonListItem: TfrmCommonListItem
   ParentDoubleBuffered = False
   ParentFont = False
   TabOrder = 0
-  object imgPicture: TImage
-    AlignWithMargins = True
-    Left = 3
-    Top = 3
-    Width = 46
-    Height = 39
-    Align = alLeft
-    Center = True
-    Proportional = True
-    Stretch = True
-    ExplicitHeight = 64
+  object Bevel1: TBevel
+    Left = 0
+    Top = 43
+    Width = 574
+    Height = 2
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = -2
   end
   object pDetail: TPanel
     AlignWithMargins = True
     Left = 118
     Top = 3
     Width = 406
-    Height = 39
+    Height = 37
     Align = alRight
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitHeight = 39
     object lblCaption: TLabel
       AlignWithMargins = True
       Left = 3
@@ -54,7 +52,7 @@ object frmCommonListItem: TfrmCommonListItem
     Left = 530
     Top = 3
     Width = 41
-    Height = 39
+    Height = 37
     Cursor = crHandPoint
     Hint = 'Open Item Details'
     Align = alRight
@@ -93,5 +91,32 @@ object frmCommonListItem: TfrmCommonListItem
     SubTextFont.Style = []
     TabOrder = 1
     Text = 'Apply Search'
+    ExplicitHeight = 39
+  end
+  object pImage: TPanel
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 62
+    Height = 37
+    Align = alLeft
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 2
+    StyleElements = [seFont, seBorder]
+    ExplicitHeight = 39
+    object imgPicture: TImage
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 46
+      Height = 31
+      Align = alLeft
+      Center = True
+      Proportional = True
+      Stretch = True
+      ExplicitHeight = 64
+    end
   end
 end

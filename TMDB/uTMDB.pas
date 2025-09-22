@@ -3,8 +3,14 @@ unit uTMDB;
 interface
 
 uses
+  Winapi.Windows,
   System.SysUtils, System.Classes, JD.TMDB, JD.TMDB.Common,
   XSuperObject,
+
+  IdURI, IdHTTP, IdIOHandler, IdIOHandlerSocket,
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
+
+  Vcl.Graphics, Vcl.ExtCtrls,
   uTMDBLoginBrowser;
 
 type
@@ -62,6 +68,9 @@ type
 var
   dmTMDB: TdmTMDB;
 
+procedure TMDBDownloadImageAsync(const URL: string; Image: TImage; const Size: String = 'original';
+  Callback: TProc = nil);
+
 function TMDBSetup: TTMDBSetup;
 
 implementation
@@ -84,6 +93,81 @@ begin
     _TMDBSetup:= TTMDBSetup.Create;
   Result:= _TMDBSetup;
 end;
+
+
+
+
+procedure TMDBDownloadImageAsync(const URL: string; Image: TImage; const Size: String = 'original';
+  Callback: TProc = nil);
+begin
+  TThread.CreateAnonymousThread(
+    procedure
+    var
+      HTTP: TIdHTTP;
+      SSEIO: TIdSSLIOHandlerSocketOpenSSL;
+      Stream: TMemoryStream;
+      Picture: TPicture;
+    begin
+      //HTTP / HTTPS
+      HTTP := TIdHTTP.Create(nil);
+      SSEIO := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+      SSEIO.SSLOptions.SSLVersions := [sslvTLSv1,sslvTLSv1_1,sslvTLSv1_2];
+      SSEIO.SSLOptions.Mode := sslmClient;
+      SSEIO.SSLOptions.VerifyMode := [];
+      SSEIO.SSLOptions.VerifyDepth := 0;
+      HTTP.IOHandler := SSEIO;
+
+      //Buffers
+      Stream := TMemoryStream.Create;
+      Picture := TPicture.Create;
+      try
+        try
+
+          //Concatenate image URL
+          var TURL:= dmTMDB.TMDB.Client.GetImageURL(URL, Size);
+
+          //Download image
+          HTTP.Get(TURL, Stream);
+          Stream.Position := 0;
+
+          // Load the image into a TPicture
+          Picture.LoadFromStream(Stream);
+
+          // Update the UI in the main thread
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              Image.Picture.Assign(Picture);
+
+              if Assigned(Callback) then
+                Callback;
+            end
+          );
+        except
+          on E: Exception do begin
+            // Handle download errors
+            TThread.Synchronize(nil,
+              procedure
+              begin
+                //ShowMessage('Error downloading image: ' + E.Message);
+              end
+            );
+          end;
+        end;
+      finally
+        SSEIO.Free;
+        HTTP.Free;
+        Stream.Free;
+        Picture.Free;
+      end;
+
+
+    end
+  ).Start;
+end;
+
+
+{ TdmTMDB }
 
 procedure TdmTMDB.PrepAPI;
 begin

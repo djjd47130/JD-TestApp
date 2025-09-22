@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0060C2BF-2707-4E40-9BF3-C6504E952179}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\JD-TMDB\JDTMDBLib.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\JD-TMDB\dclJDTMDBLib.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="JDTestApp.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="JDTMDBLib">
+        <MSBuild Projects="..\JD-TMDB\JDTMDBLib.dproj"/>
+    </Target>
+    <Target Name="JDTMDBLib:Clean">
+        <MSBuild Projects="..\JD-TMDB\JDTMDBLib.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JDTMDBLib:Make">
+        <MSBuild Projects="..\JD-TMDB\JDTMDBLib.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclJDTMDBLib">
+        <MSBuild Projects="..\JD-TMDB\dclJDTMDBLib.dproj"/>
+    </Target>
+    <Target Name="dclJDTMDBLib:Clean">
+        <MSBuild Projects="..\JD-TMDB\dclJDTMDBLib.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclJDTMDBLib:Make">
+        <MSBuild Projects="..\JD-TMDB\dclJDTMDBLib.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="JDTestApp">
+        <MSBuild Projects="JDTestApp.dproj"/>
+    </Target>
+    <Target Name="JDTestApp:Clean">
+        <MSBuild Projects="JDTestApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JDTestApp:Make">
+        <MSBuild Projects="JDTestApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="JDTMDBLib;dclJDTMDBLib;JDTestApp"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="JDTMDBLib:Clean;dclJDTMDBLib:Clean;JDTestApp:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="JDTMDBLib:Make;dclJDTMDBLib:Make;JDTestApp:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
