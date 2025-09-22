@@ -1,0 +1,97 @@
+object frmCommonListItem: TfrmCommonListItem
+  Left = 0
+  Top = 0
+  Width = 574
+  Height = 45
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
+  ParentDoubleBuffered = False
+  ParentFont = False
+  TabOrder = 0
+  object imgPicture: TImage
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 46
+    Height = 39
+    Align = alLeft
+    Center = True
+    Proportional = True
+    Stretch = True
+    ExplicitHeight = 64
+  end
+  object pDetail: TPanel
+    AlignWithMargins = True
+    Left = 118
+    Top = 3
+    Width = 406
+    Height = 39
+    Align = alRight
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvNone
+    TabOrder = 0
+    object lblCaption: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 400
+      Height = 25
+      Align = alTop
+      AutoSize = False
+      Caption = 'Caption'
+      ShowAccelChar = False
+      Layout = tlCenter
+      ExplicitLeft = 6
+      ExplicitTop = 7
+    end
+  end
+  object btnDetail: TJDFontButton
+    AlignWithMargins = True
+    Left = 530
+    Top = 3
+    Width = 41
+    Height = 39
+    Cursor = crHandPoint
+    Hint = 'Open Item Details'
+    Align = alRight
+    Default = True
+    DrawStyle = fdTransparent
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    Image.AutoSize = False
+    Image.Text = #61524
+    Image.Font.Charset = DEFAULT_CHARSET
+    Image.Font.Color = clWindowText
+    Image.Font.Height = -24
+    Image.Font.Name = 'FontAwesome'
+    Image.Font.Style = []
+    Image.Font.Quality = fqAntialiased
+    Image.StandardColor = fcGreen
+    Overlay.Text = #57715
+    Overlay.Font.Charset = DEFAULT_CHARSET
+    Overlay.Font.Color = clWindowText
+    Overlay.Font.Height = -7
+    Overlay.Font.Name = 'FontAwesome'
+    Overlay.Font.Style = []
+    Overlay.Font.Quality = fqAntialiased
+    Overlay.Position = foNone
+    Overlay.Margin = 3
+    ImagePosition = fpImgOnly
+    Margin = 8
+    Spacing = 8
+    SubTextFont.Charset = DEFAULT_CHARSET
+    SubTextFont.Color = clGray
+    SubTextFont.Height = -11
+    SubTextFont.Name = 'Tahoma'
+    SubTextFont.Style = []
+    TabOrder = 1
+    Text = 'Apply Search'
+  end
+end
