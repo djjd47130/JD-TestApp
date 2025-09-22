@@ -79,3 +79,9 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+Win32/Debug/AppConfig.json
+Win32/Debug/TMDBConfig.json
+Win32/Debug/JDTestApp.exe.WebView2
+Win32/Debug/*.nupkg
+Win32/Debug/*.lib
