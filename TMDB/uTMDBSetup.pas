@@ -115,6 +115,8 @@ end;
 procedure TfrmTMDBSetup.FormCreate(Sender: TObject);
 begin
   inherited;
+  sbTMDB.Align:= alClient;
+
   //var F:= TfrmCommonCollapsePanel.Create(sbTMDB);
   //F.Parent:= sbTMDB;
   //F.Align:= alTop;

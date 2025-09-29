@@ -21,17 +21,20 @@ inherited frmContentSearchPeople: TfrmContentSearchPeople
       Width = 681
       ExplicitWidth = 681
       inherited lblPage: TLabel
-        Left = 444
-      end
-      inherited btnPagePrev: TButton
-        Left = 401
-      end
-      inherited btnPageNext: TButton
-        Left = 594
+        Left = 440
+        ExplicitLeft = 444
       end
       inherited btnRefresh: TJDFontButton
         Left = 637
         ExplicitLeft = 637
+      end
+      inherited btnPageNext: TJDFontButton
+        Left = 590
+        ExplicitLeft = 590
+      end
+      inherited btnPagePrev: TJDFontButton
+        Left = 393
+        ExplicitLeft = 393
       end
     end
     inherited pDetail: TPanel

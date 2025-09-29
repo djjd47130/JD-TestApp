@@ -1,7 +1,8 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'SPACEBALLS: The Web Browser'
+  Cursor = crHandPoint
+  Caption = 'JD Testing Grounds'
   ClientHeight = 515
   ClientWidth = 888
   Color = clBtnFace
@@ -23,7 +24,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 888
-    Height = 33
+    Height = 35
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
@@ -31,10 +32,11 @@ object frmMain: TfrmMain
       Left = 0
       Top = 0
       Width = 888
-      Height = 33
+      Height = 35
       OnActiveTabChanged = TabsActiveTabChanged
       OnButtonAddClick = TabsButtonAddClick
       OnButtonCloseTabClick = TabsButtonCloseTabClick
+      OnShowHint = TabsShowHint
       ActiveTabIndex = -1
       Images = imgFavicons16
       Options.Display.CloseButton.Offsets.Vertical = 7
@@ -90,7 +92,7 @@ object frmMain: TfrmMain
       Options.Display.Tabs.ShowPinnedTabText = False
       Options.Display.TabContainer.TransparentBackground = True
       Options.Display.TabContainer.OverlayButtons = True
-      Options.Display.TabContainer.PaddingLeft = 72
+      Options.Display.TabContainer.PaddingLeft = 70
       Options.Display.TabContainer.PaddingRight = 5
       Options.Display.TabMouseGlow.Offsets.Vertical = 0
       Options.Display.TabMouseGlow.Offsets.Horizontal = 0
@@ -363,26 +365,26 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ShowHint = True
       TabOrder = 0
+      ExplicitTop = -6
     end
     object btnMenu: TJDFontButton
-      AlignWithMargins = True
       Left = 0
-      Top = -1
+      Top = 0
       Width = 70
-      Height = 33
+      Height = 35
       Cursor = crHandPoint
       Hint = 'Show / Hide Main Menu'
       DrawStyle = fdTransparent
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -11
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       Image.AutoSize = False
       Image.Text = #61641
       Image.Font.Charset = DEFAULT_CHARSET
       Image.Font.Color = clWindowText
-      Image.Font.Height = -27
+      Image.Font.Height = -21
       Image.Font.Name = 'FontAwesome'
       Image.Font.Style = []
       Image.Font.Quality = fqAntialiased
@@ -397,26 +399,25 @@ object frmMain: TfrmMain
       Overlay.Position = foNone
       Overlay.Margin = 3
       ImagePosition = fpImgOnly
-      Margin = 8
-      Spacing = 8
       SubTextFont.Charset = DEFAULT_CHARSET
       SubTextFont.Color = clGray
       SubTextFont.Height = -11
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
       TabOrder = 1
-      Text = 'User Login'
+      Text = ''
       OnClick = btnMenuClick
     end
   end
   object pContent: TPanel
     Left = 704
-    Top = 33
+    Top = 35
     Width = 184
-    Height = 463
+    Height = 461
     Align = alRight
     BevelOuter = bvNone
-    TabOrder = 1
+    TabOrder = 2
+    ExplicitTop = 41
   end
   object Stat: TStatusBar
     Left = 0
@@ -431,26 +432,73 @@ object frmMain: TfrmMain
   object pMenu: TPanel
     Tag = 1
     Left = 0
-    Top = 33
-    Width = 89
-    Height = 463
+    Top = 35
+    Width = 70
+    Height = 461
     Align = alLeft
     BevelEdges = [beRight]
     BevelKind = bkSoft
     BevelOuter = bvNone
-    TabOrder = 3
+    TabOrder = 1
+  end
+  object btnDummy: TJDFontButton
+    AlignWithMargins = True
+    Left = 224
+    Top = 418
+    Width = 401
+    Height = 55
+    Margins.Left = 20
+    Margins.Top = 1
+    Margins.Right = 20
+    Margins.Bottom = 1
+    DrawStyle = fdTransparent
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    Image.AutoSize = False
+    Image.Text = #61527
+    Image.Font.Charset = DEFAULT_CHARSET
+    Image.Font.Color = clWindowText
+    Image.Font.Height = -27
+    Image.Font.Name = 'FontAwesome'
+    Image.Font.Style = []
+    Image.Font.Quality = fqAntialiased
+    Image.StandardColor = fcRed
+    Overlay.Text = #57715
+    Overlay.Font.Charset = DEFAULT_CHARSET
+    Overlay.Font.Color = clWindowText
+    Overlay.Font.Height = -16
+    Overlay.Font.Name = 'FontAwesome'
+    Overlay.Font.Style = []
+    Overlay.Font.Quality = fqAntialiased
+    Overlay.Position = foNone
+    Overlay.Margin = 3
+    Margin = 6
+    ShowFocusRect = True
+    Spacing = 10
+    SubText = 'It is a dummy button for focus tricks.'
+    SubTextStyle = fsBelow
+    SubTextFont.Charset = DEFAULT_CHARSET
+    SubTextFont.Color = clGray
+    SubTextFont.Height = -16
+    SubTextFont.Name = 'Tahoma'
+    SubTextFont.Style = []
+    TabOrder = 4
+    Text = 'DO NOT HIDE THIS BUTTON'
   end
   object imgFavicons16: TImageList
     Left = 344
     Top = 104
   end
-  object JDFavicons1: TJDFavicons
+  object Favicons: TJDFavicons
     ImageLists = <
       item
         ImageList = imgFavicons16
       end>
     Mode = fmGoogle
-    OnLookupFavicon = JDFavicons1LookupFavicon
+    OnLookupFavicon = FaviconsLookupFavicon
     Left = 344
     Top = 56
   end

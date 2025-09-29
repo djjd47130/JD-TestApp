@@ -14,6 +14,9 @@ uses
   uTMDBHome,
 
   uContentBrowser,
+  uContentClock,
+  uContentFileBrowser,
+  uJDSysMonGaugesTest,
 
   Vcl.StdCtrls;
 
@@ -25,13 +28,23 @@ type
     pConfig: TPanel;
     Label4: TLabel;
     JDFontButton49: TJDFontButton;
-    JDFontButton1: TJDFontButton;
     JDFontButton24: TJDFontButton;
-    JDFontButton2: TJDFontButton;
     JDFontButton4: TJDFontButton;
     JDFontButton3: TJDFontButton;
     JDFontButton5: TJDFontButton;
     JDFontButton6: TJDFontButton;
+    Panel1: TPanel;
+    Label1: TLabel;
+    JDFontButton7: TJDFontButton;
+    Panel2: TPanel;
+    Label2: TLabel;
+    JDFontButton1: TJDFontButton;
+    JDFontButton8: TJDFontButton;
+    JDFontButton9: TJDFontButton;
+    JDFontButton10: TJDFontButton;
+    JDFontButton11: TJDFontButton;
+    JDFontButton12: TJDFontButton;
+    JDFontButton2: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure JDFontButton49Click(Sender: TObject);
     procedure CategoryPanelGroup1MouseWheelDown(Sender: TObject;
@@ -41,6 +54,15 @@ type
     procedure FormResize(Sender: TObject);
     procedure JDFontButton1Click(Sender: TObject);
     procedure JDFontButton24Click(Sender: TObject);
+    procedure JDFontButton2Click(Sender: TObject);
+    procedure JDFontButton4Click(Sender: TObject);
+    procedure JDFontButton5Click(Sender: TObject);
+    procedure JDFontButton6Click(Sender: TObject);
+    procedure JDFontButton1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure JDFontButton7Click(Sender: TObject);
+    procedure JDFontButton8Click(Sender: TObject);
+    procedure JDFontButton11Click(Sender: TObject);
+    procedure JDFontButton9Click(Sender: TObject);
   private
     procedure CalcScrollHeight;
     procedure SetNarrowMode(const Value: Boolean);
@@ -196,11 +218,27 @@ begin
   SB.VertScrollBar.Position:= SB.VertScrollBar.Position - 20;
 end;
 
+procedure TfrmMainMenu.JDFontButton11Click(Sender: TObject);
+begin
+  inherited;
+
+  HideMenu;
+end;
+
 procedure TfrmMainMenu.JDFontButton1Click(Sender: TObject);
 begin
   inherited;
   frmMain.OpenNewBrowserTab;
   HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_SPACE) and (Sender is TJDFontButton) then begin
+    var Tmp:= TJDFontButton(Sender);
+    Tmp.Click;
+  end;
 end;
 
 procedure TfrmMainMenu.JDFontButton24Click(Sender: TObject);
@@ -210,10 +248,59 @@ begin
   HideMenu;
 end;
 
+procedure TfrmMainMenu.JDFontButton2Click(Sender: TObject);
+begin
+  inherited;
+
+  HideMenu;
+end;
+
 procedure TfrmMainMenu.JDFontButton49Click(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmAppSetup, -1, 0);
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton4Click(Sender: TObject);
+begin
+  inherited;
+
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton5Click(Sender: TObject);
+begin
+  inherited;
+
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton6Click(Sender: TObject);
+begin
+  inherited;
+
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton7Click(Sender: TObject);
+begin
+  inherited;
+  TabController.CreateTab(TfrmContentClock, -1, 0);
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton8Click(Sender: TObject);
+begin
+  inherited;
+  TabController.CreateTab(TfrmContentFileBrowser, -1, 0);
+  HideMenu;
+end;
+
+procedure TfrmMainMenu.JDFontButton9Click(Sender: TObject);
+begin
+  inherited;
+  TabController.CreateTab(TfrmJDSSysMonGaugesTest, -1, 0);
   HideMenu;
 end;
 

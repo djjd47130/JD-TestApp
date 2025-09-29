@@ -7,15 +7,14 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentPageBase, JD.Common, JD.Ctrls,
   JD.Ctrls.FontButton, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
   JD.TMDB.Intf, JD.TMDB.Common,
-  uCommonListItem,
-  uCommonMovieListItem;
+  uTMDBListItem,
+  uTMDBMovieListItem;
 
 type
   TMoviePageProc = reference to procedure(Sender: TObject;
     const Page: Integer; var Data: ITMDBMoviePage);
 
   TfrmContentMoviePage = class(TfrmContentPageBase)
-    procedure btnRefreshClick(Sender: TObject);
   private
     FBaseName: String;
     FOnGetPage: TMoviePageProc;
@@ -28,9 +27,9 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    function AddListItem(AItem: ITMDBItem): TfrmCommonListItem; override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    function AddListItem(AItem: ITMDBItem): TfrmTMDBListItem; override;
 
     procedure DoOnGetPage(const Page: Integer; var Data: ITMDBMoviePage); virtual;
   public
@@ -64,10 +63,10 @@ end;
 
 { TfrmContentMoviePage }
 
-function TfrmContentMoviePage.AddListItem(AItem: ITMDBItem): TfrmCommonListItem;
+function TfrmContentMoviePage.AddListItem(AItem: ITMDBItem): TfrmTMDBListItem;
 begin
   var H:= GetTotalItemsHeight;
-  var P:= TfrmCommonMovieListItem.Create(sbItems);
+  var P:= TfrmTMDBMovieListItem.Create(sbItems);
   P.Name:= 'pItem'+IntToStr(AItem.Index);
   P.Tag:= AItem.Index;
   P.btnDetail.Tag:= AItem.Index;
@@ -77,12 +76,12 @@ begin
   P.LoadItem(AItem);
   P.btnDetail.OnClick:= lstResultsClick;
   Result:= P;
-end;
 
-procedure TfrmContentMoviePage.btnRefreshClick(Sender: TObject);
-begin
-  inherited;
-  Self.RefreshData;
+  P.Show;
+  //P.BringToFront;
+  //Application.ProcessMessages;
+
+  //ChangeTitle;
 end;
 
 procedure TfrmContentMoviePage.DoOnGetPage(const Page: Integer;
@@ -117,7 +116,7 @@ begin
 end;
 
 procedure TfrmContentMoviePage.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
   T: TJDTabRef;
   M: ITMDBMovie;
@@ -179,7 +178,7 @@ end;
 }
 
 
-procedure TfrmContentMoviePage.ShowDetail(const Index: Integer; Item: TfrmCommonListItem;
+procedure TfrmContentMoviePage.ShowDetail(const Index: Integer; Item: TfrmTMDBListItem;
   Obj: ITMDBItem);
 begin
   inherited;

@@ -10,7 +10,7 @@ uses
   uTMDBSetup,
   JD.TMDB.Intf,
   JD.TMDB.Common,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentSearchMulti = class(TfrmContentPageBase)
@@ -30,8 +30,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   end;
 
 var
@@ -75,7 +75,7 @@ begin
 end;
 
 procedure TfrmContentSearchMulti.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 
@@ -119,7 +119,7 @@ end;
 }
 
 procedure TfrmContentSearchMulti.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 

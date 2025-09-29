@@ -5,7 +5,7 @@ unit uContentPageBase;
 
   TODO:
   - Change list item concept to be more general-purpose, not tied to TMDB
-  - Go to top of list after refreashing / reloading
+    - New concept in uContentListBase / uListItemBase
   - Implement optional images
   -
 
@@ -19,13 +19,7 @@ uses
   Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
   JD.TMDB.Intf,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
-  uCommonListItem;
-
-
-type
-  TJDListItem = class(TObject)
-
-  end;
+  uTMDBListItem;
 
 
 type
@@ -34,14 +28,14 @@ type
     pTop: TPanel;
     lblResults: TLabel;
     lblPage: TLabel;
-    btnPagePrev: TButton;
-    btnPageNext: TButton;
     pSearch: TPanel;
     pDetail: TPanel;
     Splitter1: TSplitter;
     btnApply: TJDFontButton;
     btnRefresh: TJDFontButton;
     sbItems: TScrollBox;
+    btnPageNext: TJDFontButton;
+    btnPagePrev: TJDFontButton;
     procedure lstResultsClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnPagePrevClick(Sender: TObject);
@@ -59,7 +53,7 @@ type
     procedure UpdateFooter; virtual;
     procedure HideDetail; virtual;
     procedure ClearResults; virtual;
-    function AddListItem(AItem: ITMDBItem): TfrmCommonListItem; virtual;
+    function AddListItem(AItem: ITMDBItem): TfrmTMDBListItem; virtual;
 
     function Page: ITMDBPage; virtual;
     function LoadPage(const APageNum: Integer): Boolean; virtual;
@@ -67,8 +61,8 @@ type
 
     function GetData(const APageNum: Integer): ITMDBPage; virtual; //TODO: Rename to GetPageData
     function GetItem(const Index: Integer): ITMDBItem; virtual; //TODO: Rename to GetItemByIndex
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); virtual;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); virtual;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); virtual;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); virtual;
 
     function GetTotalItemsHeight: Integer;
 
@@ -154,7 +148,7 @@ begin
 end;
 
 
-procedure TfrmContentPageBase.ItemClick(const Index: Integer; Item: TfrmCommonListItem;
+procedure TfrmContentPageBase.ItemClick(const Index: Integer; Item: TfrmTMDBListItem;
   Obj: ITMDBItem);
 begin
   //Override expected
@@ -236,10 +230,10 @@ begin
   end;
 end;
 
-function TfrmContentPageBase.AddListItem(AItem: ITMDBItem): TfrmCommonListItem;
+function TfrmContentPageBase.AddListItem(AItem: ITMDBItem): TfrmTMDBListItem;
 begin
   var H:= GetTotalItemsHeight;
-  var P:= TfrmCommonListItem.Create(sbItems);
+  var P:= TfrmTMDBListItem.Create(sbItems);
   P.Tag:= AItem.Index;
   P.btnDetail.Tag:= AItem.Index;
   P.Name:= 'pItem'+IntToStr(AItem.Index);
@@ -273,9 +267,13 @@ begin
       O:= GetItem(X);
       AddListItem(O);
     end;
+
   finally
     sbItems.EnableAlign;
   end;
+
+  Application.ProcessMessages; //TODO
+
 end;
 
 procedure TfrmContentPageBase.PrepSearch;
@@ -333,7 +331,7 @@ begin
   sbItems.VertScrollBar.Position:= sbItems.VertScrollBar.Position - 20;
 end;
 
-procedure TfrmContentPageBase.ShowDetail(const Index: Integer; Item: TfrmCommonListItem;
+procedure TfrmContentPageBase.ShowDetail(const Index: Integer; Item: TfrmTMDBListItem;
   Obj: ITMDBItem);
 begin
   Splitter1.Visible:= True;

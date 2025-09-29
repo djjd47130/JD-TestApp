@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentPageBase, JD.Common, JD.Ctrls,
   JD.Ctrls.FontButton, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
   JD.TMDB.Common, JD.TMDB.Intf,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentSearchCompanies = class(TfrmContentPageBase)
@@ -24,8 +24,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   public
     { Public declarations }
   end;
@@ -66,7 +66,7 @@ begin
 end;
 
 procedure TfrmContentSearchCompanies.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
   //TODO: Navigate to company details tab within app...
@@ -106,7 +106,7 @@ end;
 }
 
 procedure TfrmContentSearchCompanies.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 

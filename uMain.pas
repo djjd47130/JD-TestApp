@@ -19,7 +19,7 @@ uses
   System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.ComCtrls, Vcl.Menus,
-  System.NetEncoding,
+  //System.NetEncoding,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics,
 
   JD.TabController,
@@ -30,7 +30,7 @@ uses
 
   XSuperObject, XSuperJSON,
 
-  ChromeTabs, ChromeTabsClasses,
+  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
 
   Vcl.Styles.Utils,
   Vcl.Styles.Fixes,
@@ -40,7 +40,7 @@ uses
 
 
 const
-  MAIN_MENU_WIDTH_OPEN = 370;
+  MAIN_MENU_WIDTH_OPEN = 380;
   MAIN_MENU_WIDTH_CLOSED = 70;
 
 
@@ -54,8 +54,9 @@ type
     btnMenu: TJDFontButton;
     Tabs: TChromeTabs;
     imgFavicons16: TImageList;
-    JDFavicons1: TJDFavicons;
+    Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
+    btnDummy: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -65,8 +66,10 @@ type
       var Close: Boolean);
     procedure btnMenuClick(Sender: TObject);
     procedure TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
-    procedure JDFavicons1LookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
+    procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
     procedure AppEventsHint(Sender: TObject);
+    procedure TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
+      var HintTimeout: Integer);
   private
 
     FMenu: TfrmMainMenu;
@@ -74,6 +77,7 @@ type
     FRect: TRect;
     FState: TWindowState;
     FContentOnly: Boolean;
+    FLoaded: Boolean;
 
     procedure SetFullScreen(const Value: Boolean);
     procedure SetContentOnly(const Value: Boolean);
@@ -128,8 +132,13 @@ begin
   //https://github.com/djjd47130/JD-TMDB/issues/5
   {$ENDIF}
 
+  FLoaded:= False;
+
   //UI
   //TODO: Add option for user to switch style...
+  //TODO: I like the style of "Windows10 Dark" when it comes to overall control styling,
+  //  especially the system buttons in the top-right. However, need to create
+  //  a custom version with a dark-gray but not pure black base color.
   //TStyleManager.TrySetStyle('Carbon', False);
   TStyleManager.TrySetStyle('Windows10 Dark', False);
   //TStyleManager.TrySetStyle('Windows10 SlateGray', False);
@@ -154,7 +163,11 @@ begin
   FMenu.Align:= alClient;
   FMenu.Show;
 
-  Self.ShowMenu(True);
+  //Move dummy button out of view...
+  btnDummy.Left:= -50000;
+
+  FLoaded:= True;
+
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -168,9 +181,10 @@ begin
   //Main Menu
   //TODO: Populate menu with configured features...
 
+  Self.ShowMenu(True);
 end;
 
-procedure TfrmMain.JDFavicons1LookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
+procedure TfrmMain.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
   var Handled: Boolean);
 begin
   //Tabs
@@ -231,6 +245,19 @@ begin
 
 end;
 
+procedure TfrmMain.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
+  var HintTimeout: Integer);
+begin
+  if HitTestResult.HitTestArea in [THitTestArea.htTab, THitTestArea.htTabImage] then begin
+    var Tab:= Tabs.Tabs[HitTestResult.TabIndex];
+    //Application.Hint:= Tab.Caption;
+    Stat.Panels[0].Text:= Tab.Caption;
+  end else begin
+    //Application.Hint:= '';
+    Stat.Panels[0].Text:= Application.Hint;
+  end;
+end;
+
 procedure TfrmMain.AppEventsHint(Sender: TObject);
 begin
   Stat.Panels[0].Text:= Application.Hint;
@@ -278,6 +305,14 @@ begin
     end else begin
       pMenu.Tag:= 0;
       pMenu.Width:= MAIN_MENU_WIDTH_CLOSED;
+    end;
+    try
+      if btnDummy.CanFocus then
+        btnDummy.SetFocus;
+    except
+      on E: Exception do begin
+
+      end;
     end;
   finally
     Self.EnableAlign;

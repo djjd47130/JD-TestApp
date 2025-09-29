@@ -14,10 +14,10 @@ uses
   uContentMovieDetail,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
   uContentMoviePage,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
-  TfrmContentSearchMovies = class(TfrmContentMoviePage)   //TfrmContentPageBase
+  TfrmContentSearchMovies = class(TfrmContentMoviePage)
     Panel7: TPanel;
     Label8: TLabel;
     txtSearchMoviesQuery: TEdit;
@@ -44,7 +44,7 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
     //procedure ItemDblClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
   end;
 
@@ -117,7 +117,7 @@ begin
 end;
 
 procedure TfrmContentSearchMovies.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   pDetail.Visible:= False;
 end;

@@ -11,7 +11,7 @@ uses
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
   JD.TabController,
   uContentBrowser,
-  Vcl.ComCtrls, Vcl.CheckLst, uCommonCollapsePanel;
+  Vcl.ComCtrls, Vcl.CheckLst, uCommonCollapsePanel, uListItemBase, uSwitchListItem, uComboListItem;
 
 type
 
@@ -35,21 +35,26 @@ type
     btnSave: TJDFontButton;
     Pages: TPageControl;
     tabBrowser: TTabSheet;
-    GroupBox1: TGroupBox;
-    Panel3: TPanel;
-    Label2: TLabel;
-    Edit1: TEdit;
-    Panel4: TPanel;
-    Label4: TLabel;
-    ComboBox1: TComboBox;
     tabGeneral: TTabSheet;
-    GroupBox2: TGroupBox;
-    Panel8: TPanel;
-    Label11: TLabel;
-    ComboBox2: TComboBox;
-    Panel7: TPanel;
-    Label10: TLabel;
-    ComboBox3: TComboBox;
+    TabSheet1: TTabSheet;
+    sbItems: TScrollBox;
+    ListSwitchItem1: TListSwitchItem;
+    ListSwitchItem2: TListSwitchItem;
+    ScrollBox1: TScrollBox;
+    ComboListItem2: TComboListItem;
+    ComboListItem3: TComboListItem;
+    ListSwitchItem3: TListSwitchItem;
+    Label1: TLabel;
+    Label3: TLabel;
+    ScrollBox2: TScrollBox;
+    Label5: TLabel;
+    ComboListItem1: TComboListItem;
+    ComboListItem4: TComboListItem;
+    ListSwitchItem4: TListSwitchItem;
+    ListSwitchItem5: TListSwitchItem;
+    ListSwitchItem6: TListSwitchItem;
+    ListSwitchItem7: TListSwitchItem;
+    ListSwitchItem8: TListSwitchItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);

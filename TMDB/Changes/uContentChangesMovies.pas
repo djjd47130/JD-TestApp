@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentPageBase, JD.Common, JD.Ctrls,
   JD.Ctrls.FontButton, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
   JD.TMDB.API, JD.TMDB.Intf, JD.TMDB.Impl, JD.TMDB.Common,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentChangesMovies = class(TfrmContentPageBase)
@@ -21,8 +21,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   public
     { Public declarations }
   end;
@@ -66,7 +66,7 @@ begin
 end;
 
 procedure TfrmContentChangesMovies.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 
@@ -123,7 +123,7 @@ end;
 }
 
 procedure TfrmContentChangesMovies.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 

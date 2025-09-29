@@ -11,7 +11,7 @@ uses
   uTMDB,
   uTMDBSetup,
   uContentTVSerieDetail,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentSearchTV = class(TfrmContentPageBase)
@@ -42,8 +42,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   end;
 
 var
@@ -107,7 +107,7 @@ begin
 end;
 
 procedure TfrmContentSearchTV.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
   T: TJDTabRef;
   M: ITMDBTVSerie;
@@ -177,7 +177,7 @@ begin
     TMDB.LoginState.SessionID);
 end;
 
-procedure TfrmContentSearchTV.ShowDetail(const Index: Integer; Item: TfrmCommonListItem;
+procedure TfrmContentSearchTV.ShowDetail(const Index: Integer; Item: TfrmTMDBListItem;
   Obj: ITMDBItem);
 var
   ID: Integer;

@@ -1,40 +1,44 @@
-inherited frmCommonMovieListItem: TfrmCommonMovieListItem
-  Width = 831
-  Height = 200
-  ExplicitWidth = 831
-  ExplicitHeight = 200
+inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
+  Width = 682
+  Height = 220
+  ExplicitWidth = 682
+  ExplicitHeight = 220
   inherited Bevel1: TBevel
-    Top = 198
-    Width = 831
+    Top = 218
+    Width = 682
+    ExplicitTop = 198
+    ExplicitWidth = 831
   end
   inherited pDetail: TPanel
-    Left = 168
-    Width = 613
-    Height = 192
+    Left = 180
+    Width = 448
+    Height = 212
     ParentBackground = False
-    ExplicitLeft = 168
-    ExplicitWidth = 613
-    ExplicitHeight = 175
+    ExplicitLeft = 180
+    ExplicitWidth = 448
+    ExplicitHeight = 212
     inherited lblCaption: TLabel
-      Width = 607
-      Height = 29
+      Width = 74
+      Height = 23
+      Hint = 'Movie Title'
+      Align = alTop
       Color = clSilver
       Font.Color = clLime
       Font.Height = -19
       ParentColor = False
       ParentFont = False
       StyleElements = [seClient, seBorder]
-      ExplicitTop = 0
-      ExplicitWidth = 631
-      ExplicitHeight = 29
+      ExplicitWidth = 74
+      ExplicitHeight = 23
     end
     object lblOverview: TLabel
       AlignWithMargins = True
       Left = 3
-      Top = 72
-      Width = 607
-      Height = 117
-      Align = alBottom
+      Top = 62
+      Width = 417
+      Height = 147
+      Hint = 'Movie Overview'
+      Align = alClient
       AutoSize = False
       Caption = 'Overview'
       Color = clSilver
@@ -48,105 +52,108 @@ inherited frmCommonMovieListItem: TfrmCommonMovieListItem
       ShowAccelChar = False
       Transparent = True
       WordWrap = True
-      ExplicitTop = 57
-      ExplicitWidth = 443
+      ExplicitTop = 96
+      ExplicitWidth = 510
+      ExplicitHeight = 93
     end
-    object lblReleaseDate: TLabel
-      AlignWithMargins = True
-      Left = 460
-      Top = 30
-      Width = 150
-      Height = 21
-      Alignment = taRightJustify
-      Anchors = [akTop, akRight]
-      AutoSize = False
-      Caption = 'Release Date'
-      Color = clSilver
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 16222831
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      ShowAccelChar = False
-      Transparent = True
-      Layout = tlCenter
-      StyleElements = [seClient, seBorder]
-      ExplicitLeft = 484
+    object pSubData: TPanel
+      Left = 0
+      Top = 29
+      Width = 448
+      Height = 30
+      Align = alTop
+      BevelEdges = [beTop, beBottom]
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 0
+      object lblGenre: TLabel
+        AlignWithMargins = True
+        Left = 378
+        Top = 3
+        Width = 67
+        Height = 18
+        Hint = 'Movie Genre(s)'
+        Align = alRight
+        Caption = 'Genre(s)'
+        Color = clSilver
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clSilver
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        ShowAccelChar = False
+        Transparent = True
+        Layout = tlCenter
+        StyleElements = [seClient, seBorder]
+      end
+      object lblReleaseDate: TLabel
+        AlignWithMargins = True
+        Left = 92
+        Top = 3
+        Width = 99
+        Height = 18
+        Hint = 'Movie Release Date'
+        Margins.Right = 15
+        Align = alLeft
+        Alignment = taRightJustify
+        Caption = 'Release Date'
+        Color = clSilver
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clSilver
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        ShowAccelChar = False
+        Transparent = True
+        Layout = tlCenter
+        StyleElements = [seClient, seBorder]
+      end
+      object lblVoteAvg: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 71
+        Height = 18
+        Hint = 'Movie Vote Average'
+        Margins.Right = 15
+        Align = alLeft
+        Alignment = taCenter
+        Caption = 'Vote Avg.'
+        Color = clSilver
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clSilver
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowAccelChar = False
+        ShowHint = False
+        Transparent = True
+        Layout = tlCenter
+        StyleElements = [seClient, seBorder]
+      end
     end
-    object lblGenre: TLabel
-      AlignWithMargins = True
-      Left = 3
-      Top = 30
-      Width = 166
-      Height = 21
-      AutoSize = False
-      Caption = 'Genre'
-      Color = clSilver
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 16222831
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      ShowAccelChar = False
-      Transparent = True
-      Layout = tlCenter
-      StyleElements = [seClient, seBorder]
-    end
-    object lblVoteAvg: TLabel
-      AlignWithMargins = True
-      Left = 175
-      Top = 30
-      Width = 279
-      Height = 21
-      Alignment = taCenter
-      Anchors = [akLeft, akTop, akRight]
-      AutoSize = False
-      Caption = 'Vote Avg.'
-      Color = clSilver
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 16222831
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      ShowAccelChar = False
-      Transparent = True
-      Layout = tlCenter
-      StyleElements = [seClient, seBorder]
-      ExplicitWidth = 303
-    end
-  end
-  inherited btnDetail: TJDFontButton
-    Left = 787
-    Height = 192
-    ExplicitLeft = 787
-    ExplicitHeight = 175
   end
   inherited pImage: TPanel
-    Left = 5
-    Top = 5
-    Width = 124
-    Height = 188
-    Margins.Left = 5
-    Margins.Top = 5
-    Margins.Right = 5
-    Margins.Bottom = 5
+    Width = 152
+    Height = 212
     Color = 15658733
-    ExplicitLeft = 5
-    ExplicitTop = 5
-    ExplicitWidth = 124
-    ExplicitHeight = 188
+    Visible = True
+    ExplicitWidth = 152
+    ExplicitHeight = 212
     inherited imgPicture: TImage
       AlignWithMargins = False
       Left = 0
       Top = 0
       Width = 89
-      Height = 188
+      Height = 212
+      Hint = 'Movie Poster'
       Picture.Data = {
         0954474946496D61676547494638396184035802F76900E5E6E7CECFD0C0C1C3
         BBBCBEC2C3C5C4C5C7CCCDCFC3C4C6AAACAFE3E4E5E6E6E7FDFDFDBDBEC0A7A9
@@ -2742,5 +2749,14 @@ inherited frmCommonMovieListItem: TfrmCommonMovieListItem
       ExplicitWidth = 89
       ExplicitHeight = 173
     end
+  end
+  inherited btnDetail: TJDFontButton
+    Left = 634
+    Width = 45
+    Height = 212
+    Hint = 'Open Movie Detail'
+    ExplicitLeft = 634
+    ExplicitWidth = 45
+    ExplicitHeight = 212
   end
 end

@@ -8,7 +8,7 @@ uses
   JD.Ctrls.FontButton, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
   JD.TMDB.Common,
   JD.TMDB.Intf,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentSearchKeywords = class(TfrmContentPageBase)
@@ -28,8 +28,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   end;
 
 var
@@ -79,7 +79,7 @@ begin
 end;
 
 procedure TfrmContentSearchKeywords.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
 
@@ -120,7 +120,7 @@ end;
 }
 
 procedure TfrmContentSearchKeywords.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
   ID: Integer;
   I: TListItem;

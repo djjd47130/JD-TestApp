@@ -9,7 +9,7 @@ uses
   JD.TMDB.Common, JD.TMDB.Intf,
   uTMDB,
   uCommonImages,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TfrmContentSearchCollections = class(TfrmContentPageBase)
@@ -53,8 +53,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
   public
     { Public declarations }
   end;
@@ -122,7 +122,7 @@ begin
 end;
 
 procedure TfrmContentSearchCollections.ItemClick(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
   //TODO: Navigate to movie details tab within app...
@@ -177,7 +177,7 @@ begin
 end;
 
 procedure TfrmContentSearchCollections.ShowDetail(const Index: Integer;
-  Item: TfrmCommonListItem; Obj: ITMDBItem);
+  Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
   ID: Integer;
   O: ITMDBCollection;

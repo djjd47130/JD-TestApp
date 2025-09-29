@@ -21,17 +21,20 @@ inherited frmContentSearchMovies: TfrmContentSearchMovies
       Width = 735
       ExplicitWidth = 735
       inherited lblPage: TLabel
-        Left = 498
-      end
-      inherited btnPagePrev: TButton
-        Left = 455
-      end
-      inherited btnPageNext: TButton
-        Left = 648
+        Left = 494
+        ExplicitLeft = 498
       end
       inherited btnRefresh: TJDFontButton
         Left = 691
         ExplicitLeft = 691
+      end
+      inherited btnPageNext: TJDFontButton
+        Left = 644
+        ExplicitLeft = 644
+      end
+      inherited btnPagePrev: TJDFontButton
+        Left = 447
+        ExplicitLeft = 447
       end
     end
     inherited pDetail: TPanel

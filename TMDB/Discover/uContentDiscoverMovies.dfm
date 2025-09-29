@@ -30,17 +30,20 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
       Width = 667
       ExplicitWidth = 667
       inherited lblPage: TLabel
-        Left = 430
-      end
-      inherited btnPagePrev: TButton
-        Left = 387
-      end
-      inherited btnPageNext: TButton
-        Left = 580
+        Left = 426
+        ExplicitLeft = 430
       end
       inherited btnRefresh: TJDFontButton
         Left = 623
         ExplicitLeft = 623
+      end
+      inherited btnPageNext: TJDFontButton
+        Left = 576
+        ExplicitLeft = 533
+      end
+      inherited btnPagePrev: TJDFontButton
+        Left = 379
+        ExplicitLeft = 336
       end
     end
     inherited pDetail: TPanel
@@ -79,24 +82,39 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
       VertScrollBar.Tracking = True
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
-      DoubleBuffered = True
+      BevelEdges = []
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      ChevronColor = clSkyBlue
+      ChevronHotColor = clLime
+      DoubleBuffered = False
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      GradientBaseColor = clBlack
+      GradientColor = 10485760
       HeaderFont.Charset = DEFAULT_CHARSET
-      HeaderFont.Color = clWindowText
-      HeaderFont.Height = -11
+      HeaderFont.Color = clWhite
+      HeaderFont.Height = -13
       HeaderFont.Name = 'Tahoma'
-      HeaderFont.Style = []
+      HeaderFont.Style = [fsBold]
+      HeaderHeight = 22
       Images = Img16
+      ParentBackground = True
       ParentDoubleBuffered = False
+      ParentFont = False
       TabOrder = 1
       object CategoryPanel7: TCategoryPanel
-        Top = 1062
-        Height = 30
+        Top = 757
+        Height = 28
         Caption = 'Watch'
         Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 0
-        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel15: TPanel
           AlignWithMargins = True
@@ -113,11 +131,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 169
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
+            ExplicitWidth = 169
           end
           object Edit11: TEdit
             AlignWithMargins = True
@@ -145,11 +164,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 41
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
+            ExplicitWidth = 41
           end
           object Edit12: TEdit
             AlignWithMargins = True
@@ -164,14 +184,13 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel5: TCategoryPanel
-        Top = 1032
-        Height = 30
+        Top = 729
+        Height = 28
         Caption = 'Runtime'
         Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 1
-        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel7: TPanel
           AlignWithMargins = True
@@ -188,11 +207,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 169
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
+            ExplicitWidth = 169
           end
           object Edit7: TEdit
             AlignWithMargins = True
@@ -220,11 +240,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 41
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
+            ExplicitWidth = 41
           end
           object Edit8: TEdit
             AlignWithMargins = True
@@ -239,14 +260,13 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel3: TCategoryPanel
-        Top = 1002
-        Height = 30
+        Top = 701
+        Height = 28
         Caption = 'People'
         Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 2
-        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel3: TPanel
           AlignWithMargins = True
@@ -263,11 +283,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 169
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
+            ExplicitWidth = 169
           end
           object Edit3: TEdit
             AlignWithMargins = True
@@ -295,11 +316,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 41
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
+            ExplicitWidth = 41
           end
           object Edit4: TEdit
             AlignWithMargins = True
@@ -314,12 +336,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel4: TCategoryPanel
-        Top = 802
+        Top = 503
+        Height = 198
         Caption = 'Companies'
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 3
-        ExplicitWidth = 253
         object clCompanies: TJDChipList
           Left = 0
           Top = 49
@@ -376,11 +398,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 168
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Search for Companies:'
+            ExplicitWidth = 168
           end
           object txtSearchCompanies: TButtonedEdit
             Left = 0
@@ -399,14 +422,13 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel2: TCategoryPanel
-        Top = 772
-        Height = 30
+        Top = 475
+        Height = 28
         Caption = 'Votes'
         Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 4
-        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel1: TPanel
           AlignWithMargins = True
@@ -423,11 +445,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 169
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
+            ExplicitWidth = 169
           end
           object Edit1: TEdit
             AlignWithMargins = True
@@ -455,11 +478,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 41
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
+            ExplicitWidth = 41
           end
           object Edit2: TEdit
             AlignWithMargins = True
@@ -474,14 +498,13 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object cpRelease: TCategoryPanel
-        Top = 742
-        Height = 30
+        Top = 447
+        Height = 28
         Caption = 'Release Date'
         Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 5
-        ExplicitWidth = 253
         ExpandedHeight = 280
         object Panel13: TPanel
           AlignWithMargins = True
@@ -498,11 +521,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 169
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
+            ExplicitWidth = 169
           end
           object txtSearchMoviesPrimaryReleaseYear: TEdit
             AlignWithMargins = True
@@ -530,11 +554,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 41
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
+            ExplicitWidth = 41
           end
           object txtSearchMoviesYear: TEdit
             AlignWithMargins = True
@@ -549,13 +574,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel6: TCategoryPanel
-        Top = 530
-        Height = 212
+        Top = 237
+        Height = 210
         Caption = 'Keywords'
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 6
-        ExplicitWidth = 253
         object Panel11: TPanel
           AlignWithMargins = True
           Left = 3
@@ -571,11 +595,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 161
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Search for Keywords:'
+            ExplicitWidth = 161
           end
           object txtSearchKeyword: TSearchBox
             Left = 0
@@ -635,22 +660,22 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         end
       end
       object CategoryPanel1: TCategoryPanel
-        Top = 347
-        Height = 183
+        Top = 56
+        Height = 181
         Caption = 'Genres'
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 7
-        ExplicitWidth = 253
         object Label7: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 135
+          Width = 228
           Height = 18
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Search for Genres'
+          ExplicitWidth = 135
         end
         object clGenres: TJDChipList
           Left = 0
@@ -669,11 +694,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
-          Items = <
-            item
-              Caption = 'Science Fiction'
-              Exclude = False
-            end>
+          Items = <>
           ParentBackground = False
           ParentColor = False
           UI.ChipColor = 12615680
@@ -689,24 +710,25 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
           UI.ChipNormal.Pen.Width = 1.000000000000000000
           OnResize = JDChipList1Resize
         end
-        object SearchBox1: TSearchBox
+        object cboSearchGenres: TComboBox
           Left = 0
           Top = 21
           Width = 234
           Height = 26
           Align = alTop
           TabOrder = 1
-          OnInvokeSearch = txtSearchKeywordInvokeSearch
+          OnKeyDown = cboSearchGenresKeyDown
         end
       end
       object cpRegion: TCategoryPanel
-        Top = 257
-        Height = 90
+        Top = 28
+        Height = 28
         Caption = 'Region and Language'
+        Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 8
-        ExplicitWidth = 253
+        ExpandedHeight = 90
         object Panel10: TPanel
           AlignWithMargins = True
           Left = 3
@@ -722,11 +744,12 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 57
+            Width = 222
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Region:'
+            ExplicitWidth = 57
           end
           object cboSearchMoviesRegion: TComboBox
             AlignWithMargins = True
@@ -745,8 +768,9 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
       end
       object cpCerts: TCategoryPanel
         Top = 0
-        Height = 257
+        Height = 28
         Caption = 'Certification'
+        Collapsed = True
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         Font.Charset = DEFAULT_CHARSET
@@ -756,7 +780,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 9
-        ExplicitWidth = 185
+        ExpandedHeight = 257
         object Label1: TLabel
           AlignWithMargins = True
           Left = 3
@@ -794,7 +818,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         object Panel8: TPanel
           AlignWithMargins = True
           Left = 3
-          Top = 176
+          Top = -55
           Width = 228
           Height = 55
           Margins.Top = 0
@@ -830,7 +854,6 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
               'Default'
               'False'
               'True')
-            ExplicitWidth = 239
           end
         end
       end

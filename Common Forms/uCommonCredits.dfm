@@ -48,5 +48,7 @@ inherited frmCommonCredits: TfrmCommonCredits
     ParentFont = False
     TabOrder = 0
     ViewStyle = vsReport
+    ExplicitLeft = 8
+    ExplicitTop = 8
   end
 end

@@ -87,6 +87,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Icon_MainIcon>JDTestApp_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -97,6 +98,8 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Icon_MainIcon>JDTestApp_Icon1.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -115,7 +118,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uContentListBase.pas">
-            <Form>frmContentBase1</Form>
+            <Form>frmContentListBase</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Common Forms\uTMDBCommonFormBase.pas">
@@ -156,13 +159,13 @@
             <Form>frmCommonPersonCredits</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Common Forms\uCommonListItem.pas">
-            <Form>frmCommonListItem</Form>
+        <DCCReference Include="Common Forms\uTMDBListItem.pas">
+            <Form>frmTMDBListItem</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="Common Forms\uCommonMovieListItem.pas">
-            <Form>frmCommonMovieListItem</Form>
+        <DCCReference Include="Common Forms\uTMDBMovieListItem.pas">
+            <Form>frmTMDBMovieListItem</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -287,6 +290,47 @@
         </DCCReference>
         <DCCReference Include="TMDB\uTMDBLoginBrowser.pas">
             <Form>frmTMDBLoginBrowser</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="General\uContentClock.pas">
+            <Form>frmContentClock</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="System\uContentFileBrowser.pas">
+            <Form>frmContentFileBrowser</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uListItemBase.pas">
+            <Form>ListItemBase</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uSwitchListItem.pas">
+            <Form>ListSwitchItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uComboListItem.pas">
+            <Form>ComboListItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="TMDB\Movies\uTMDBVertMovieListItem.pas">
+            <Form>frmTMDBVertMovieListItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="TMDB\Search\uTMDBSearch.pas">
+            <Form>frmTMDBSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="TMDB\Search\uTMDBSearchListItem.pas">
+            <Form>frmTMDBSearchListItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="JDSysMon\uJDSysMonGaugesTest.pas">
+            <Form>frmJDSSysMonGaugesTest</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

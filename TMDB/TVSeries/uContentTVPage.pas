@@ -9,7 +9,7 @@ uses
   JD.TMDB.Intf,
   JD.TabController,
   uContentTVSerieDetail,
-  uCommonListItem;
+  uTMDBListItem;
 
 type
   TTVPageProc = reference to procedure(Sender: TObject;
@@ -29,8 +29,8 @@ type
     function GetItem(const Index: Integer): ITMDBItem; override;
     procedure HideDetail; override;
     //procedure PopulateItem(const Index: Integer; Item: TListItem; Obj: ITMDBItem); override;
-    procedure ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
-    procedure ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem); override;
+    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
+    procedure ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem); override;
 
 
     procedure DoOnGetPage(const Page: Integer; var Data: ITMDBTVSeriesPage); virtual;
@@ -85,7 +85,7 @@ begin
   pDetail.Visible:= False;
 end;
 
-procedure TfrmContentTVPage.ItemClick(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem);
+procedure TfrmContentTVPage.ItemClick(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
   T: TJDTabRef;
   M: ITMDBTVSerie;
@@ -145,7 +145,7 @@ begin
 end;
 }
 
-procedure TfrmContentTVPage.ShowDetail(const Index: Integer; Item: TfrmCommonListItem; Obj: ITMDBItem);
+procedure TfrmContentTVPage.ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem);
 begin
   inherited;
   pDetail.Visible:= False;

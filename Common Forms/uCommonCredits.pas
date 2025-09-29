@@ -38,6 +38,7 @@ begin
   try
     lstCredits.Items.Clear;
 
+    //Cast
     for X := 0 to FCredits.Cast.Count-1 do begin
       Ca:= FCredits.Cast[X];
       I:= lstCredits.Items.Add;
@@ -46,6 +47,7 @@ begin
       I.SubItems.Add(Ca.Character);
     end;
 
+    //Crew
     for X := 0 to FCredits.Crew.Count-1 do begin
       Cr:= FCredits.Crew[X];
       I:= lstCredits.Items.Add;

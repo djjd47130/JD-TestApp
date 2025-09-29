@@ -212,9 +212,9 @@ function TfrmContentBrowser.GetImageIndex: Integer;
 begin
   Result:= -1;
   try
-    var Ref:= frmMain.JDFavicons1.GetFavicon(txtAddress.Text);
+    var Ref:= frmMain.Favicons.GetFavicon(txtAddress.Text);
     if Assigned(Ref) then
-      Result:= frmMain.JDFavicons1.GetFavicon(txtAddress.Text).ImageIndex;
+      Result:= frmMain.Favicons.GetFavicon(txtAddress.Text).ImageIndex;
   except
     on E: Exception do begin
 

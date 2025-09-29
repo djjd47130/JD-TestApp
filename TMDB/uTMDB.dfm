@@ -8,7 +8,7 @@ object dmTMDB: TdmTMDB
       'JD TMDB API Wrapper for Delphi (https://github.com/djjd47130/JD-' +
       'TMDB)'
     RateLimiting = True
-    RateLimitMsec = 100
+    RateLimitMsec = 50
     AgreedToWatchProviderAttribution = True
     OnUserAuthRequest = TMDBUserAuthRequest
     Left = 66

@@ -15,22 +15,21 @@ inherited frmTMDBSetup: TfrmTMDBSetup
     TabOrder = 0
     OnMouseWheelDown = sbTMDBMouseWheelDown
     OnMouseWheelUp = sbTMDBMouseWheelUp
-    ExplicitWidth = 771
     object gbAPIAuthMethod: TGroupBox
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 814
+      Width = 714
       Height = 254
       Align = alTop
       Caption = 'API Authentication'
+      ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 731
       object Label8: TLabel
         AlignWithMargins = True
         Left = 7
         Top = 23
-        Width = 800
+        Width = 700
         Height = 32
         Margins.Left = 5
         Margins.Right = 5
@@ -50,7 +49,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         AlignWithMargins = True
         Left = 7
         Top = 61
-        Width = 800
+        Width = 700
         Height = 37
         Cursor = crHandPoint
         Margins.Left = 5
@@ -75,12 +74,11 @@ inherited frmTMDBSetup: TfrmTMDBSetup
       object gbAPIAuthMethodAPIKey: TPanel
         Left = 2
         Top = 129
-        Width = 810
+        Width = 710
         Height = 55
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 744
         DesignSize = (
           710
           55)
@@ -94,12 +92,11 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         object txtAPIKey: TEdit
           Left = 16
           Top = 29
-          Width = 682
+          Width = 582
           Height = 26
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = txtAPIKeyChange
-          ExplicitWidth = 716
         end
       end
       object gbAPIAuthMethodAccessToken: TPanel
@@ -112,7 +109,6 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
-        ExplicitWidth = 744
         DesignSize = (
           710
           60)
@@ -131,7 +127,6 @@ inherited frmTMDBSetup: TfrmTMDBSetup
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = txtAPIKeyChange
-          ExplicitWidth = 716
         end
       end
       object Panel2: TPanel
@@ -142,7 +137,6 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitWidth = 744
         object rAuthToken: TRadioButton
           Tag = 1
           AlignWithMargins = True
@@ -170,7 +164,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         end
         object btnValidateKey: TButton
           AlignWithMargins = True
-          Left = 741
+          Left = 641
           Top = 3
           Width = 66
           Height = 22
@@ -185,7 +179,6 @@ inherited frmTMDBSetup: TfrmTMDBSetup
           ParentFont = False
           TabOrder = 2
           OnClick = btnValidateKeyClick
-          ExplicitLeft = 675
         end
       end
     end
@@ -197,22 +190,21 @@ inherited frmTMDBSetup: TfrmTMDBSetup
       Height = 222
       Align = alTop
       Caption = 'Locale Options'
+      ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 731
       object Panel6: TPanel
         Left = 2
         Top = 89
-        Width = 810
+        Width = 710
         Height = 69
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 744
         object Label5: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 804
+          Width = 704
           Height = 18
           Align = alTop
           AutoSize = False
@@ -225,7 +217,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
           AlignWithMargins = True
           Left = 3
           Top = 27
-          Width = 804
+          Width = 704
           Height = 26
           Cursor = crHandPoint
           Align = alTop
@@ -241,12 +233,11 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 744
         object Label6: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 804
+          Width = 704
           Height = 18
           Align = alTop
           AutoSize = False
@@ -259,7 +250,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
           AlignWithMargins = True
           Left = 3
           Top = 27
-          Width = 804
+          Width = 704
           Height = 26
           Cursor = crHandPoint
           Align = alTop
@@ -275,12 +266,11 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitWidth = 744
         object Label7: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 804
+          Width = 704
           Height = 18
           Align = alTop
           AutoSize = False
@@ -293,7 +283,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
           AlignWithMargins = True
           Left = 3
           Top = 27
-          Width = 804
+          Width = 704
           Height = 26
           Cursor = crHandPoint
           Align = alTop

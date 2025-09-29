@@ -33,6 +33,22 @@ type
   end;
 
 
+
+type
+  TComboBox = class(Vcl.StdCtrls.TComboBox)
+  private
+    FStoredItems: TStringList;
+    procedure FilterItems;
+    procedure StoredItemsChange(Sender: TObject);
+    procedure SetStoredItems(const Value: TStringList);
+    procedure CNCommand(var AMessage: TWMCommand); message CN_COMMAND;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    property StoredItems: TStringList read FStoredItems write SetStoredItems;
+  end;
+
+
 type
   TInterfaceWrapper = class
   private
@@ -107,8 +123,8 @@ type
     txtSearchCompanies: TButtonedEdit;
     txtSearchKeyword: TSearchBox;
     clGenres: TJDChipList;
-    SearchBox1: TSearchBox;
     Label7: TLabel;
+    cboSearchGenres: TComboBox;
     procedure cboCertCountryClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -121,11 +137,16 @@ type
     procedure FormShow(Sender: TObject);
     procedure txtSearchCompaniesRightButtonClick(Sender: TObject);
     procedure txtSearchKeywordInvokeSearch(Sender: TObject);
+    procedure cboSearchGenresKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnApplyClick(Sender: TObject);
+    procedure btnPagePrevClick(Sender: TObject);
+    procedure btnPageNextClick(Sender: TObject);
   private
     FPrepped: Boolean;
     function GetCertString: String;
     procedure ClearCertCountries;
     procedure UpdateImageIndices;
+    procedure ChangeTitle;
   public
     function Page: ITMDBPage; override;
     //procedure SetupCols; override;
@@ -143,7 +164,42 @@ implementation
 {$R *.dfm}
 
 uses
+  System.StrUtils,
   uMain;
+
+function ChipExtractWithIDsStr(AChipList: TJDChipList): String;
+  procedure A(const ID: Integer);
+  begin
+    if Result <> '' then
+      Result:= Result + ','; //AND
+    Result:= Result + IntToStr(ID);
+  end;
+begin
+  Result:= '';
+  for var X := 0 to AChipList.Items.Count-1 do begin
+    var Itm:= AChipList.Items[X];
+    if not Itm.Exclude then begin
+      A(Itm.Tag);
+    end;
+  end;
+end;
+
+function ChipExtractWithoutIDsStr(AChipList: TJDChipList): String;
+  procedure A(const ID: Integer);
+  begin
+    if Result <> '' then
+      Result:= Result + ','; //AND
+    Result:= Result + IntToStr(ID);
+  end;
+begin
+  Result:= '';
+  for var X := 0 to AChipList.Items.Count-1 do begin
+    var Itm:= AChipList.Items[X];
+    if Itm.Exclude then begin
+      A(Itm.Tag);
+    end;
+  end;
+end;
 
 { TInterfaceWrapper }
 
@@ -177,6 +233,7 @@ begin
   inherited;
   if ResultCount = 0 then
     Self.btnApply.Click;
+  ChangeTitle;
 end;
 
 function TfrmContentDiscoverMovies.GetData(const APageNum: Integer): ITMDBPage;
@@ -194,11 +251,40 @@ begin
   Params.PrimaryReleaseYear:= StrToIntDef(txtSearchMoviesPrimaryReleaseYear.Text, 0);
   Params.Year:= StrToIntDef(txtSearchMoviesYear.Text, 0);
 
+  Params.WithGenres:= ChipExtractWithIDsStr(clGenres); // ''; //TODO
+  Params.WithoutGenres:= ChipExtractWithoutIDsStr(clGenres); // ''; //TODO
+
+  //TODO
+
+  //Params.SortBy:= 'vote_average.desc'; //TODO
+
+
+
 
 
   Result:= TMDB.Discover.DiscoverMovies(Params, APageNum);
 
-  TabCaption:= 'Discover Movies';
+  ChangeTitle;
+
+end;
+
+procedure TfrmContentDiscoverMovies.ChangeTitle;
+begin
+
+  var Tmp:= 'Discover Movies';
+  if Self.Page <> nil then begin
+    if Self.ResultCount > 0 then begin
+      Tmp:= Tmp + ' - ';
+      for var X := 0 to Self.ResultCount-1 do begin
+        if (X > 0) then
+          Tmp:= Tmp + ', ';
+        Tmp:= Tmp + Self.Page.Items[X].GetText;
+        if X >= 2 then
+          Break;
+      end;
+    end;
+  end;
+  TabCaption:= Tmp;
 
 end;
 
@@ -254,6 +340,30 @@ begin
   Item.SubItems.Add(O.Overview);
 end;
 }
+
+procedure TfrmContentDiscoverMovies.cboSearchGenresKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+
+  if (Key = VK_RETURN) then begin
+    var S:= cboSearchGenres.Text;
+    var Idx:= cboSearchGenres.Items.IndexOf(S);
+
+    if Idx >= 0 then begin
+      var GID:= Integer(cboSearchGenres.Items.Objects[Idx]);
+      cboSearchGenres.Text:= '';
+      var I:= clGenres.Items.Add;
+      I.Caption:= S;
+      I.Tag:= GID;
+    end else begin
+      //Not a valid selection
+    end;
+
+    Key:= 0;
+
+  end;
+
+end;
 
 procedure TfrmContentDiscoverMovies.cboSearchMoviesAdultClick(Sender: TObject);
 begin
@@ -321,6 +431,15 @@ begin
     cboCertCountry.ItemIndex:= cboCertCountry.Items.IndexOf(TMDBSetup.Country);
     cboCertCountryClick(nil);
 
+    //Genres
+    cboSearchGenres.StoredItems.BeginUpdate;
+    try
+      cboSearchGenres.StoredItems.Clear;
+      TMDB.ListMovieGenres(cboSearchGenres.StoredItems);
+    finally
+      cboSearchGenres.StoredItems.EndUpdate;
+    end;
+
 
     //TODO.............................................................
 
@@ -374,6 +493,27 @@ begin
   I.Caption:= S;
 end;
 
+procedure TfrmContentDiscoverMovies.btnApplyClick(Sender: TObject);
+begin
+  inherited;
+
+  ChangeTitle;
+end;
+
+procedure TfrmContentDiscoverMovies.btnPageNextClick(Sender: TObject);
+begin
+  inherited;
+
+  ChangeTitle;
+end;
+
+procedure TfrmContentDiscoverMovies.btnPagePrevClick(Sender: TObject);
+begin
+  inherited;
+
+  ChangeTitle;
+end;
+
 procedure TfrmContentDiscoverMovies.cboCertCountryClick(Sender: TObject);
 var
   O: TInterfaceWrapper;
@@ -424,5 +564,86 @@ begin
   AddCol('Description', 700);
 end;
 }
+
+
+
+
+
+{ TComboBox }
+
+constructor TComboBox.Create(AOwner: TComponent);
+begin
+  inherited;
+  AutoComplete := False;
+  FStoredItems := TStringList.Create;
+  FStoredItems.OnChange := StoredItemsChange;
+end;
+
+destructor TComboBox.Destroy;
+begin
+  FStoredItems.Free;
+  inherited;
+end;
+
+procedure TComboBox.CNCommand(var AMessage: TWMCommand);
+begin
+  // we have to process everything from our ancestor
+  inherited;
+  // if we received the CBN_EDITUPDATE notification
+  if AMessage.NotifyCode = CBN_EDITUPDATE then
+    // fill the items with the matches
+    FilterItems;
+end;
+
+procedure TComboBox.FilterItems;
+var
+  I: Integer;
+  Selection: TSelection;
+begin
+  // store the current combo edit selection
+  SendMessage(Handle, CB_GETEDITSEL, WPARAM(@Selection.StartPos),
+    LPARAM(@Selection.EndPos));
+  // begin with the items update
+  Items.BeginUpdate;
+  try
+    // if the combo edit is not empty, then clear the items
+    // and search through the FStoredItems
+    if Text <> '' then
+    begin
+      // clear all items
+      Items.Clear;
+      // iterate through all of them
+      for I := 0 to FStoredItems.Count - 1 do
+        // check if the current one contains the text in edit
+        if ContainsText(FStoredItems[I], Text) then
+          // and if so, then add it to the items
+          Items.Add(FStoredItems[I]);
+    end
+    // else the combo edit is empty
+    else
+      // so then we'll use all what we have in the FStoredItems
+      Items.Assign(FStoredItems)
+  finally
+    // finish the items update
+    Items.EndUpdate;
+  end;
+  // and restore the last combo edit selection
+  SendMessage(Handle, CB_SETEDITSEL, 0, MakeLParam(Selection.StartPos,
+    Selection.EndPos));
+end;
+
+procedure TComboBox.StoredItemsChange(Sender: TObject);
+begin
+  if Assigned(FStoredItems) then
+    FilterItems;
+end;
+
+procedure TComboBox.SetStoredItems(const Value: TStringList);
+begin
+  if Assigned(FStoredItems) then
+    FStoredItems.Assign(Value)
+  else
+    FStoredItems := Value;
+end;
 
 end.

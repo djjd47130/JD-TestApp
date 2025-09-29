@@ -51,7 +51,7 @@ inherited frmContentPageBase: TfrmContentPageBase
       end
       object lblPage: TLabel
         AlignWithMargins = True
-        Left = 408
+        Left = 404
         Top = 3
         Width = 144
         Height = 26
@@ -62,34 +62,6 @@ inherited frmContentPageBase: TfrmContentPageBase
         Layout = tlCenter
         ExplicitLeft = 217
       end
-      object btnPagePrev: TButton
-        AlignWithMargins = True
-        Left = 365
-        Top = 3
-        Width = 37
-        Height = 26
-        Cursor = crHandPoint
-        Hint = 'Go to Prior Page'
-        Align = alRight
-        Caption = '<'
-        Enabled = False
-        TabOrder = 0
-        OnClick = btnPagePrevClick
-      end
-      object btnPageNext: TButton
-        AlignWithMargins = True
-        Left = 558
-        Top = 3
-        Width = 37
-        Height = 26
-        Cursor = crHandPoint
-        Hint = 'Go to Next Page'
-        Align = alRight
-        Caption = '>'
-        Enabled = False
-        TabOrder = 1
-        OnClick = btnPageNextClick
-      end
       object btnRefresh: TJDFontButton
         AlignWithMargins = True
         Left = 601
@@ -99,7 +71,6 @@ inherited frmContentPageBase: TfrmContentPageBase
         Cursor = crHandPoint
         Hint = 'Refresh List'
         Align = alRight
-        Default = True
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -132,9 +103,99 @@ inherited frmContentPageBase: TfrmContentPageBase
         SubTextFont.Height = -11
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
-        TabOrder = 2
+        TabOrder = 0
         Text = 'Apply Search'
         OnClick = btnRefreshClick
+      end
+      object btnPageNext: TJDFontButton
+        AlignWithMargins = True
+        Left = 554
+        Top = 3
+        Width = 41
+        Height = 26
+        Cursor = crHandPoint
+        Hint = 'Next Page of Results'
+        Align = alRight
+        DrawStyle = fdTransparent
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Image.AutoSize = False
+        Image.Text = #61524
+        Image.Font.Charset = DEFAULT_CHARSET
+        Image.Font.Color = clWindowText
+        Image.Font.Height = -24
+        Image.Font.Name = 'FontAwesome'
+        Image.Font.Style = []
+        Image.Font.Quality = fqAntialiased
+        Image.StandardColor = fcGreen
+        Overlay.Text = #57715
+        Overlay.Font.Charset = DEFAULT_CHARSET
+        Overlay.Font.Color = clWindowText
+        Overlay.Font.Height = -7
+        Overlay.Font.Name = 'FontAwesome'
+        Overlay.Font.Style = []
+        Overlay.Font.Quality = fqAntialiased
+        Overlay.Position = foNone
+        Overlay.Margin = 3
+        ImagePosition = fpImgOnly
+        Margin = 8
+        Spacing = 8
+        SubTextFont.Charset = DEFAULT_CHARSET
+        SubTextFont.Color = clGray
+        SubTextFont.Height = -11
+        SubTextFont.Name = 'Tahoma'
+        SubTextFont.Style = []
+        TabOrder = 1
+        Text = 'Apply Search'
+        OnClick = btnPageNextClick
+      end
+      object btnPagePrev: TJDFontButton
+        AlignWithMargins = True
+        Left = 357
+        Top = 3
+        Width = 41
+        Height = 26
+        Cursor = crHandPoint
+        Hint = 'Previous Page of Results'
+        Align = alRight
+        DrawStyle = fdTransparent
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Image.AutoSize = False
+        Image.Text = #61523
+        Image.Font.Charset = DEFAULT_CHARSET
+        Image.Font.Color = clWindowText
+        Image.Font.Height = -24
+        Image.Font.Name = 'FontAwesome'
+        Image.Font.Style = []
+        Image.Font.Quality = fqAntialiased
+        Image.StandardColor = fcGreen
+        Overlay.Text = #57715
+        Overlay.Font.Charset = DEFAULT_CHARSET
+        Overlay.Font.Color = clWindowText
+        Overlay.Font.Height = -7
+        Overlay.Font.Name = 'FontAwesome'
+        Overlay.Font.Style = []
+        Overlay.Font.Quality = fqAntialiased
+        Overlay.Position = foNone
+        Overlay.Margin = 3
+        ImagePosition = fpImgOnly
+        Margin = 8
+        Spacing = 8
+        SubTextFont.Charset = DEFAULT_CHARSET
+        SubTextFont.Color = clGray
+        SubTextFont.Height = -11
+        SubTextFont.Name = 'Tahoma'
+        SubTextFont.Style = []
+        TabOrder = 2
+        Text = 'Apply Search'
+        OnClick = btnPagePrevClick
       end
     end
     object pDetail: TPanel

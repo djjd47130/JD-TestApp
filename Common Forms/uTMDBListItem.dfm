@@ -1,4 +1,4 @@
-object frmCommonListItem: TfrmCommonListItem
+object frmTMDBListItem: TfrmTMDBListItem
   Left = 0
   Top = 0
   Width = 574
@@ -23,28 +23,54 @@ object frmCommonListItem: TfrmCommonListItem
   end
   object pDetail: TPanel
     AlignWithMargins = True
-    Left = 118
+    Left = 129
     Top = 3
-    Width = 406
+    Width = 395
     Height = 37
     Align = alRight
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 39
     object lblCaption: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 400
-      Height = 25
-      Align = alTop
-      AutoSize = False
+      Width = 63
+      Height = 31
+      Cursor = crHandPoint
+      Hint = 'Item Caption'
+      Align = alLeft
       Caption = 'Caption'
       ShowAccelChar = False
       Layout = tlCenter
-      ExplicitLeft = 6
-      ExplicitTop = 7
+      OnMouseDown = lblCaptionMouseDown
+      ExplicitHeight = 19
+    end
+  end
+  object pImage: TPanel
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 54
+    Height = 37
+    Hint = 'Movie Poster'
+    Align = alLeft
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 1
+    Visible = False
+    StyleElements = [seFont, seBorder]
+    object imgPicture: TImage
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 38
+      Height = 31
+      Align = alLeft
+      Center = True
+      Proportional = True
+      Stretch = True
     end
   end
   object btnDetail: TJDFontButton
@@ -56,7 +82,6 @@ object frmCommonListItem: TfrmCommonListItem
     Cursor = crHandPoint
     Hint = 'Open Item Details'
     Align = alRight
-    Default = True
     DrawStyle = fdTransparent
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -89,34 +114,8 @@ object frmCommonListItem: TfrmCommonListItem
     SubTextFont.Height = -11
     SubTextFont.Name = 'Tahoma'
     SubTextFont.Style = []
-    TabOrder = 1
-    Text = 'Apply Search'
-    ExplicitHeight = 39
-  end
-  object pImage: TPanel
-    AlignWithMargins = True
-    Left = 3
-    Top = 3
-    Width = 62
-    Height = 37
-    Align = alLeft
-    BevelOuter = bvNone
-    Color = clWhite
-    ParentBackground = False
     TabOrder = 2
-    StyleElements = [seFont, seBorder]
-    ExplicitHeight = 39
-    object imgPicture: TImage
-      AlignWithMargins = True
-      Left = 3
-      Top = 3
-      Width = 46
-      Height = 31
-      Align = alLeft
-      Center = True
-      Proportional = True
-      Stretch = True
-      ExplicitHeight = 64
-    end
+    Text = 'Apply Search'
+    Visible = False
   end
 end

@@ -15,25 +15,8 @@ uses
   ;
 
 type
-  TJDTabForm = class;
   TJDTabRef = class;
   TJDTabController = class;
-
-
-  TJDTabFormClass = class of TJDTabForm;
-
-  //TODO: Migrate form-related stuff to central form class as part of library...
-  //NOTE: The following approach is not likely to suffice, as it is not a typical actual VCL form
-  //  tied to the VCL framework via DFM. Need to create base form in separate dedicated unit instead.
-  TJDTabForm = class(TForm)
-  private
-
-  public
-
-  published
-
-  end;
-
 
 
   TJDTabRef = class(TObject)
@@ -241,12 +224,16 @@ begin
       //else if TabCount > 0 then
       //  ActiveTabIndex:= Index;
 
-
-      FItems.Delete(X);
-      if X > 0 then
-        ActiveTabIndex:= X-1
-      else if TabCount > 0 then
-        ActiveTabIndex:= X;
+      Self.Container.DisableAlign;
+      try
+        FItems.Delete(X);
+        if X > 0 then
+          ActiveTabIndex:= X-1
+        else if TabCount > 0 then
+          ActiveTabIndex:= X;
+      finally
+        Self.Container.EnableAlign;
+      end;
 
       Break;
     end;

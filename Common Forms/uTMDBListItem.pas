@@ -1,6 +1,8 @@
-unit uCommonListItem;
+unit uTMDBListItem;
 
 interface
+
+//TODO: Change to inherit from new generalized list item object...
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
@@ -10,17 +12,18 @@ uses
   Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg;
 
 type
-  TfrmCommonListItem = class;
+  TfrmTMDBListItem = class;
 
-  TfrmCommonListItemClass = class of TfrmCommonListItem;
+  TfrmTMDBListItemClass = class of TfrmTMDBListItem;
 
-  TfrmCommonListItem = class(TFrame)
+  TfrmTMDBListItem = class(TFrame)
     imgPicture: TImage;
     pDetail: TPanel;
     lblCaption: TLabel;
-    btnDetail: TJDFontButton;
     pImage: TPanel;
     Bevel1: TBevel;
+    btnDetail: TJDFontButton;
+    procedure lblCaptionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     FItem: ITMDBItem;
   public
@@ -36,24 +39,32 @@ implementation
 
 {$R *.dfm}
 
-constructor TfrmCommonListItem.Create(AOwner: TComponent);
+constructor TfrmTMDBListItem.Create(AOwner: TComponent);
 begin
   inherited;
   pDetail.Align:= alClient;
   imgPicture.Align:= alClient;
 end;
 
-destructor TfrmCommonListItem.Destroy;
+destructor TfrmTMDBListItem.Destroy;
 begin
 
   inherited;
 end;
 
-procedure TfrmCommonListItem.LoadItem(const Item: ITMDBItem);
+procedure TfrmTMDBListItem.lblCaptionMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  //if Assigned(btnDetail.OnClick) then
+    btnDetail.Click;
+end;
+
+procedure TfrmTMDBListItem.LoadItem(const Item: ITMDBItem);
 begin
   FItem:= Item;
 
   lblCaption.Caption:= Item.GetText;
+
 
 end;
 
