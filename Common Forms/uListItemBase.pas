@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
+  JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
   Vcl.StdCtrls;
 
 type
@@ -29,8 +30,8 @@ type
     function GetText: String; virtual;
     function GetID: Int64; virtual;
   public
-    constructor Create(AOwner: TComponent; AData: Pointer); overload; virtual;
-    constructor Create(AOwner: TComponent; AIntf: IInterface); overload; virtual;
+    constructor Create(AOwner: TComponent; AData: Pointer); reintroduce; overload; virtual;
+    constructor Create(AOwner: TComponent; AIntf: IInterface); reintroduce; overload; virtual;
     destructor Destroy; override;
 
     function IsIntf: Boolean;
@@ -42,6 +43,9 @@ type
 implementation
 
 {$R *.dfm}
+
+uses
+  JD.ListController;
 
 { TListItemBase }
 
@@ -90,4 +94,6 @@ begin
   Result:= FIsIntf;
 end;
 
+initialization
+  RegisterListItemClass(TListItemBase);
 end.

@@ -9,7 +9,7 @@ uses
   JD.TabController,
   ChromeTabsTypes,
   System.RegularExpressions,
-  System.NetEncoding;
+  System.NetEncoding, Vcl.ComCtrls;
 
 type
   TfrmContentBrowser = class(TfrmContentBase)
@@ -20,6 +20,13 @@ type
     btnBack: TJDFontButton;
     btnForward: TJDFontButton;
     btnRefresh: TJDFontButton;
+    btnFavorites: TJDFontButton;
+    pFavorites: TPanel;
+    lstFavorites: TListView;
+    StaticText1: TStaticText;
+    pFavoritesTop: TPanel;
+    btnAddFavorite: TJDFontButton;
+    btnMenu: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure EdgeDocumentTitleChanged(Sender: TCustomEdgeBrowser;
       const ADocumentTitle: string);
@@ -40,6 +47,9 @@ type
       IsSuccess: Boolean; WebErrorStatus: TOleEnum);
     procedure txtAddressDblClick(Sender: TObject);
     procedure EdgeZoomFactorChanged(Sender: TCustomEdgeBrowser; AZoomFactor: Double);
+    procedure btnFavoritesClick(Sender: TObject);
+    procedure btnAddFavoriteClick(Sender: TObject);
+    procedure EdgeHistoryChanged(Sender: TCustomEdgeBrowser);
   private
     FInitialized: Boolean;
     procedure SetFullscreen(const Value: Boolean);
@@ -51,6 +61,28 @@ type
 
     function GetImageIndex: Integer; override;
     procedure RefreshData; override;
+
+
+
+
+    //TODO: Shell functions - #8
+    /// <summary>
+    /// Virtual function to return the shell root string.
+    /// </summary>
+    class function GetShellRoot: String; override;
+
+    /// <summary>
+    /// Virtual function to return the shell path string.
+    /// </summary>
+    class function GetShellPath: String; override;
+
+    /// <summary>
+    /// Virtual procedure to open a shell resource by its path.
+    /// </summary>
+    class procedure ShellOpen(const Path: String); override;
+
+
+
   end;
 
 var
@@ -130,6 +162,13 @@ begin
   UpdateHeader;
 end;
 
+procedure TfrmContentBrowser.EdgeHistoryChanged(Sender: TCustomEdgeBrowser);
+begin
+  inherited;
+  //TODO: Update history...
+
+end;
+
 procedure TfrmContentBrowser.UpdateHeader;
 var
   T: String;
@@ -189,6 +228,7 @@ procedure TfrmContentBrowser.EdgeZoomFactorChanged(Sender: TCustomEdgeBrowser; A
 begin
   inherited;
   //TODO: Save zoom factor for current domain...
+
 end;
 
 procedure TfrmContentBrowser.FormCreate(Sender: TObject);
@@ -220,6 +260,22 @@ begin
 
     end;
   end;
+end;
+
+class function TfrmContentBrowser.GetShellPath: String;
+begin
+
+end;
+
+class function TfrmContentBrowser.GetShellRoot: String;
+begin
+
+end;
+
+class procedure TfrmContentBrowser.ShellOpen(const Path: String);
+begin
+  inherited;
+
 end;
 
 {
@@ -277,10 +333,27 @@ begin
   //Edge.Refresh;
 end;
 
+procedure TfrmContentBrowser.btnAddFavoriteClick(Sender: TObject);
+begin
+  inherited;
+  //TODO: Add current page to favorites...
+
+end;
+
 procedure TfrmContentBrowser.btnBackClick(Sender: TObject);
 begin
   inherited;
   Edge.GoBack;
+end;
+
+procedure TfrmContentBrowser.btnFavoritesClick(Sender: TObject);
+begin
+  inherited;
+  pFavorites.Visible:= not pFavorites.Visible;
+  if pFavorites.Visible then begin
+    //TODO: Load favorites list...
+
+  end;
 end;
 
 procedure TfrmContentBrowser.btnForwardClick(Sender: TObject);

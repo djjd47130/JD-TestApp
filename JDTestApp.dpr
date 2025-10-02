@@ -61,7 +61,11 @@ uses
   uTMDBVertMovieListItem in 'TMDB\Movies\uTMDBVertMovieListItem.pas' {frmTMDBVertMovieListItem: TFrame},
   uTMDBSearch in 'TMDB\Search\uTMDBSearch.pas' {frmTMDBSearch},
   uTMDBSearchListItem in 'TMDB\Search\uTMDBSearchListItem.pas' {frmTMDBSearchListItem: TFrame},
-  uJDSysMonGaugesTest in 'JDSysMon\uJDSysMonGaugesTest.pas' {frmJDSSysMonGaugesTest};
+  uJDSysMonGaugesTest in 'JDSysMon\uJDSysMonGaugesTest.pas' {frmJDSSysMonGaugesTest},
+  uTMDBContentCollectionDetail in 'TMDB\Collections\uTMDBContentCollectionDetail.pas' {frmTMDBContentCollectionDetail},
+  JD.ListController in 'JD.ListController.pas',
+  JD.Plugins.Intf in 'Plugins\JD.Plugins.Intf.pas',
+  JD.PluginManager in 'JD.PluginManager.pas';
 
 {$R *.res}
 
@@ -71,5 +75,6 @@ begin
   Application.Title := 'JD Testing Grounds';
   Application.CreateForm(TdmTMDB, dmTMDB);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmTMDBContentCollectionDetail, frmTMDBContentCollectionDetail);
   Application.Run;
 end.

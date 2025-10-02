@@ -49,13 +49,13 @@ inherited frmMainMenu: TfrmMainMenu
         Caption = 'Media'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitWidth = 757
       end
-      object JDFontButton24: TJDFontButton
+      object btnMenuTMDB: TJDFontButton
         AlignWithMargins = True
         Left = 20
         Top = 39
@@ -72,9 +72,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61448
         Image.Font.Charset = DEFAULT_CHARSET
@@ -105,10 +105,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Style = []
         TabOrder = 0
         Text = 'The Movie Database (TMDB)'
-        OnClick = JDFontButton24Click
-        OnKeyUp = JDFontButton1KeyUp
+        OnClick = btnMenuTMDBClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton4: TJDFontButton
+      object btnMenuLastFM: TJDFontButton
         AlignWithMargins = True
         Left = 20
         Top = 83
@@ -125,9 +125,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61954
         Image.Font.Charset = DEFAULT_CHARSET
@@ -158,10 +158,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Style = []
         TabOrder = 1
         Text = 'Last.FM'
-        OnClick = JDFontButton4Click
-        OnKeyUp = JDFontButton1KeyUp
+        OnClick = btnMenuLastFMClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton5: TJDFontButton
+      object btnMenuMusicBrainz: TJDFontButton
         AlignWithMargins = True
         Left = 20
         Top = 127
@@ -178,9 +178,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61441
         Image.Font.Charset = DEFAULT_CHARSET
@@ -211,10 +211,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Style = []
         TabOrder = 2
         Text = 'MusicBrainz'
-        OnClick = JDFontButton5Click
-        OnKeyUp = JDFontButton1KeyUp
+        OnClick = btnMenuMusicBrainzClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton6: TJDFontButton
+      object btnMenuDiscogs: TJDFontButton
         AlignWithMargins = True
         Left = 20
         Top = 171
@@ -231,9 +231,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61619
         Image.Font.Charset = SYMBOL_CHARSET
@@ -264,8 +264,8 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Style = []
         TabOrder = 3
         Text = 'Discogs'
-        OnClick = JDFontButton6Click
-        OnKeyUp = JDFontButton1KeyUp
+        OnClick = btnMenuDiscogsClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
     end
     object pConfig: TPanel
@@ -291,13 +291,13 @@ inherited frmMainMenu: TfrmMainMenu
         Caption = 'Configuration'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitWidth = 757
       end
-      object JDFontButton49: TJDFontButton
+      object btnMenuAppSetup: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -314,9 +314,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61459
         Image.Font.Charset = DEFAULT_CHARSET
@@ -345,12 +345,12 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 0
-        Text = 'Application Setup'
-        OnClick = JDFontButton49Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The App Setup'
+        OnClick = btnMenuAppSetupClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
     end
-    object JDFontButton3: TJDFontButton
+    object btnMenuTEST: TJDFontButton
       AlignWithMargins = True
       Left = 20
       Top = 853
@@ -366,9 +366,9 @@ inherited frmMainMenu: TfrmMainMenu
       DrawStyle = fdTransparent
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -21
+      Font.Height = -19
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       Image.AutoSize = False
       Image.Text = #61515
       Image.Font.Charset = DEFAULT_CHARSET
@@ -399,7 +399,7 @@ inherited frmMainMenu: TfrmMainMenu
       TabOrder = 2
       Text = 'TEST'
       Visible = False
-      OnKeyUp = JDFontButton1KeyUp
+      OnKeyUp = btnMenuWebBrowserKeyUp
     end
     object Panel1: TPanel
       Left = 0
@@ -424,13 +424,13 @@ inherited frmMainMenu: TfrmMainMenu
         Caption = 'General'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitWidth = 757
       end
-      object JDFontButton7: TJDFontButton
+      object btnMenuClock: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -447,9 +447,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61463
         Image.Font.Charset = DEFAULT_CHARSET
@@ -478,11 +478,11 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 0
-        Text = 'Clock'
-        OnClick = JDFontButton7Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The Clock'
+        OnClick = btnMenuClockClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton8: TJDFontButton
+      object btnMenuFileBrowser: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -499,9 +499,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61564
         Image.Font.Charset = DEFAULT_CHARSET
@@ -530,11 +530,11 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 1
-        Text = 'File Browser'
-        OnClick = JDFontButton8Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The File Browser'
+        OnClick = btnMenuFileBrowserClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton9: TJDFontButton
+      object btnMenuSystemMonitor: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -551,9 +551,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61568
         Image.Font.Charset = DEFAULT_CHARSET
@@ -582,11 +582,11 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 2
-        Text = 'System Monitor'
-        OnClick = JDFontButton9Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The System Monitor'
+        OnClick = btnMenuSystemMonitorClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton10: TJDFontButton
+      object btnMenuCalculator: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -603,9 +603,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61932
         Image.Font.Charset = DEFAULT_CHARSET
@@ -634,10 +634,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 3
-        Text = 'Calculator'
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The Calculator'
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton11: TJDFontButton
+      object btnMenuCalendar: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -654,9 +654,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61555
         Image.Font.Charset = DEFAULT_CHARSET
@@ -685,9 +685,9 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 4
-        Text = 'Calendar'
-        OnClick = JDFontButton11Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The Calendar'
+        OnClick = btnMenuCalendarClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
     end
     object Panel2: TPanel
@@ -713,13 +713,13 @@ inherited frmMainMenu: TfrmMainMenu
         Caption = 'Web'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitWidth = 757
       end
-      object JDFontButton1: TJDFontButton
+      object btnMenuWebBrowser: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -736,9 +736,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61612
         Image.Font.Charset = DEFAULT_CHARSET
@@ -769,10 +769,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Style = []
         TabOrder = 0
         Text = 'SPACEBALLS: The Web Browser'
-        OnClick = JDFontButton1Click
-        OnKeyUp = JDFontButton1KeyUp
+        OnClick = btnMenuWebBrowserClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton12: TJDFontButton
+      object btnMenuRESTClient: TJDFontButton
         Tag = 1
         AlignWithMargins = True
         Left = 20
@@ -789,9 +789,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61678
         Image.Font.Charset = DEFAULT_CHARSET
@@ -821,10 +821,10 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 1
-        Text = 'REST Client'
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The REST Client'
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
-      object JDFontButton2: TJDFontButton
+      object btnMenuWeatherUnderground: TJDFontButton
         AlignWithMargins = True
         Left = 20
         Top = 83
@@ -841,9 +841,9 @@ inherited frmMainMenu: TfrmMainMenu
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61829
         Image.Font.Charset = DEFAULT_CHARSET
@@ -873,9 +873,9 @@ inherited frmMainMenu: TfrmMainMenu
         SubTextFont.Name = 'Tahoma'
         SubTextFont.Style = []
         TabOrder = 2
-        Text = 'Weather Underground'
-        OnClick = JDFontButton2Click
-        OnKeyUp = JDFontButton1KeyUp
+        Text = 'SPACEBALLS: The Weather'
+        OnClick = btnMenuWeatherUndergroundClick
+        OnKeyUp = btnMenuWebBrowserKeyUp
       end
     end
   end

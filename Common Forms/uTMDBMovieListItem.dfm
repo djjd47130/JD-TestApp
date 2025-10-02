@@ -18,7 +18,7 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
     ExplicitWidth = 448
     ExplicitHeight = 212
     inherited lblCaption: TLabel
-      Width = 74
+      Width = 442
       Height = 23
       Hint = 'Movie Title'
       Align = alTop
@@ -35,7 +35,7 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
       AlignWithMargins = True
       Left = 3
       Top = 62
-      Width = 417
+      Width = 442
       Height = 147
       Hint = 'Movie Overview'
       Align = alClient
@@ -71,7 +71,7 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
         Left = 378
         Top = 3
         Width = 67
-        Height = 18
+        Height = 24
         Hint = 'Movie Genre(s)'
         Align = alRight
         Caption = 'Genre(s)'
@@ -87,13 +87,14 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
         Transparent = True
         Layout = tlCenter
         StyleElements = [seClient, seBorder]
+        ExplicitHeight = 18
       end
       object lblReleaseDate: TLabel
         AlignWithMargins = True
         Left = 92
         Top = 3
         Width = 99
-        Height = 18
+        Height = 24
         Hint = 'Movie Release Date'
         Margins.Right = 15
         Align = alLeft
@@ -111,13 +112,14 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
         Transparent = True
         Layout = tlCenter
         StyleElements = [seClient, seBorder]
+        ExplicitHeight = 18
       end
       object lblVoteAvg: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 3
         Width = 71
-        Height = 18
+        Height = 24
         Hint = 'Movie Vote Average'
         Margins.Right = 15
         Align = alLeft
@@ -137,6 +139,7 @@ inherited frmTMDBMovieListItem: TfrmTMDBMovieListItem
         Transparent = True
         Layout = tlCenter
         StyleElements = [seClient, seBorder]
+        ExplicitHeight = 18
       end
     end
   end

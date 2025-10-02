@@ -59,9 +59,11 @@ type
     TMDB: TTMDB;
     procedure TMDBUserAuthRequest(Sender: TObject; const URL: WideString; var Result: Boolean);
   private
-    { Private declarations }
+
   public
-    { Public declarations }
+    /// <summary>
+    /// Prepares TMDB API component for a new request, resetting API key/token, user-agent, etc.
+    /// </summary>
     procedure PrepAPI;
   end;
 

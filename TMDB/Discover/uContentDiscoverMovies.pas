@@ -125,6 +125,10 @@ type
     clGenres: TJDChipList;
     Label7: TLabel;
     cboSearchGenres: TComboBox;
+    CategoryPanel8: TCategoryPanel;
+    Panel6: TPanel;
+    Label13: TLabel;
+    cboSort: TComboBox;
     procedure cboCertCountryClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -256,7 +260,7 @@ begin
 
   //TODO
 
-  //Params.SortBy:= 'vote_average.desc'; //TODO
+  Params.SortBy:= cboSort.Text;
 
 
 

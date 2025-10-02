@@ -27,13 +27,13 @@ inherited frmTMDBVertMovieListItem: TfrmTMDBVertMovieListItem
     ExplicitHeight = 48
     inherited lblCaption: TLabel
       Width = 349
-      Height = 18
-      Font.Height = -15
-      ExplicitWidth = 57
-      ExplicitHeight = 18
+      Height = 16
+      Font.Height = -13
+      ExplicitWidth = 49
+      ExplicitHeight = 16
     end
     inherited lblOverview: TLabel
-      Top = 54
+      Top = 52
       Width = 349
       Height = 18
       Align = alTop
@@ -43,7 +43,7 @@ inherited frmTMDBVertMovieListItem: TfrmTMDBVertMovieListItem
       ExplicitHeight = 18
     end
     inherited pSubData: TPanel
-      Top = 24
+      Top = 22
       Width = 355
       Height = 27
       ExplicitTop = 24
@@ -51,29 +51,28 @@ inherited frmTMDBVertMovieListItem: TfrmTMDBVertMovieListItem
       ExplicitHeight = 27
       inherited lblGenre: TLabel
         Left = 605
-        Height = 18
         Align = alNone
         ExplicitLeft = 605
       end
       inherited lblReleaseDate: TLabel
         Left = 3
-        Width = 86
+        Width = 79
         Height = 21
         Alignment = taLeftJustify
-        Font.Height = -13
+        Font.Height = -12
         ExplicitLeft = 3
-        ExplicitWidth = 86
-        ExplicitHeight = 16
+        ExplicitWidth = 79
+        ExplicitHeight = 14
       end
       inherited lblVoteAvg: TLabel
-        Left = 275
-        Width = 65
+        Left = 279
+        Width = 61
         Height = 21
         Align = alRight
-        Font.Height = -13
+        Font.Height = -12
         ExplicitLeft = 275
-        ExplicitWidth = 65
-        ExplicitHeight = 16
+        ExplicitWidth = 61
+        ExplicitHeight = 14
       end
     end
   end

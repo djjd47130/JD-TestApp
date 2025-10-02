@@ -34,13 +34,14 @@ object ListItemBase: TListItemBase
       Left = 3
       Top = 3
       Width = 57
-      Height = 18
+      Height = 41
       Cursor = crHandPoint
       Hint = 'Item'
       Align = alLeft
       Caption = 'Caption'
       ShowAccelChar = False
       Layout = tlCenter
+      ExplicitHeight = 18
     end
   end
   object pImage: TPanel
@@ -57,9 +58,6 @@ object ListItemBase: TListItemBase
     TabOrder = 1
     Visible = False
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 3
-    ExplicitTop = 5
-    ExplicitHeight = 62
     object imgPicture: TImage
       AlignWithMargins = True
       Left = 3

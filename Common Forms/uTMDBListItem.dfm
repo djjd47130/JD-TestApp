@@ -36,7 +36,7 @@ object frmTMDBListItem: TfrmTMDBListItem
       Left = 3
       Top = 3
       Width = 63
-      Height = 31
+      Height = 19
       Cursor = crHandPoint
       Hint = 'Item Caption'
       Align = alLeft
@@ -44,7 +44,6 @@ object frmTMDBListItem: TfrmTMDBListItem
       ShowAccelChar = False
       Layout = tlCenter
       OnMouseDown = lblCaptionMouseDown
-      ExplicitHeight = 19
     end
   end
   object pImage: TPanel

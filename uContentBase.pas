@@ -3,8 +3,9 @@ unit uContentBase;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes;
 
 
@@ -60,15 +61,47 @@ type
     /// </summary>
     function CanClose: Boolean; virtual;
 
+
+
+    //TODO: Favicons - #13
     /// <summary>
     /// Virtual function to return the image index associated with the tab.
     /// </summary>
     function GetImageIndex: Integer; virtual;
 
+
+
+    //TODO: Shell functions - #8
+    /// <summary>
+    /// Virtual function to return the shell root string.
+    /// </summary>
+    class function GetShellRoot: String; virtual;
+
+    /// <summary>
+    /// Virtual function to return the shell path string.
+    /// </summary>
+    class function GetShellPath: String; virtual;
+
+    /// <summary>
+    /// Virtual procedure to open a shell resource by its path.
+    /// </summary>
+    class procedure ShellOpen(const Path: String); virtual;
+
+
+
   end;
 
 var
   frmContentBase: TfrmContentBase;
+
+
+
+//TODO: Registered content forms for shell addresses - #8
+function RegisteredContentForms: TList<TfrmContentBaseClass>;
+procedure RegisterContentForm(AClass: TfrmContentBaseClass);
+procedure UnregisterContentForm(AClass: TfrmContentBaseClass);
+
+
 
 implementation
 
@@ -77,6 +110,33 @@ implementation
 uses
   uMain,
   JD.TabController;
+
+
+
+//TODO: Registered content forms for shell addresses - #8
+var
+  _RegisteredContentForms: TList<TfrmContentBaseClass>;
+
+function RegisteredContentForms: TList<TfrmContentBaseClass>;
+begin
+  if _RegisteredContentForms = nil then
+    _RegisteredContentForms:= TList<TfrmContentBaseClass>.Create;
+  Result:= _RegisteredContentForms;
+end;
+
+procedure RegisterContentForm(AClass: TfrmContentBaseClass);
+begin
+  var I:= RegisteredContentForms.IndexOf(AClass);
+  if I < 0 then
+    RegisteredContentForms.Add(AClass);
+end;
+
+procedure UnregisterContentForm(AClass: TfrmContentBaseClass);
+begin
+  var I:= RegisteredContentForms.IndexOf(AClass);
+  if I < 0 then
+    RegisteredContentForms.Delete(I);
+end;
 
 
 
@@ -97,9 +157,6 @@ begin
   FOnClick := Value;
 end;
 
-
-
-
 { TfrmContentBase }
 
 constructor TfrmContentBase.Create(AOwner: TComponent);
@@ -117,6 +174,23 @@ end;
 function TfrmContentBase.GetImageIndex: Integer;
 begin
   Result:= -1;
+end;
+
+class function TfrmContentBase.GetShellPath: String;
+begin
+  //Override expected
+  Result:= '';
+end;
+
+class function TfrmContentBase.GetShellRoot: String;
+begin
+  //Override expected
+  Result:= 'App';
+end;
+
+class procedure TfrmContentBase.ShellOpen(const Path: String);
+begin
+  //Override expected
 end;
 
 function TfrmContentBase.GetTabCaption: String;
@@ -146,5 +220,11 @@ begin
   if T <> nil then
     T.Caption:= Value;
 end;
+
+initialization
+  _RegisteredContentForms:= nil;
+
+finalization
+  FreeAndNil(_RegisteredContentForms);
 
 end.

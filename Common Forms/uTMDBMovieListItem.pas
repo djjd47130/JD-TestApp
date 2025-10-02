@@ -33,6 +33,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  JD.ListController;
+
 { TfrmCommonListItem1 }
 
 constructor TfrmTMDBMovieListItem.Create(AOwner: TComponent);
@@ -124,6 +127,5 @@ begin
       end);
 
 end;
-
 
 end.

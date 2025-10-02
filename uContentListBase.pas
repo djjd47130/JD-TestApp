@@ -7,7 +7,7 @@ uses
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
   uContentBase, JD.Common, JD.Ctrls, JD.Ctrls.FontButton, Vcl.ExtCtrls,
-  uListItemBase;
+  uListItemBase, JD.ListController;
 
 type
   TfrmContentListBase = class(TForm)
@@ -15,6 +15,15 @@ type
     pTop: TPanel;
     lblResults: TLabel;
     btnRefresh: TJDFontButton;
+    pTemplate: TPanel;
+    pData: TPanel;
+    lblCaption: TLabel;
+    pImage: TPanel;
+    imgPicture: TImage;
+    btnLeft: TJDFontButton;
+    btnRight: TJDFontButton;
+    Lst: TJDListController;
+    LstLayout: TJDListItemLayout;
   private
     FOwnsItems: Boolean;
   protected

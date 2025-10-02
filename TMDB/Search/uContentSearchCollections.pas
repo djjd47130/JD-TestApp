@@ -9,7 +9,8 @@ uses
   JD.TMDB.Common, JD.TMDB.Intf,
   uTMDB,
   uCommonImages,
-  uTMDBListItem;
+  uTMDBListItem,
+  uTMDBContentCollectionDetail;
 
 type
   TfrmContentSearchCollections = class(TfrmContentPageBase)
@@ -126,7 +127,8 @@ procedure TfrmContentSearchCollections.ItemClick(const Index: Integer;
 begin
   inherited;
   //TODO: Navigate to movie details tab within app...
-
+  var T:= TabController.CreateTab(TfrmTMDBContentCollectionDetail, -1, 0); //TODO
+  TfrmTMDBContentCollectionDetail(T.Content).LoadCollection(Obj.ID);
 end;
 
 function TfrmContentSearchCollections.Page: ITMDBPage;

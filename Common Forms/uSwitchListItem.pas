@@ -23,4 +23,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  JD.ListController;
+
+initialization
+  RegisterListItemClass(TListItemBase);
 end.

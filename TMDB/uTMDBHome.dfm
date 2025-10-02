@@ -1,21 +1,20 @@
 inherited frmTMDBHome: TfrmTMDBHome
-  Caption = 'TMDB Home'
+  Caption = 'The Movie Database - Home'
   ClientHeight = 554
-  ClientWidth = 905
+  ClientWidth = 904
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
-  ExplicitWidth = 921
+  ExplicitWidth = 920
   ExplicitHeight = 593
   PixelsPerInch = 96
   TextHeight = 18
   object SB: TScrollBox
     Left = 0
-    Top = 47
-    Width = 905
-    Height = 507
-    VertScrollBar.Position = 355
-    VertScrollBar.Range = 3000
+    Top = 48
+    Width = 904
+    Height = 506
+    VertScrollBar.Range = 2500
     VertScrollBar.Smooth = True
     VertScrollBar.Style = ssHotTrack
     VertScrollBar.Tracking = True
@@ -31,9 +30,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     OnMouseWheelUp = SBMouseWheelUp
     object pMovies: TPanel
       Left = 0
-      Top = 285
-      Width = 888
-      Height = 671
+      Top = 700
+      Width = 887
+      Height = 530
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -44,7 +43,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -62,9 +61,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnMovieCertifications: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 523
-        Width = 848
-        Height = 42
+        Top = 413
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -75,9 +74,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61603
         Image.Font.Charset = DEFAULT_CHARSET
@@ -111,9 +110,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnMovieGenres: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 567
-        Width = 848
-        Height = 42
+        Top = 447
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -124,9 +123,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61451
         Image.Font.Charset = DEFAULT_CHARSET
@@ -160,9 +159,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnMyMovieWatchlist: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 435
-        Width = 848
-        Height = 42
+        Top = 345
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -172,9 +171,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61550
         Image.Font.Charset = DEFAULT_CHARSET
@@ -208,9 +207,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnMyFavoriteMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 391
-        Width = 848
-        Height = 42
+        Top = 311
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -220,9 +219,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61444
         Image.Font.Charset = DEFAULT_CHARSET
@@ -257,9 +256,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 479
-        Width = 848
-        Height = 42
+        Top = 379
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -269,9 +268,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61508
         Image.Font.Charset = DEFAULT_CHARSET
@@ -304,9 +303,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnTopRatedMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 303
-        Width = 848
-        Height = 42
+        Top = 243
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -316,9 +315,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61538
         Image.Font.Charset = DEFAULT_CHARSET
@@ -352,9 +351,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnUpcomingMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 259
-        Width = 848
-        Height = 42
+        Top = 209
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -364,9 +363,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61463
         Image.Font.Charset = DEFAULT_CHARSET
@@ -400,9 +399,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnPopularMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 215
-        Width = 848
-        Height = 42
+        Top = 175
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -412,9 +411,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61445
         Image.Font.Charset = DEFAULT_CHARSET
@@ -448,9 +447,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnNowPlayingMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 171
-        Width = 848
-        Height = 42
+        Top = 141
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -460,9 +459,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61765
         Image.Font.Charset = DEFAULT_CHARSET
@@ -496,9 +495,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnDiscoverMovies: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 127
-        Width = 848
-        Height = 42
+        Top = 107
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -508,9 +507,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61546
         Image.Font.Charset = DEFAULT_CHARSET
@@ -544,9 +543,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnSearchCollections: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 83
-        Width = 848
-        Height = 42
+        Top = 73
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -557,9 +556,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61442
         Image.Font.Charset = DEFAULT_CHARSET
@@ -594,8 +593,8 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 20
         Top = 39
-        Width = 848
-        Height = 42
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -606,9 +605,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61442
         Image.Font.Charset = DEFAULT_CHARSET
@@ -642,9 +641,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton23: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 347
-        Width = 848
-        Height = 42
+        Top = 277
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -655,9 +654,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61953
         Image.Font.Charset = DEFAULT_CHARSET
@@ -691,9 +690,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object btnMovieChanges: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 611
-        Width = 848
-        Height = 42
+        Top = 481
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -704,9 +703,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61556
         Image.Font.Charset = DEFAULT_CHARSET
@@ -740,9 +739,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pTV: TPanel
       Left = 0
-      Top = 956
-      Width = 888
-      Height = 673
+      Top = 1230
+      Width = 887
+      Height = 532
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -753,7 +752,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -772,8 +771,8 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 20
         Top = 39
-        Width = 848
-        Height = 42
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -783,9 +782,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -820,9 +819,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 83
-        Width = 848
-        Height = 42
+        Top = 73
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -832,9 +831,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -868,9 +867,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 127
-        Width = 848
-        Height = 42
+        Top = 107
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -880,9 +879,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -916,9 +915,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 171
-        Width = 848
-        Height = 42
+        Top = 141
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -928,9 +927,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -964,9 +963,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 215
-        Width = 848
-        Height = 42
+        Top = 175
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -976,9 +975,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1012,9 +1011,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 259
-        Width = 848
-        Height = 42
+        Top = 209
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1024,9 +1023,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1060,9 +1059,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 303
-        Width = 848
-        Height = 42
+        Top = 243
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1072,9 +1071,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1107,9 +1106,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton28: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 347
-        Width = 848
-        Height = 42
+        Top = 277
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1119,9 +1118,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1155,9 +1154,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton13: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 391
-        Width = 848
-        Height = 42
+        Top = 311
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1167,9 +1166,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1204,9 +1203,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 435
-        Width = 848
-        Height = 42
+        Top = 345
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1216,9 +1215,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1252,9 +1251,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 479
-        Width = 848
-        Height = 42
+        Top = 379
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1264,9 +1263,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1300,9 +1299,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 1
         AlignWithMargins = True
         Left = 20
-        Top = 523
-        Width = 848
-        Height = 42
+        Top = 413
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1312,9 +1311,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1349,9 +1348,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 567
-        Width = 848
-        Height = 42
+        Top = 447
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1361,9 +1360,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1397,9 +1396,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 611
-        Width = 848
-        Height = 42
+        Top = 481
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1409,9 +1408,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61704
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1444,9 +1443,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pMisc: TPanel
       Left = 0
-      Top = 1867
-      Width = 888
-      Height = 344
+      Top = 1954
+      Width = 887
+      Height = 262
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -1457,7 +1456,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -1477,8 +1476,8 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 20
         Top = 39
-        Width = 848
-        Height = 42
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1488,9 +1487,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61483
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1523,9 +1522,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton45: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 83
-        Width = 848
-        Height = 42
+        Top = 73
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1535,9 +1534,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61483
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1571,9 +1570,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton47: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 127
-        Width = 848
-        Height = 42
+        Top = 107
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1583,9 +1582,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61486
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1619,9 +1618,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton44: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 171
-        Width = 848
-        Height = 42
+        Top = 141
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1631,9 +1630,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61687
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1668,9 +1667,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 215
-        Width = 848
-        Height = 42
+        Top = 175
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1680,9 +1679,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61643
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1716,9 +1715,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 1
         AlignWithMargins = True
         Left = 20
-        Top = 259
-        Width = 848
-        Height = 42
+        Top = 209
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1728,9 +1727,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61612
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1764,9 +1763,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pConfig: TPanel
       Left = 0
-      Top = 2211
-      Width = 888
-      Height = 393
+      Top = 2216
+      Width = 887
+      Height = 324
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -1777,7 +1776,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -1797,9 +1796,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton3: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 347
-        Width = 848
-        Height = 42
+        Top = 277
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1809,9 +1808,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61476
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1844,9 +1843,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton22: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 127
-        Width = 848
-        Height = 42
+        Top = 107
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1856,9 +1855,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61463
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1893,9 +1892,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 259
-        Width = 848
-        Height = 42
+        Top = 209
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1905,9 +1904,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61612
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1940,9 +1939,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton20: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 215
-        Width = 848
-        Height = 42
+        Top = 175
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -1952,9 +1951,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61557
         Image.Font.Charset = DEFAULT_CHARSET
@@ -1988,9 +1987,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton19: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 303
-        Width = 848
-        Height = 42
+        Top = 243
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2000,9 +1999,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61617
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2036,9 +2035,9 @@ inherited frmTMDBHome: TfrmTMDBHome
       object JDFontButton18: TJDFontButton
         AlignWithMargins = True
         Left = 20
-        Top = 171
-        Width = 848
-        Height = 42
+        Top = 141
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2048,9 +2047,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61476
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2085,9 +2084,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 83
-        Width = 848
-        Height = 42
+        Top = 73
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2097,9 +2096,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61573
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2134,8 +2133,8 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 20
         Top = 39
-        Width = 848
-        Height = 42
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2145,9 +2144,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61459
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2180,9 +2179,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object pPeople: TPanel
       Left = 0
-      Top = 1629
-      Width = 888
-      Height = 238
+      Top = 1762
+      Width = 887
+      Height = 192
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -2193,7 +2192,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -2212,8 +2211,8 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 20
         Top = 39
-        Width = 848
-        Height = 42
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2223,9 +2222,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61447
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2260,9 +2259,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 83
-        Width = 848
-        Height = 42
+        Top = 73
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2272,9 +2271,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61447
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2308,9 +2307,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 127
-        Width = 848
-        Height = 42
+        Top = 107
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2320,9 +2319,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61447
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2356,9 +2355,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         Tag = 2
         AlignWithMargins = True
         Left = 20
-        Top = 171
-        Width = 848
-        Height = 42
+        Top = 141
+        Width = 847
+        Height = 32
         Cursor = crHandPoint
         Margins.Left = 20
         Margins.Top = 1
@@ -2368,9 +2367,9 @@ inherited frmTMDBHome: TfrmTMDBHome
         DrawStyle = fdTransparent
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
+        Font.Style = []
         Image.AutoSize = False
         Image.Text = #61447
         Image.Font.Charset = DEFAULT_CHARSET
@@ -2403,9 +2402,9 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object Panel1: TPanel
       Left = 0
-      Top = -355
-      Width = 888
-      Height = 320
+      Top = 0
+      Width = 887
+      Height = 350
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -2416,13 +2415,13 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
         Align = alTop
         AutoSize = False
-        Caption = 'Trending Movies'
+        Caption = 'Top Rated Movies'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -24
@@ -2430,27 +2429,27 @@ inherited frmTMDBHome: TfrmTMDBHome
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitTop = 1
+        ExplicitWidth = 872
       end
-      object sbTrendingMovies: TScrollBox
+      object sbTopRatedMovies: TScrollBox
         AlignWithMargins = True
         Left = 3
         Top = 41
-        Width = 882
-        Height = 274
+        Width = 881
+        Height = 304
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         Align = alBottom
         Anchors = [akLeft, akTop, akRight, akBottom]
         BorderStyle = bsNone
         TabOrder = 0
-        ExplicitHeight = 254
       end
     end
     object Panel2: TPanel
       Left = 0
-      Top = -35
-      Width = 888
-      Height = 320
+      Top = 350
+      Width = 887
+      Height = 350
       Align = alTop
       BevelEdges = [beBottom]
       BevelKind = bkSoft
@@ -2461,7 +2460,7 @@ inherited frmTMDBHome: TfrmTMDBHome
         AlignWithMargins = True
         Left = 8
         Top = 3
-        Width = 872
+        Width = 871
         Height = 32
         Margins.Left = 8
         Margins.Right = 8
@@ -2475,30 +2474,30 @@ inherited frmTMDBHome: TfrmTMDBHome
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitTop = 1
+        ExplicitWidth = 872
       end
       object sbPopularMovies: TScrollBox
         AlignWithMargins = True
         Left = 3
         Top = 41
-        Width = 882
-        Height = 274
+        Width = 881
+        Height = 304
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         Align = alBottom
         Anchors = [akLeft, akTop, akRight, akBottom]
         BorderStyle = bsNone
         TabOrder = 0
-        ExplicitHeight = 254
       end
     end
   end
   object pTop: TPanel
     Left = 0
     Top = 0
-    Width = 905
-    Height = 47
+    Width = 904
+    Height = 48
     Align = alTop
-    BevelEdges = [beTop, beBottom]
+    BevelEdges = [beBottom]
     BevelKind = bkSoft
     BevelOuter = bvNone
     DoubleBuffered = True
@@ -2509,8 +2508,8 @@ inherited frmTMDBHome: TfrmTMDBHome
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 262
-      Height = 37
+      Width = 267
+      Height = 40
       Align = alLeft
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000002430000
@@ -2871,10 +2870,10 @@ inherited frmTMDBHome: TfrmTMDBHome
     end
     object btnUser: TJDFontButton
       AlignWithMargins = True
-      Left = 860
+      Left = 859
       Top = 3
       Width = 42
-      Height = 37
+      Height = 40
       Cursor = crHandPoint
       Hint = 'TMDB User Menu'
       Align = alRight
@@ -2913,13 +2912,14 @@ inherited frmTMDBHome: TfrmTMDBHome
       TabOrder = 0
       Text = 'User Login'
       OnClick = btnUserClick
+      ExplicitHeight = 38
     end
     object btnMenu: TJDFontButton
       AlignWithMargins = True
-      Left = 812
+      Left = 811
       Top = 3
       Width = 42
-      Height = 37
+      Height = 40
       Cursor = crHandPoint
       Hint = 'TMDB Configuration'
       Align = alRight
@@ -2959,13 +2959,14 @@ inherited frmTMDBHome: TfrmTMDBHome
       TabStop = False
       Text = 'User Login'
       OnClick = JDFontButton49Click
+      ExplicitHeight = 38
     end
     object JDFontButton25: TJDFontButton
       AlignWithMargins = True
-      Left = 764
+      Left = 763
       Top = 3
       Width = 42
-      Height = 37
+      Height = 40
       Cursor = crHandPoint
       Hint = 'Search TMDB'
       Align = alRight
@@ -3004,6 +3005,58 @@ inherited frmTMDBHome: TfrmTMDBHome
       TabOrder = 2
       Text = 'User Login'
       OnClick = JDFontButton25Click
+      ExplicitHeight = 38
+    end
+    object StaticText1: TStaticText
+      AlignWithMargins = True
+      Left = 285
+      Top = 12
+      Width = 57
+      Height = 22
+      Cursor = crHandPoint
+      Margins.Left = 12
+      Margins.Top = 12
+      Margins.Right = 12
+      Margins.Bottom = 12
+      Align = alLeft
+      Caption = 'Movies'
+      TabOrder = 3
+      ExplicitLeft = 266
+      ExplicitHeight = 20
+    end
+    object StaticText2: TStaticText
+      AlignWithMargins = True
+      Left = 366
+      Top = 12
+      Width = 81
+      Height = 22
+      Cursor = crHandPoint
+      Margins.Left = 12
+      Margins.Top = 12
+      Margins.Right = 12
+      Margins.Bottom = 12
+      Align = alLeft
+      Caption = 'Television'
+      TabOrder = 4
+      ExplicitLeft = 347
+      ExplicitHeight = 20
+    end
+    object StaticText3: TStaticText
+      AlignWithMargins = True
+      Left = 471
+      Top = 12
+      Width = 55
+      Height = 22
+      Cursor = crHandPoint
+      Margins.Left = 12
+      Margins.Top = 12
+      Margins.Right = 12
+      Margins.Bottom = 12
+      Align = alLeft
+      Caption = 'People'
+      TabOrder = 5
+      ExplicitLeft = 452
+      ExplicitHeight = 20
     end
   end
   object pUser: TPanel
@@ -3360,7 +3413,13 @@ inherited frmTMDBHome: TfrmTMDBHome
     Enabled = False
     Interval = 500
     OnTimer = tmrLoadDelayTimer
-    Left = 496
-    Top = 192
+    Left = 648
+    Top = 184
+  end
+  object lstTopRatedMovies: TJDListController
+    Container = sbTopRatedMovies
+    Orientation = loHorizontal
+    Left = 299
+    Top = 200
   end
 end

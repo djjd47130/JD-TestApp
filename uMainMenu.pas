@@ -27,42 +27,42 @@ type
     Label3: TLabel;
     pConfig: TPanel;
     Label4: TLabel;
-    JDFontButton49: TJDFontButton;
-    JDFontButton24: TJDFontButton;
-    JDFontButton4: TJDFontButton;
-    JDFontButton3: TJDFontButton;
-    JDFontButton5: TJDFontButton;
-    JDFontButton6: TJDFontButton;
+    btnMenuAppSetup: TJDFontButton;
+    btnMenuTMDB: TJDFontButton;
+    btnMenuLastFM: TJDFontButton;
+    btnMenuTEST: TJDFontButton;
+    btnMenuMusicBrainz: TJDFontButton;
+    btnMenuDiscogs: TJDFontButton;
     Panel1: TPanel;
     Label1: TLabel;
-    JDFontButton7: TJDFontButton;
+    btnMenuClock: TJDFontButton;
     Panel2: TPanel;
     Label2: TLabel;
-    JDFontButton1: TJDFontButton;
-    JDFontButton8: TJDFontButton;
-    JDFontButton9: TJDFontButton;
-    JDFontButton10: TJDFontButton;
-    JDFontButton11: TJDFontButton;
-    JDFontButton12: TJDFontButton;
-    JDFontButton2: TJDFontButton;
+    btnMenuWebBrowser: TJDFontButton;
+    btnMenuFileBrowser: TJDFontButton;
+    btnMenuSystemMonitor: TJDFontButton;
+    btnMenuCalculator: TJDFontButton;
+    btnMenuCalendar: TJDFontButton;
+    btnMenuRESTClient: TJDFontButton;
+    btnMenuWeatherUnderground: TJDFontButton;
     procedure FormCreate(Sender: TObject);
-    procedure JDFontButton49Click(Sender: TObject);
+    procedure btnMenuAppSetupClick(Sender: TObject);
     procedure CategoryPanelGroup1MouseWheelDown(Sender: TObject;
       Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
     procedure CategoryPanelGroup1MouseWheelUp(Sender: TObject;
       Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
     procedure FormResize(Sender: TObject);
-    procedure JDFontButton1Click(Sender: TObject);
-    procedure JDFontButton24Click(Sender: TObject);
-    procedure JDFontButton2Click(Sender: TObject);
-    procedure JDFontButton4Click(Sender: TObject);
-    procedure JDFontButton5Click(Sender: TObject);
-    procedure JDFontButton6Click(Sender: TObject);
-    procedure JDFontButton1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure JDFontButton7Click(Sender: TObject);
-    procedure JDFontButton8Click(Sender: TObject);
-    procedure JDFontButton11Click(Sender: TObject);
-    procedure JDFontButton9Click(Sender: TObject);
+    procedure btnMenuWebBrowserClick(Sender: TObject);
+    procedure btnMenuTMDBClick(Sender: TObject);
+    procedure btnMenuWeatherUndergroundClick(Sender: TObject);
+    procedure btnMenuLastFMClick(Sender: TObject);
+    procedure btnMenuMusicBrainzClick(Sender: TObject);
+    procedure btnMenuDiscogsClick(Sender: TObject);
+    procedure btnMenuWebBrowserKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnMenuClockClick(Sender: TObject);
+    procedure btnMenuFileBrowserClick(Sender: TObject);
+    procedure btnMenuCalendarClick(Sender: TObject);
+    procedure btnMenuSystemMonitorClick(Sender: TObject);
   private
     procedure CalcScrollHeight;
     procedure SetNarrowMode(const Value: Boolean);
@@ -218,21 +218,21 @@ begin
   SB.VertScrollBar.Position:= SB.VertScrollBar.Position - 20;
 end;
 
-procedure TfrmMainMenu.JDFontButton11Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuCalendarClick(Sender: TObject);
 begin
   inherited;
 
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton1Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuWebBrowserClick(Sender: TObject);
 begin
   inherited;
   frmMain.OpenNewBrowserTab;
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmMainMenu.btnMenuWebBrowserKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;
   if (Key = VK_SPACE) and (Sender is TJDFontButton) then begin
@@ -241,63 +241,63 @@ begin
   end;
 end;
 
-procedure TfrmMainMenu.JDFontButton24Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuTMDBClick(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmTMDBHome, -1, 0);
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton2Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuWeatherUndergroundClick(Sender: TObject);
 begin
   inherited;
 
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton49Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuAppSetupClick(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmAppSetup, -1, 0);
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton4Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuLastFMClick(Sender: TObject);
 begin
   inherited;
 
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton5Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuMusicBrainzClick(Sender: TObject);
 begin
   inherited;
 
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton6Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuDiscogsClick(Sender: TObject);
 begin
   inherited;
 
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton7Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuClockClick(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmContentClock, -1, 0);
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton8Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuFileBrowserClick(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmContentFileBrowser, -1, 0);
   HideMenu;
 end;
 
-procedure TfrmMainMenu.JDFontButton9Click(Sender: TObject);
+procedure TfrmMainMenu.btnMenuSystemMonitorClick(Sender: TObject);
 begin
   inherited;
   TabController.CreateTab(TfrmJDSSysMonGaugesTest, -1, 0);

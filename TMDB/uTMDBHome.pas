@@ -38,7 +38,7 @@ uses
   uContentTVPage,
   uTMDBSearch,
 
-  Vcl.StdCtrls, uTMDBListItem, uTMDBMovieListItem, uTMDBVertMovieListItem, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, uTMDBListItem, uTMDBMovieListItem, uTMDBVertMovieListItem, Vcl.Imaging.pngimage, JD.ListController;
 
 type
   TfrmTMDBHome = class(TfrmTMDBContentBase)
@@ -125,13 +125,17 @@ type
     btnMenu: TJDFontButton;
     Panel1: TPanel;
     Label9: TLabel;
-    sbTrendingMovies: TScrollBox;
+    sbTopRatedMovies: TScrollBox;
     Panel2: TPanel;
     Label10: TLabel;
     sbPopularMovies: TScrollBox;
     Image1: TImage;
     JDFontButton25: TJDFontButton;
     tmrLoadDelay: TTimer;
+    lstTopRatedMovies: TJDListController;
+    StaticText1: TStaticText;
+    StaticText2: TStaticText;
+    StaticText3: TStaticText;
     procedure FormCreate(Sender: TObject);
     procedure btnSearchMoviesClick(Sender: TObject);
     procedure btnSearchCollectionsClick(Sender: TObject);
@@ -185,7 +189,7 @@ type
     function CanClose: Boolean; override;
     procedure EnableTMDBItems(const AEnabled: Boolean);
 
-    procedure LoadTrendingMovies;
+    procedure LoadTopRatedMovies;
     procedure LoadPopularMovies;
 
   end;
@@ -806,7 +810,7 @@ begin
   Screen.Cursor:= crHourglass;
   try
     //TODO: Show/hide accordingly...
-    LoadTrendingMovies;
+    LoadTopRatedMovies;
     LoadPopularMovies;
   finally
     Screen.Cursor:= crDefault;
@@ -857,21 +861,16 @@ begin
       sbPopularMovies.Controls[0].Free;
     end;
 
-    //Application.ProcessMessages;
-
     //Fetch list...
     var Data:= TMDB.MovieLists.GetPopular;
     for var X := 0 to Data.Items.Count-1 do begin
       var I:= Data.Items[X];
-
       F:= TfrmTMDBVertMovieListItem.Create(sbPopularMovies);
       F.Name:= 'frmPopularMovie'+IntToStr(X);
-      F.Width:= 220;
+      F.Width:= 200;
       F.Align:= alLeft;
       F.LoadItem(I);
       F.Parent:= sbPopularMovies;
-
-
     end;
 
   finally
@@ -880,37 +879,33 @@ begin
 
 end;
 
-procedure TfrmTMDBHome.LoadTrendingMovies;
+procedure TfrmTMDBHome.LoadTopRatedMovies;
 var
   F: TfrmTMDBVertMovieListItem;
 begin
 
-  sbTrendingMovies.DisableAlign;
+  sbTopRatedMovies.DisableAlign;
   try
 
     //Delete all items...
-    while sbTrendingMovies.ControlCount > 0 do begin
-      sbTrendingMovies.Controls[0].Free;
+    while sbTopRatedMovies.ControlCount > 0 do begin
+      sbTopRatedMovies.Controls[0].Free;
     end;
-
-    //Application.ProcessMessages;
 
     //Fetch list...
     var Data:= TMDB.MovieLists.GetTopRated;
     for var X := 0 to Data.Items.Count-1 do begin
       var I:= Data.Items[X];
-
-      F:= TfrmTMDBVertMovieListItem.Create(sbTrendingMovies);
+      F:= TfrmTMDBVertMovieListItem.Create(sbTopRatedMovies);
       F.Name:= 'frmTrendingMovie'+IntToStr(X);
-      F.Width:= 250;
+      F.Width:= 200;
       F.Align:= alLeft;
       F.LoadItem(I);
-      F.Parent:= sbTrendingMovies;
-
+      F.Parent:= sbTopRatedMovies;
     end;
 
   finally
-    sbTrendingMovies.EnableAlign;
+    sbTopRatedMovies.EnableAlign;
   end;
 
 end;

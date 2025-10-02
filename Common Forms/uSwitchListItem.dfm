@@ -2,6 +2,9 @@ inherited ListSwitchItem: TListSwitchItem
   inherited pData: TPanel
     Width = 362
     ExplicitWidth = 362
+    inherited lblCaption: TLabel
+      Height = 41
+    end
   end
   inherited pImage: TPanel
     Left = 3
@@ -45,7 +48,6 @@ inherited ListSwitchItem: TListSwitchItem
     TabStop = False
     ThumbColor = clSkyBlue
     ThumbWidth = 25
-    ExplicitLeft = 718
     ExplicitHeight = 20
   end
 end

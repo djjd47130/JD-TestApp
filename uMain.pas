@@ -14,15 +14,20 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages,
+  Winapi.Windows, Winapi.Messages, System.ImageList,
+
   System.SysUtils, System.Variants, System.Classes, System.Types, System.UITypes,
   System.Generics.Collections,
+
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.ComCtrls, Vcl.Menus,
-  //System.NetEncoding,
-  JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics,
+  Vcl.ImgList, Vcl.AppEvnts,
 
+  JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics, JD.Favicons,
   JD.TabController,
+
+  uMainMenu,
+  uAppSetup,
   uContentBase,
   uContentBrowser,
 
@@ -33,19 +38,13 @@ uses
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
 
   Vcl.Styles.Utils,
-  Vcl.Styles.Fixes,
-
-  uMainMenu,
-  uAppSetup, System.ImageList, Vcl.ImgList, JD.Favicons, Vcl.AppEvnts, Vcl.Mask;
-
+  Vcl.Styles.Fixes;
 
 const
   MAIN_MENU_WIDTH_OPEN = 380;
   MAIN_MENU_WIDTH_CLOSED = 70;
 
-
 type
-
   TfrmMain = class(TForm)
     pTop: TPanel;
     pContent: TPanel;
@@ -71,21 +70,15 @@ type
     procedure TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
       var HintTimeout: Integer);
   private
-
     FMenu: TfrmMainMenu;
     FFullScreen: Boolean;
     FRect: TRect;
     FState: TWindowState;
     FContentOnly: Boolean;
     FLoaded: Boolean;
-
     procedure SetFullScreen(const Value: Boolean);
     procedure SetContentOnly(const Value: Boolean);
   public
-    /// <summary>
-    /// Prepares API component for a new request, resetting API key/token, user-agent, etc.
-    /// </summary>
-    //procedure PrepAPI;
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
     procedure ShowMenu(const Value: Boolean);

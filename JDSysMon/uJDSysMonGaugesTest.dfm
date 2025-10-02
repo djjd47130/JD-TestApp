@@ -26,7 +26,7 @@ object frmJDSSysMonGaugesTest: TfrmJDSSysMonGaugesTest
     BaseAutoSize = True
     BaseSize = 50.000000000000000000
     CaptionMargin = 10.000000000000000000
-    ColorMain.Color = 2697513
+    ColorMain.Color = 1973790
     ColorMain.UseStandardColor = False
     Crosshairs.HorzColor.StandardColor = fcNeutral
     Crosshairs.HorzColor.UseStandardColor = True
@@ -127,7 +127,7 @@ object frmJDSSysMonGaugesTest: TfrmJDSSysMonGaugesTest
     BaseAutoSize = True
     BaseSize = 50.000000000000000000
     CaptionMargin = 10.000000000000000000
-    ColorMain.Color = 2697513
+    ColorMain.Color = 1973790
     ColorMain.UseStandardColor = False
     Crosshairs.HorzColor.StandardColor = fcNeutral
     Crosshairs.HorzColor.UseStandardColor = True
@@ -228,7 +228,7 @@ object frmJDSSysMonGaugesTest: TfrmJDSSysMonGaugesTest
     BaseAutoSize = True
     BaseSize = 50.000000000000000000
     CaptionMargin = 10.000000000000000000
-    ColorMain.Color = 2697513
+    ColorMain.Color = 1973790
     ColorMain.UseStandardColor = False
     Crosshairs.HorzColor.StandardColor = fcNeutral
     Crosshairs.HorzColor.UseStandardColor = True
@@ -328,15 +328,15 @@ object frmJDSSysMonGaugesTest: TfrmJDSSysMonGaugesTest
     OnDriveInfo = MonDriveInfo
     OnDriveAdded = MonDriveAdded
     OnDriveRemoved = MonDriveRemoved
-    Left = 192
-    Top = 96
+    Left = 128
+    Top = 184
   end
   object Vol: TJDVolumeControls
-    Volume = 30
+    Volume = 28
     Muted = False
     OnVolumeChanged = VolVolumeChanged
     OnMuteChanged = VolMuteChanged
-    Left = 232
-    Top = 96
+    Left = 176
+    Top = 184
   end
 end

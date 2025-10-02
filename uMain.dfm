@@ -1,8 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Cursor = crHandPoint
-  Caption = 'JD Testing Grounds'
+  Caption = 'SPACEBALLS: The Test App'
   ClientHeight = 515
   ClientWidth = 888
   Color = clBtnFace
@@ -18,6 +17,9 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  DesignSize = (
+    888
+    515)
   PixelsPerInch = 96
   TextHeight = 13
   object pTop: TPanel
@@ -49,8 +51,8 @@ object frmMain: TfrmMain
       Options.Display.CloseButton.CrossRadialOffset = 4
       Options.Display.AddButton.Offsets.Vertical = 10
       Options.Display.AddButton.Offsets.Horizontal = 2
-      Options.Display.AddButton.Height = 16
-      Options.Display.AddButton.Width = 31
+      Options.Display.AddButton.Height = 17
+      Options.Display.AddButton.Width = 33
       Options.Display.AddButton.ShowPlusSign = True
       Options.Display.AddButton.Visibility = avRightFloating
       Options.Display.AddButton.HorizontalOffsetFloating = -3
@@ -77,8 +79,8 @@ object frmMain: TfrmMain
       Options.Display.Tabs.OffsetTop = 4
       Options.Display.Tabs.OffsetRight = 0
       Options.Display.Tabs.OffsetBottom = 0
-      Options.Display.Tabs.MinWidth = 30
-      Options.Display.Tabs.MaxWidth = 250
+      Options.Display.Tabs.MinWidth = 50
+      Options.Display.Tabs.MaxWidth = 300
       Options.Display.Tabs.TabWidthFromContent = False
       Options.Display.Tabs.PinnedWidth = 42
       Options.Display.Tabs.ImageOffsetLeft = 13
@@ -168,7 +170,7 @@ object frmMain: TfrmMain
       LookAndFeel.TabsContainer.StopAlpha = 255
       LookAndFeel.TabsContainer.OutlineColor = 14520930
       LookAndFeel.TabsContainer.OutlineAlpha = 0
-      LookAndFeel.Tabs.BaseLine.Color = 11110509
+      LookAndFeel.Tabs.BaseLine.Color = 10485760
       LookAndFeel.Tabs.BaseLine.Thickness = 1.000000000000000000
       LookAndFeel.Tabs.BaseLine.Alpha = 255
       LookAndFeel.Tabs.Modified.CentreColor = clWhite
@@ -196,11 +198,11 @@ object frmMain: TfrmMain
       LookAndFeel.Tabs.Active.Font.Alpha = 100
       LookAndFeel.Tabs.Active.Font.TextRenderingMode = TextRenderingHintClearTypeGridFit
       LookAndFeel.Tabs.Active.Font.UseDefaultFont = True
-      LookAndFeel.Tabs.Active.Style.StartColor = clBlack
-      LookAndFeel.Tabs.Active.Style.StopColor = 10485760
+      LookAndFeel.Tabs.Active.Style.StartColor = 10485760
+      LookAndFeel.Tabs.Active.Style.StopColor = clBlack
       LookAndFeel.Tabs.Active.Style.StartAlpha = 255
       LookAndFeel.Tabs.Active.Style.StopAlpha = 255
-      LookAndFeel.Tabs.Active.Style.OutlineColor = 11110509
+      LookAndFeel.Tabs.Active.Style.OutlineColor = 10485760
       LookAndFeel.Tabs.Active.Style.OutlineSize = 1.000000000000000000
       LookAndFeel.Tabs.Active.Style.OutlineAlpha = 255
       LookAndFeel.Tabs.NotActive.Font.Name = 'Segoe UI'
@@ -213,7 +215,7 @@ object frmMain: TfrmMain
       LookAndFeel.Tabs.NotActive.Style.StopColor = 15194573
       LookAndFeel.Tabs.NotActive.Style.StartAlpha = 0
       LookAndFeel.Tabs.NotActive.Style.StopAlpha = 0
-      LookAndFeel.Tabs.NotActive.Style.OutlineColor = 13546390
+      LookAndFeel.Tabs.NotActive.Style.OutlineColor = clWindowFrame
       LookAndFeel.Tabs.NotActive.Style.OutlineSize = 1.000000000000000000
       LookAndFeel.Tabs.NotActive.Style.OutlineAlpha = 50
       LookAndFeel.Tabs.Hot.Font.Name = 'Segoe UI'
@@ -226,7 +228,7 @@ object frmMain: TfrmMain
       LookAndFeel.Tabs.Hot.Style.StopColor = 5329233
       LookAndFeel.Tabs.Hot.Style.StartAlpha = 255
       LookAndFeel.Tabs.Hot.Style.StopAlpha = 255
-      LookAndFeel.Tabs.Hot.Style.OutlineColor = 10648687
+      LookAndFeel.Tabs.Hot.Style.OutlineColor = clWindowFrame
       LookAndFeel.Tabs.Hot.Style.OutlineSize = 1.000000000000000000
       LookAndFeel.Tabs.Hot.Style.OutlineAlpha = 235
       LookAndFeel.CloseButton.Cross.Normal.Color = clSilver
@@ -365,13 +367,12 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ShowHint = True
       TabOrder = 0
-      ExplicitTop = -6
     end
     object btnMenu: TJDFontButton
       Left = 0
       Top = 0
       Width = 70
-      Height = 35
+      Height = 34
       Cursor = crHandPoint
       Hint = 'Show / Hide Main Menu'
       DrawStyle = fdTransparent
@@ -410,14 +411,13 @@ object frmMain: TfrmMain
     end
   end
   object pContent: TPanel
-    Left = 704
+    Left = 824
     Top = 35
-    Width = 184
+    Width = 64
     Height = 461
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 41
   end
   object Stat: TStatusBar
     Left = 0
@@ -443,14 +443,15 @@ object frmMain: TfrmMain
   end
   object btnDummy: TJDFontButton
     AlignWithMargins = True
-    Left = 224
-    Top = 418
-    Width = 401
+    Left = 80
+    Top = 426
+    Width = 353
     Height = 55
     Margins.Left = 20
     Margins.Top = 1
     Margins.Right = 20
     Margins.Bottom = 1
+    Anchors = [akLeft, akBottom]
     DrawStyle = fdTransparent
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -489,8 +490,8 @@ object frmMain: TfrmMain
     Text = 'DO NOT HIDE THIS BUTTON'
   end
   object imgFavicons16: TImageList
-    Left = 344
-    Top = 104
+    Left = 264
+    Top = 176
   end
   object Favicons: TJDFavicons
     ImageLists = <
@@ -499,12 +500,12 @@ object frmMain: TfrmMain
       end>
     Mode = fmGoogle
     OnLookupFavicon = FaviconsLookupFavicon
-    Left = 344
-    Top = 56
+    Left = 264
+    Top = 128
   end
   object AppEvents: TApplicationEvents
     OnHint = AppEventsHint
-    Left = 272
-    Top = 104
+    Left = 264
+    Top = 80
   end
 end

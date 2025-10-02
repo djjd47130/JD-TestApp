@@ -1,47 +1,64 @@
-inherited frmContentListBase: TfrmContentListBase
+object frmContentListBase: TfrmContentListBase
+  Left = 0
+  Top = 0
   Caption = 'List'
+  ClientHeight = 464
+  ClientWidth = 688
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = True
   PixelsPerInch = 96
-  TextHeight = 18
+  TextHeight = 13
   object sbItems: TScrollBox
-    AlignWithMargins = True
-    Left = 3
-    Top = 35
-    Width = 748
-    Height = 435
+    Left = 0
+    Top = 97
+    Width = 688
+    Height = 367
     VertScrollBar.Smooth = True
     VertScrollBar.Tracking = True
     Align = alClient
+    BorderStyle = bsNone
     DoubleBuffered = True
     ParentDoubleBuffered = False
     TabOrder = 0
-    ExplicitLeft = 8
+    ExplicitLeft = -3
+    ExplicitTop = 145
   end
   object pTop: TPanel
     Left = 0
     Top = 0
-    Width = 754
+    Width = 688
     Height = 32
     Align = alTop
+    BevelEdges = [beBottom]
+    BevelKind = bkFlat
     BevelOuter = bvNone
+    ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 645
+    ExplicitLeft = 8
+    ExplicitTop = -7
     object lblResults: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 3
       Width = 262
-      Height = 26
+      Height = 24
       Align = alLeft
       AutoSize = False
       Caption = '0 Results'
       Layout = tlCenter
+      ExplicitHeight = 26
     end
     object btnRefresh: TJDFontButton
       AlignWithMargins = True
-      Left = 710
+      Left = 644
       Top = 3
       Width = 41
-      Height = 26
+      Height = 24
       Cursor = crHandPoint
       Hint = 'Refresh List'
       Align = alRight
@@ -79,7 +96,179 @@ inherited frmContentListBase: TfrmContentListBase
       SubTextFont.Style = []
       TabOrder = 0
       Text = 'Apply Search'
-      ExplicitLeft = 601
     end
+  end
+  object pTemplate: TPanel
+    Left = 0
+    Top = 32
+    Width = 688
+    Height = 65
+    Align = alTop
+    BevelEdges = [beBottom]
+    BevelKind = bkFlat
+    BevelOuter = bvNone
+    ParentBackground = False
+    TabOrder = 2
+    Visible = False
+    ExplicitTop = 56
+    object pData: TPanel
+      AlignWithMargins = True
+      Left = 126
+      Top = 3
+      Width = 374
+      Height = 57
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 0
+      object lblCaption: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 49
+        Height = 51
+        Cursor = crHandPoint
+        Hint = 'Item'
+        Align = alLeft
+        Caption = 'Caption'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ShowAccelChar = False
+        Layout = tlCenter
+        ExplicitHeight = 16
+      end
+    end
+    object pImage: TPanel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 61
+      Height = 57
+      Hint = 'Item'
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      Visible = False
+      StyleElements = [seFont, seBorder]
+      object imgPicture: TImage
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 38
+        Height = 51
+        Hint = 'Item'
+        Align = alLeft
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Center = True
+        Proportional = True
+        Stretch = True
+        ExplicitHeight = 49
+      end
+    end
+    object btnLeft: TJDFontButton
+      AlignWithMargins = True
+      Left = 70
+      Top = 3
+      Width = 50
+      Height = 57
+      Cursor = crHandPoint
+      Hint = 'Item'
+      Align = alLeft
+      DrawStyle = fdTransparent
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Image.AutoSize = False
+      Image.Text = #61462
+      Image.Font.Charset = DEFAULT_CHARSET
+      Image.Font.Color = clWindowText
+      Image.Font.Height = -29
+      Image.Font.Name = 'FontAwesome'
+      Image.Font.Style = []
+      Image.Font.Quality = fqAntialiased
+      Image.StandardColor = fcGreen
+      Overlay.Text = #57715
+      Overlay.Font.Charset = DEFAULT_CHARSET
+      Overlay.Font.Color = clWindowText
+      Overlay.Font.Height = -7
+      Overlay.Font.Name = 'FontAwesome'
+      Overlay.Font.Style = []
+      Overlay.Font.Quality = fqAntialiased
+      Overlay.Position = foNone
+      Overlay.Margin = 3
+      ImagePosition = fpImgOnly
+      Margin = 8
+      Spacing = 8
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clGray
+      SubTextFont.Height = -11
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      TabOrder = 2
+      Text = 'Apply Search'
+      Visible = False
+    end
+    object btnRight: TJDFontButton
+      AlignWithMargins = True
+      Left = 635
+      Top = 3
+      Width = 50
+      Height = 57
+      Cursor = crHandPoint
+      Hint = 'Item'
+      Align = alRight
+      DrawStyle = fdTransparent
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Image.AutoSize = False
+      Image.Text = #61459
+      Image.Font.Charset = DEFAULT_CHARSET
+      Image.Font.Color = clWindowText
+      Image.Font.Height = -29
+      Image.Font.Name = 'FontAwesome'
+      Image.Font.Style = []
+      Image.Font.Quality = fqAntialiased
+      Overlay.Text = #57715
+      Overlay.Font.Charset = DEFAULT_CHARSET
+      Overlay.Font.Color = clWindowText
+      Overlay.Font.Height = -7
+      Overlay.Font.Name = 'FontAwesome'
+      Overlay.Font.Style = []
+      Overlay.Font.Quality = fqAntialiased
+      Overlay.Position = foNone
+      Overlay.Margin = 3
+      ImagePosition = fpImgOnly
+      Margin = 8
+      Spacing = 8
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clGray
+      SubTextFont.Height = -11
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      TabOrder = 3
+      Text = 'Apply Search'
+      Visible = False
+    end
+  end
+  object Lst: TJDListController
+    Container = sbItems
+    Layout = LstLayout
+    Left = 168
+    Top = 169
+  end
+  object LstLayout: TJDListItemLayout
+    ContentControl = pTemplate
+    Left = 264
+    Top = 169
   end
 end

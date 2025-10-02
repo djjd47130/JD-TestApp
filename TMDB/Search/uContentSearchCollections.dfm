@@ -11,8 +11,7 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
     inherited pDetail: TPanel
       Top = 248
       Height = 252
-      ExplicitLeft = 6
-      ExplicitTop = 244
+      ExplicitTop = 248
       ExplicitHeight = 252
       object Pages: TPageControl
         AlignWithMargins = True
@@ -26,10 +25,6 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
         OnChange = PagesChange
         object TabSheet1: TTabSheet
           Caption = 'Details'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object lblTitle: TLabel
             AlignWithMargins = True
             Left = 3
@@ -66,10 +61,6 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
         object TabSheet2: TTabSheet
           Caption = 'Parts'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object lstParts: TListView
             AlignWithMargins = True
             Left = 3
@@ -115,25 +106,16 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
         object tabImages: TTabSheet
           Caption = 'Images'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
         end
         object TabSheet4: TTabSheet
           Caption = 'Translations'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
         end
       end
     end
     inherited sbItems: TScrollBox
       Height = 203
-      ExplicitTop = 244
-      ExplicitHeight = -6
+      ExplicitHeight = 203
     end
   end
   inherited pSearch: TPanel
@@ -149,10 +131,11 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 107
+        Width = 259
         Height = 18
         Align = alTop
         Caption = 'Search Query:'
+        ExplicitWidth = 107
       end
       object txtSearchMoviesQuery: TEdit
         AlignWithMargins = True
@@ -213,10 +196,11 @@ inherited frmContentSearchCollections: TfrmContentSearchCollections
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 57
+        Width = 259
         Height = 18
         Align = alTop
         Caption = 'Region:'
+        ExplicitWidth = 57
       end
       object cboSearchMoviesRegion: TComboBox
         AlignWithMargins = True
