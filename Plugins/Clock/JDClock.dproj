@@ -41,7 +41,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_ExeOutput>..\Bin</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -50,6 +50,8 @@
         <GenDll>true</GenDll>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>JDClock</SanitizedProjectName>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;Mitov_VCL_VideoLab;ngcgoogle18svc;vclactnband;vclFireDAC;OpenWireBindingPkg;tethering;lmdrtplugin;JDLibComponents;FireDACADSDriver;OpenWireEditorPkg;vcltouch;AudioLabEssentialPkg;ngcgoogle12svc;vcldb;lmdrtchartdb;svn;ngcgoogle11svc;ngcgoogle8svc;Mitov_FMX_BasicLab;OpenWireEditorBasicPkg;MSICS_RAD21_Rtl;lmdrtdialog;lmdrttools;dwsLibRuntime;lmdrtrtf;ngcgoogle5svc;htmlcomp_xe104;vclx;lmdrtelpro;lmdrtide;TimingLabBasicPkg;RESTBackendComponents;ngcgoogle10svc;VCLRESTComponents;ngcgoogle13svc;vclie;bindengine;CloudService;FireDACMySQLDriver;SignalLabScopePkg;bindcompdbx;IndyIPServer;lmdrttoolsdb;IndySystem;ngcruntime;OpenWireStudioAudioHostPkg;Mitov_FMX_Windows_VideoLab_Basic;dsnapcon;Mitov_VCL_VideoLab_Basic;VirtualTreesR;FireDACMSAccDriver;fmxFireDAC;JDCardComponents;vclimg;lmdrtchart;Jcl;OpenWireStudioHostPkg;MiTeC_Common_RAD21;ngcgoogle19svc;VideoLabPkg;nghtml;ngcgoogle4svc;ngvldtctrls;ngcgoogle9svc;ngcgoogle;FMXTee;ngdragdrop;soaprtl;DbxCommonDriver;Mitov_VCL_AudioLab_Basic;xmlrtl;soapmidas;ngcgoogle17svc;fmxobj;VideoLabBasicPkg;ngcboxnet;rtl;DbxClientDriver;VideoLabAdditionalPkg;SignalLabBasicPkg;Mitov_VCL_VideoLab_Additional;WMI_PKG;lmdrtprint;appanalytics;Mitov_VCL_Runtime;lmdrtdocking;IndyIPClient;bindcompvcl;lmdrtsyntax;TeeUI;AudioLabGenericBasicPkg;VclSmp;OpenWireBindingVclPkg;JclVcl;lmdrtscriptimp;JDTestAppComponents;lmdrtshell;FMX_VideoLabBasicPkg;lmdrtstorage;lmdrtweb;RESTComponents;lmdrtsearch;DBXInterBaseDriver;htmlcompfm_xe104;bindcompvclsmp;svnui;Mitov_VCL_BasicLab;lmdrtl;OpenWireBindingFmxPkg;JDGamesComps;ngcgoogle14svc;XSuperObjectLib;lmdrtbar;bindcompfmx;lmdrteldb;inetdb;RaizeComponentsVcl;ngcgoogle3svc;FmxTeeUI;RaizeComponentsVclDb;OpenWireStudioVideoHostPkg;fmx;FireDACIBDriver;fmxdae;vcledge;Mitov_VCL_AudioLab;dbexpress;IndyCore;lmdrtdesign;ngvalidators;TextLabBasicPkg;dsnap;Mitov_VCL_AudioLab_Essential;lmdrtrtlx;FireDACCommon;lmdrtgrid;ngdialogs;lmdrtelcore;QR506RunDXE10;soapserver;ngcgoogle2svc;JclDeveloperTools;ngcgoogle7svc;lmdrtinspector;lmdrtfx;DBXMySQLDriver;htmlreports_xe104;lmdrtsearchdb;FireDACCommonODBC;FireDACCommonDriver;Mitov_BasicLab;LockBoxDR;inet;lmdrtspell;htmleditcore_xe104;OpenWirePkg;IndyIPCommon;vcl;MediaLabBasicPkg;ngcgoogle1svc;lmdrtsys;ngcgoogle6svc;TeeDB;FireDAC;Mitov_Runtime;ngcdropbox;ngcommon;FireDACSqliteDriver;FireDACPgDriver;ChromeTabs_R;OpenWireBindingDatabasePkg;Tee;lmdrtscript;vclwinx;lmdrtrtfdb;ngcgoogle15svc;htmledit_xe104;CustomIPTransport;vcldsnap;MediaLabPkg;AudioLabBasicPkg;SignalLabAdditionalPkg;bindcomp;AudioLabPkg;SynEdit_R;dbxcds;adortl;htmleditfm_xe104;SignalLabGenericBasicPkg;ngcwrappers;hclcore_xe104;JDVST;VideoLabGenericBasicPkg;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;ngcgoogle16svc;JDTMDBLib;JclContainers;lmdrtcore;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -72,6 +74,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -85,6 +90,7 @@
         </DelphiCompile>
         <DCCReference Include="JD.Clock.Impl.pas"/>
         <DCCReference Include="..\JD.Plugins.Intf.pas"/>
+        <DCCReference Include="..\JD.Plugins.Impl.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -105,6 +111,15 @@
                 <Source>
                     <Source Name="MainSource">JDClock.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\XSuperObjectLib.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\JDWordGridComps.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\dclJDUOMLib.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\WINDOWS\system32\FMX_MediaLabBasicDsn270.bpl">Mitov - FireMonkey MediaLab Basic Design Package</Excluded_Packages>
+                    <Excluded_Packages Name="C:\WINDOWS\system32\FMX_SignalLabScopeDsn270.bpl">Mitov - FireMonkey SignalLab Scope Design Package</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
@@ -122,7 +137,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\JDClock.dll" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\Bin\JDClock.dll" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>JDClock.dll</RemoteName>
                         <Overwrite>true</Overwrite>

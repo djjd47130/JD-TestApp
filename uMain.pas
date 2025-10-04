@@ -17,7 +17,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.ImageList,
 
   System.SysUtils, System.Variants, System.Classes, System.Types, System.UITypes,
-  System.Generics.Collections,
+  //System.Generics.Collections,
 
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.ComCtrls, Vcl.Menus,
@@ -28,12 +28,12 @@ uses
 
   uMainMenu,
   uAppSetup,
-  uContentBase,
+  //uContentBase,
   uContentBrowser,
 
-  Jpeg, PngImage,
+  //Jpeg, PngImage,
 
-  XSuperObject, XSuperJSON,
+  //XSuperObject, XSuperJSON,
 
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
 

@@ -65,7 +65,8 @@ uses
   uTMDBContentCollectionDetail in 'TMDB\Collections\uTMDBContentCollectionDetail.pas' {frmTMDBContentCollectionDetail},
   JD.ListController in 'JD.ListController.pas',
   JD.Plugins.Intf in 'Plugins\JD.Plugins.Intf.pas',
-  JD.PluginManager in 'JD.PluginManager.pas';
+  JD.PluginManager in 'JD.PluginManager.pas',
+  JD.Plugins.Impl in 'Plugins\JD.Plugins.Impl.pas';
 
 {$R *.res}
 

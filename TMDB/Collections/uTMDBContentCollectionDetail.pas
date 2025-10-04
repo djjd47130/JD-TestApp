@@ -30,12 +30,12 @@ type
     FImages: ITMDBMediaImageGroup;
     //FTranslations: ITMDBTranslations;
     FDetailImages: TfrmCommonImages;
-    function GetCollectionDetail(const ID: Integer): ITMDBCollectionDetail;
+    //function GetCollectionDetail(const ID: Integer): ITMDBCollectionDetail;
     procedure LoadDetails;
     procedure LoadImages;
     procedure LoadParts;
     procedure LoadTranslations;
-    procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem);
+    //procedure ShowDetail(const Index: Integer; Item: TfrmTMDBListItem; Obj: ITMDBItem);
     function AddListItem(AItem: ITMDBItem): TfrmTMDBListItem;
   public
     procedure DisplayCollectionDetail(const Value: ITMDBCollectionDetail);
@@ -49,12 +49,15 @@ implementation
 
 {$R *.dfm}
 
+{
 function TfrmTMDBContentCollectionDetail.GetCollectionDetail(const ID: Integer): ITMDBCollectionDetail;
 begin
   PrepAPI;
   Result:= TMDB.Client.Collections.GetDetails(ID, TMDBSetup.Language);
 end;
+}
 
+{
 procedure TfrmTMDBContentCollectionDetail.ShowDetail(const Index: Integer;
   Item: TfrmTMDBListItem; Obj: ITMDBItem);
 var
@@ -74,6 +77,7 @@ begin
   DisplayCollectionDetail(FDetail);
   inherited;
 end;
+}
 
 procedure TfrmTMDBContentCollectionDetail.DisplayCollectionDetail(const Value: ITMDBCollectionDetail);
 begin
@@ -152,7 +156,7 @@ begin
 
     for X := 0 to FDetail.Parts.Count-1 do begin
       O:= FDetail.Parts[X];
-      var F:= AddListItem(O);
+      AddListItem(O);
 
     end;
 
@@ -194,7 +198,7 @@ end;
 
 procedure TfrmTMDBContentCollectionDetail.lstResultsClick(Sender: TObject);
 begin
-  var MovieID:= (Sender as TControl).Tag;
+  //var MovieID:= (Sender as TControl).Tag;
   //var T:= TabController.CreateTab(TfrmContentMovieDetail, -1,  0); //TODO
   //TfrmContentMovieDetail(T.Content).LoadMovie(MovieID);
 end;

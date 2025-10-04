@@ -78,6 +78,8 @@ end;
 
 function TfrmTMDBSearch.AddItem(AItem: ITMDBItem): TfrmTMDBSearchListItem;
 begin
+  Result:= nil;
+
   case SearchMode of
     smMovies: begin
       //Result:= TfrmTMDBMovieListItem.Create(sbItems);
@@ -108,10 +110,12 @@ begin
       //Result.LoadCompany(ITMDBCompany(AItem));
     end;
   end;
-  Result.Name:= 'ListItem'+IntToStr(sbItems.ControlCount-1);
-  Result.Parent:= sbItems;
-  Result.Align:= alTop;
-  Result.Top:= 50000;
+  if Assigned(Result) then begin
+    Result.Name:= 'ListItem'+IntToStr(sbItems.ControlCount-1);
+    Result.Parent:= sbItems;
+    Result.Align:= alTop;
+    Result.Top:= 50000;
+  end;
 
 end;
 
@@ -162,7 +166,7 @@ end;
 procedure TfrmTMDBSearch.LoadPage(APage: ITMDBPage; const AClearItems: Boolean = True);
 var
   I: ITMDBItem;
-  F: TfrmTMDBListItem;
+  //F: TfrmTMDBListItem;
 begin
   sbItems.DisableAlign;
   try
@@ -171,7 +175,7 @@ begin
     end;
     for var X := 0 to APage.Items.Count-1 do begin
       I:= APage.Items[X];
-      F:= Self.AddItem(I);
+      Self.AddItem(I);
     end;
 
   finally

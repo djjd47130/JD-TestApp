@@ -5,35 +5,27 @@ interface
 uses
   Winapi.Windows,
   System.Classes, System.SysUtils, System.Generics.Collections,
-  JD.Plugins.Intf;
+  JD.Plugins.Intf,
+  JD.Plugins.Impl;
 
 type
+  TJDClockPlugin = class;
 
-  TJDClockPlugin = class(TInterfacedObject, IJDPlugin)
+
+
+  TJDClockPlugin = class(TJDPlugin, IJDPlugin)
   private
-    FMenuItems: IJDPluginMenuItems;
-    FShellRegs: IJDShellRegs;
+    procedure ClockExecute(Sender: TObject; Item: IJDPluginMenuItem);
   protected
-    function GetName: WideString; stdcall;
-    function GetCaption: WideString; stdcall;
-    function GetPublisher: WideString; stdcall;
-    function GetMenuItems: IJDPluginMenuItems; stdcall;
-    function GetShellRegs: IJDShellRegs; stdcall;
+    function GetName: WideString; override; stdcall;
+    function GetCaption: WideString; override; stdcall;
+    function GetPublisher: WideString; override; stdcall;
+
+    procedure PopulateMenuItems; override; stdcall;
+    procedure PopulateShellRegs; override; stdcall;
   public
-    constructor Create;
+    constructor Create; override;
     destructor Destroy; override;
-  end;
-
-  TJDPluginContentForm = class(TInterfacedObject, IJDPluginContentForm)
-  protected
-    function GetOwner: IJDPlugin; stdcall;
-    function GetName: WideString; stdcall;
-    function GetCaption: WideString; stdcall;
-    function GetID: WideString; stdcall;
-  public
-    function CreateWindow: HWND; stdcall;
-    procedure SetParentWindow(const Handle: HWND); stdcall;
-
   end;
 
 
@@ -41,31 +33,27 @@ implementation
 
 { TJDClockPlugin }
 
+procedure TJDClockPlugin.ClockExecute(Sender: TObject; Item: IJDPluginMenuItem);
+begin
+  //TODO: Open clock...
+
+end;
+
 constructor TJDClockPlugin.Create;
 begin
-  FShellRegs:= TJDShellRegs.Create;
-  FMenuItems:= TJDPluginMenuItems.Create;
-  //TODO
+  inherited;
 
 end;
 
 destructor TJDClockPlugin.Destroy;
 begin
 
-  //TODO
-  FMenuItems:= nil;
-  FShellRegs:= nil;
   inherited;
 end;
 
 function TJDClockPlugin.GetCaption: WideString;
 begin
   Result:= 'JD Clock';
-end;
-
-function TJDClockPlugin.GetMenuItems: IJDPluginMenuItems;
-begin
-  Result:= FMenuItems;
 end;
 
 function TJDClockPlugin.GetName: WideString;
@@ -78,40 +66,33 @@ begin
   Result:= 'Jerry Dodge';
 end;
 
-function TJDClockPlugin.GetShellRegs: IJDShellRegs;
+procedure TJDClockPlugin.PopulateMenuItems;
 begin
-  Result:= FShellRegs;
-end;
+  inherited;
 
-{ TJDPluginContentForm }
-
-function TJDPluginContentForm.CreateWindow: HWND;
-begin
-
-end;
-
-function TJDPluginContentForm.GetCaption: WideString;
-begin
+  var I:= MenuItems.Add;
+  I.Name:= 'JD.Clock';
+  I.Caption:= 'JD Clock';
+  I.OnClick:= ClockExecute;
 
 end;
 
-function TJDPluginContentForm.GetID: WideString;
+procedure TJDClockPlugin.PopulateShellRegs;
 begin
+  inherited;
 
-end;
+  var I:= ShellRegs.Add;
+  I.ShellRoot:= 'JD';
+  I.ShellPath:= 'Clock';
 
-function TJDPluginContentForm.GetName: WideString;
-begin
+  //I.OnExecute:= ClockExecute;
 
-end;
+  //I.OnExecute:= procedure
+    //begin
+      //TODO: Incompatible types Procedure and TProcedure...
 
-function TJDPluginContentForm.GetOwner: IJDPlugin;
-begin
-
-end;
-
-procedure TJDPluginContentForm.SetParentWindow(const Handle: HWND);
-begin
+    //end;
+  //TODO
 
 end;
 

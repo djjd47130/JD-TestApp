@@ -54,12 +54,15 @@ inherited frmTMDBContentCollectionDetail: TfrmTMDBContentCollectionDetail
         ReadOnly = True
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitWidth = 625
       end
     end
     object tabParts: TTabSheet
       Caption = 'Parts'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object sbItems: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -78,10 +81,18 @@ inherited frmTMDBContentCollectionDetail: TfrmTMDBContentCollectionDetail
     object tabImages: TTabSheet
       Caption = 'Images'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tabTranslations: TTabSheet
       Caption = 'Translations'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
 end

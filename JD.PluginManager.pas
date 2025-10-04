@@ -1,11 +1,21 @@
 unit JD.PluginManager;
 
+(*
+  JD Plugin Manager
+  Task #11
+
+  TJDPluginManager Loads and maintains all plugins for the app.
+
+
+*)
+
 interface
 
 uses
   Winapi.Windows, Winapi.Messages,
   System.Classes, System.SysUtils, System.Generics.Collections,
-  JD.Plugins.Intf;
+  JD.Plugins.Intf,
+  JD.TabController;
 
 type
   TJDCreatePluginObj = function: IJDPlugin; stdcall;
@@ -35,20 +45,27 @@ type
   TJDPluginManager = class(TComponent)
   private
     FModules: TObjectList<TJDPluginModule>;
+    FTabController: TJDTabController;
     function GetModule(const Index: Integer): TJDPluginModule;
     procedure DestroyModules;
+    procedure SetTabController(const Value: TJDTabController);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+
+    procedure LoadDir(const Dir: String);
 
     function LoadModule(const Filename: String): TJDPluginModule;
     procedure UnloadModule(const Index: Integer);
     function Count: Integer;
     property Modules[const Index: Integer]: TJDPluginModule read GetModule; default;
 
+    //CORE function to execute any given Shell command by a given path
     function ShellExec(const Path: String): IJDShellReg;
 
   published
+
+    property TabController: TJDTabController read FTabController write SetTabController;
 
   end;
 
@@ -88,6 +105,25 @@ begin
   Result:= FModules[Index];
 end;
 
+procedure TJDPluginManager.LoadDir(const Dir: String);
+begin
+  //TODO: Load all DLLs from the specified directory...
+
+end;
+
+procedure TJDPluginManager.SetTabController(const Value: TJDTabController);
+begin
+  FTabController := Value;
+end;
+
+function TJDPluginManager.ShellExec(const Path: String): IJDShellReg;
+begin
+  //TODO: Load tab based on Path using new Plugin Shell concept...
+
+  //TODO: Implement new Shell Path parser...
+
+end;
+
 function TJDPluginManager.LoadModule(const Filename: String): TJDPluginModule;
 begin
   if FileExists(Filename) then begin
@@ -97,14 +133,6 @@ begin
   end else begin
     raise Exception.Create('File does not exist: "'+Filename+'"');
   end;
-end;
-
-function TJDPluginManager.ShellExec(const Path: String): IJDShellReg;
-begin
-  //TODO: Load tab based on Path using new Plugin Shell concept...
-
-  //TODO: Implement new Shell Path parser...
-
 end;
 
 procedure TJDPluginManager.UnloadModule(const Index: Integer);

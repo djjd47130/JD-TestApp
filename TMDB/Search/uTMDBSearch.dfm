@@ -155,7 +155,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       TabOrder = 3
       TabStop = False
       Text = 'User Login'
-      ExplicitTop = 5
     end
   end
   object sbItems: TScrollBox
@@ -241,12 +240,14 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       ParentFont = False
       TabOrder = 0
       ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 612
+      ExplicitTop = 57
+      ExplicitWidth = 348
       ExplicitHeight = 56
       inherited Bevel1: TBevel
         Top = 54
         Width = 348
+        ExplicitTop = 54
+        ExplicitWidth = 348
       end
       inherited pData: TPanel
         Left = 3
@@ -257,11 +258,8 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         ExplicitHeight = 48
         inherited lblCaption: TLabel
           Width = 72
-          Height = 42
           Caption = 'Language'
-          ExplicitLeft = 0
           ExplicitWidth = 72
-          ExplicitHeight = 41
         end
       end
       inherited pImage: TPanel
@@ -270,7 +268,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         Align = alNone
         ExplicitLeft = 16
         ExplicitTop = 67
-        ExplicitHeight = 47
         inherited imgPicture: TImage
           Left = 19
           Top = 35
@@ -297,6 +294,7 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       inherited ComboBox1: TComboBox
         Left = 160
         Text = 'en'
+        ExplicitLeft = 160
       end
     end
     inline ComboListItem2: TComboListItem
@@ -314,7 +312,7 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       TabOrder = 1
       ExplicitLeft = 1
       ExplicitTop = 1
-      ExplicitWidth = 612
+      ExplicitWidth = 348
       ExplicitHeight = 56
       inherited Bevel1: TBevel
         Top = 54
@@ -331,7 +329,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         ExplicitHeight = 48
         inherited lblCaption: TLabel
           Width = 52
-          Height = 42
           Caption = 'Region'
           ExplicitWidth = 52
         end
@@ -342,7 +339,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         Align = alNone
         ExplicitLeft = 16
         ExplicitTop = 67
-        ExplicitHeight = 47
         inherited imgPicture: TImage
           Left = 19
           Top = 35
@@ -369,7 +365,7 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       inherited ComboBox1: TComboBox
         Left = 160
         Text = 'US'
-        ExplicitLeft = 288
+        ExplicitLeft = 160
       end
     end
     inline ComboListItem3: TComboListItem
@@ -385,6 +381,7 @@ inherited frmTMDBSearch: TfrmTMDBSearch
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      ExplicitLeft = 1
       ExplicitTop = 170
       ExplicitWidth = 348
       ExplicitHeight = 56
@@ -403,7 +400,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         ExplicitHeight = 48
         inherited lblCaption: TLabel
           Width = 99
-          Height = 42
           Caption = 'Include Adult'
           ExplicitWidth = 99
         end
@@ -414,7 +410,6 @@ inherited frmTMDBSearch: TfrmTMDBSearch
         Align = alNone
         ExplicitLeft = 16
         ExplicitTop = 67
-        ExplicitHeight = 47
         inherited imgPicture: TImage
           Left = 19
           Top = 35
