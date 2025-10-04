@@ -9,7 +9,7 @@ This project is currently in active develoment, and not guaranteed for use at th
 
 This app aims to pull together a single environment demonstrating all my solutions together into one place. It originated as just a test application for my TMDB API wrapper, but accidentally transformed into more of a general-purpose web browser sort of application. I've split it away from TMDB into its own thing, which I'm actively working to make it into a plugin-based application, where TMDB is just one of the many possible features. 
 
-<img width="1218" height="825" alt="image" src="https://github.com/user-attachments/assets/1498bc22-49b7-4393-bbb9-74bc4ac54608" />
+<img width="1317" height="860" alt="image" src="https://github.com/user-attachments/assets/42e3825d-53ea-42ac-a763-603096e0ffe4" />
 
 ## Plugins
 
