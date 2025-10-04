@@ -23,6 +23,8 @@ This app aims to borrow the concept of Shell Commands from Windows to allow diff
 
 This project is written in Delphi 10.4. While it should work fine on other version of Delphi, there are no guarantees. The older the Delphi version, the less likely this library will be compatible.
 
+## Third-Party Integration
+
 ### JDLib
 
 The test applications uses controls from [JDLib, a separate repository of mine](https://github.com/djjd47130/JDLib).
@@ -30,3 +32,8 @@ The test applications uses controls from [JDLib, a separate repository of mine](
 ### TChromeTabs
 
 The test application uses the [`TChromeTabs` control](https://github.com/norgepaul/TChromeTabs).
+
+### Indy
+
+### X-SuperObject
+
