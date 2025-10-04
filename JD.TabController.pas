@@ -73,7 +73,21 @@ type
     /// - AIndex: Integer (Optional) - The index where to insert the new tab.
     /// - AID: Integer (Optional) - The unique ID of the resource being opened.
     /// </summary>
-    function CreateTab(AClass: TfrmContentBaseClass;
+    /// <param name="AClass">
+    /// The content form class to be instantiated.
+    /// </param>
+    /// <param name="AIndex">
+    /// The tab index in which to insert new tab. End of tabs by default.
+    /// </param>
+    /// <param name="AID">
+    /// The tab identifier which controls whether to reused already existing tabs.
+    /// None by default.
+    /// </param>
+    /// <returns>
+    /// The object referencing the tab to its corresponding content form.
+    /// </returns>
+    function CreateTab(
+      AClass: TfrmContentBaseClass;
       const AIndex: Integer = -1;
       const AID: Integer = -1): TJDTabRef;
 

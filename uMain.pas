@@ -172,8 +172,6 @@ end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   //Main Menu
-  //TODO: Populate menu with configured features...
-
   Self.ShowMenu(True);
 end;
 
@@ -241,23 +239,24 @@ end;
 procedure TfrmMain.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
   var HintTimeout: Integer);
 begin
+  //Tabs
   if HitTestResult.HitTestArea in [THitTestArea.htTab, THitTestArea.htTabImage] then begin
     var Tab:= Tabs.Tabs[HitTestResult.TabIndex];
-    //Application.Hint:= Tab.Caption;
     Stat.Panels[0].Text:= Tab.Caption;
   end else begin
-    //Application.Hint:= '';
     Stat.Panels[0].Text:= Application.Hint;
   end;
 end;
 
 procedure TfrmMain.AppEventsHint(Sender: TObject);
 begin
+  //UI
   Stat.Panels[0].Text:= Application.Hint;
 end;
 
 procedure TfrmMain.SetContentOnly(const Value: Boolean);
 begin
+  //UI
   FContentOnly := Value;
   pTop.Visible:= not Value;
   pMenu.Visible:= not Value;
@@ -268,9 +267,9 @@ procedure TfrmMain.SetFullScreen(const Value: Boolean);
 var
   M: TMonitor;
 begin
+  //UI
   FFullScreen := Value;
   M:= Screen.MonitorFromRect(BoundsRect);
-
   if Value then begin
     FRect:= BoundsRect;
     FState:= WindowState;
@@ -289,6 +288,8 @@ end;
 
 procedure TfrmMain.ShowMenu(const Value: Boolean);
 begin
+  //TODO: Change mechanism to populate menu with registered menu items...
+
   //Main Menu
   Self.DisableAlign;
   try
@@ -299,8 +300,9 @@ begin
       pMenu.Tag:= 0;
       pMenu.Width:= MAIN_MENU_WIDTH_CLOSED;
     end;
+    //Take focus away from everything...
     try
-      if btnDummy.CanFocus then
+      if btnDummy.CanFocus and btnDummy.Visible then
         btnDummy.SetFocus;
     except
       on E: Exception do begin

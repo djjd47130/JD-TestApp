@@ -65,6 +65,9 @@ type
 
   published
 
+    /// <summary>
+    /// The tab controller linked with the plugin manager to open new tabs as needed.
+    /// </summary>
     property TabController: TJDTabController read FTabController write SetTabController;
 
   end;

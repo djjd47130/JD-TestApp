@@ -1,5 +1,15 @@
 unit JD.Clock.Impl;
 
+(*
+  JD Clock
+  Plugin for JD Test App
+
+  SUMMARY
+  This is the first test plugin for the overall JD test application. It serves as the
+  initial test, being something extremely simple - just display the current time.
+  Further developments will be based around this plugin, as more features are added.
+*)
+
 interface
 
 uses

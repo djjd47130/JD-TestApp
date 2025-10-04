@@ -1,5 +1,13 @@
 unit JD.Plugins.Impl;
 
+(*
+  JD Plugins - Implementation Definitions
+  Task #11
+
+  This unit contains all the core implementation for the plugin mechanism.
+  Each plugin will need to implement each of these which is to be supported by said plugin.
+*)
+
 interface
 
 uses
@@ -54,20 +62,20 @@ type
   private
     FRoot: WideString;
     FPath: WideString;
-    FOnExecute: TProcedure;
+    FOnExecute: TJDPluginExecuteEvent;
   protected
     function GetShellRoot: WideString; stdcall;
     procedure SetShellRoot(const Value: WideString); stdcall;
     function GetShellPath: WideString; stdcall;
     procedure SetShellPath(const Value: WideString); stdcall;
-    function GetOnExecute: TProcedure;
-    procedure SetOnExecute(const Value: TProcedure);
+    function GetOnExecute: TJDPluginExecuteEvent;
+    procedure SetOnExecute(const Value: TJDPluginExecuteEvent);
   public
     procedure ShellExec(const Path: WideString); stdcall;
 
     property ShellRoot: WideString read GetShellRoot write SetShellRoot;
     property ShellPath: WideString read GetShellPath write SetShellPath;
-    property OnExecute: TProcedure read GetOnExecute write SetOnExecute;
+    property OnExecute: TJDPluginExecuteEvent read GetOnExecute write SetOnExecute;
   end;
 
   TJDShellRegs = class(TInterfacedObject, IJDShellRegs)
@@ -91,7 +99,7 @@ type
     FOwner: IJDPluginMenuItems;
     FCaption: WideString;
     FName: WideString;
-    FOnClick: TJDPluginMenuItemClickEvent;
+    FOnClick: TJDPluginExecuteEvent;
   protected
     function GetOwner: IJDPluginMenuItems; stdcall;
     function GetCaption: WideString; stdcall;
@@ -99,8 +107,8 @@ type
     function GetName: WideString; stdcall;
     procedure SetName(const Value: WideString); stdcall;
     procedure PaintIcon(const DC: HDC; const Rect: TRect); stdcall;
-    function GetOnClick: TJDPluginMenuItemClickEvent; stdcall;
-    procedure SetOnClick(const Value: TJDPluginMenuItemClickEvent); stdcall;
+    function GetOnClick: TJDPluginExecuteEvent; stdcall;
+    procedure SetOnClick(const Value: TJDPluginExecuteEvent); stdcall;
   public
     constructor Create(AOwner: IJDPluginMenuItems);
     destructor Destroy; override;
@@ -108,7 +116,7 @@ type
     property Owner: IJDPluginMenuItems read FOwner;
     property Caption: WideString read GetCaption write SetCaption;
     property Name: WideString read GetName write SetName;
-    property OnClick: TJDPluginMenuItemClickEvent read GetOnClick write SetOnClick;
+    property OnClick: TJDPluginExecuteEvent read GetOnClick write SetOnClick;
 
   end;
 
@@ -227,7 +235,7 @@ end;
 
 { TJDShellReg }
 
-function TJDShellReg.GetOnExecute: TProcedure;
+function TJDShellReg.GetOnExecute: TJDPluginExecuteEvent;
 begin
   Result:= FOnExecute;
 end;
@@ -242,7 +250,7 @@ begin
   Result:= FRoot;
 end;
 
-procedure TJDShellReg.SetOnExecute(const Value: TProcedure);
+procedure TJDShellReg.SetOnExecute(const Value: TJDPluginExecuteEvent);
 begin
   FOnExecute:= Value;
 end;
@@ -332,9 +340,9 @@ begin
   Result:= FName;
 end;
 
-function TJDPluginMenuItem.GetOnClick: TJDPluginMenuItemClickEvent;
+function TJDPluginMenuItem.GetOnClick: TJDPluginExecuteEvent;
 begin
-  //TODO
+  Result:= FOnClick;
 end;
 
 function TJDPluginMenuItem.GetOwner: IJDPluginMenuItems;
@@ -357,7 +365,7 @@ begin
   FName:= Value;
 end;
 
-procedure TJDPluginMenuItem.SetOnClick(const Value: TJDPluginMenuItemClickEvent);
+procedure TJDPluginMenuItem.SetOnClick(const Value: TJDPluginExecuteEvent);
 begin
   FOnClick:= Value;
 end;

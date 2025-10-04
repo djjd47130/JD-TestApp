@@ -6,7 +6,6 @@ unit JD.Plugins.Intf;
 
   This unit contains all the core interface definitions for the plugin mechanism.
   Each plugin will need to implement each of these which is to be supported by said plugin.
-  Some common interfaces are implemented within this unit as well.
 *)
 
 interface
@@ -24,6 +23,8 @@ type
   IJDPluginContentForm = interface;
   IJDPluginTabRef = interface;
 
+
+  TJDPluginExecuteEvent = procedure(Sender: TObject; Item: IJDPluginMenuItem) of object;
 
 
   /// <summary>
@@ -50,8 +51,8 @@ type
     procedure SetShellRoot(const Value: WideString); stdcall;
     function GetShellPath: WideString; stdcall;
     procedure SetShellPath(const Value: WideString); stdcall;
-    function GetOnExecute: TProcedure;
-    procedure SetOnExecute(const Value: TProcedure);
+    function GetOnExecute: TJDPluginExecuteEvent;
+    procedure SetOnExecute(const Value: TJDPluginExecuteEvent);
 
     /// <summary>
     /// Executes a shell command associated with this registered entry.
@@ -61,7 +62,7 @@ type
 
     property ShellRoot: WideString read GetShellRoot write SetShellRoot;
     property ShellPath: WideString read GetShellPath write SetShellPath;
-    property OnExecute: TProcedure read GetOnExecute write SetOnExecute;
+    property OnExecute: TJDPluginExecuteEvent read GetOnExecute write SetOnExecute;
   end;
 
   /// <summary>
@@ -78,8 +79,6 @@ type
     procedure Delete(const Index: Integer); stdcall;
   end;
 
-  TJDPluginMenuItemClickEvent = procedure(Sender: TObject; Item: IJDPluginMenuItem) of object;
-
   /// <summary>
   /// Represents a single item to be listed in application's manu menu.
   /// Task #12
@@ -92,13 +91,13 @@ type
     function GetName: WideString; stdcall;
     procedure SetName(const Value: WideString); stdcall;
     procedure PaintIcon(const DC: HDC; const Rect: TRect); stdcall;
-    function GetOnClick: TJDPluginMenuItemClickEvent; stdcall;
-    procedure SetOnClick(const Value: TJDPluginMenuItemClickEvent); stdcall;
+    function GetOnClick: TJDPluginExecuteEvent; stdcall;
+    procedure SetOnClick(const Value: TJDPluginExecuteEvent); stdcall;
 
     property Owner: IJDPluginMenuItems read GetOwner;
     property Caption: WideString read GetCaption write SetCaption;
     property Name: WideString read GetName write SetName;
-    property OnClick: TJDPluginMenuItemClickEvent read GetOnClick write SetOnClick;
+    property OnClick: TJDPluginExecuteEvent read GetOnClick write SetOnClick;
   end;
 
   /// <summary>
