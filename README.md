@@ -13,7 +13,7 @@ This app aims to pull together a single environment demonstrating all my solutio
 
 ## Plugins
 
-A plugin is a specially designed DLL which can be loaded into the application to add functionality. It can be virtually anything, from features as simple as a clock, to as complicated as a business reporting module.
+A plugin is a specially designed DLL which can be loaded into the application to add functionality. It can be virtually anything, from features as simple as a clock, to as complicated as a business reporting module. In any case, a plugin registers a variety of menu items and shell extensions which in turn launch its various features.
 
 ## Shell Commands
 
