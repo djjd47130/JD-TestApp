@@ -171,7 +171,7 @@ end;
 function TfrmContentMovieDetail.EmbedFormIntoTab(AClass: TfrmTMDBCommonFormBaseClass;
   ATab: TTabSheet): TfrmTMDBCommonFormBase;
 begin
-  Result:= AClass.Create(ATab);
+  Result:= AClass.Create(ATab, MainForm);
   Result.Parent:= ATab;
   Result.BorderStyle:= bsNone;
   Result.Align:= alClient;
@@ -181,7 +181,7 @@ end;
 function TfrmContentMovieDetail.EmbedFormIntoTab(AClass: TfrmTMDBContentBaseClass;
   ATab: TTabSheet): TfrmTMDBContentBase;
 begin
-  Result:= AClass.Create(ATab);
+  Result:= AClass.Create(ATab, MainForm);
   Result.Parent:= ATab;
   Result.BorderStyle:= bsNone;
   Result.Align:= alClient;
@@ -393,7 +393,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Web Browser
-        var F:= TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
         (F.Content as TfrmContentBrowser).Navigate(FDetail.Homepage);
       end);
     A('Runtime', IntToStr(FDetail.Runtime));
@@ -402,7 +402,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Image Detail
-        var F:= TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
         var U:= TMDB.Client.GetImageURL(FDetail.BackdropPath);
         (F.Content as TfrmContentBrowser).Navigate(U);
       end);
@@ -410,7 +410,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Image Detail
-        var F:= TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
         var U:= TMDB.Client.GetImageURL(FDetail.PosterPath);
         (F.Content as TfrmContentBrowser).Navigate(U);
       end);

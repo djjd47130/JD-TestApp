@@ -1,20 +1,23 @@
 inherited frmTMDBSetup: TfrmTMDBSetup
+  Width = 787
   AutoScroll = True
   Caption = 'TMDB Setup'
   OnCreate = FormCreate
   OnShow = FormShow
+  ExplicitWidth = 787
   PixelsPerInch = 96
   TextHeight = 18
   object sbTMDB: TScrollBox
     Left = 0
     Top = 0
-    Width = 737
+    Width = 754
     Height = 441
     Align = alTop
     BorderStyle = bsNone
     TabOrder = 0
     OnMouseWheelDown = sbTMDBMouseWheelDown
     OnMouseWheelUp = sbTMDBMouseWheelUp
+    ExplicitWidth = 737
     object gbAPIAuthMethod: TGroupBox
       AlignWithMargins = True
       Left = 3
@@ -80,7 +83,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          710
+          727
           55)
         object Label1: TLabel
           Left = 16
@@ -92,25 +95,27 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         object txtAPIKey: TEdit
           Left = 16
           Top = 29
-          Width = 582
+          Width = 599
           Height = 26
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = txtAPIKeyChange
+          ExplicitWidth = 582
         end
       end
       object gbAPIAuthMethodAccessToken: TPanel
         Tag = 1
         Left = 2
         Top = 184
-        Width = 710
+        Width = 727
         Height = 60
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
+        ExplicitWidth = 710
         DesignSize = (
-          710
+          727
           60)
         object Label3: TLabel
           Left = 16
@@ -122,21 +127,23 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         object txtAccessToken: TEdit
           Left = 16
           Top = 32
-          Width = 682
+          Width = 699
           Height = 26
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = txtAPIKeyChange
+          ExplicitWidth = 682
         end
       end
       object Panel2: TPanel
         Left = 2
         Top = 101
-        Width = 710
+        Width = 727
         Height = 28
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
+        ExplicitWidth = 710
         object rAuthToken: TRadioButton
           Tag = 1
           AlignWithMargins = True
@@ -186,12 +193,13 @@ inherited frmTMDBSetup: TfrmTMDBSetup
       AlignWithMargins = True
       Left = 3
       Top = 263
-      Width = 714
+      Width = 731
       Height = 222
       Align = alTop
       Caption = 'Locale Options'
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 714
       object Panel6: TPanel
         Left = 2
         Top = 89
@@ -228,11 +236,12 @@ inherited frmTMDBSetup: TfrmTMDBSetup
       object Panel5: TPanel
         Left = 2
         Top = 20
-        Width = 710
+        Width = 727
         Height = 69
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 710
         object Label6: TLabel
           AlignWithMargins = True
           Left = 3
@@ -261,11 +270,12 @@ inherited frmTMDBSetup: TfrmTMDBSetup
       object Panel1: TPanel
         Left = 2
         Top = 158
-        Width = 710
+        Width = 727
         Height = 69
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
+        ExplicitWidth = 710
         object Label7: TLabel
           AlignWithMargins = True
           Left = 3
@@ -296,7 +306,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
   object btnSave: TJDFontButton
     Left = 0
     Top = 441
-    Width = 737
+    Width = 754
     Height = 46
     Cursor = crHandPoint
     Align = alBottom

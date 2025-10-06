@@ -62,7 +62,7 @@ uses
 procedure TfrmContentSearchTV.FormCreate(Sender: TObject);
 begin
   inherited;
-  FDetailForm:= TfrmContentTVSerieDetail.Create(pDetail);
+  FDetailForm:= TfrmContentTVSerieDetail.Create(pDetail, MainForm);
   FDetailForm.Parent:= pDetail;
   FDetailForm.BorderStyle:= bsNone;
   FDetailForm.Align:= alClient;
@@ -115,7 +115,7 @@ begin
   inherited;
   //TODO: Navigate to series details tab within app...
   M:= Obj as ITMDBTVSerie;
-  T:= TabController.CreateTab(TfrmContentTVSerieDetail);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentTVSerieDetail);
   (T.Content as TfrmContentTVSerieDetail).LoadSeries(M.ID);
 end;
 

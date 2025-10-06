@@ -47,6 +47,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  uMain;
+
 { TfrmContentTVPage }
 
 procedure TfrmContentTVPage.btnRefreshClick(Sender: TObject);
@@ -92,7 +95,7 @@ var
 begin
   inherited;
   M:= Obj as ITMDBTVSerie;
-  T:= TabController.CreateTab(TfrmContentTVSerieDetail);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentTVSerieDetail);
   (T.Content as TfrmContentTVSerieDetail).LoadSeries(M.ID);
 end;
 

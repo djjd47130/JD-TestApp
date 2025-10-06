@@ -83,7 +83,7 @@ var
 begin
   inherited;
   M:= Obj as ITMDBPerson; //TODO: Interface not supported...
-  T:= TabController.CreateTab(TfrmContentPersonDetail);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentPersonDetail);
   (T.Content as TfrmContentPersonDetail).LoadPerson(M.ID);
 end;
 

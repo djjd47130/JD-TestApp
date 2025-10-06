@@ -94,15 +94,7 @@ begin
   var I:= ShellRegs.Add;
   I.ShellRoot:= 'JD';
   I.ShellPath:= 'Clock';
-
-  //I.OnExecute:= ClockExecute;
-
-  //I.OnExecute:= procedure
-    //begin
-      //TODO: Incompatible types Procedure and TProcedure...
-
-    //end;
-  //TODO
+  I.OnExecute:= ClockExecute;
 
 end;
 

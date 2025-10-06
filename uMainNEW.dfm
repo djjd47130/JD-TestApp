@@ -1,32 +1,25 @@
-object frmMain: TfrmMain
+object frmMainNEW: TfrmMainNEW
   Left = 0
   Top = 0
-  Caption = 'SPACEBALLS: The Test App'
-  ClientHeight = 544
-  ClientWidth = 836
+  Caption = 'frmMainNEW'
+  ClientHeight = 464
+  ClientWidth = 771
   Color = clBtnFace
-  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
-  Visible = True
-  OnCloseQuery = FormCloseQuery
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  OnShow = FormShow
   DesignSize = (
-    836
-    544)
+    771
+    464)
   PixelsPerInch = 96
   TextHeight = 13
   object pTop: TPanel
     Left = 0
     Top = 0
-    Width = 836
+    Width = 771
     Height = 35
     Align = alTop
     BevelOuter = bvNone
@@ -34,19 +27,13 @@ object frmMain: TfrmMain
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 888
+    ExplicitLeft = -65
+    ExplicitWidth = 836
     object Tabs: TChromeTabs
       Left = 0
       Top = 0
-      Width = 836
+      Width = 771
       Height = 35
-      OnActiveTabChanged = TabsActiveTabChanged
-      OnButtonAddClick = TabsButtonAddClick
-      OnButtonCloseTabClick = TabsButtonCloseTabClick
-      OnNeedDragImageControl = TabsNeedDragImageControl
-      OnCreateDragForm = TabsCreateDragForm
-      OnShowHint = TabsShowHint
-      OnTabDragDrop = TabsTabDragDrop
       ActiveTabIndex = -1
       Images = DM.imgFavicons16
       Options.Display.CloseButton.Offsets.Vertical = 7
@@ -375,7 +362,7 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ShowHint = True
       TabOrder = 0
-      ExplicitTop = -3
+      ExplicitWidth = 836
     end
     object btnMenu: TJDFontButton
       Left = 0
@@ -416,52 +403,50 @@ object frmMain: TfrmMain
       SubTextFont.Style = []
       TabOrder = 1
       Text = ''
-      OnClick = btnMenuClick
     end
   end
   object pContent: TPanel
-    Left = 772
-    Top = 68
+    Left = 707
+    Top = 35
     Width = 64
-    Height = 457
+    Height = 410
     Align = alRight
     BevelOuter = bvNone
-    TabOrder = 2
-    ExplicitLeft = 824
-    ExplicitTop = 35
-    ExplicitHeight = 461
+    TabOrder = 1
+    ExplicitTop = 7
+    ExplicitHeight = 457
   end
   object Stat: TStatusBar
     Left = 0
-    Top = 525
-    Width = 836
+    Top = 445
+    Width = 771
     Height = 19
     Panels = <
       item
         Width = 50
       end>
-    ExplicitTop = 496
-    ExplicitWidth = 888
+    ExplicitLeft = -65
+    ExplicitWidth = 836
   end
   object pMenu: TPanel
     Tag = 1
     Left = 0
-    Top = 68
+    Top = 35
     Width = 70
-    Height = 457
+    Height = 410
     Align = alLeft
     BevelEdges = [beRight]
     BevelKind = bkSoft
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 1
-    ExplicitTop = 40
-    ExplicitHeight = 461
+    TabOrder = 3
+    ExplicitTop = 7
+    ExplicitHeight = 457
   end
   object btnDummy: TJDFontButton
     AlignWithMargins = True
     Left = 80
-    Top = 455
+    Top = 409
     Width = 353
     Height = 55
     Margins.Left = 20
@@ -505,284 +490,8 @@ object frmMain: TfrmMain
     SubTextFont.Style = []
     TabOrder = 4
     Text = 'DO NOT HIDE THIS BUTTON'
-    ExplicitTop = 426
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 35
-    Width = 836
-    Height = 33
-    Align = alTop
-    BevelEdges = [beBottom]
-    BevelKind = bkFlat
-    BevelOuter = bvNone
-    ParentBackground = False
-    TabOrder = 5
-    Visible = False
-    ExplicitLeft = -136
-    ExplicitTop = 0
-    ExplicitWidth = 754
-    object txtAddress: TEdit
-      AlignWithMargins = True
-      Left = 102
-      Top = 3
-      Width = 635
-      Height = 25
-      Align = alClient
-      TabOrder = 3
-      ExplicitHeight = 21
-    end
-    object btnGo: TJDFontButton
-      Left = 740
-      Top = 0
-      Width = 32
-      Height = 31
-      Cursor = crHandPoint
-      Align = alRight
-      Default = True
-      DrawStyle = fdTransparent
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61537
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcGreen
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 4
-      Text = 'btnGo'
-      ExplicitLeft = 658
-    end
-    object btnBack: TJDFontButton
-      Left = 0
-      Top = 0
-      Width = 33
-      Height = 31
-      Cursor = crHandPoint
-      Align = alLeft
-      DrawStyle = fdTransparent
-      Enabled = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61523
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcGreen
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 0
-      Text = 'JDFontButton1'
-    end
-    object btnForward: TJDFontButton
-      Left = 33
-      Top = 0
-      Width = 33
-      Height = 31
-      Cursor = crHandPoint
-      Align = alLeft
-      DrawStyle = fdTransparent
-      Enabled = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61524
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcGreen
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 1
-      Text = 'JDFontButton1'
-    end
-    object btnRefresh: TJDFontButton
-      Left = 66
-      Top = 0
-      Width = 33
-      Height = 31
-      Cursor = crHandPoint
-      Align = alLeft
-      DrawStyle = fdTransparent
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61666
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcGreen
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 2
-      Text = 'JDFontButton1'
-    end
-    object btnFavorites: TJDFontButton
-      Left = 772
-      Top = 0
-      Width = 32
-      Height = 31
-      Cursor = crHandPoint
-      Align = alRight
-      Default = True
-      DrawStyle = fdTransparent
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61446
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcOrange
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 5
-      Text = 'btnGo'
-      ExplicitLeft = 690
-    end
-    object JDFontButton1: TJDFontButton
-      Left = 804
-      Top = 0
-      Width = 32
-      Height = 31
-      Cursor = crHandPoint
-      Align = alRight
-      Default = True
-      DrawStyle = fdTransparent
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Image.AutoSize = False
-      Image.Text = #61449
-      Image.Font.Charset = DEFAULT_CHARSET
-      Image.Font.Color = clWindowText
-      Image.Font.Height = -21
-      Image.Font.Name = 'FontAwesome'
-      Image.Font.Style = []
-      Image.Font.Quality = fqAntialiased
-      Image.StandardColor = fcGreen
-      Overlay.Text = #57715
-      Overlay.Font.Charset = DEFAULT_CHARSET
-      Overlay.Font.Color = clWindowText
-      Overlay.Font.Height = -7
-      Overlay.Font.Name = 'FontAwesome'
-      Overlay.Font.Style = []
-      Overlay.Font.Quality = fqAntialiased
-      Overlay.Position = foNone
-      Overlay.Margin = 3
-      ImagePosition = fpImgOnly
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clGray
-      SubTextFont.Height = -11
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-      TabOrder = 6
-      Text = 'btnGo'
-      ExplicitLeft = 722
-    end
   end
   object AppEvents: TApplicationEvents
-    OnHint = AppEventsHint
     Left = 16
     Top = 96
   end

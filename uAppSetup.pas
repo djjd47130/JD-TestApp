@@ -78,8 +78,9 @@ implementation
 {$R *.dfm}
 
 uses
+  uMain,
   System.IOUtils,
-  uMain;
+  uDM;
 
 { TAppSetup }
 
@@ -144,7 +145,7 @@ procedure TfrmAppSetup.Label9Click(Sender: TObject);
 begin
   inherited;
   //Navigate to TMDB API page
-  var F:= TabController.CreateTab(TfrmContentBrowser);
+  var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
   TfrmContentBrowser(F.Content).Navigate('https://www.themoviedb.org/settings/api');
 end;
 

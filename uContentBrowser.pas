@@ -93,6 +93,7 @@ implementation
 {$R *.dfm}
 
 uses
+  uDM,
   uMain;
 
 function IsValidURLPath(const Input: string): Boolean;
@@ -137,7 +138,7 @@ end;
 
 function TfrmContentBrowser.Tab: TJDTabRef;
 begin
-  Result:= TabController.TabByForm(Self);
+  Result:= TfrmMain(MainForm).TabController.TabByForm(Self);
 end;
 
 procedure TfrmContentBrowser.txtAddressDblClick(Sender: TObject);
@@ -219,7 +220,7 @@ begin
   inherited;
   Args.ArgsInterface.Set_Handled(1);
   if Args.ArgsInterface.Get_uri(URI) = S_OK then begin
-    T:= TabController.CreateTab(TfrmContentBrowser);
+    T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
     (T.Content as TfrmContentBrowser).Navigate(URI);
   end;
 end;
@@ -252,9 +253,9 @@ function TfrmContentBrowser.GetImageIndex: Integer;
 begin
   Result:= -1;
   try
-    var Ref:= frmMain.Favicons.GetFavicon(txtAddress.Text);
+    var Ref:= DM.Favicons.GetFavicon(txtAddress.Text);
     if Assigned(Ref) then
-      Result:= frmMain.Favicons.GetFavicon(txtAddress.Text).ImageIndex;
+      Result:= DM.Favicons.GetFavicon(txtAddress.Text).ImageIndex;
   except
     on E: Exception do begin
 

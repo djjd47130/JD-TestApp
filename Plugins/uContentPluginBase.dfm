@@ -1,36 +1,12 @@
-inherited frmContentBrowser: TfrmContentBrowser
-  Caption = 'Browser'
-  ClientHeight = 505
-  ClientWidth = 845
-  OnCreate = FormCreate
-  OnShow = FormShow
-  ExplicitWidth = 861
-  ExplicitHeight = 544
+inherited frmContentPluginBase: TfrmContentPluginBase
+  Caption = 'JD Plugin'
+  DoubleBuffered = True
   PixelsPerInch = 96
   TextHeight = 18
-  object Edge: TEdgeBrowser
-    Left = 0
-    Top = 33
-    Width = 489
-    Height = 472
-    Align = alLeft
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
-    TabStop = True
-    OnContainsFullScreenElementChanged = EdgeContainsFullScreenElementChanged
-    OnContentLoading = EdgeContentLoading
-    OnDocumentTitleChanged = EdgeDocumentTitleChanged
-    OnHistoryChanged = EdgeHistoryChanged
-    OnNavigationStarting = EdgeNavigationStarting
-    OnNavigationCompleted = EdgeNavigationCompleted
-    OnNewWindowRequested = EdgeNewWindowRequested
-    OnZoomFactorChanged = EdgeZoomFactorChanged
-    ExplicitTop = 34
-  end
-  object pTop: TPanel
+  object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 845
+    Width = 754
     Height = 33
     Align = alTop
     BevelEdges = [beBottom]
@@ -38,19 +14,23 @@ inherited frmContentBrowser: TfrmContentBrowser
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
+    Visible = False
+    ExplicitLeft = -17
+    ExplicitTop = 35
+    ExplicitWidth = 771
     object txtAddress: TEdit
       AlignWithMargins = True
       Left = 102
       Top = 3
-      Width = 644
+      Width = 553
       Height = 25
       Align = alClient
       TabOrder = 3
-      OnDblClick = txtAddressDblClick
+      ExplicitWidth = 570
       ExplicitHeight = 26
     end
     object btnGo: TJDFontButton
-      Left = 749
+      Left = 658
       Top = 0
       Width = 32
       Height = 31
@@ -89,7 +69,7 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 4
       Text = 'btnGo'
-      OnClick = btnGoClick
+      ExplicitLeft = 675
     end
     object btnBack: TJDFontButton
       Left = 0
@@ -99,6 +79,7 @@ inherited frmContentBrowser: TfrmContentBrowser
       Cursor = crHandPoint
       Align = alLeft
       DrawStyle = fdTransparent
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -130,7 +111,6 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 0
       Text = 'JDFontButton1'
-      OnClick = btnBackClick
     end
     object btnForward: TJDFontButton
       Left = 33
@@ -140,6 +120,7 @@ inherited frmContentBrowser: TfrmContentBrowser
       Cursor = crHandPoint
       Align = alLeft
       DrawStyle = fdTransparent
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -171,7 +152,6 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 1
       Text = 'JDFontButton1'
-      OnClick = btnForwardClick
     end
     object btnRefresh: TJDFontButton
       Left = 66
@@ -212,10 +192,9 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 2
       Text = 'JDFontButton1'
-      OnClick = btnRefreshClick
     end
     object btnFavorites: TJDFontButton
-      Left = 781
+      Left = 690
       Top = 0
       Width = 32
       Height = 31
@@ -254,10 +233,10 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 5
       Text = 'btnGo'
-      OnClick = btnFavoritesClick
+      ExplicitLeft = 707
     end
-    object btnMenu: TJDFontButton
-      Left = 813
+    object JDFontButton1: TJDFontButton
+      Left = 722
       Top = 0
       Width = 32
       Height = 31
@@ -296,105 +275,7 @@ inherited frmContentBrowser: TfrmContentBrowser
       SubTextFont.Style = []
       TabOrder = 6
       Text = 'btnGo'
-    end
-  end
-  object pFavorites: TPanel
-    Left = 560
-    Top = 33
-    Width = 285
-    Height = 472
-    Align = alRight
-    BevelEdges = [beLeft]
-    BevelKind = bkFlat
-    BevelOuter = bvNone
-    ParentBackground = False
-    TabOrder = 2
-    Visible = False
-    object lstFavorites: TListView
-      AlignWithMargins = True
-      Left = 3
-      Top = 61
-      Width = 277
-      Height = 408
-      Align = alClient
-      Columns = <
-        item
-          Caption = 'Page Name'
-          Width = 220
-        end>
-      HotTrackStyles = [htHandPoint, htUnderlineHot]
-      Items.ItemData = {
-        05780000000300000000000000FFFFFFFFFFFFFFFF00000000FFFFFFFF000000
-        000647006F006F0067006C00650000000000FFFFFFFFFFFFFFFF00000000FFFF
-        FFFF0000000008460061006300650062006F006F006B0000000000FFFFFFFFFF
-        FFFFFF00000000FFFFFFFF000000000759006F0075005400750062006500}
-      TabOrder = 0
-      ViewStyle = vsReport
-      ExplicitTop = 53
-    end
-    object StaticText1: TStaticText
-      AlignWithMargins = True
-      Left = 3
-      Top = 3
-      Width = 277
-      Height = 22
-      Align = alTop
-      AutoSize = False
-      Caption = 'Favorites'
-      TabOrder = 1
-    end
-    object pFavoritesTop: TPanel
-      Left = 0
-      Top = 28
-      Width = 283
-      Height = 30
-      Align = alTop
-      BevelEdges = [beTop]
-      BevelKind = bkFlat
-      BevelOuter = bvNone
-      TabOrder = 2
-      object btnAddFavorite: TJDFontButton
-        Left = 0
-        Top = 0
-        Width = 31
-        Height = 28
-        Cursor = crHandPoint
-        Align = alLeft
-        Default = True
-        DrawStyle = fdTransparent
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Image.AutoSize = False
-        Image.Text = #61543
-        Image.Font.Charset = DEFAULT_CHARSET
-        Image.Font.Color = clWindowText
-        Image.Font.Height = -21
-        Image.Font.Name = 'FontAwesome'
-        Image.Font.Style = []
-        Image.Font.Quality = fqAntialiased
-        Image.StandardColor = fcGreen
-        Overlay.Text = #57715
-        Overlay.Font.Charset = DEFAULT_CHARSET
-        Overlay.Font.Color = clWindowText
-        Overlay.Font.Height = -7
-        Overlay.Font.Name = 'FontAwesome'
-        Overlay.Font.Style = []
-        Overlay.Font.Quality = fqAntialiased
-        Overlay.Position = foNone
-        Overlay.Margin = 3
-        ImagePosition = fpImgOnly
-        SubTextFont.Charset = DEFAULT_CHARSET
-        SubTextFont.Color = clGray
-        SubTextFont.Height = -11
-        SubTextFont.Name = 'Tahoma'
-        SubTextFont.Style = []
-        TabOrder = 0
-        Text = 'btnGo'
-        OnClick = btnAddFavoriteClick
-      end
+      ExplicitLeft = 739
     end
   end
 end

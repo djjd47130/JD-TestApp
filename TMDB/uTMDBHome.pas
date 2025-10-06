@@ -80,9 +80,6 @@ type
     JDFontButton26: TJDFontButton;
     JDFontButton45: TJDFontButton;
     JDFontButton47: TJDFontButton;
-    JDFontButton44: TJDFontButton;
-    JDFontButton5: TJDFontButton;
-    JDFontButton1: TJDFontButton;
     pConfig: TPanel;
     Label4: TLabel;
     JDFontButton3: TJDFontButton;
@@ -136,6 +133,14 @@ type
     StaticText1: TStaticText;
     StaticText2: TStaticText;
     StaticText3: TStaticText;
+    Panel4: TPanel;
+    Label8: TLabel;
+    JDFontButton27: TJDFontButton;
+    JDFontButton29: TJDFontButton;
+    JDFontButton30: TJDFontButton;
+    JDFontButton32: TJDFontButton;
+    JDFontButton33: TJDFontButton;
+    JDFontButton34: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure btnSearchMoviesClick(Sender: TObject);
     procedure btnSearchCollectionsClick(Sender: TObject);
@@ -245,7 +250,7 @@ begin
       sLineBreak+sLineBreak+'Open API setup?', mtError, [mbYes,mbNo], 0) of
       mrYes: begin
         //var Tab:=
-          TabController.CreateTab(TfrmTMDBSetup);
+          TfrmMain(MainForm).TabController.CreateTab(TfrmTMDBSetup);
       end;
       else begin
         //TODO: Is this even necessary?
@@ -333,7 +338,7 @@ procedure TfrmTMDBHome.btnDiscoverMoviesClick(Sender: TObject);
 begin
   inherited;
 
-  TabController.CreateTab(TfrmContentDiscoverMovies);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentDiscoverMovies);
   //HideMenu;
 
 end;
@@ -391,14 +396,14 @@ end;
 procedure TfrmTMDBHome.btnMovieCertificationsClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentCertsMovies);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentCertsMovies);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.btnMovieChangesClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentChangesMovies);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentChangesMovies);
   //HideMenu;
 end;
 
@@ -408,7 +413,7 @@ var
   F: TfrmContentTVPage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentTVPage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentTVPage);
   F:= TfrmContentTVPage(T.Content);
   F.BaseName:= 'Popular TV';
   F.OnGetPage:=
@@ -424,42 +429,42 @@ end;
 procedure TfrmTMDBHome.JDFontButton13Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentCertsTV);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentCertsTV);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton18Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentConfigCountries);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentConfigCountries);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton19Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentConfigJobs);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentConfigJobs);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton1Click(Sender: TObject);
 begin
   inherited;
-  frmMain.OpenNewBrowserTab('https://www.themoviedb.org/');
+  TfrmMain(MainForm).OpenNewBrowserTab('https://www.themoviedb.org/');
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton20Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentConfigLanguages);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentConfigLanguages);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton22Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentConfigTimezones);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentConfigTimezones);
   //HideMenu;
 end;
 
@@ -470,7 +475,7 @@ var
   //W: TTMDBTimeWindow;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'Trending Movies';
   F.OnGetPage:=
@@ -487,13 +492,13 @@ end;
 procedure TfrmTMDBHome.JDFontButton25Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmTMDBSearch);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmTMDBSearch);
 end;
 
 procedure TfrmTMDBHome.btnMovieGenresClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentGenresMovie);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentGenresMovie);
   //HideMenu;
 end;
 
@@ -503,7 +508,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'My Favorite Movies';
   F.OnGetPage:=
@@ -523,7 +528,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'My Movie Watchlist';
   F.OnGetPage:=
@@ -543,7 +548,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'Now Playing Movies';
   F.OnGetPage:=
@@ -562,7 +567,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'Popular Movies';
   F.OnGetPage:=
@@ -578,21 +583,21 @@ end;
 procedure TfrmTMDBHome.JDFontButton28Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentGenresTV);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentGenresTV);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.btnSearchCollectionsClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchCollections);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchCollections);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.btnSearchTVClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchTV);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchTV);
   //HideMenu;
 end;
 
@@ -602,7 +607,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'Top Rated Movies';
   F.OnGetPage:=
@@ -621,7 +626,7 @@ var
   F: TfrmContentMoviePage;
 begin
   inherited;
-  T:= TabController.CreateTab(TfrmContentMoviePage);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMoviePage);
   F:= TfrmContentMoviePage(T.Content);
   F.BaseName:= 'Upcoming Movies';
   F.OnGetPage:=
@@ -659,42 +664,42 @@ end;
 procedure TfrmTMDBHome.JDFontButton44Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchCompanies);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchCompanies);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton45Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchKeywords);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchKeywords);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.btnSearchMoviesClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchMovies);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchMovies);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton47Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchMulti);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchMulti);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton48Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentSearchPeople);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmContentSearchPeople);
   //HideMenu;
 end;
 
 procedure TfrmTMDBHome.JDFontButton49Click(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmTMDBSetup, -1, 0);
+  TfrmMain(MainForm).TabController.CreateTab(TfrmTMDBSetup, -1, 0);
   //HideMenu;
 end;
 

@@ -77,7 +77,7 @@ begin
   inherited;
   Pages.ActivePageIndex:= 0;
 
-  FDetailImages:= TfrmCommonImages.Create(tabImages);
+  FDetailImages:= TfrmCommonImages.Create(tabImages, MainForm);
   FDetailImages.Parent:= tabImages;
   FDetailImages.BorderStyle:= bsNone;
   FDetailImages.Align:= alClient;
@@ -127,7 +127,7 @@ procedure TfrmContentSearchCollections.ItemClick(const Index: Integer;
 begin
   inherited;
   //TODO: Navigate to movie details tab within app...
-  var T:= TabController.CreateTab(TfrmTMDBContentCollectionDetail, -1, 0); //TODO
+  var T:= TfrmMain(MainForm).TabController.CreateTab(TfrmTMDBContentCollectionDetail, -1, 0); //TODO
   TfrmTMDBContentCollectionDetail(T.Content).LoadCollection(Obj.ID);
 end;
 
@@ -271,7 +271,7 @@ var
 begin
   inherited;
   M:= FDetail.Parts[lstParts.ItemIndex];
-  T:= TabController.CreateTab(TfrmContentMovieDetail);
+  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMovieDetail);
   (T.Content as TfrmContentMovieDetail).LoadMovie(M.ID);
 
 end;

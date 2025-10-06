@@ -125,7 +125,7 @@ end;
 function TfrmContentTVSerieDetail.EmbedFormIntoTab(
   AClass: TfrmTMDBCommonFormBaseClass; ATab: TTabSheet): TfrmTMDBCommonFormBase;
 begin
-  Result:= AClass.Create(ATab);
+  Result:= AClass.Create(ATab, MainForm);
   Result.Parent:= ATab;
   Result.BorderStyle:= bsNone;
   Result.Align:= alClient;

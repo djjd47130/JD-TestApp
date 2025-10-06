@@ -5,7 +5,12 @@ unit JD.Plugins.Impl;
   Task #11
 
   This unit contains all the core implementation for the plugin mechanism.
-  Each plugin will need to implement each of these which is to be supported by said plugin.
+  Each plugin will need to inherit and implement the following:
+  - TJDPlugin - The core object referencing the entire plugin.
+    - TJDPluginMenuItem/s
+    - TJDPluginShellReg/s
+  - TJDPluginContentForm - Encapsulates a single possible form to be embedded with a tab.
+
 *)
 
 interface
@@ -18,8 +23,8 @@ uses
 type
   TJDPlugin = class;
   TJDPluginContentForm = class;
-  TJDShellReg = class;
-  TJDShellRegs = class;
+  TJDPluginShellReg = class;
+  TJDPluginShellRegs = class;
   TJDPluginMenuItem = class;
   TJDPluginMenuItems = class;
 
@@ -41,8 +46,11 @@ type
     constructor Create; virtual;
     destructor Destroy; override;
 
-    property MenuItems: IJDPluginMenuItems read FMenuItems;
-    property ShellRegs: IJDShellRegs read FShellRegs;
+    property Name: WideString read GetName;
+    property Caption: WideString read GetCaption;
+    property Publisher: WideString read GetPublisher;
+    property MenuItems: IJDPluginMenuItems read GetMenuItems;
+    property ShellRegs: IJDShellRegs read GetShellRegs;
   end;
 
   TJDPluginContentForm = class(TInterfacedObject, IJDPluginContentForm)
@@ -54,11 +62,17 @@ type
     function GetCaption: WideString; stdcall;
     function GetID: WideString; stdcall;
   public
+    constructor Create(AOwner: IJDPlugin); virtual;
+    destructor Destroy; override;
+    //TODO: Design ability to embed forms from DLL into content panel...
     function CreateWindow: HWND; stdcall;
     procedure SetParentWindow(const Handle: HWND); stdcall;
+
+    procedure CloseQuery(var CanClose: Boolean); stdcall;
+
   end;
 
-  TJDShellReg = class(TInterfacedObject, IJDShellReg)
+  TJDPluginShellReg = class(TInterfacedObject, IJDShellReg)
   private
     FRoot: WideString;
     FPath: WideString;
@@ -78,7 +92,7 @@ type
     property OnExecute: TJDPluginExecuteEvent read GetOnExecute write SetOnExecute;
   end;
 
-  TJDShellRegs = class(TInterfacedObject, IJDShellRegs)
+  TJDPluginShellRegs = class(TInterfacedObject, IJDShellRegs)
   private
     FOwner: IJDPlugin;
     FItems: TInterfaceList;
@@ -92,6 +106,9 @@ type
     function Add: IJDShellReg; stdcall;
     procedure Clear; stdcall;
     procedure Delete(const Index: Integer); stdcall;
+
+    property Count: Integer read GetCount;
+    property Items[const Index: Integer]: IJDShellReg read GetItem; default;
   end;
 
   TJDPluginMenuItem = class(TInterfacedObject, IJDPluginMenuItem)
@@ -145,7 +162,7 @@ implementation
 
 constructor TJDPlugin.Create;
 begin
-  FShellRegs:= TJDShellRegs.Create(Self);
+  FShellRegs:= TJDPluginShellRegs.Create(Self);
   FMenuItems:= TJDPluginMenuItems.Create(Self);
 
   PopulateShellRegs;
@@ -203,6 +220,24 @@ end;
 
 { TJDPluginContentForm }
 
+procedure TJDPluginContentForm.CloseQuery(var CanClose: Boolean);
+begin
+  CanClose:= True;
+  //Override expected
+end;
+
+constructor TJDPluginContentForm.Create(AOwner: IJDPlugin);
+begin
+  FOwner:= AOwner;
+
+end;
+
+destructor TJDPluginContentForm.Destroy;
+begin
+
+  inherited;
+end;
+
 function TJDPluginContentForm.CreateWindow: HWND;
 begin
   Result:= 0; //TODO
@@ -230,74 +265,74 @@ end;
 
 procedure TJDPluginContentForm.SetParentWindow(const Handle: HWND);
 begin
-
+  //TODO
 end;
 
-{ TJDShellReg }
+{ TJDPluginShellReg }
 
-function TJDShellReg.GetOnExecute: TJDPluginExecuteEvent;
+function TJDPluginShellReg.GetOnExecute: TJDPluginExecuteEvent;
 begin
   Result:= FOnExecute;
 end;
 
-function TJDShellReg.GetShellPath: WideString;
+function TJDPluginShellReg.GetShellPath: WideString;
 begin
   Result:= FPath;
 end;
 
-function TJDShellReg.GetShellRoot: WideString;
+function TJDPluginShellReg.GetShellRoot: WideString;
 begin
   Result:= FRoot;
 end;
 
-procedure TJDShellReg.SetOnExecute(const Value: TJDPluginExecuteEvent);
+procedure TJDPluginShellReg.SetOnExecute(const Value: TJDPluginExecuteEvent);
 begin
   FOnExecute:= Value;
 end;
 
-procedure TJDShellReg.SetShellPath(const Value: WideString);
+procedure TJDPluginShellReg.SetShellPath(const Value: WideString);
 begin
   FPath:= Value;
 end;
 
-procedure TJDShellReg.SetShellRoot(const Value: WideString);
+procedure TJDPluginShellReg.SetShellRoot(const Value: WideString);
 begin
   FRoot:= Value;
 end;
 
-procedure TJDShellReg.ShellExec(const Path: WideString);
+procedure TJDPluginShellReg.ShellExec(const Path: WideString);
 begin
   //TODO: Execute specified shell command...
 
 end;
 
-{ TJDShellRegs }
+{ TJDPluginShellRegs }
 
-function TJDShellRegs.Add: IJDShellReg;
+function TJDPluginShellRegs.Add: IJDShellReg;
 begin
-  Result:= TJDShellReg.Create;
+  Result:= TJDPluginShellReg.Create;
   FItems.Add(Result);
 end;
 
-procedure TJDShellRegs.Clear;
+procedure TJDPluginShellRegs.Clear;
 begin
   while GetCount > 0 do
     Delete(0);
 end;
 
-constructor TJDShellRegs.Create(AOwner: IJDPlugin);
+constructor TJDPluginShellRegs.Create(AOwner: IJDPlugin);
 begin
   FOwner:= AOwner;
   FItems:= TInterfaceList.Create;
 
 end;
 
-procedure TJDShellRegs.Delete(const Index: Integer);
+procedure TJDPluginShellRegs.Delete(const Index: Integer);
 begin
   FItems.Delete(Index);
 end;
 
-destructor TJDShellRegs.Destroy;
+destructor TJDPluginShellRegs.Destroy;
 begin
 
   Clear;
@@ -305,12 +340,12 @@ begin
   inherited;
 end;
 
-function TJDShellRegs.GetCount: Integer;
+function TJDPluginShellRegs.GetCount: Integer;
 begin
   Result:= FItems.Count;
 end;
 
-function TJDShellRegs.GetItem(const Index: Integer): IJDShellReg;
+function TJDPluginShellRegs.GetItem(const Index: Integer): IJDShellReg;
 begin
   Result:= IJDShellReg(FItems[Index]);
 end;

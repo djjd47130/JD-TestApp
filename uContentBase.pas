@@ -6,9 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
+
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes;
-
-
 
 type
 
@@ -39,11 +38,13 @@ type
   TfrmContentBaseClass = class of TfrmContentBase;
 
   TfrmContentBase = class(TForm)
+  private
+    FMainForm: TForm;
   protected
     function GetTabCaption: String;
     procedure SetTabCaption(const Value: String);
   public
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent; AMainForm: TForm); reintroduce; virtual;
     destructor Destroy; override;
 
     /// <summary>
@@ -71,6 +72,7 @@ type
 
 
 
+
     //TODO: Shell functions - #8
     /// <summary>
     /// Virtual function to return the shell root string.
@@ -87,6 +89,8 @@ type
     /// </summary>
     class procedure ShellOpen(const Path: String); virtual;
 
+
+    property MainForm: TForm read FMainForm;
 
 
   end;
@@ -159,9 +163,10 @@ end;
 
 { TfrmContentBase }
 
-constructor TfrmContentBase.Create(AOwner: TComponent);
+constructor TfrmContentBase.Create(AOwner: TComponent; AMainForm: TForm);
 begin
-  inherited;
+  inherited Create(AOwner);
+  FMainForm:= AMainForm;
   TabCaption:= Caption;
 end;
 
@@ -197,7 +202,7 @@ function TfrmContentBase.GetTabCaption: String;
 var
   T: TJDTabRef;
 begin
-  T:= TabController.TabByForm(Self);
+  T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     Result:= T.Caption;
 end;
@@ -216,7 +221,7 @@ procedure TfrmContentBase.SetTabCaption(const Value: String);
 var
   T: TJDTabRef;
 begin
-  T:= TabController.TabByForm(Self);
+  T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     T.Caption:= Value;
 end;

@@ -56,7 +56,7 @@ inherited frmAppSetup: TfrmAppSetup
     Top = 0
     Width = 829
     Height = 433
-    ActivePage = tabGeneral
+    ActivePage = TabSheet1
     Align = alTop
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -85,7 +85,7 @@ inherited frmAppSetup: TfrmAppSetup
           Margins.Right = 8
           Align = alTop
           AutoSize = False
-          Caption = 'Enable and Disable Addons'
+          Caption = 'Enable and Disable Plugins'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -24
@@ -101,7 +101,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 38
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -123,13 +123,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 237
               Height = 41
+              Hint = ''
               Caption = 'SPACEBALLS: The Web Browser'
               ExplicitWidth = 237
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61612
@@ -146,6 +143,8 @@ inherited frmAppSetup: TfrmAppSetup
             Hint = 'Enable or Disable Addon'
             ThumbColor = clLime
             ExplicitLeft = 730
+            ExplicitTop = 17
+            ExplicitHeight = 23
           end
         end
         inline ListSwitchItem2: TListSwitchItem
@@ -153,7 +152,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 148
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -175,13 +174,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 212
               Height = 41
+              Hint = ''
               Caption = 'The Movie DataBase (TMDB)'
               ExplicitWidth = 212
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61448
@@ -209,7 +205,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 93
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -231,13 +227,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 165
               Height = 41
+              Hint = ''
               Caption = 'Weather Underground'
               ExplicitWidth = 165
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61829
@@ -265,7 +258,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 203
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -282,7 +275,6 @@ inherited frmAppSetup: TfrmAppSetup
           end
           inherited pData: TPanel
             Width = 402
-            Hint = 'Item'
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 59
@@ -290,10 +282,6 @@ inherited frmAppSetup: TfrmAppSetup
               Caption = 'Last.FM'
               ExplicitWidth = 59
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61954
@@ -321,7 +309,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 258
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -343,13 +331,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 91
               Height = 41
+              Hint = ''
               Caption = 'MusicBrainz'
               ExplicitWidth = 91
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61441
@@ -377,7 +362,7 @@ inherited frmAppSetup: TfrmAppSetup
           Top = 313
           Width = 815
           Height = 55
-          Hint = 'Item'
+          Hint = 'Turn plugins on or off'
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -399,13 +384,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 58
               Height = 41
+              Hint = ''
               Caption = 'Discogs'
               ExplicitWidth = 58
             end
-          end
-          inherited pImage: TPanel
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61619
@@ -490,14 +472,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 118
               Height = 41
+              Hint = 'What to open when clicking the new tab button'
               Caption = 'New Tab Button'
               ExplicitWidth = 118
             end
-          end
-          inherited pImage: TPanel
-            ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61543
@@ -540,17 +518,14 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 811
           end
           inherited pData: TPanel
+            ExplicitTop = 2
             inherited lblCaption: TLabel
               Width = 88
               Height = 41
+              Hint = 'What to open when the application starts up'
               Caption = 'App Startup'
               ExplicitWidth = 88
             end
-          end
-          inherited pImage: TPanel
-            ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61537
@@ -598,6 +573,7 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 186
               Height = 41
+              Hint = 'Automatically collapse main menu when navigating'
               Caption = 'Auto Collapse Main Menu'
               ExplicitWidth = 186
             end
@@ -605,8 +581,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pImage: TPanel
             Left = 59
             ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Left = 3
@@ -683,14 +657,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 106
               Height = 41
+              Hint = 'What search engine the browser should use'
               Caption = 'Search Engine'
               ExplicitWidth = 106
             end
-          end
-          inherited pImage: TPanel
-            ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61442
@@ -736,14 +706,10 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 83
               Height = 41
+              Hint = 'What to open by default in your browser'
               Caption = 'Home Page'
               ExplicitWidth = 83
             end
-          end
-          inherited pImage: TPanel
-            ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Image.Text = #61461
@@ -789,6 +755,7 @@ inherited frmAppSetup: TfrmAppSetup
             inherited lblCaption: TLabel
               Width = 183
               Height = 41
+              Hint = 'Whether to enable browsing history'
               Caption = 'Enable Browsing History'
               ExplicitWidth = 183
             end
@@ -796,8 +763,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pImage: TPanel
             Left = 59
             ExplicitLeft = 59
-            ExplicitTop = 3
-            ExplicitHeight = 47
           end
           inherited btnLeft: TJDFontButton
             Left = 3

@@ -15,9 +15,12 @@ type
 
   TfrmTMDBCommonFormBase = class(TForm)
   private
+    FMainForm: TForm;
     function GetTMDB: TTMDB;
   public
+    constructor Create(AOwner: TComponent; AMainForm: TForm); reintroduce; virtual;
     property TMDB: TTMDB read GetTMDB;
+    property MainForm: TForm read FMainForm;
   end;
 
 var
@@ -31,6 +34,12 @@ uses
   uMain;
 
 { TfrmTMDBCommonFormBase }
+
+constructor TfrmTMDBCommonFormBase.Create(AOwner: TComponent; AMainForm: TForm);
+begin
+  inherited Create(AOwner);
+  FMainForm:= AMainForm;
+end;
 
 function TfrmTMDBCommonFormBase.GetTMDB: TTMDB;
 begin

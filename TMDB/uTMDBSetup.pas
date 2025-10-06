@@ -71,6 +71,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  uMain;
+
 procedure TfrmTMDBSetup.APIAuthMethodRadioClick(Sender: TObject);
 var
   T: Integer;
@@ -150,7 +153,7 @@ end;
 procedure TfrmTMDBSetup.Label9Click(Sender: TObject);
 begin
   //Navigate to TMDB API page
-  var F:= TabController.CreateTab(TfrmContentBrowser);
+  var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
   TfrmContentBrowser(F.Content).Navigate('https://www.themoviedb.org/settings/api');
 end;
 

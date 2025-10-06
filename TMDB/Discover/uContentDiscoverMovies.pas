@@ -20,7 +20,7 @@ uses
   uTMDB,
   uTMDBSetup,
   uContentPageBase,
-  uCommonDblCheckList,
+  //uCommonChipList,
   uContentMoviePage;
 
 
@@ -117,10 +117,8 @@ type
     Edit12: TEdit;
     JDChipList1: TJDChipList;
     Splitter2: TSplitter;
-    clCompanies: TJDChipList;
     Panel5: TPanel;
     Label6: TLabel;
-    txtSearchCompanies: TButtonedEdit;
     txtSearchKeyword: TSearchBox;
     clGenres: TJDChipList;
     Label7: TLabel;
@@ -139,7 +137,6 @@ type
     procedure cboSearchMoviesRegionCloseUp(Sender: TObject);
     procedure JDChipList1Resize(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure txtSearchCompaniesRightButtonClick(Sender: TObject);
     procedure txtSearchKeywordInvokeSearch(Sender: TObject);
     procedure cboSearchGenresKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnApplyClick(Sender: TObject);
@@ -484,17 +481,6 @@ begin
   SetCategoryPanelImageIndices(cpCerts, CheckListBoxHasChecks(lstCerts) or (cboSearchMoviesAdult.ItemIndex > 0));
   SetCategoryPanelImageIndices(cpRegion, (cboSearchMoviesRegion.ItemIndex >= 0));
 
-end;
-
-procedure TfrmContentDiscoverMovies.txtSearchCompaniesRightButtonClick(
-  Sender: TObject);
-begin
-  inherited;
-
-  var S:= txtSearchCompanies.Text;
-  txtSearchCompanies.Text:= '';
-  var I:= clCompanies.Items.Add;
-  I.Caption:= S;
 end;
 
 procedure TfrmContentDiscoverMovies.btnApplyClick(Sender: TObject);

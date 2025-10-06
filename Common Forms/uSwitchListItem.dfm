@@ -4,17 +4,25 @@ inherited ListSwitchItem: TListSwitchItem
     ExplicitWidth = 362
     inherited lblCaption: TLabel
       Height = 41
+      Hint = ''
     end
   end
   inherited pImage: TPanel
     Left = 3
+    Hint = ''
+    ExplicitLeft = 3
+    inherited imgPicture: TImage
+      Hint = ''
+    end
   end
   inherited btnLeft: TJDFontButton
     Left = 71
+    Hint = ''
     ExplicitLeft = 71
   end
   inherited btnRight: TJDFontButton
     Left = 647
+    Hint = 'Configure Plugin'
     TabOrder = 4
     ExplicitLeft = 647
   end
@@ -25,6 +33,7 @@ inherited ListSwitchItem: TListSwitchItem
     Width = 70
     Height = 23
     Cursor = crHandPoint
+    Hint = 'Toggle Plugin On or Off'
     Margins.Top = 15
     Margins.Right = 15
     Margins.Bottom = 15

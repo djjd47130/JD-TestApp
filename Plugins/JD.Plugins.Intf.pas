@@ -6,6 +6,9 @@ unit JD.Plugins.Intf;
 
   This unit contains all the core interface definitions for the plugin mechanism.
   Each plugin will need to implement each of these which is to be supported by said plugin.
+  IJDPlugin must be accessible from within plugin DLL via exported function "JDCreatePluginObj".
+  This function is called once upon initial loading of plugin, and the instance returned
+  carries all integration details of the plugin.
 *)
 
 interface
@@ -15,16 +18,80 @@ uses
   System.Classes, System.SysUtils;
 
 type
+  IJDPluginTabController = interface;
+  IJDPluginTabRef = interface;
   IJDPlugin = interface;
   IJDShellReg = interface;
   IJDShellRegs = interface;
   IJDPluginMenuItem = interface;
   IJDPluginMenuItems = interface;
   IJDPluginContentForm = interface;
-  IJDPluginTabRef = interface;
 
 
   TJDPluginExecuteEvent = procedure(Sender: TObject; Item: IJDPluginMenuItem) of object;
+
+
+  /// <summary>
+  /// Represents up to 4 segment version strings.
+  /// </summary>
+  IJDVersion = record
+  private
+    FP1: Integer;
+    FP2: Integer;
+    FP3: Integer;
+    FP4: Integer;
+    function GetP1: Integer; stdcall;
+    function GetP2: Integer; stdcall;
+    function GetP3: Integer; stdcall;
+    function GetP4: Integer; stdcall;
+  public
+    function GetStr: WideString; stdcall;
+    procedure SetStr(const Value: WideString); stdcall;
+
+    property P1: Integer read GetP1;
+    property P2: Integer read GetP2;
+    property P3: Integer read GetP3;
+    property P4: Integer read GetP4;
+    property AsString: WideString read GetStr write SetStr;
+  end;
+
+
+
+  /// <summary>
+  /// Provides plugin access to the tabular interface.
+  /// </summary>
+  IJDPluginTabController = interface
+    ['{C4EEA179-EA74-4969-BD52-E7F84334B992}']
+    function GetParent: HWND; stdcall;
+    procedure SetParent(const Value: HWND); stdcall;
+    function GetCount: Integer; stdcall;
+    function GetItem(const Index: Integer): IJDPluginTabRef; stdcall;
+
+    function CreateTab(const Caption: WideString; const Index: Integer = -1): IJDPluginTabRef; stdcall;
+    procedure DeleteTab(const Index: Integer); stdcall;
+
+    property Parent: HWND read GetParent write SetParent;
+    property Count: Integer read GetCount;
+    property Items[const Index: Integer]: IJDPluginTabRef read GetItem;
+  end;
+
+  /// <summary>
+  /// Represents a single content tab within application UI.
+  /// </summary>
+  IJDPluginTabRef = interface
+    ['{5C129031-99AF-4311-9AE9-5DD78C38428D}']
+    function GetOwner: IJDPluginTabController; stdcall;
+    function GetIndex: Integer; stdcall;
+    function GetCaption: WideString; stdcall;
+    procedure SetCaption(const Value: WideString); stdcall;
+
+    procedure ShowContent; stdcall;
+
+    property Owner: IJDPluginTabController read GetOwner;
+    property Index: Integer read GetIndex;
+    property Caption: WideString read GetCaption write SetCaption;
+  end;
+
 
 
   /// <summary>
@@ -39,6 +106,12 @@ type
     function GetPublisher: WideString; stdcall;
     function GetMenuItems: IJDPluginMenuItems; stdcall;
     function GetShellRegs: IJDShellRegs; stdcall;
+
+    property Name: WideString read GetName;
+    property Caption: WideString read GetCaption;
+    property Publisher: WideString read GetPublisher;
+    property MenuItems: IJDPluginMenuItems read GetMenuItems;
+    property ShellRegs: IJDShellRegs read GetShellRegs;
   end;
 
   /// <summary>
@@ -77,6 +150,9 @@ type
     function Add: IJDShellReg; stdcall;
     procedure Clear; stdcall;
     procedure Delete(const Index: Integer); stdcall;
+
+    property Count: Integer read GetCount;
+    property Items[const Index: Integer]: IJDShellReg read GetItem; default;
   end;
 
   /// <summary>
@@ -130,16 +206,45 @@ type
     function CreateWindow: HWND; stdcall;
     procedure SetParentWindow(const Handle: HWND); stdcall;
 
-  end;
-
-  /// <summary>
-  ///
-  /// </summary>
-  IJDPluginTabRef = interface
-    ['{5C129031-99AF-4311-9AE9-5DD78C38428D}']
+    procedure CloseQuery(var CanClose: Boolean); stdcall;
 
   end;
 
 implementation
+
+{ IJDVersion }
+
+function IJDVersion.GetP1: Integer;
+begin
+  Result:= FP1;
+end;
+
+function IJDVersion.GetP2: Integer;
+begin
+  Result:= FP2;
+end;
+
+function IJDVersion.GetP3: Integer;
+begin
+  Result:= FP3;
+end;
+
+function IJDVersion.GetP4: Integer;
+begin
+  Result:= FP4;
+end;
+
+function IJDVersion.GetStr: WideString;
+begin
+  Result:= IntToStr(FP1) + '.' + IntToStr(FP2) + '.' +
+    IntToStr(FP3) + '.' + IntToStr(FP4);
+  //TODO: Handle number of digits...
+end;
+
+procedure IJDVersion.SetStr(const Value: WideString);
+begin
+  //TODO: Parse version from string into individual values...
+
+end;
 
 end.

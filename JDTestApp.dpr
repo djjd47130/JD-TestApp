@@ -18,7 +18,7 @@ uses
   uMainMenu in 'uMainMenu.pas' {frmMainMenu},
   uAppSetup in 'uAppSetup.pas' {frmAppSetup},
   uContentBrowser in 'uContentBrowser.pas' {frmContentBrowser},
-  uCommonDblCheckList in 'Common Forms\uCommonDblCheckList.pas' {frmCommonDblCheckList: TFrame},
+  uCommonChipList in 'Common Forms\uCommonChipList.pas' {frmCommonChipList: TFrame},
   uCommonPersonCredits in 'Common Forms\uCommonPersonCredits.pas' {frmCommonPersonCredits},
   uTMDBListItem in 'Common Forms\uTMDBListItem.pas' {frmTMDBListItem: TFrame},
   uTMDBMovieListItem in 'Common Forms\uTMDBMovieListItem.pas' {frmTMDBMovieListItem: TFrame},
@@ -66,16 +66,24 @@ uses
   JD.ListController in 'JD.ListController.pas',
   JD.Plugins.Intf in 'Plugins\JD.Plugins.Intf.pas',
   JD.PluginManager in 'JD.PluginManager.pas',
-  JD.Plugins.Impl in 'Plugins\JD.Plugins.Impl.pas';
+  JD.Plugins.Impl in 'Plugins\JD.Plugins.Impl.pas',
+  uTMDBWatchProviderPage in 'TMDB\WatchProviders\uTMDBWatchProviderPage.pas' {frmTMDBWatchProviderPage},
+  uContentPluginBase in 'Plugins\uContentPluginBase.pas' {frmContentPluginBase},
+  uDM in 'uDM.pas' {DM: TDataModule},
+  JD.AppController.Intf in 'JD.AppController.Intf.pas',
+  JD.CmdLine in 'JD.CmdLine.pas',
+  JD.AppController.Impl in 'JD.AppController.Impl.pas',
+  uMainNEW in 'uMainNEW.pas' {frmMainNEW};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+  Application.MainFormOnTaskbar := False;
+  Application.ShowMainForm:= False;
   Application.Title := 'JD Testing Grounds';
+  Application.CreateForm(TDM, DM);
   Application.CreateForm(TdmTMDB, dmTMDB);
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmTMDBContentCollectionDetail, frmTMDBContentCollectionDetail);
   Application.Run;
 end.

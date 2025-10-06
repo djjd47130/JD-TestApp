@@ -58,7 +58,6 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
       Width = 661
       Height = 393
       BorderStyle = bsNone
-      ExplicitLeft = 1
       ExplicitWidth = 661
       ExplicitHeight = 393
     end
@@ -117,7 +116,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 0
-        ExplicitTop = 957
+        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel15: TPanel
           AlignWithMargins = True
@@ -134,12 +133,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 169
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
-            ExplicitWidth = 169
           end
           object Edit11: TEdit
             AlignWithMargins = True
@@ -167,12 +165,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 41
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
-            ExplicitWidth = 41
           end
           object Edit12: TEdit
             AlignWithMargins = True
@@ -194,7 +191,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 1
-        ExplicitTop = 929
+        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel7: TPanel
           AlignWithMargins = True
@@ -211,12 +208,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 169
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
-            ExplicitWidth = 169
           end
           object Edit7: TEdit
             AlignWithMargins = True
@@ -244,12 +240,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 41
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
-            ExplicitWidth = 41
           end
           object Edit8: TEdit
             AlignWithMargins = True
@@ -271,7 +266,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 2
-        ExplicitTop = 901
+        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel3: TPanel
           AlignWithMargins = True
@@ -288,12 +283,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 169
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
-            ExplicitWidth = 169
           end
           object Edit3: TEdit
             AlignWithMargins = True
@@ -321,12 +315,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 41
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
-            ExplicitWidth = 41
           end
           object Edit4: TEdit
             AlignWithMargins = True
@@ -347,48 +340,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 3
-        ExplicitTop = 703
-        object clCompanies: TJDChipList
-          Left = 0
-          Top = 49
-          Width = 234
-          Height = 120
-          Align = alTop
-          AllowExclude = True
-          AutoSize = False
-          ChipHeight = 24
-          ChipPadding = 3
-          Color = clBackground
-          ExcludeToggle = ctButton
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          Items = <
-            item
-              Caption = 'Disney'
-              Exclude = False
-            end
-            item
-              Caption = 'Dasney'
-              Exclude = True
-            end>
-          ParentBackground = False
-          ParentColor = False
-          UI.ChipColor = 12615680
-          UI.ChipExcludeColor = clMaroon
-          UI.DeleteButtonColor = clRed
-          UI.ShowDeleteBtn = False
-          UI.ChipNormal.Brush.Alpha = 255
-          UI.ChipNormal.Brush.Color.StandardColor = fcNeutral
-          UI.ChipNormal.Brush.Color.UseStandardColor = True
-          UI.ChipNormal.Pen.Alpha = 255
-          UI.ChipNormal.Pen.Color.StandardColor = fcNeutral
-          UI.ChipNormal.Pen.Color.UseStandardColor = True
-          UI.ChipNormal.Pen.Width = 1.000000000000000000
-          OnResize = JDChipList1Resize
-        end
+        ExplicitWidth = 253
         object Panel5: TPanel
           AlignWithMargins = True
           Left = 3
@@ -399,31 +351,16 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
           Margins.Bottom = 0
           Align = alTop
           BevelOuter = bvNone
-          TabOrder = 1
+          TabOrder = 0
           object Label6: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 168
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Search for Companies:'
-            ExplicitWidth = 168
-          end
-          object txtSearchCompanies: TButtonedEdit
-            Left = 0
-            Top = 21
-            Width = 228
-            Height = 26
-            Align = alTop
-            Images = Img16
-            RightButton.HotImageIndex = 2
-            RightButton.ImageIndex = 0
-            RightButton.PressedImageIndex = 3
-            RightButton.Visible = True
-            TabOrder = 0
-            OnRightButtonClick = txtSearchCompaniesRightButtonClick
           end
         end
       end
@@ -435,7 +372,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 4
-        ExplicitTop = 675
+        ExplicitWidth = 253
         ExpandedHeight = 146
         object Panel1: TPanel
           AlignWithMargins = True
@@ -452,12 +389,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 169
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
-            ExplicitWidth = 169
           end
           object Edit1: TEdit
             AlignWithMargins = True
@@ -485,12 +421,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 41
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
-            ExplicitWidth = 41
           end
           object Edit2: TEdit
             AlignWithMargins = True
@@ -512,7 +447,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 5
-        ExplicitTop = 647
+        ExplicitWidth = 253
         ExpandedHeight = 280
         object Panel13: TPanel
           AlignWithMargins = True
@@ -529,12 +464,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 169
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Primary Release Year:'
-            ExplicitWidth = 169
           end
           object txtSearchMoviesPrimaryReleaseYear: TEdit
             AlignWithMargins = True
@@ -562,12 +496,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 41
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Year:'
-            ExplicitWidth = 41
           end
           object txtSearchMoviesYear: TEdit
             AlignWithMargins = True
@@ -588,7 +521,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 6
-        ExplicitTop = 437
+        ExplicitWidth = 253
         object Panel11: TPanel
           AlignWithMargins = True
           Left = 3
@@ -604,12 +537,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 161
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Search for Keywords:'
-            ExplicitWidth = 161
           end
           object txtSearchKeyword: TSearchBox
             Left = 0
@@ -675,17 +607,16 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 7
-        ExplicitTop = 256
+        ExplicitWidth = 253
         object Label7: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 228
+          Width = 135
           Height = 18
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Search for Genres'
-          ExplicitWidth = 135
         end
         object clGenres: TJDChipList
           Left = 0
@@ -737,7 +668,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         CollapsedImageIndex = 0
         ExpandedImageIndex = 1
         TabOrder = 8
-        ExplicitTop = 228
+        ExplicitWidth = 253
         object Panel10: TPanel
           AlignWithMargins = True
           Left = 3
@@ -753,12 +684,11 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 222
+            Width = 57
             Height = 18
             Margins.Bottom = 0
             Align = alTop
             Caption = 'Region:'
-            ExplicitWidth = 57
           end
           object cboSearchMoviesRegion: TComboBox
             AlignWithMargins = True
@@ -789,7 +719,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 9
-        ExplicitTop = 200
+        ExplicitWidth = 253
         ExpandedHeight = 257
         object Label1: TLabel
           AlignWithMargins = True
@@ -864,6 +794,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
               'Default'
               'False'
               'True')
+            ExplicitWidth = 239
           end
         end
       end
@@ -872,6 +803,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
         Height = 89
         Caption = 'Sort'
         TabOrder = 10
+        ExplicitWidth = 253
         object Panel6: TPanel
           AlignWithMargins = True
           Left = 3
@@ -883,8 +815,6 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 6
-          ExplicitTop = 8
           object Label13: TLabel
             AlignWithMargins = True
             Left = 3
@@ -926,6 +856,7 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
               'vote_average.desc'
               'vote_count.asc'
               'vote_count.desc')
+            ExplicitWidth = 239
           end
         end
       end
@@ -1089,87 +1020,87 @@ inherited frmContentDiscoverMovies: TfrmContentDiscoverMovies
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000FBFB
-      FB00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000004E4E
+      4E00000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000F0FB
-      F000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000004B
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000E2E2
-      E200DEDEDE0000000000EEEEEE00DEDEDE000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000F5F5F5000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000008CDF
-      8C007CDB7C0000000000BDECBD007CDB7C000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000A9A9
+      A900AFAFAF00000000008E8E8E00AFAFAF000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000D9F4D9000000000000000000000000000000
+      0000000000000000000000000000747474000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000000000000000A3
+      000000A90000000000000089000000A900000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000DEDEDE00DEDEDE0000000000E9E9E900DEDEDE0000000000000000000000
+      0000000000000000000000000000007000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000F3F3F300C0C0C000DEDEDE0000000000000000000000
+      0000AFAFAF00AFAFAF00000000009C9C9C00AFAFAF0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00007CDB7C007CDB7C0000000000A7E6A7007CDB7C0000000000000000000000
+      000000000000000000007E7E7E00C0C0C000AFAFAF0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000D0F2D00000B900007CDB7C0000000000000000000000
+      000000A9000000A90000000000000097000000A9000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000DEDEDE00DEDEDE0000000000E9E9E900DEDEDE00000000000000
+      000000000000000000000079000000B9000000A9000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000F3F3F300C0C0C000F3F3F300E9E9E900DEDEDE00000000000000
+      000000000000AFAFAF00AFAFAF00000000009C9C9C00AFAFAF00000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000007CDB7C007CDB7C0000000000A7E6A7007CDB7C00000000000000
+      0000000000007E7E7E00C0C0C0007E7E7E009C9C9C00AFAFAF00000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000D0F2D00000B90000D0F2D000A7E6A7007CDB7C00000000000000
+      00000000000000A9000000A90000000000000097000000A90000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000DEDEDE00DEDEDE0000000000E9E9E900DEDEDE000000
+      0000000000000079000000B90000007900000097000000A90000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000F3F3F300C0C0C000F3F3F300FBFBFB0000000000E9E9E900DEDEDE000000
+      00000000000000000000AFAFAF00AFAFAF00000000009C9C9C00AFAFAF000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000007CDB7C007CDB7C0000000000A7E6A7007CDB7C000000
+      00007E7E7E00C0C0C0007E7E7E004E4E4E00000000009C9C9C00AFAFAF000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000D0F2D00000B90000D0F2D000F0FBF00000000000A7E6A7007CDB7C000000
+      0000000000000000000000A9000000A90000000000000097000000A900000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000F9F9F900D3D3D300F3F3F30000000000DEDEDE00E9E9E9000000
-      000000000000000000000000000000000000000000000000000000000000F9F9
-      F900C0C0C000F3F3F300F9F9F900D3D3D300DEDEDE0000000000E9E9E900E2E2
-      E200000000000000000000000000000000000000000000000000000000000000
-      000000000000E9F9E9004DCE4D00D0F2D000000000007CDB7C00A7E6A7000000
-      000000000000000000000000000000000000000000000000000000000000E9F9
-      E90000B90000D0F2D000E9F9E9004DCE4D007CDB7C0000000000A7E6A7008CDF
-      8C00000000000000000000000000000000000000000000000000000000000000
-      0000F9F9F900D3D3D300F3F3F30000000000DEDEDE00E9E9E900000000000000
+      00000079000000B9000000790000004B0000000000000097000000A900000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000F9F9F900F9F9F900D3D3D300F1F1F100DEDEDE00DEDEDE0000000000FBFB
-      FB00000000000000000000000000000000000000000000000000000000000000
-      0000E9F9E9004DCE4D00D0F2D000000000007CDB7C00A7E6A700000000000000
+      0000000000005D5D5D00BABABA007E7E7E0000000000AFAFAF009C9C9C000000
+      0000000000000000000000000000000000000000000000000000000000005D5D
+      5D00C0C0C0007E7E7E005D5D5D00BABABA00AFAFAF00000000009C9C9C00A9A9
+      A900000000000000000000000000000000000000000000000000000000000000
+      000000000000005A000000B30000007900000000000000A90000009700000000
+      000000000000000000000000000000000000000000000000000000000000005A
+      000000B9000000790000005A000000B3000000A90000000000000097000000A3
       0000000000000000000000000000000000000000000000000000000000000000
-      0000E9F9E900E9F9E9004DCE4D00C7EFC7007CDB7C007CDB7C0000000000F0FB
-      F00000000000000000000000000000000000000000000000000000000000F9F9
-      F900D3D3D300F3F3F30000000000DEDEDE00E9E9E90000000000000000000000
+      00005D5D5D00BABABA007E7E7E0000000000AFAFAF009C9C9C00000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000F9F9F900D3D3D300F3F3F3000000000000000000DEDEDE00DEDEDE000000
-      000000000000000000000000000000000000000000000000000000000000E9F9
-      E9004DCE4D00D0F2D000000000007CDB7C00A7E6A70000000000000000000000
+      00005D5D5D005D5D5D00BABABA0086868600AFAFAF00AFAFAF00000000004E4E
+      4E00000000000000000000000000000000000000000000000000000000000000
+      0000005A000000B30000007900000000000000A9000000970000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000E9F9E9004DCE4D00D0F2D00000000000000000007CDB7C007CDB7C000000
-      000000000000000000000000000000000000000000000000000000000000E2E2
-      E200F3F3F30000000000EEEEEE00E9E9E9000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000FBFB
-      FB00D3D3D300F3F3F30000000000000000000000000000000000DEDEDE00DEDE
-      DE00000000000000000000000000000000000000000000000000000000008CDF
-      8C00D0F2D00000000000BDECBD00A7E6A7000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000F0FB
-      F0004DCE4D00D0F2D000000000000000000000000000000000007CDB7C007CDB
-      7C00000000000000000000000000000000000000000000000000000000000000
+      0000005A0000005A000000B300000081000000A9000000A9000000000000004B
+      0000000000000000000000000000000000000000000000000000000000005D5D
+      5D00BABABA007E7E7E0000000000AFAFAF009C9C9C0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00005D5D5D00BABABA007E7E7E000000000000000000AFAFAF00AFAFAF000000
+      000000000000000000000000000000000000000000000000000000000000005A
+      000000B30000007900000000000000A900000097000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000F5F5F500000000000000000000000000000000000000000000000000F5F5
-      F500000000000000000000000000000000000000000000000000000000000000
+      0000005A000000B3000000790000000000000000000000A9000000A900000000
+      000000000000000000000000000000000000000000000000000000000000A9A9
+      A9007E7E7E00000000008E8E8E009C9C9C000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000004E4E
+      4E00BABABA007E7E7E0000000000000000000000000000000000AFAFAF00AFAF
+      AF000000000000000000000000000000000000000000000000000000000000A3
+      0000007900000000000000890000009700000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000004B
+      000000B30000007900000000000000000000000000000000000000A9000000A9
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000D9F4D900000000000000000000000000000000000000000000000000D9F4
-      D900000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000747474000000000000000000000000000000000000000000000000007474
+      7400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000007000000000000000000000000000000000000000000000000000000070
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

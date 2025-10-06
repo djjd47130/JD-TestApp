@@ -5,6 +5,10 @@ unit uMain;
   A compilation and demonstration of all JD libraries and solutions.
 
   TODO:
+  - Modify main form to allow more than 1 instance
+    - Move global stuff into central data module
+    - Implement dragging tabs into new window
+    - TTabController must be modified to account for multiple windows
   - Create "plugin" like concept
   - Strip TMDB away into a separate layer
   - Introduce other third-party API wrappers
@@ -15,30 +19,19 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.ImageList,
-
   System.SysUtils, System.Variants, System.Classes, System.Types, System.UITypes,
-  //System.Generics.Collections,
-
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.Menus,
-  Vcl.ImgList, Vcl.AppEvnts,
+  Vcl.ComCtrls, Vcl.Menus, Vcl.ImgList, Vcl.AppEvnts,
 
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics, JD.Favicons,
   JD.TabController,
 
   uMainMenu,
-  uAppSetup,
-  //uContentBase,
-  uContentBrowser,
-
-  //Jpeg, PngImage,
-
-  //XSuperObject, XSuperJSON,
 
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
 
   Vcl.Styles.Utils,
-  Vcl.Styles.Fixes;
+  Vcl.Styles.Fixes, LMDDckSite;
 
 const
   MAIN_MENU_WIDTH_OPEN = 380;
@@ -52,10 +45,16 @@ type
     pMenu: TPanel;
     btnMenu: TJDFontButton;
     Tabs: TChromeTabs;
-    imgFavicons16: TImageList;
-    Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
     btnDummy: TJDFontButton;
+    Panel1: TPanel;
+    txtAddress: TEdit;
+    btnGo: TJDFontButton;
+    btnBack: TJDFontButton;
+    btnForward: TJDFontButton;
+    btnRefresh: TJDFontButton;
+    btnFavorites: TJDFontButton;
+    JDFontButton1: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -65,11 +64,15 @@ type
       var Close: Boolean);
     procedure btnMenuClick(Sender: TObject);
     procedure TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
-    procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
     procedure AppEventsHint(Sender: TObject);
     procedure TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
       var HintTimeout: Integer);
+    procedure TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
+    procedure TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+      var TabDropOptions: TTabDropOptions);
+    procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
   private
+    FTabController: TJDTabController;
     FMenu: TfrmMainMenu;
     FFullScreen: Boolean;
     FRect: TRect;
@@ -78,6 +81,8 @@ type
     FLoaded: Boolean;
     procedure SetFullScreen(const Value: Boolean);
     procedure SetContentOnly(const Value: Boolean);
+    procedure ProcessDroppedTab(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+      var TabDropOptions: TTabDropOptions);
   public
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
@@ -85,33 +90,39 @@ type
     property FullScreen: Boolean read FFullScreen write SetFullScreen;
     property ContentOnly: Boolean read FContentOnly write SetContentOnly;
     function OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
+    property TabController: TJDTabController read FTabController;
   end;
 
 var
   frmMain: TfrmMain;
 
-function AppSetup: TAppSetup;
+function TabController(const MainForm: TForm): TJDTabController;
 
 implementation
 
 uses
+  uAppSetup,
+  uContentBrowser,
   System.IOUtils,
-  Vcl.Themes;
+  Vcl.Themes,
+  uDM;
 
 {$R *.dfm}
 
 
-
-var
-  _AppSetup: TAppSetup;
-
-function AppSetup: TAppSetup;
+procedure MakeFormIndependent(Form: TForm);
 begin
-  if _AppSetup = nil then
-    _AppSetup:= TAppSetup.Create;
-  Result:= _AppSetup;
+  Application.MainFormOnTaskbar := False;
+  ShowWindow(Application.Handle, SW_HIDE);
+
+
+  SetWindowLong(Form.Handle, GWL_HWNDPARENT, 0);
 end;
 
+function TabController(const MainForm: TForm): TJDTabController;
+begin
+  Result:= TfrmMain(MainForm).TabController;
+end;
 
 
 
@@ -130,10 +141,10 @@ begin
   //UI
   //TODO: Add option for user to switch style...
   //TODO: I like the style of "Windows10 Dark" when it comes to overall control styling,
-  //  especially the system buttons in the top-right. However, need to create
+  //  especially the large system buttons in the top-right. However, need to create
   //  a custom version with a dark-gray but not pure black base color.
   //TStyleManager.TrySetStyle('Carbon', False);
-  TStyleManager.TrySetStyle('Windows10 Dark', False);
+  TStyleManager.TrySetStyle('Windows10 DarkGray', False);
   //TStyleManager.TrySetStyle('Windows10 SlateGray', False);
   //TStyleManager.TrySetStyle('Cobalt XEMedia', False);
   //TStyleManager.TrySetStyle('Lime Graphite', False);
@@ -143,14 +154,15 @@ begin
   Width:= 1200;
   Height:= 800;
 
-  //Tabs
-  InitTabController;
-  TabController.ChromeTabs:= Tabs;
-  TabController.Container:= pContent;
-  TabController.MainForm:= Self;
+  //Tabs - TODO: Move TJDTabController to TfrmMain as installed component
+  //InitTabController;
+  FTabController:= TJDTabController.Create(nil);
+  FTabController.MainForm:= Self;
+  FTabController.ChromeTabs:= Tabs;
+  FTabController.Container:= pContent;
 
   //Main Menu
-  FMenu:= TfrmMainMenu.Create(pMenu);
+  FMenu:= TfrmMainMenu.Create(pMenu, Self);
   FMenu.Parent:= pMenu;
   FMenu.BorderStyle:= bsNone;
   FMenu.Align:= alClient;
@@ -159,6 +171,8 @@ begin
   //Move dummy button out of view...
   btnDummy.Left:= -50000;
 
+  MakeFormIndependent(Self);
+
   FLoaded:= True;
 
 end;
@@ -166,21 +180,13 @@ end;
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   //Tabs
-  UninitTabController;
+  FreeAndNil(FTabController);
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   //Main Menu
   Self.ShowMenu(True);
-end;
-
-procedure TfrmMain.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
-  var Handled: Boolean);
-begin
-  //Tabs
-  //TODO: Return image if not a web URL...
-
 end;
 
 function TfrmMain.MenuVisible: Boolean;
@@ -236,6 +242,19 @@ begin
 
 end;
 
+procedure TfrmMain.TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
+begin
+  //Tabs
+  var Ref:= TabController.TabByTab(ATab);
+  DragForm:= Ref.Content;
+end;
+
+procedure TfrmMain.TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
+begin
+
+  DragControl := pContent;
+end;
+
 procedure TfrmMain.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
   var HintTimeout: Integer);
 begin
@@ -246,6 +265,52 @@ begin
   end else begin
     Stat.Panels[0].Text:= Application.Hint;
   end;
+end;
+
+procedure TfrmMain.ProcessDroppedTab(Sender: TObject; X, Y: Integer;
+  DragTabObject: IDragTabObject; Cancelled: Boolean;
+  var TabDropOptions: TTabDropOptions);
+var
+  WinX, WinY: Integer;
+  NewForm: TfrmMain;
+begin
+  //Tabs
+
+  // Make sure that the drag drop hasn't been cancelled and that
+  // we are not dropping on a TChromeTab control
+  if (not Cancelled) and
+     (DragTabObject.SourceControl <> DragTabObject.DockControl) and
+     (DragTabObject.DockControl = nil) then
+  begin
+    // Find the drop position
+    WinX := Mouse.CursorPos.X - DragTabObject.DragCursorOffset.X - ((Width - ClientWidth) div 2);
+    WinY := Mouse.CursorPos.Y - DragTabObject.DragCursorOffset.Y - (Height - ClientHeight) + ((Width - ClientWidth) div 2);
+
+    // Create a new form
+    NewForm := TfrmMain.Create(Application);
+
+    // Set the new form position
+    NewForm.Position := poDesigned;
+    NewForm.Left := WinX;
+    NewForm.Top := WinY;
+
+    // Show the form
+    NewForm.Show;
+
+    // Remove the original tab
+    //TabDropOptions := [tdDeleteDraggedTab];
+    var OldTab:= TabController.Tabs[DragTabObject.DropTabIndex];
+    //NewForm.TabController.CreateTab()
+    TabController.DeleteTab(OldTab.Index);
+  end;
+end;
+
+procedure TfrmMain.TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+  var TabDropOptions: TTabDropOptions);
+begin
+  //Tabs
+
+  ProcessDroppedTab(Sender, X, Y, DragTabObject, Cancelled, TabDropOptions);
 end;
 
 procedure TfrmMain.AppEventsHint(Sender: TObject);
@@ -327,8 +392,4 @@ begin
   end;
 end;
 
-initialization
-  _AppSetup:= nil;
-finalization
-  FreeAndNil(_AppSetup);
 end.

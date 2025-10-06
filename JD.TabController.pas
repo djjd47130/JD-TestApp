@@ -1,5 +1,13 @@
 unit JD.TabController;
 
+(*
+  JD Tab Controller
+
+  TODO
+  - Change to support multiple forms
+
+*)
+
 interface
 
 uses
@@ -87,7 +95,7 @@ type
     /// The object referencing the tab to its corresponding content form.
     /// </returns>
     function CreateTab(
-      AClass: TfrmContentBaseClass;
+      const AClass: TfrmContentBaseClass;
       const AIndex: Integer = -1;
       const AID: Integer = -1): TJDTabRef;
 
@@ -112,16 +120,17 @@ type
     property MainForm: TForm read FMainForm write SetMainForm;
   end;
 
-procedure InitTabController;
-procedure UninitTabController;
-function TabController: TJDTabController;
+//procedure InitTabController;
+//procedure UninitTabController;
+//function TabController: TJDTabController;
 
 implementation
 
 var
-  _TabController: TJDTabController;
+  //_TabController: TJDTabController;
   _TabLastID: Int64;
 
+{
 procedure InitTabController;
 begin
   _TabController:= TJDTabController.Create(nil);
@@ -138,6 +147,7 @@ begin
     InitTabController;
   Result:= _TabController;
 end;
+}
 
 function NewTabID: Int64;
 begin
@@ -154,7 +164,7 @@ begin
 
   FID:= NewTabID;
 
-  FContent:= FClass.Create(nil);
+  FContent:= FClass.Create(nil, AOwner.MainForm);
   FContent.Tag:= FID;
   FContent.Parent:= FOwner.FContainer;
   FContent.BorderStyle:= bsNone;
@@ -255,7 +265,7 @@ begin
 
 end;
 
-function TJDTabController.CreateTab(AClass: TfrmContentBaseClass;
+function TJDTabController.CreateTab(const AClass: TfrmContentBaseClass;
   const AIndex: Integer;
   const AID: Integer): TJDTabRef;
 var

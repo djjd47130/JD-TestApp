@@ -121,7 +121,7 @@ end;
 procedure TfrmMainMenu.HideMenu;
 begin
   //TODO: Add user option whether to auto-close menu, enabled by default.
-  frmMain.ShowMenu(False);
+  TfrmMain(MainForm).ShowMenu(False);
 end;
 
 procedure TfrmMainMenu.SetNarrowMode(const Value: Boolean);
@@ -228,7 +228,7 @@ end;
 procedure TfrmMainMenu.btnMenuWebBrowserClick(Sender: TObject);
 begin
   inherited;
-  frmMain.OpenNewBrowserTab;
+  TfrmMain(MainForm).OpenNewBrowserTab;
   HideMenu;
 end;
 
@@ -244,7 +244,7 @@ end;
 procedure TfrmMainMenu.btnMenuTMDBClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmTMDBHome, -1, 0);
+  TabController(MainForm).CreateTab(TfrmTMDBHome, -1, 0);
   HideMenu;
 end;
 
@@ -258,7 +258,7 @@ end;
 procedure TfrmMainMenu.btnMenuAppSetupClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmAppSetup, -1, 0);
+  TabController(MainForm).CreateTab(TfrmAppSetup, -1, 0);
   HideMenu;
 end;
 
@@ -286,21 +286,21 @@ end;
 procedure TfrmMainMenu.btnMenuClockClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentClock, -1, 0);
+  TabController(MainForm).CreateTab(TfrmContentClock, -1, 0);
   HideMenu;
 end;
 
 procedure TfrmMainMenu.btnMenuFileBrowserClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmContentFileBrowser, -1, 0);
+  TabController(MainForm).CreateTab(TfrmContentFileBrowser, -1, 0);
   HideMenu;
 end;
 
 procedure TfrmMainMenu.btnMenuSystemMonitorClick(Sender: TObject);
 begin
   inherited;
-  TabController.CreateTab(TfrmJDSSysMonGaugesTest, -1, 0);
+  TabController(MainForm).CreateTab(TfrmJDSSysMonGaugesTest, -1, 0);
   HideMenu;
 end;
 

@@ -191,7 +191,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Open link in browser tab...
-        var F:= TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
         (F.Content as TfrmContentBrowser).Navigate(FDetail.Homepage);
       end);
     A('Popularity', FormatFloat('0.000', FDetail.Popularity));
@@ -201,7 +201,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Open image in browser tab...
-        var F:= TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
         var U:= TMDB.Client.GetImageURL(FDetail.ProfilePath);
         (F.Content as TfrmContentBrowser).Navigate(U);
       end);
@@ -459,7 +459,7 @@ end;
 function TfrmContentPersonDetail.EmbedFormIntoTab(AClass: TfrmTMDBCommonFormBaseClass;
   ATab: TTabSheet): TfrmTMDBCommonFormBase;
 begin
-  Result:= AClass.Create(ATab);
+  Result:= AClass.Create(ATab, MainForm);
   Result.Parent:= ATab;
   Result.BorderStyle:= bsNone;
   Result.Align:= alClient;
@@ -479,7 +479,7 @@ end;
 function TfrmContentPersonDetail.EmbedFormIntoTab(AClass: TfrmTMDBContentBaseClass;
   ATab: TTabSheet): TfrmTMDBContentBase;
 begin
-  Result:= AClass.Create(ATab);
+  Result:= AClass.Create(ATab, MainForm);
   Result.Parent:= ATab;
   Result.BorderStyle:= bsNone;
   Result.Align:= alClient;

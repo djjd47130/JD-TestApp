@@ -76,7 +76,7 @@ begin
     //TODO
   end;
   if U <> '' then begin
-    T:= TabController.CreateTab(TfrmContentBrowser);
+    T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
     (T.Content as TfrmContentBrowser).Navigate(U);
   end;
 end;
