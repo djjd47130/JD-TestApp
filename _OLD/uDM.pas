@@ -1,5 +1,13 @@
 unit uDM;
 
+(*
+  Global Data Module controlling entire application.
+  - Manages lifecycle of windows and tabs
+
+
+
+*)
+
 interface
 
 uses
@@ -7,19 +15,29 @@ uses
   System.SysUtils, System.Classes, Vcl.AppEvnts,
   JD.Favicons, System.ImageList,
   Vcl.Forms, Vcl.ImgList, Vcl.Controls,
-  uAppSetup;
+  uAppSetup,
+  JD.AppController.Intf, LMDCustomComponent, LMDWndProcComponent, LMDTrayIcon, Vcl.JumpList, System.Win.TaskbarCore,
+  Vcl.Taskbar, ElComponent, ElBaseComp, ElTray, Vcl.Menus;
 
 type
   TDM = class(TDataModule)
     imgFavicons16: TImageList;
     Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
+    ElTrayIcon1: TElTrayIcon;
+    PopupMenu1: TPopupMenu;
+    Show1: TMenuItem;
+    Show2: TMenuItem;
     procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
     procedure DataModuleCreate(Sender: TObject);
+    procedure Show2Click(Sender: TObject);
   private
-    { Private declarations }
+    //Global instance of app controller
+    FAppController: IJDAppController;
   public
-    { Public declarations }
+    procedure InitAppController;
+    procedure HandleCmdLine(const CmdLine: String);
+
   end;
 
 var
@@ -53,14 +71,29 @@ begin
   //  "DM" is a data module created before any other forms.
   //  It is responsible for managing the entirety of the app.
 
+  InitAppController;
+
+  //TEMPORARILY DISABLED
+  //HandleCmdLine(System.CmdLine);
 
 
-  //TODO: Handle command line...
+end;
+
+procedure TDM.HandleCmdLine(const CmdLine: String);
+begin
+
+  // Handle command line...
   var Cmd:= TCmdLine.Create;
   try
+    Cmd.AsString:= CmdLine;
 
     if Trim(Cmd.OpenFilename) <> '' then  begin
       //TODO: Open filename as URI...
+      frmMain.OpenNewBrowserTab(Cmd.OpenFilename);
+      //  Can't do this because frmMain isn't created yet!
+
+    end else begin
+      //TODO: Open new tab to default...
 
     end;
 
@@ -74,10 +107,25 @@ begin
 
     end;
 
+    if Cmd.Exists('kiosk', True) or Cmd.Exists('k', True) then begin
+      //TODO: Open window as full-screen kiosk mode...
+
+    end;
+
 
   finally
     Cmd.Free;
   end;
+end;
+
+procedure TDM.InitAppController;
+begin
+
+end;
+
+procedure TDM.Show2Click(Sender: TObject);
+begin
+  Application.Terminate;
 end;
 
 procedure TDM.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);

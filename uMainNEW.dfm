@@ -11,9 +11,6 @@ object frmMainNEW: TfrmMainNEW
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  DesignSize = (
-    771
-    464)
   PixelsPerInch = 96
   TextHeight = 13
   object pTop: TPanel
@@ -27,15 +24,14 @@ object frmMainNEW: TfrmMainNEW
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = -65
-    ExplicitWidth = 836
     object Tabs: TChromeTabs
       Left = 0
       Top = 0
       Width = 771
       Height = 35
+      OnButtonAddClick = TabsButtonAddClick
+      OnButtonCloseTabClick = TabsButtonCloseTabClick
       ActiveTabIndex = -1
-      Images = DM.imgFavicons16
       Options.Display.CloseButton.Offsets.Vertical = 7
       Options.Display.CloseButton.Offsets.Horizontal = -5
       Options.Display.CloseButton.Height = 16
@@ -362,7 +358,6 @@ object frmMainNEW: TfrmMainNEW
       Font.Style = [fsBold]
       ShowHint = True
       TabOrder = 0
-      ExplicitWidth = 836
     end
     object btnMenu: TJDFontButton
       Left = 0
@@ -413,8 +408,6 @@ object frmMainNEW: TfrmMainNEW
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 7
-    ExplicitHeight = 457
   end
   object Stat: TStatusBar
     Left = 0
@@ -425,8 +418,6 @@ object frmMainNEW: TfrmMainNEW
       item
         Width = 50
       end>
-    ExplicitLeft = -65
-    ExplicitWidth = 836
   end
   object pMenu: TPanel
     Tag = 1
@@ -440,56 +431,6 @@ object frmMainNEW: TfrmMainNEW
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 7
-    ExplicitHeight = 457
-  end
-  object btnDummy: TJDFontButton
-    AlignWithMargins = True
-    Left = 80
-    Top = 409
-    Width = 353
-    Height = 55
-    Margins.Left = 20
-    Margins.Top = 1
-    Margins.Right = 20
-    Margins.Bottom = 1
-    Anchors = [akLeft, akBottom]
-    DrawStyle = fdTransparent
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    Image.AutoSize = False
-    Image.Text = #61527
-    Image.Font.Charset = DEFAULT_CHARSET
-    Image.Font.Color = clWindowText
-    Image.Font.Height = -27
-    Image.Font.Name = 'FontAwesome'
-    Image.Font.Style = []
-    Image.Font.Quality = fqAntialiased
-    Image.StandardColor = fcRed
-    Overlay.Text = #57715
-    Overlay.Font.Charset = DEFAULT_CHARSET
-    Overlay.Font.Color = clWindowText
-    Overlay.Font.Height = -16
-    Overlay.Font.Name = 'FontAwesome'
-    Overlay.Font.Style = []
-    Overlay.Font.Quality = fqAntialiased
-    Overlay.Position = foNone
-    Overlay.Margin = 3
-    Margin = 6
-    ShowFocusRect = True
-    Spacing = 10
-    SubText = 'It is a dummy button for focus tricks.'
-    SubTextStyle = fsBelow
-    SubTextFont.Charset = DEFAULT_CHARSET
-    SubTextFont.Color = clGray
-    SubTextFont.Height = -16
-    SubTextFont.Name = 'Tahoma'
-    SubTextFont.Style = []
-    TabOrder = 4
-    Text = 'DO NOT HIDE THIS BUTTON'
   end
   object AppEvents: TApplicationEvents
     Left = 16

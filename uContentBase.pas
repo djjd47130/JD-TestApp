@@ -7,7 +7,9 @@ uses
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
 
-  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes;
+  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes
+  , JD.AppController.Intf
+  ;
 
 type
 
@@ -37,58 +39,39 @@ type
 
   TfrmContentBaseClass = class of TfrmContentBase;
 
-  TfrmContentBase = class(TForm)
+  TfrmContentBase = class(TForm, IJDAppContentBase)
   private
+    FOwner: IJDAppController;
     FMainForm: TForm;
+    FURI: String;
   protected
-    function GetTabCaption: String;
-    procedure SetTabCaption(const Value: String);
+
   public
+    { Methods from IJDAppTabRef }
+    function GetTabCaption: WideString; stdcall;
+    procedure SetTabCaption(const Value: WideString); stdcall;
+    function GetOwner: IJDAppController stdcall; reintroduce;
+    function GetParent: IJDAppWindow; stdcall;
+    function GetURI: WideString; stdcall;
+    function GetIndex: Integer; stdcall;
+    procedure RefreshData stdcall; virtual;
+    function CanClose: Boolean stdcall; virtual;
+    procedure Navigate(const URI: WideString = ''); stdcall;
+
+  public
+    //TODO: Pass instance of IJDAppController...
     constructor Create(AOwner: TComponent; AMainForm: TForm); reintroduce; virtual;
     destructor Destroy; override;
 
-    /// <summary>
-    /// Controls the caption of the tab and form simultaneously.
-    /// </summary>
-    property TabCaption: String read GetTabCaption write SetTabCaption;
-
-    /// <summary>
-    /// Virtual method to refresh any data within the form.
-    /// </summary>
-    procedure RefreshData; virtual;
-
-    /// <summary>
-    /// Virtual function to return whether the form is allowed to close.
-    /// </summary>
-    function CanClose: Boolean; virtual;
-
-
+    property TabCaption: WideString read GetTabCaption write SetTabCaption;
 
     //TODO: Favicons - #13
-    /// <summary>
-    /// Virtual function to return the image index associated with the tab.
-    /// </summary>
     function GetImageIndex: Integer; virtual;
 
-
-
-
     //TODO: Shell functions - #8
-    /// <summary>
-    /// Virtual function to return the shell root string.
-    /// </summary>
     class function GetShellRoot: String; virtual;
-
-    /// <summary>
-    /// Virtual function to return the shell path string.
-    /// </summary>
     class function GetShellPath: String; virtual;
-
-    /// <summary>
-    /// Virtual procedure to open a shell resource by its path.
-    /// </summary>
     class procedure ShellOpen(const Path: String); virtual;
-
 
     property MainForm: TForm read FMainForm;
 
@@ -198,13 +181,38 @@ begin
   //Override expected
 end;
 
-function TfrmContentBase.GetTabCaption: String;
+function TfrmContentBase.GetTabCaption: WideString;
 var
   T: TJDTabRef;
 begin
   T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     Result:= T.Caption;
+end;
+
+function TfrmContentBase.GetIndex: Integer;
+begin
+  //TODO
+end;
+
+function TfrmContentBase.GetOwner: IJDAppController;
+begin
+  Result:= FOwner;
+end;
+
+function TfrmContentBase.GetParent: IJDAppWindow;
+begin
+
+end;
+
+function TfrmContentBase.GetURI: WideString;
+begin
+  Result:= FURI;
+end;
+
+procedure TfrmContentBase.Navigate(const URI: WideString);
+begin
+
 end;
 
 function TfrmContentBase.CanClose: Boolean;
@@ -217,7 +225,7 @@ begin
 
 end;
 
-procedure TfrmContentBase.SetTabCaption(const Value: String);
+procedure TfrmContentBase.SetTabCaption(const Value: WideString);
 var
   T: TJDTabRef;
 begin

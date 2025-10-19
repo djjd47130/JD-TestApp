@@ -10,35 +10,40 @@ unit uMain;
     - Implement dragging tabs into new window
     - TTabController must be modified to account for multiple windows
   - Create "plugin" like concept
-  - Strip TMDB away into a separate layer
-  - Introduce other third-party API wrappers
+  - Strip TMDB away into a plugin
+  - Introduce other plugins
 
 *)
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.ImageList,
-  System.SysUtils, System.Variants, System.Classes, System.Types, System.UITypes,
+  Winapi.Windows, Winapi.Messages,
+
+  System.ImageList, System.SysUtils, System.Variants, System.Classes, System.Types, System.UITypes,
+
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.ComCtrls, Vcl.Menus, Vcl.ImgList, Vcl.AppEvnts,
 
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics, JD.Favicons,
   JD.TabController,
+  JD.AppController.Intf,
 
   uMainMenu,
 
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
 
   Vcl.Styles.Utils,
-  Vcl.Styles.Fixes, LMDDckSite;
+  Vcl.Styles.Fixes,
+
+  NG.Dialogs;
 
 const
-  MAIN_MENU_WIDTH_OPEN = 380;
-  MAIN_MENU_WIDTH_CLOSED = 70;
+  MAIN_MENU_WIDTH_OPEN = 320;
+  MAIN_MENU_WIDTH_CLOSED = 50;
 
 type
-  TfrmMain = class(TForm)
+  TfrmMain = class(TForm, IJDAppWindow)
     pTop: TPanel;
     pContent: TPanel;
     Stat: TStatusBar;
@@ -46,7 +51,6 @@ type
     btnMenu: TJDFontButton;
     Tabs: TChromeTabs;
     AppEvents: TApplicationEvents;
-    btnDummy: TJDFontButton;
     Panel1: TPanel;
     txtAddress: TEdit;
     btnGo: TJDFontButton;
@@ -55,16 +59,18 @@ type
     btnRefresh: TJDFontButton;
     btnFavorites: TJDFontButton;
     JDFontButton1: TJDFontButton;
+    NGTaskDialog1: TNGTaskDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure AppEventsHint(Sender: TObject);
+    procedure btnMenuClick(Sender: TObject);
     procedure TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
     procedure TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
       var Close: Boolean);
-    procedure btnMenuClick(Sender: TObject);
     procedure TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
-    procedure AppEventsHint(Sender: TObject);
     procedure TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
       var HintTimeout: Integer);
     procedure TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
@@ -72,6 +78,7 @@ type
       var TabDropOptions: TTabDropOptions);
     procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
   private
+    FAppController: IJDAppController;
     FTabController: TJDTabController;
     FMenu: TfrmMainMenu;
     FFullScreen: Boolean;
@@ -83,7 +90,18 @@ type
     procedure SetContentOnly(const Value: Boolean);
     procedure ProcessDroppedTab(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
+  protected
+    //From IJDAppWindow
+    function GetOwner: IJDAppController stdcall; reintroduce;
+    function GetTabCount: Integer stdcall;
+    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+
+    function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
+    procedure CloseTab(const TabIndex: Integer) stdcall;
+    function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;
   public
+    constructor Create(AOwner: TComponent; AAppController: IJDAppController); reintroduce; virtual;
+
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
     procedure ShowMenu(const Value: Boolean);
@@ -105,7 +123,7 @@ uses
   uContentBrowser,
   System.IOUtils,
   Vcl.Themes,
-  uDM;
+  uAppController;
 
 {$R *.dfm}
 
@@ -127,6 +145,12 @@ end;
 
 
 { TfrmMain }
+
+constructor TfrmMain.Create(AOwner: TComponent; AAppController: IJDAppController);
+begin
+  inherited Create(AOwner);
+  FAppController:= AAppController;
+end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
@@ -168,17 +192,25 @@ begin
   FMenu.Align:= alClient;
   FMenu.Show;
 
-  //Move dummy button out of view...
-  btnDummy.Left:= -50000;
-
+  //Give form its own taskbar icon...
   MakeFormIndependent(Self);
 
   FLoaded:= True;
 
+  //Force form to show...
+  Show;
+  BringToFront;
+  Application.ProcessMessages;
+
+  //TEMP: Handle commandline...
+  frmAppController.HandleCmdLine(System.CmdLine);
+
+  RegisterForm(Self);
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
+
   //Tabs
   FreeAndNil(FTabController);
 end;
@@ -189,10 +221,13 @@ begin
   Self.ShowMenu(True);
 end;
 
-function TfrmMain.MenuVisible: Boolean;
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  //Main Menu
-  Result:= pMenu.Tag = 1;
+  //If this is the last form, then terminate app...
+  UnregisterForm(Self);
+  Action:= caFree;
+  if RegisteredForms.Count = 0 then
+    Application.Terminate;
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -276,6 +311,15 @@ var
 begin
   //Tabs
 
+  //Dragged tab has been dropped somewhere - determine where and how to handle...
+  //Task #9
+  //Three scenarios:
+  //  - Within its original container - Default handling
+  //  - Within container in another window - Move tab and content to other window's tabs tabs
+  //  - Anywhere else - Move tab and content to new window
+
+  //TODO: Update below code to follow above rules...
+
   // Make sure that the drag drop hasn't been cancelled and that
   // we are not dropping on a TChromeTab control
   if (not Cancelled) and
@@ -287,19 +331,17 @@ begin
     WinY := Mouse.CursorPos.Y - DragTabObject.DragCursorOffset.Y - (Height - ClientHeight) + ((Width - ClientWidth) div 2);
 
     // Create a new form
-    NewForm := TfrmMain.Create(Application);
-
-    // Set the new form position
+    //TODO: Create from within tab handler...
+    NewForm := TfrmMain.Create(Application, nil); //TODO
     NewForm.Position := poDesigned;
     NewForm.Left := WinX;
     NewForm.Top := WinY;
-
-    // Show the form
     NewForm.Show;
 
-    // Remove the original tab
-    //TabDropOptions := [tdDeleteDraggedTab];
+    //TODO: Move content form and tab to new location...
+    //TabDropOptions := [tdDeleteDraggedTab]; //Tab controller already has its own delete method
     var OldTab:= TabController.Tabs[DragTabObject.DropTabIndex];
+    //TODO
     //NewForm.TabController.CreateTab()
     TabController.DeleteTab(OldTab.Index);
   end;
@@ -365,15 +407,6 @@ begin
       pMenu.Tag:= 0;
       pMenu.Width:= MAIN_MENU_WIDTH_CLOSED;
     end;
-    //Take focus away from everything...
-    try
-      if btnDummy.CanFocus and btnDummy.Visible then
-        btnDummy.SetFocus;
-    except
-      on E: Exception do begin
-
-      end;
-    end;
   finally
     Self.EnableAlign;
   end;
@@ -390,6 +423,43 @@ begin
       ShowMenu(False);
     end;
   end;
+end;
+
+function TfrmMain.GetOwner: IJDAppController;
+begin
+  Result:= FAppController;
+end;
+
+function TfrmMain.GetTab(const Index: Integer): IJDAppContentBase;
+begin
+  //TODO: Return reference to tab at given index...
+end;
+
+function TfrmMain.GetTabCount: Integer;
+begin
+  Result:= Tabs.Tabs.Count;
+end;
+
+function TfrmMain.MenuVisible: Boolean;
+begin
+  //Main Menu
+  Result:= pMenu.Tag = 1;
+end;
+
+function TfrmMain.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase;
+begin
+  //TODO: Move tab and content to destination...
+end;
+
+procedure TfrmMain.CloseTab(const TabIndex: Integer);
+begin
+  //TODO: Close the tab at given index...
+end;
+
+function TfrmMain.CreateNewTab(const URI: WideString): IJDAppWindow;
+begin
+  //TODO: Create new tab and navigate to URI...
+  //var F:= TabController.CreateTab()
 end;
 
 end.

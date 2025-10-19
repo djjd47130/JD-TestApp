@@ -14,13 +14,11 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poScreenCenter
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  DesignSize = (
-    836
-    544)
   PixelsPerInch = 96
   TextHeight = 13
   object pTop: TPanel
@@ -34,7 +32,6 @@ object frmMain: TfrmMain
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 888
     object Tabs: TChromeTabs
       Left = 0
       Top = 0
@@ -48,7 +45,7 @@ object frmMain: TfrmMain
       OnShowHint = TabsShowHint
       OnTabDragDrop = TabsTabDragDrop
       ActiveTabIndex = -1
-      Images = DM.imgFavicons16
+      Images = frmAppController.imgFavicons16
       Options.Display.CloseButton.Offsets.Vertical = 7
       Options.Display.CloseButton.Offsets.Horizontal = -5
       Options.Display.CloseButton.Height = 16
@@ -88,7 +85,7 @@ object frmMain: TfrmMain
       Options.Display.Tabs.OffsetRight = 0
       Options.Display.Tabs.OffsetBottom = 0
       Options.Display.Tabs.MinWidth = 50
-      Options.Display.Tabs.MaxWidth = 300
+      Options.Display.Tabs.MaxWidth = 250
       Options.Display.Tabs.TabWidthFromContent = False
       Options.Display.Tabs.PinnedWidth = 42
       Options.Display.Tabs.ImageOffsetLeft = 13
@@ -102,7 +99,7 @@ object frmMain: TfrmMain
       Options.Display.Tabs.ShowPinnedTabText = False
       Options.Display.TabContainer.TransparentBackground = True
       Options.Display.TabContainer.OverlayButtons = True
-      Options.Display.TabContainer.PaddingLeft = 70
+      Options.Display.TabContainer.PaddingLeft = 50
       Options.Display.TabContainer.PaddingRight = 5
       Options.Display.TabMouseGlow.Offsets.Vertical = 0
       Options.Display.TabMouseGlow.Offsets.Horizontal = 0
@@ -375,12 +372,11 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ShowHint = True
       TabOrder = 0
-      ExplicitTop = -3
     end
     object btnMenu: TJDFontButton
       Left = 0
       Top = 0
-      Width = 70
+      Width = 50
       Height = 34
       Cursor = crHandPoint
       Hint = 'Show / Hide Main Menu'
@@ -394,7 +390,7 @@ object frmMain: TfrmMain
       Image.Text = #61641
       Image.Font.Charset = DEFAULT_CHARSET
       Image.Font.Color = clWindowText
-      Image.Font.Height = -21
+      Image.Font.Height = -19
       Image.Font.Name = 'FontAwesome'
       Image.Font.Style = []
       Image.Font.Quality = fqAntialiased
@@ -415,6 +411,7 @@ object frmMain: TfrmMain
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
       TabOrder = 1
+      TabStop = False
       Text = ''
       OnClick = btnMenuClick
     end
@@ -427,9 +424,6 @@ object frmMain: TfrmMain
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 824
-    ExplicitTop = 35
-    ExplicitHeight = 461
   end
   object Stat: TStatusBar
     Left = 0
@@ -440,8 +434,6 @@ object frmMain: TfrmMain
       item
         Width = 50
       end>
-    ExplicitTop = 496
-    ExplicitWidth = 888
   end
   object pMenu: TPanel
     Tag = 1
@@ -455,57 +447,6 @@ object frmMain: TfrmMain
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 40
-    ExplicitHeight = 461
-  end
-  object btnDummy: TJDFontButton
-    AlignWithMargins = True
-    Left = 80
-    Top = 455
-    Width = 353
-    Height = 55
-    Margins.Left = 20
-    Margins.Top = 1
-    Margins.Right = 20
-    Margins.Bottom = 1
-    Anchors = [akLeft, akBottom]
-    DrawStyle = fdTransparent
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    Image.AutoSize = False
-    Image.Text = #61527
-    Image.Font.Charset = DEFAULT_CHARSET
-    Image.Font.Color = clWindowText
-    Image.Font.Height = -27
-    Image.Font.Name = 'FontAwesome'
-    Image.Font.Style = []
-    Image.Font.Quality = fqAntialiased
-    Image.StandardColor = fcRed
-    Overlay.Text = #57715
-    Overlay.Font.Charset = DEFAULT_CHARSET
-    Overlay.Font.Color = clWindowText
-    Overlay.Font.Height = -16
-    Overlay.Font.Name = 'FontAwesome'
-    Overlay.Font.Style = []
-    Overlay.Font.Quality = fqAntialiased
-    Overlay.Position = foNone
-    Overlay.Margin = 3
-    Margin = 6
-    ShowFocusRect = True
-    Spacing = 10
-    SubText = 'It is a dummy button for focus tricks.'
-    SubTextStyle = fsBelow
-    SubTextFont.Charset = DEFAULT_CHARSET
-    SubTextFont.Color = clGray
-    SubTextFont.Height = -16
-    SubTextFont.Name = 'Tahoma'
-    SubTextFont.Style = []
-    TabOrder = 4
-    Text = 'DO NOT HIDE THIS BUTTON'
-    ExplicitTop = 426
   end
   object Panel1: TPanel
     Left = 0
@@ -517,11 +458,8 @@ object frmMain: TfrmMain
     BevelKind = bkFlat
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 5
+    TabOrder = 4
     Visible = False
-    ExplicitLeft = -136
-    ExplicitTop = 0
-    ExplicitWidth = 754
     object txtAddress: TEdit
       AlignWithMargins = True
       Left = 102
@@ -572,7 +510,6 @@ object frmMain: TfrmMain
       SubTextFont.Style = []
       TabOrder = 4
       Text = 'btnGo'
-      ExplicitLeft = 658
     end
     object btnBack: TJDFontButton
       Left = 0
@@ -736,7 +673,6 @@ object frmMain: TfrmMain
       SubTextFont.Style = []
       TabOrder = 5
       Text = 'btnGo'
-      ExplicitLeft = 690
     end
     object JDFontButton1: TJDFontButton
       Left = 804
@@ -778,12 +714,44 @@ object frmMain: TfrmMain
       SubTextFont.Style = []
       TabOrder = 6
       Text = 'btnGo'
-      ExplicitLeft = 722
     end
   end
   object AppEvents: TApplicationEvents
     OnHint = AppEventsHint
-    Left = 16
-    Top = 96
+    Left = 176
+    Top = 120
+  end
+  object NGTaskDialog1: TNGTaskDialog
+    Buttons = [tcbCancel]
+    Caption = 'SPACEBALLS: The Test App'
+    CustomButtons = <
+      item
+        Caption = 'Continue'
+        Default = True
+        ElevationRequired = True
+      end>
+    ExpandButtonCaption = 'Unjam the Radar'
+    CollapseButtonCaption = 'Jam the Radar'
+    ExpandedInformation = 
+      'This is SPACEBALLS: The Dialog Box, a critical part of SPACEBALL' +
+      'S: The Test App. '
+    Flags = [tdfAllowDialogCancellation, tdfVerificationFlagChecked, tdfShowProgressBar]
+    FooterIcon = tdiShield
+    ProgressBar.Marquee = True
+    RadioButtons = <
+      item
+        Caption = 'Warp Speed'
+      end
+      item
+        Caption = 'Ludicrous Speed'
+        Default = True
+      end
+      item
+        Caption = 'Plaid'
+      end>
+    Title = 'SPACEBALLS: The Dialog Box'
+    VerificationText = 'I confirm that I am an asshole.'
+    Left = 176
+    Top = 168
   end
 end

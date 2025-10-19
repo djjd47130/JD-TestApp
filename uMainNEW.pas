@@ -3,9 +3,13 @@ unit uMainNEW;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.AppEvnts, Vcl.ComCtrls, JD.Common, JD.Ctrls,
-  JD.Ctrls.FontButton, ChromeTabs, Vcl.ExtCtrls,
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.AppEvnts,
+  Vcl.ComCtrls, Vcl.ExtCtrls,
+  JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
+  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
+
   JD.AppController.Intf;
 
 type
@@ -16,8 +20,9 @@ type
     pContent: TPanel;
     Stat: TStatusBar;
     pMenu: TPanel;
-    btnDummy: TJDFontButton;
     AppEvents: TApplicationEvents;
+    procedure TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
+    procedure TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab; var Close: Boolean);
   private
     FAppWindow: IJDAppWindow;
   public
@@ -34,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uDM;
+  uAppController;
 
 { TfrmMainNEW }
 
@@ -52,6 +57,17 @@ destructor TfrmMainNEW.Destroy;
 begin
 
   inherited;
+end;
+
+procedure TfrmMainNEW.TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
+begin
+  //Open new tab and navigate to default...
+
+end;
+
+procedure TfrmMainNEW.TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab; var Close: Boolean);
+begin
+  //
 end;
 
 end.

@@ -15,6 +15,8 @@ uses
 
 type
 
+
+
   TAppSetup = class(TObject)
   private
     FAppSetup: ISuperObject;
@@ -80,7 +82,7 @@ implementation
 uses
   uMain,
   System.IOUtils,
-  uDM;
+  uAppController;
 
 { TAppSetup }
 

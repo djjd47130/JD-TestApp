@@ -3,13 +3,17 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentBase, WebView2, Winapi.ActiveX,
-  Vcl.Edge, Vcl.StdCtrls, Vcl.ExtCtrls, JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
-  JD.TabController,
+  Winapi.Windows, Winapi.Messages, Winapi.ActiveX,
+  System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ComCtrls,
+  Vcl.Edge, Vcl.StdCtrls, Vcl.ExtCtrls,
+  uContentBase,
+  WebView2,
+  JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.TabController,
   ChromeTabsTypes,
   System.RegularExpressions,
-  System.NetEncoding, Vcl.ComCtrls;
+  System.NetEncoding;
 
 type
   TfrmContentBrowser = class(TfrmContentBase)
@@ -93,8 +97,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uDM,
-  uMain;
+  uMain, uAppController;
 
 function IsValidURLPath(const Input: string): Boolean;
 const
@@ -236,6 +239,7 @@ procedure TfrmContentBrowser.FormCreate(Sender: TObject);
 begin
   inherited;
   Edge.Align:= alClient;
+
   FInitialized:= False;
 end;
 
@@ -244,6 +248,7 @@ begin
   inherited;
   if not FInitialized then begin
     Edge.ReinitializeWebView;
+
     FInitialized:= True;
   end;
   UpdateHeader;
@@ -253,9 +258,9 @@ function TfrmContentBrowser.GetImageIndex: Integer;
 begin
   Result:= -1;
   try
-    var Ref:= DM.Favicons.GetFavicon(txtAddress.Text);
+    var Ref:= frmAppController.Favicons.GetFavicon(txtAddress.Text);
     if Assigned(Ref) then
-      Result:= DM.Favicons.GetFavicon(txtAddress.Text).ImageIndex;
+      Result:= frmAppController.Favicons.GetFavicon(txtAddress.Text).ImageIndex;
   except
     on E: Exception do begin
 

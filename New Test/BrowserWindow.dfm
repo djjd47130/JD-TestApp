@@ -1,355 +1,42 @@
-inherited frmContentMovieDetail: TfrmContentMovieDetail
-  Caption = 'Movie Detail'
-  ClientHeight = 498
-  ClientWidth = 919
+object FrmBrowserWindow: TFrmBrowserWindow
+  Left = 0
+  Top = 0
+  Caption = 'Multi-Process ChromeTabs Demo'
+  ClientHeight = 600
+  ClientWidth = 900
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ExplicitWidth = 935
-  ExplicitHeight = 537
   PixelsPerInch = 96
-  TextHeight = 18
-  object Pages: TPageControl
+  TextHeight = 13
+  object ChromeTabs: TChromeTabs
     Left = 0
-    Top = 35
-    Width = 919
-    Height = 434
-    ActivePage = TabSheet1
-    Align = alBottom
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    MultiLine = True
-    TabOrder = 0
-    Visible = False
-    OnChange = PagesChange
-    object TabSheet1: TTabSheet
-      Caption = 'Detail'
-      object Splitter1: TSplitter
-        Left = 0
-        Top = 245
-        Width = 911
-        Height = 7
-        Cursor = crVSplit
-        Align = alBottom
-        ResizeStyle = rsUpdate
-        ExplicitLeft = 3
-        ExplicitTop = 230
-      end
-      object txtOverview: TMemo
-        AlignWithMargins = True
-        Left = 3
-        Top = 255
-        Width = 905
-        Height = 120
-        Align = alBottom
-        BorderStyle = bsNone
-        Color = clBtnFace
-        ReadOnly = True
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
-      object lstDetail: TListView
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 905
-        Height = 239
-        Align = alClient
-        Columns = <
-          item
-            Caption = 'Name'
-            Width = 200
-          end
-          item
-            Caption = 'Value'
-            Width = 600
-          end>
-        HotTrackStyles = [htHandPoint, htUnderlineHot]
-        ReadOnly = True
-        RowSelect = True
-        ShowColumnHeaders = False
-        TabOrder = 1
-        ViewStyle = vsReport
-        OnCustomDraw = lstDetailCustomDraw
-        OnCustomDrawItem = lstDetailCustomDrawItem
-        OnCustomDrawSubItem = lstDetailCustomDrawSubItem
-        OnDblClick = lstDetailDblClick
-      end
-    end
-    object TabSheet2: TTabSheet
-      Caption = 'Account States'
-      ImageIndex = 1
-      object lblRating: TLabel
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 905
-        Height = 18
-        Align = alTop
-        AutoSize = False
-        Caption = 'Rating'
-        ExplicitTop = 123
-        ExplicitWidth = 693
-      end
-      object btnFavorite: TJDFontButton
-        AlignWithMargins = True
-        Left = 3
-        Top = 27
-        Width = 905
-        Height = 38
-        Cursor = crHandPoint
-        Align = alTop
-        DrawStyle = fdTransparent
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Image.AutoSize = False
-        Image.Text = #61578
-        Image.Font.Charset = DEFAULT_CHARSET
-        Image.Font.Color = clWindowText
-        Image.Font.Height = -21
-        Image.Font.Name = 'FontAwesome'
-        Image.Font.Style = []
-        Image.Font.Quality = fqAntialiased
-        Image.StandardColor = fcRed
-        Overlay.Text = #57715
-        Overlay.Font.Charset = DEFAULT_CHARSET
-        Overlay.Font.Color = clWindowText
-        Overlay.Font.Height = -7
-        Overlay.Font.Name = 'FontAwesome'
-        Overlay.Font.Style = []
-        Overlay.Font.Quality = fqAntialiased
-        Overlay.Position = foNone
-        Overlay.Margin = 3
-        Margin = 8
-        Spacing = 8
-        SubTextFont.Charset = DEFAULT_CHARSET
-        SubTextFont.Color = clGray
-        SubTextFont.Height = -11
-        SubTextFont.Name = 'Tahoma'
-        SubTextFont.Style = []
-        TabOrder = 0
-        Text = 'Add to Favorites'
-        OnClick = btnFavoriteClick
-      end
-      object btnWatchlist: TJDFontButton
-        AlignWithMargins = True
-        Left = 3
-        Top = 71
-        Width = 905
-        Height = 38
-        Cursor = crHandPoint
-        Align = alTop
-        DrawStyle = fdTransparent
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Image.AutoSize = False
-        Image.Text = #61591
-        Image.Font.Charset = DEFAULT_CHARSET
-        Image.Font.Color = clWindowText
-        Image.Font.Height = -21
-        Image.Font.Name = 'FontAwesome'
-        Image.Font.Style = []
-        Image.Font.Quality = fqAntialiased
-        Image.StandardColor = fcRed
-        Overlay.Text = #57715
-        Overlay.Font.Charset = DEFAULT_CHARSET
-        Overlay.Font.Color = clWindowText
-        Overlay.Font.Height = -7
-        Overlay.Font.Name = 'FontAwesome'
-        Overlay.Font.Style = []
-        Overlay.Font.Quality = fqAntialiased
-        Overlay.Position = foNone
-        Overlay.Margin = 3
-        Margin = 8
-        Spacing = 8
-        SubTextFont.Charset = DEFAULT_CHARSET
-        SubTextFont.Color = clGray
-        SubTextFont.Height = -11
-        SubTextFont.Name = 'Tahoma'
-        SubTextFont.Style = []
-        TabOrder = 1
-        Text = 'Add to Watchlist'
-        OnClick = btnWatchlistClick
-      end
-    end
-    object tabAltTitles: TTabSheet
-      Caption = 'Alternative Titles'
-      ImageIndex = 2
-      object lstAltTitles: TListView
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 905
-        Height = 372
-        Align = alClient
-        Columns = <
-          item
-            Caption = 'Title'
-            Width = 350
-          end
-          item
-            Caption = 'Country'
-            Width = 250
-          end>
-        HotTrackStyles = [htHandPoint, htUnderlineHot]
-        ReadOnly = True
-        RowSelect = True
-        TabOrder = 0
-        ViewStyle = vsReport
-      end
-    end
-    object tabChanges: TTabSheet
-      Caption = 'Changes'
-      ImageIndex = 3
-    end
-    object tabCredits: TTabSheet
-      Caption = 'Credits'
-      ImageIndex = 4
-    end
-    object TabSheet6: TTabSheet
-      Caption = 'External IDs'
-      ImageIndex = 5
-      object lstExternalIDs: TListView
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 905
-        Height = 372
-        Align = alClient
-        Columns = <
-          item
-            Caption = 'Name'
-            Width = 200
-          end
-          item
-            Caption = 'Value'
-            Width = 600
-          end>
-        HotTrackStyles = [htHandPoint, htUnderlineHot]
-        ReadOnly = True
-        RowSelect = True
-        TabOrder = 0
-        ViewStyle = vsReport
-      end
-    end
-    object tabImages: TTabSheet
-      Caption = 'Images'
-      ImageIndex = 6
-    end
-    object TabSheet8: TTabSheet
-      Caption = 'Keywords'
-      ImageIndex = 7
-      object lstKeywords: TListBox
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 326
-        Height = 372
-        Align = alLeft
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ItemHeight = 23
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
-    object TabSheet9: TTabSheet
-      Caption = 'Lists'
-      ImageIndex = 8
-    end
-    object TabSheet10: TTabSheet
-      Caption = 'Recommendations'
-      ImageIndex = 9
-    end
-    object tabReleaseDates: TTabSheet
-      Caption = 'Release Dates'
-      ImageIndex = 10
-      object lstReleaseDates: TListView
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 905
-        Height = 372
-        Align = alClient
-        BorderStyle = bsNone
-        Columns = <
-          item
-            Caption = 'Release Date'
-            Width = 130
-          end
-          item
-            Caption = 'Type'
-            Width = 180
-          end
-          item
-            Caption = 'Note'
-            Width = 150
-          end
-          item
-            Caption = 'Certification'
-            Width = 120
-          end
-          item
-            Caption = 'Descriptors'
-            Width = 200
-          end
-          item
-            Caption = 'Language'
-            Width = 150
-          end>
-        HotTrackStyles = [htHandPoint, htUnderlineHot]
-        GroupView = True
-        ReadOnly = True
-        RowSelect = True
-        TabOrder = 0
-        ViewStyle = vsReport
-      end
-    end
-    object tabReviews: TTabSheet
-      Caption = 'Reviews'
-      ImageIndex = 11
-    end
-    object tabSimilar: TTabSheet
-      Caption = 'Similar'
-      ImageIndex = 12
-    end
-    object TabSheet14: TTabSheet
-      Caption = 'Translations'
-      ImageIndex = 13
-    end
-    object tabVideos: TTabSheet
-      Caption = 'Videos'
-      ImageIndex = 14
-    end
-  end
-  object Tabs: TChromeTabs
-    Left = 0
-    Top = 469
-    Width = 919
-    Height = 29
-    OnActiveTabChanged = TabsActiveTabChanged
-    ActiveTabIndex = -1
+    Top = 0
+    Width = 900
+    Height = 36
+    OnActiveTabChanged = ChromeTabsActiveTabChanged
+    ActiveTabIndex = 0
     Options.Display.CloseButton.Offsets.Vertical = 7
-    Options.Display.CloseButton.Offsets.Horizontal = 0
-    Options.Display.CloseButton.Height = 14
-    Options.Display.CloseButton.Width = 14
+    Options.Display.CloseButton.Offsets.Horizontal = -5
+    Options.Display.CloseButton.Height = 16
+    Options.Display.CloseButton.Width = 16
     Options.Display.CloseButton.AutoHide = True
-    Options.Display.CloseButton.Visibility = bvNever
+    Options.Display.CloseButton.Visibility = bvAll
     Options.Display.CloseButton.AutoHideWidth = 20
     Options.Display.CloseButton.CrossRadialOffset = 4
     Options.Display.AddButton.Offsets.Vertical = 10
     Options.Display.AddButton.Offsets.Horizontal = 2
-    Options.Display.AddButton.Height = 16
-    Options.Display.AddButton.Width = 31
+    Options.Display.AddButton.Height = 17
+    Options.Display.AddButton.Width = 33
     Options.Display.AddButton.ShowPlusSign = True
-    Options.Display.AddButton.Visibility = avNone
+    Options.Display.AddButton.Visibility = avRightFloating
     Options.Display.AddButton.HorizontalOffsetFloating = -3
     Options.Display.ScrollButtonLeft.Offsets.Vertical = 10
     Options.Display.ScrollButtonLeft.Offsets.Horizontal = 1
@@ -374,13 +61,13 @@ inherited frmContentMovieDetail: TfrmContentMovieDetail
     Options.Display.Tabs.OffsetTop = 4
     Options.Display.Tabs.OffsetRight = 0
     Options.Display.Tabs.OffsetBottom = 0
-    Options.Display.Tabs.MinWidth = 30
-    Options.Display.Tabs.MaxWidth = 250
-    Options.Display.Tabs.TabWidthFromContent = True
+    Options.Display.Tabs.MinWidth = 50
+    Options.Display.Tabs.MaxWidth = 300
+    Options.Display.Tabs.TabWidthFromContent = False
     Options.Display.Tabs.PinnedWidth = 42
     Options.Display.Tabs.ImageOffsetLeft = 13
     Options.Display.Tabs.TextTrimType = tttFade
-    Options.Display.Tabs.Orientation = toBottom
+    Options.Display.Tabs.Orientation = toTop
     Options.Display.Tabs.BaseLineTabRegionOnly = False
     Options.Display.Tabs.WordWrap = False
     Options.Display.Tabs.TextAlignmentHorizontal = taLeftJustify
@@ -389,8 +76,8 @@ inherited frmContentMovieDetail: TfrmContentMovieDetail
     Options.Display.Tabs.ShowPinnedTabText = False
     Options.Display.TabContainer.TransparentBackground = True
     Options.Display.TabContainer.OverlayButtons = True
-    Options.Display.TabContainer.PaddingLeft = 0
-    Options.Display.TabContainer.PaddingRight = 0
+    Options.Display.TabContainer.PaddingLeft = 70
+    Options.Display.TabContainer.PaddingRight = 5
     Options.Display.TabMouseGlow.Offsets.Vertical = 0
     Options.Display.TabMouseGlow.Offsets.Horizontal = 0
     Options.Display.TabMouseGlow.Height = 200
@@ -412,7 +99,7 @@ inherited frmContentMovieDetail: TfrmContentMovieDetail
     Options.Display.TabSpinners.Download.SweepAngle = 135
     Options.Display.TabSpinners.AnimationUpdateMS = 50
     Options.Display.TabSpinners.HideImagesWhenSpinnerVisible = True
-    Options.DragDrop.DragType = dtNone
+    Options.DragDrop.DragType = dtBetweenContainers
     Options.DragDrop.DragOutsideImageAlpha = 220
     Options.DragDrop.DragOutsideDistancePixels = 30
     Options.DragDrop.DragStartPixels = 20
@@ -451,14 +138,25 @@ inherited frmContentMovieDetail: TfrmContentMovieDetail
     Options.Behaviour.CloseOnWheel = True
     Options.Behaviour.IgnoreDoubleClicksWhileAnimatingMovement = True
     Options.Scrolling.Enabled = True
-    Options.Scrolling.ScrollButtons = csbRight
+    Options.Scrolling.ScrollButtons = csbLeft
     Options.Scrolling.ScrollStep = 20
     Options.Scrolling.ScrollRepeatDelay = 20
     Options.Scrolling.AutoHideButtons = True
     Options.Scrolling.DragScroll = True
     Options.Scrolling.DragScrollOffset = 50
     Options.Scrolling.MouseWheelScroll = True
-    Tabs = <>
+    Tabs = <
+      item
+        Active = True
+        Tag = 0
+        ImageIndex = -1
+        ImageIndexOverlay = -1
+        Pinned = False
+        Visible = True
+        Modified = False
+        SpinnerState = tssNone
+        HideCloseButton = False
+      end>
     LookAndFeel.TabsContainer.StartColor = 14586466
     LookAndFeel.TabsContainer.StopColor = 13201730
     LookAndFeel.TabsContainer.StartAlpha = 255
@@ -654,13 +352,16 @@ inherited frmContentMovieDetail: TfrmContentMovieDetail
     LookAndFeel.ScrollButtons.Arrow.Disabled.OutlineColor = clGray
     LookAndFeel.ScrollButtons.Arrow.Disabled.OutlineSize = 1.000000000000000000
     LookAndFeel.ScrollButtons.Arrow.Disabled.OutlineAlpha = 200
-    Align = alBottom
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWhite
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ShowHint = True
+    Align = alTop
+    TabOrder = 0
+  end
+  object BtnNewTab: TButton
+    Left = 820
+    Top = 40
+    Width = 75
+    Height = 25
+    Caption = 'New Tab'
     TabOrder = 1
+    OnClick = BtnNewTabClick
   end
 end

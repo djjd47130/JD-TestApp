@@ -45,6 +45,9 @@ type
     btnMenuCalendar: TJDFontButton;
     btnMenuRESTClient: TJDFontButton;
     btnMenuWeatherUnderground: TJDFontButton;
+    JDFontButton1: TJDFontButton;
+    JDFontButton2: TJDFontButton;
+    JDFontButton3: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure btnMenuAppSetupClick(Sender: TObject);
     procedure CategoryPanelGroup1MouseWheelDown(Sender: TObject;
@@ -126,7 +129,7 @@ end;
 
 procedure TfrmMainMenu.SetNarrowMode(const Value: Boolean);
 const
-  BTN_HEIGHT = 38;
+  BTN_HEIGHT = 32;
 var
   X, Y: Integer;
   P: TPanel;
@@ -154,11 +157,12 @@ begin
           B:= C as TJDFontButton;
 
           B.Height:= BTN_HEIGHT;
-          B.Font.Size:= 14;
+          B.Font.Size:= 11;
           B.Margins.Top:= 0;
           B.Margins.Bottom:= 0;
+          B.TabStop:= False;
 
-          B.Image.Font.Size:= 24;
+          B.Image.Font.Size:= 15;
 
           B.ShowHint:= True;
           B.Hint:= B.Text;
@@ -178,7 +182,7 @@ begin
         end;
       end;
       if Value then begin
-        P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + 2; // 20;
+        P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + 2;
       end else begin
         P.ClientHeight:= ((P.ControlCount-1) * BTN_HEIGHT) + L.Height + 10;
       end;

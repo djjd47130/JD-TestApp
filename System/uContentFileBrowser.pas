@@ -6,14 +6,21 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentBase, VirtualTrees.BaseAncestorVCL, VirtualTrees.BaseTree,
   VirtualTrees.AncestorVCL, VirtualTrees,
-  System.IOUtils, Vcl.ExtCtrls;
+  System.IOUtils, Vcl.ExtCtrls, JD.Common, JD.Ctrls, JD.Ctrls.FontButton, Vcl.StdCtrls;
 
 type
   TfrmContentFileBrowser = class(TfrmContentBase)
-    VirtualStringTree1: TVirtualStringTree;
-    Panel1: TPanel;
+    tvTree: TVirtualStringTree;
     Splitter1: TSplitter;
     pMain: TPanel;
+    pTop: TPanel;
+    txtAddress: TEdit;
+    btnGo: TJDFontButton;
+    btnBack: TJDFontButton;
+    btnForward: TJDFontButton;
+    btnRefresh: TJDFontButton;
+    btnFavorites: TJDFontButton;
+    btnMenu: TJDFontButton;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

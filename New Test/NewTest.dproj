@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{14CBD183-CAD1-410B-A30C-43A04511085A}</ProjectGuid>
+        <ProjectGuid>{583043EB-AAC4-4A33-9346-7CD58F51A34C}</ProjectGuid>
         <ProjectVersion>19.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>JDTestApp.dpr</MainSource>
+        <MainSource>NewTest.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -57,14 +57,10 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>JDTestApp</SanitizedProjectName>
-        <Custom_Styles>&quot;Windows10 Dark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Dark.vsf&quot;;&quot;Windows10 DarkGray|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10DarkGray.vsf&quot;;&quot;Windows10 SlateGray|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10SlateGray.vsf&quot;;Carbon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Carbon.vsf;&quot;Cobalt XEMedia|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CobaltXEMedia.vsf&quot;;Light|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Light.vsf;&quot;Lime Graphite|VCLSTYLE|$(BDSCOMMONDIR)\Styles\LimeGraphite.vsf&quot;</Custom_Styles>
-        <DCC_Define>USE_INTF;$(DCC_Define)</DCC_Define>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <SanitizedProjectName>NewTest</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;vclactnband;vclFireDAC;OpenWireBindingPkg;bindcompvclsmp;tethering;svnui;Mitov_VCL_BasicLab;JDLibComponents;FireDACADSDriver;OpenWireEditorPkg;OpenWireBindingFmxPkg;JDGamesComps;vcltouch;AudioLabEssentialPkg;vcldb;bindcompfmx;svn;inetdb;RaizeComponentsVcl;OpenWireEditorBasicPkg;FmxTeeUI;RaizeComponentsVclDb;fmx;FireDACIBDriver;fmxdae;MSICS_RAD21_Rtl;vcledge;Mitov_VCL_AudioLab;dwsLibRuntime;dbexpress;IndyCore;TextLabBasicPkg;vclx;dsnap;Mitov_VCL_AudioLab_Essential;FireDACCommon;TimingLabBasicPkg;RESTBackendComponents;QR506RunDXE10;VCLRESTComponents;soapserver;JclDeveloperTools;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;FireDACCommonODBC;FireDACCommonDriver;Mitov_BasicLab;SignalLabScopePkg;LockBoxDR;inet;bindcompdbx;OpenWirePkg;IndyIPCommon;vcl;IndyIPServer;MediaLabBasicPkg;IndySystem;OpenWireStudioAudioHostPkg;dsnapcon;FireDACMSAccDriver;fmxFireDAC;JDCardComponents;vclimg;TeeDB;FireDAC;Jcl;Mitov_Runtime;OpenWireStudioHostPkg;MiTeC_Common_RAD21;FireDACSqliteDriver;FireDACPgDriver;ChromeTabs_R;FMXTee;soaprtl;DbxCommonDriver;OpenWireBindingDatabasePkg;Tee;Mitov_VCL_AudioLab_Basic;xmlrtl;soapmidas;fmxobj;vclwinx;rtl;DbxClientDriver;CustomIPTransport;vcldsnap;SignalLabBasicPkg;AudioLabBasicPkg;MediaLabPkg;WMI_PKG;SignalLabAdditionalPkg;bindcomp;appanalytics;Mitov_VCL_Runtime;AudioLabPkg;IndyIPClient;bindcompvcl;SynEdit_R;TeeUI;dbxcds;VclSmp;OpenWireBindingVclPkg;adortl;AudioLabGenericBasicPkg;SignalLabGenericBasicPkg;JclVcl;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;JDTMDBLib;JclContainers;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;Mitov_VCL_VideoLab;ngcgoogle18svc;vclactnband;vclFireDAC;OpenWireBindingPkg;tethering;lmdrtplugin;JDLibComponents;FireDACADSDriver;OpenWireEditorPkg;vcltouch;AudioLabEssentialPkg;ngcgoogle12svc;vcldb;lmdrtchartdb;svn;ngcgoogle11svc;ngcgoogle8svc;Mitov_FMX_BasicLab;OpenWireEditorBasicPkg;MSICS_RAD21_Rtl;lmdrtdialog;lmdrttools;dwsLibRuntime;lmdrtrtf;ngcgoogle5svc;htmlcomp_xe104;vclx;lmdrtelpro;lmdrtide;TimingLabBasicPkg;RESTBackendComponents;ngcgoogle10svc;VCLRESTComponents;ngcgoogle13svc;vclie;bindengine;CloudService;FireDACMySQLDriver;SignalLabScopePkg;bindcompdbx;IndyIPServer;lmdrttoolsdb;IndySystem;ngcruntime;OpenWireStudioAudioHostPkg;Mitov_FMX_Windows_VideoLab_Basic;dsnapcon;Mitov_VCL_VideoLab_Basic;VirtualTreesR;FireDACMSAccDriver;fmxFireDAC;JDCardComponents;vclimg;lmdrtchart;Jcl;OpenWireStudioHostPkg;MiTeC_Common_RAD21;ngcgoogle19svc;VideoLabPkg;nghtml;ngcgoogle4svc;ngvldtctrls;ngcgoogle9svc;ngcgoogle;FMXTee;ngdragdrop;soaprtl;DbxCommonDriver;Mitov_VCL_AudioLab_Basic;xmlrtl;soapmidas;ngcgoogle17svc;fmxobj;VideoLabBasicPkg;ngcboxnet;rtl;DbxClientDriver;VideoLabAdditionalPkg;SignalLabBasicPkg;Mitov_VCL_VideoLab_Additional;WMI_PKG;lmdrtprint;appanalytics;Mitov_VCL_Runtime;lmdrtdocking;IndyIPClient;bindcompvcl;lmdrtsyntax;TeeUI;AudioLabGenericBasicPkg;VclSmp;OpenWireBindingVclPkg;JclVcl;lmdrtscriptimp;JDTestAppComponents;lmdrtshell;FMX_VideoLabBasicPkg;lmdrtstorage;lmdrtweb;RESTComponents;lmdrtsearch;DBXInterBaseDriver;htmlcompfm_xe104;bindcompvclsmp;svnui;Mitov_VCL_BasicLab;lmdrtl;OpenWireBindingFmxPkg;JDGamesComps;ngcgoogle14svc;XSuperObjectLib;lmdrtbar;bindcompfmx;lmdrteldb;inetdb;RaizeComponentsVcl;ngcgoogle3svc;FmxTeeUI;RaizeComponentsVclDb;OpenWireStudioVideoHostPkg;fmx;FireDACIBDriver;fmxdae;vcledge;Mitov_VCL_AudioLab;dbexpress;IndyCore;lmdrtdesign;ngvalidators;TextLabBasicPkg;dsnap;Mitov_VCL_AudioLab_Essential;lmdrtrtlx;FireDACCommon;lmdrtgrid;ngdialogs;lmdrtelcore;QR506RunDXE10;soapserver;ngcgoogle2svc;JclDeveloperTools;ngcgoogle7svc;lmdrtinspector;lmdrtfx;DBXMySQLDriver;htmlreports_xe104;lmdrtsearchdb;FireDACCommonODBC;FireDACCommonDriver;Mitov_BasicLab;LockBoxDR;inet;lmdrtspell;htmleditcore_xe104;OpenWirePkg;IndyIPCommon;vcl;MediaLabBasicPkg;ngcgoogle1svc;lmdrtsys;ngcgoogle6svc;TeeDB;FireDAC;Mitov_Runtime;ngcdropbox;ngcommon;FireDACSqliteDriver;FireDACPgDriver;ChromeTabs_R;OpenWireBindingDatabasePkg;Tee;lmdrtscript;vclwinx;lmdrtrtfdb;ngcgoogle15svc;htmledit_xe104;CustomIPTransport;vcldsnap;MediaLabPkg;AudioLabBasicPkg;SignalLabAdditionalPkg;bindcomp;AudioLabPkg;SynEdit_R;dbxcds;adortl;htmleditfm_xe104;SignalLabGenericBasicPkg;ngcwrappers;hclcore_xe104;JDVST;VideoLabGenericBasicPkg;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;ngcgoogle16svc;JDTMDBLib;JclContainers;lmdrtcore;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -73,10 +69,11 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;vclactnband;vclFireDAC;OpenWireBindingPkg;bindcompvclsmp;tethering;Mitov_VCL_BasicLab;JDLibComponents;FireDACADSDriver;OpenWireEditorPkg;OpenWireBindingFmxPkg;vcltouch;AudioLabEssentialPkg;vcldb;bindcompfmx;inetdb;RaizeComponentsVcl;OpenWireEditorBasicPkg;FmxTeeUI;RaizeComponentsVclDb;fmx;FireDACIBDriver;fmxdae;vcledge;Mitov_VCL_AudioLab;dbexpress;IndyCore;TextLabBasicPkg;vclx;dsnap;Mitov_VCL_AudioLab_Essential;FireDACCommon;TimingLabBasicPkg;RESTBackendComponents;QR506RunDXE10;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACMySQLDriver;FireDACCommonODBC;FireDACCommonDriver;Mitov_BasicLab;SignalLabScopePkg;LockBoxDR;inet;bindcompdbx;OpenWirePkg;IndyIPCommon;vcl;IndyIPServer;MediaLabBasicPkg;IndySystem;OpenWireStudioAudioHostPkg;dsnapcon;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;Mitov_Runtime;OpenWireStudioHostPkg;FireDACSqliteDriver;FireDACPgDriver;ChromeTabs_R;FMXTee;soaprtl;DbxCommonDriver;OpenWireBindingDatabasePkg;Tee;Mitov_VCL_AudioLab_Basic;xmlrtl;soapmidas;fmxobj;vclwinx;rtl;DbxClientDriver;CustomIPTransport;vcldsnap;SignalLabBasicPkg;AudioLabBasicPkg;MediaLabPkg;SignalLabAdditionalPkg;bindcomp;appanalytics;Mitov_VCL_Runtime;AudioLabPkg;IndyIPClient;bindcompvcl;SynEdit_R;TeeUI;dbxcds;VclSmp;OpenWireBindingVclPkg;adortl;AudioLabGenericBasicPkg;SignalLabGenericBasicPkg;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;Mitov_VCL_VideoLab;ngcgoogle18svc;vclactnband;vclFireDAC;OpenWireBindingPkg;tethering;lmdrtplugin;JDLibComponents;FireDACADSDriver;OpenWireEditorPkg;vcltouch;AudioLabEssentialPkg;ngcgoogle12svc;vcldb;lmdrtchartdb;ngcgoogle11svc;ngcgoogle8svc;Mitov_FMX_BasicLab;OpenWireEditorBasicPkg;lmdrtdialog;lmdrttools;lmdrtrtf;ngcgoogle5svc;vclx;lmdrtelpro;lmdrtide;TimingLabBasicPkg;RESTBackendComponents;ngcgoogle10svc;VCLRESTComponents;ngcgoogle13svc;vclie;bindengine;CloudService;FireDACMySQLDriver;SignalLabScopePkg;bindcompdbx;IndyIPServer;lmdrttoolsdb;IndySystem;ngcruntime;OpenWireStudioAudioHostPkg;Mitov_FMX_Windows_VideoLab_Basic;dsnapcon;Mitov_VCL_VideoLab_Basic;VirtualTreesR;FireDACMSAccDriver;fmxFireDAC;vclimg;lmdrtchart;OpenWireStudioHostPkg;ngcgoogle19svc;VideoLabPkg;nghtml;ngcgoogle4svc;ngvldtctrls;ngcgoogle9svc;ngcgoogle;FMXTee;ngdragdrop;soaprtl;DbxCommonDriver;Mitov_VCL_AudioLab_Basic;xmlrtl;soapmidas;ngcgoogle17svc;fmxobj;VideoLabBasicPkg;ngcboxnet;rtl;DbxClientDriver;VideoLabAdditionalPkg;SignalLabBasicPkg;Mitov_VCL_VideoLab_Additional;lmdrtprint;appanalytics;Mitov_VCL_Runtime;lmdrtdocking;IndyIPClient;bindcompvcl;lmdrtsyntax;TeeUI;AudioLabGenericBasicPkg;VclSmp;OpenWireBindingVclPkg;lmdrtscriptimp;lmdrtshell;FMX_VideoLabBasicPkg;lmdrtstorage;lmdrtweb;RESTComponents;lmdrtsearch;DBXInterBaseDriver;bindcompvclsmp;Mitov_VCL_BasicLab;lmdrtl;OpenWireBindingFmxPkg;ngcgoogle14svc;lmdrtbar;bindcompfmx;lmdrteldb;inetdb;RaizeComponentsVcl;ngcgoogle3svc;FmxTeeUI;RaizeComponentsVclDb;OpenWireStudioVideoHostPkg;fmx;FireDACIBDriver;fmxdae;vcledge;Mitov_VCL_AudioLab;dbexpress;IndyCore;lmdrtdesign;ngvalidators;TextLabBasicPkg;dsnap;Mitov_VCL_AudioLab_Essential;lmdrtrtlx;FireDACCommon;lmdrtgrid;ngdialogs;lmdrtelcore;QR506RunDXE10;soapserver;ngcgoogle2svc;ngcgoogle7svc;lmdrtinspector;lmdrtfx;DBXMySQLDriver;lmdrtsearchdb;FireDACCommonODBC;FireDACCommonDriver;Mitov_BasicLab;LockBoxDR;inet;lmdrtspell;OpenWirePkg;IndyIPCommon;vcl;MediaLabBasicPkg;ngcgoogle1svc;lmdrtsys;ngcgoogle6svc;TeeDB;FireDAC;Mitov_Runtime;ngcdropbox;ngcommon;FireDACSqliteDriver;FireDACPgDriver;ChromeTabs_R;OpenWireBindingDatabasePkg;Tee;lmdrtscript;vclwinx;lmdrtrtfdb;ngcgoogle15svc;CustomIPTransport;vcldsnap;MediaLabPkg;AudioLabBasicPkg;SignalLabAdditionalPkg;bindcomp;AudioLabPkg;SynEdit_R;dbxcds;adortl;htmleditfm_xe104;SignalLabGenericBasicPkg;ngcwrappers;VideoLabGenericBasicPkg;dsnapxml;dbrtl;IndyProtocols;inetdbxpress;ngcgoogle16svc;lmdrtcore;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <DCC_Optimize>false</DCC_Optimize>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
@@ -86,8 +83,6 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Icon_MainIcon>JDTestApp_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -98,209 +93,16 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Icon_MainIcon>JDTestApp_Icon1.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uAppController.pas">
-            <Form>frmAppController</Form>
+        <DCCReference Include="AppController.pas"/>
+        <DCCReference Include="BrowserWindow.pas">
+            <Form>frmBrowserWindow</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uMain.pas">
-            <Form>frmMain</Form>
-        </DCCReference>
-        <DCCReference Include="uMainNEW.pas">
-            <Form>frmMainNEW</Form>
-        </DCCReference>
-        <DCCReference Include="uContentBase.pas">
-            <Form>frmContentBase</Form>
-        </DCCReference>
-        <DCCReference Include="uContentPageBase.pas">
-            <Form>frmContentPageBase</Form>
-        </DCCReference>
-        <DCCReference Include="uContentListBase.pas">
-            <Form>frmContentListBase</Form>
-        </DCCReference>
-        <DCCReference Include="JD.TabController.pas"/>
-        <DCCReference Include="uMainMenu.pas">
-            <Form>frmMainMenu</Form>
-        </DCCReference>
-        <DCCReference Include="uAppSetup.pas">
-            <Form>frmAppSetup</Form>
-        </DCCReference>
-        <DCCReference Include="uContentBrowser.pas">
-            <Form>frmContentBrowser</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDB.pas">
-            <Form>dmTMDB</Form>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBContentBase.pas">
-            <Form>frmTMDBContentBase</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBHome.pas">
-            <Form>frmTMDBHome</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBSetup.pas">
-            <Form>frmTMDBSetup</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBCommonFormBase.pas">
-            <Form>frmTMDBCommonFormBase</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBListItem.pas">
-            <Form>frmTMDBListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBMovieListItem.pas">
-            <Form>frmTMDBMovieListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonChipList.pas">
-            <Form>frmCommonChipList</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonImages.pas">
-            <Form>frmCommonImages</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonCredits.pas">
-            <Form>frmCommonCredits</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonReviews.pas">
-            <Form>frmCommonReviews</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonPersonCredits.pas">
-            <Form>frmCommonPersonCredits</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonVideos.pas">
-            <Form>frmCommonVideos</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonAlternativeTitles.pas">
-            <Form>frmCommonAlternativeTitles</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonChanges.pas">
-            <Form>frmContentChanges</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonCollapsePanel.pas">
-            <Form>frmCommonCollapsePanel</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Certifications\uContentCertsMovies.pas">
-            <Form>frmContentCertsMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Certifications\uContentCertsTV.pas">
-            <Form>frmContentCertsTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Changes\uContentChangesMovies.pas">
-            <Form>frmContentChangesMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigCountries.pas">
-            <Form>frmContentConfigCountries</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigJobs.pas">
-            <Form>frmContentConfigJobs</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigLanguages.pas">
-            <Form>frmContentConfigLanguages</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigTimezones.pas">
-            <Form>frmContentConfigTimezones</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Discover\uContentDiscoverMovies.pas"/>
-        <DCCReference Include="TMDB\Movies\uContentMovieDetail.pas">
-            <Form>frmContentMovieDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Movies\uContentMoviePage.pas">
-            <Form>frmContentMoviePage</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Genres\uContentGenresMovie.pas">
-            <Form>frmContentGenresMovie</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Genres\uContentGenresTV.pas">
-            <Form>frmContentGenresTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\People\uContentPersonDetail.pas">
-            <Form>frmContentPersonDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchCollections.pas">
-            <Form>frmContentSearchCollections</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchCompanies.pas">
-            <Form>frmContentSearchCompanies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchKeywords.pas">
-            <Form>frmContentSearchKeywords</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchMovies.pas">
-            <Form>frmContentSearchMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchMulti.pas">
-            <Form>frmContentSearchMulti</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchPeople.pas">
-            <Form>frmContentSearchPeople</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchTV.pas">
-            <Form>frmContentSearchTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\TVSeries\uContentTVPage.pas">
-            <Form>frmContentTVPage</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\TVSeries\uContentTVSerieDetail.pas">
-            <Form>frmContentTVSerieDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBLoginBrowser.pas">
-            <Form>frmTMDBLoginBrowser</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Movies\uTMDBVertMovieListItem.pas">
-            <Form>frmTMDBVertMovieListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uTMDBSearch.pas">
-            <Form>frmTMDBSearch</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uTMDBSearchListItem.pas">
-            <Form>frmTMDBSearchListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Collections\uTMDBContentCollectionDetail.pas">
-            <Form>frmTMDBContentCollectionDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\WatchProviders\uTMDBWatchProviderPage.pas">
-            <Form>frmTMDBWatchProviderPage</Form>
-        </DCCReference>
-        <DCCReference Include="Plugins\uContentPluginBase.pas">
-            <Form>frmContentPluginBase</Form>
-        </DCCReference>
-        <DCCReference Include="JDSysMon\uJDSysMonGaugesTest.pas">
-            <Form>frmJDSSysMonGaugesTest</Form>
-        </DCCReference>
-        <DCCReference Include="General\uContentClock.pas">
-            <Form>frmContentClock</Form>
-        </DCCReference>
-        <DCCReference Include="System\uContentFileBrowser.pas">
-            <Form>frmContentFileBrowser</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uListItemBase.pas">
-            <Form>ListItemBase</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uSwitchListItem.pas">
-            <Form>ListSwitchItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uComboListItem.pas">
-            <Form>ComboListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="JD.ListController.pas"/>
-        <DCCReference Include="Plugins\JD.Plugins.Intf.pas"/>
-        <DCCReference Include="JD.PluginManager.pas"/>
-        <DCCReference Include="Plugins\JD.Plugins.Impl.pas"/>
-        <DCCReference Include="JD.AppController.Intf.pas"/>
-        <DCCReference Include="JD.CmdLine.pas"/>
-        <DCCReference Include="JD.AppController.Impl.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -319,22 +121,13 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">JDTestApp.dpr</Source>
+                    <Source Name="MainSource">NewTest.dpr</Source>
                 </Source>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\XSuperObjectLib.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\JDWordGridComps.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\dclJDUOMLib.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\WINDOWS\system32\FMX_MediaLabBasicDsn270.bpl">Mitov - FireMonkey MediaLab Basic Design Package</Excluded_Packages>
-                    <Excluded_Packages Name="C:\WINDOWS\system32\FMX_SignalLabScopeDsn270.bpl">Mitov - FireMonkey SignalLab Scope Design Package</Excluded_Packages>
-                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\JDTestApp.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\NewTest.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>JDTestApp.exe</RemoteName>
+                        <RemoteName>NewTest.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

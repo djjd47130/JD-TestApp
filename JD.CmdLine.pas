@@ -5,7 +5,7 @@ unit JD.CmdLine;
   by Jerry Dodge
 
   Class: TCmdLine
-  - Parses out a command line into individual name/value pairs
+  - Parses out a cmd line params into individual name/value pairs
   - Concatenates name/value pairs into a command line string
   - Property "ModuleFilename" for the current executable path
   - Property "OpenFilename" for the file to be opened, if any
@@ -33,7 +33,15 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+
+    /// <summary>
+    /// Returns the number of parameters.
+    /// </summary>
     function Count: Integer;
+
+    /// <summary>
+    /// Returns whether a given parameter exists.
+    /// </summary>
     function Exists(const N: String; const IgnoreCase: Boolean = False): Boolean;
     property ModuleFilename: String read FModuleFilename write SetModuleFilename;
     property OpenFilename: String read FOpenFilename write SetOpenFilename;

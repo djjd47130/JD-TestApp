@@ -15,6 +15,9 @@
         <Projects Include="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="New Test\NewTest.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="ChromeTabsDemoDX10_4:Make">
         <MSBuild Projects="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj" Targets="Make"/>
     </Target>
+    <Target Name="NewTest">
+        <MSBuild Projects="New Test\NewTest.dproj"/>
+    </Target>
+    <Target Name="NewTest:Clean">
+        <MSBuild Projects="New Test\NewTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NewTest:Make">
+        <MSBuild Projects="New Test\NewTest.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="JDTestApp;JDTestAppComponents;JDClock;ChromeTabsDemoDX10_4"/>
+        <CallTarget Targets="JDTestApp;JDTestAppComponents;JDClock;ChromeTabsDemoDX10_4;NewTest"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="JDTestApp:Clean;JDTestAppComponents:Clean;JDClock:Clean;ChromeTabsDemoDX10_4:Clean"/>
+        <CallTarget Targets="JDTestApp:Clean;JDTestAppComponents:Clean;JDClock:Clean;ChromeTabsDemoDX10_4:Clean;NewTest:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="JDTestApp:Make;JDTestAppComponents:Make;JDClock:Make;ChromeTabsDemoDX10_4:Make"/>
+        <CallTarget Targets="JDTestApp:Make;JDTestAppComponents:Make;JDClock:Make;ChromeTabsDemoDX10_4:Make;NewTest:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

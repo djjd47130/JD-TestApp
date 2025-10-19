@@ -25,7 +25,6 @@ inherited frmContentBrowser: TfrmContentBrowser
     OnNavigationCompleted = EdgeNavigationCompleted
     OnNewWindowRequested = EdgeNewWindowRequested
     OnZoomFactorChanged = EdgeZoomFactorChanged
-    ExplicitTop = 34
   end
   object pTop: TPanel
     Left = 0
