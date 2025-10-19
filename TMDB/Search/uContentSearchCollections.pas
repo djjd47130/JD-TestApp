@@ -68,7 +68,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   JD.TabController,
   uContentMovieDetail;
 
@@ -127,7 +127,7 @@ procedure TfrmContentSearchCollections.ItemClick(const Index: Integer;
 begin
   inherited;
   //TODO: Navigate to movie details tab within app...
-  var T:= TfrmMain(MainForm).TabController.CreateTab(TfrmTMDBContentCollectionDetail, -1, 0); //TODO
+  var T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmTMDBContentCollectionDetail, -1, 0); //TODO
   TfrmTMDBContentCollectionDetail(T.Content).LoadCollection(Obj.ID);
 end;
 
@@ -271,7 +271,7 @@ var
 begin
   inherited;
   M:= FDetail.Parts[lstParts.ItemIndex];
-  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMovieDetail);
+  T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentMovieDetail);
   (T.Content as TfrmContentMovieDetail).LoadMovie(M.ID);
 
 end;

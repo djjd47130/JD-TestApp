@@ -43,7 +43,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 { TfrmContentSearchPeople }
 
@@ -83,7 +83,7 @@ var
 begin
   inherited;
   M:= Obj as ITMDBPerson; //TODO: Interface not supported...
-  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentPersonDetail);
+  T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentPersonDetail);
   (T.Content as TfrmContentPersonDetail).LoadPerson(M.ID);
 end;
 

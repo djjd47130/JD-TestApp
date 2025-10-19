@@ -90,7 +90,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 procedure TfrmContentTVSerieDetail.DisplayAccountStates(
   const Value: ITMDBAccountStates);

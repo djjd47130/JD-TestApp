@@ -83,7 +83,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   JD.TabController;
 
 type
@@ -124,7 +124,7 @@ end;
 procedure TfrmMainMenu.HideMenu;
 begin
   //TODO: Add user option whether to auto-close menu, enabled by default.
-  TfrmMain(MainForm).ShowMenu(False);
+  TfrmAppWindow(MainForm).ShowMenu(False);
 end;
 
 procedure TfrmMainMenu.SetNarrowMode(const Value: Boolean);
@@ -232,7 +232,7 @@ end;
 procedure TfrmMainMenu.btnMenuWebBrowserClick(Sender: TObject);
 begin
   inherited;
-  TfrmMain(MainForm).OpenNewBrowserTab;
+  TfrmAppWindow(MainForm).OpenNewBrowserTab;
   HideMenu;
 end;
 

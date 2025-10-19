@@ -3305,11 +3305,13 @@ inherited frmTMDBHome: TfrmTMDBHome
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 80
-          Height = 18
+          Width = 259
+          Height = 17
           Align = alClient
           Caption = 'Username:'
           Layout = tlCenter
+          ExplicitWidth = 80
+          ExplicitHeight = 18
         end
         object txtAuthUser: TEdit
           AlignWithMargins = True
@@ -3334,12 +3336,14 @@ inherited frmTMDBHome: TfrmTMDBHome
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 78
-          Height = 18
+          Width = 247
+          Height = 16
           Margins.Right = 15
           Align = alClient
           Caption = 'Password:'
           Layout = tlCenter
+          ExplicitWidth = 78
+          ExplicitHeight = 18
         end
         object txtAuthPass: TEdit
           AlignWithMargins = True

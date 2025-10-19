@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 procedure TfrmContentPersonDetail.FormCreate(Sender: TObject);
 begin
@@ -191,7 +191,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Open link in browser tab...
-        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
         (F.Content as TfrmContentBrowser).Navigate(FDetail.Homepage);
       end);
     A('Popularity', FormatFloat('0.000', FDetail.Popularity));
@@ -201,7 +201,7 @@ begin
       procedure(Ref: TDetailRef)
       begin
         //Open image in browser tab...
-        var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
+        var F:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
         var U:= TMDB.Client.GetImageURL(FDetail.ProfilePath);
         (F.Content as TfrmContentBrowser).Navigate(U);
       end);

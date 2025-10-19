@@ -166,7 +166,7 @@ implementation
 
 uses
   System.StrUtils,
-  uMain;
+  uAppWindow;
 
 function ChipExtractWithIDsStr(AChipList: TJDChipList): String;
   procedure A(const ID: Integer);

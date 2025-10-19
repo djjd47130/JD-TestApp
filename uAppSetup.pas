@@ -80,7 +80,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   System.IOUtils,
   uAppController;
 
@@ -147,7 +147,7 @@ procedure TfrmAppSetup.Label9Click(Sender: TObject);
 begin
   inherited;
   //Navigate to TMDB API page
-  var F:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
+  var F:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
   TfrmContentBrowser(F.Content).Navigate('https://www.themoviedb.org/settings/api');
 end;
 
@@ -172,7 +172,7 @@ begin
   //TODO: Validate setup...
 
   //TODO: Re-enable app-wide controls if valid...
-  //frmMain.Menu.EnableTMDBItems(True);
+  //frmAppWindow.Menu.EnableTMDBItems(True);
 
   SaveSetup;
   btnSave.Enabled:= False;

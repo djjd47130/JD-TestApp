@@ -95,7 +95,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   JD.TabController;
 
 
@@ -202,7 +202,7 @@ end;
 
 function TfrmContentBase.GetParent: IJDAppWindow;
 begin
-
+  Result:= IJDAppWindow(TfrmAppWindow(FMainForm));
 end;
 
 function TfrmContentBase.GetURI: WideString;

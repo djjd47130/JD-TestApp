@@ -4,7 +4,7 @@ unit uAppController;
   MASTER FORM
   This unit acts as the application's "main form", since VCL basically requires it.
   However, this form is never seen. It merely controles the lifecycle of
-  multiple instances of the actual main form (uMain.pas). The main purpose is
+  multiple instances of the actual main form (uAppWindow.pas). The main purpose is
   to prevent any one form from becoming the "main form", and allow any number
   of instances at any given time.
 *)
@@ -16,7 +16,7 @@ uses
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   JD.Favicons,
-  uMain,
+  uAppWindow,
   uAppSetup,
   JD.AppController.Intf,
   Vcl.Menus, ElComponent, ElBaseComp, ElTray, Vcl.AppEvnts, System.ImageList, Vcl.ImgList;
@@ -45,9 +45,9 @@ var
 
 function AppSetup: TAppSetup;
 
-procedure RegisterForm(AForm: TfrmMain);
-procedure UnregisterForm(AForm: TfrmMain);
-function RegisteredForms: TObjectList<TfrmMain>;
+procedure RegisterForm(AForm: TfrmAppWindow);
+procedure UnregisterForm(AForm: TfrmAppWindow);
+function RegisteredForms: TObjectList<TfrmAppWindow>;
 
 implementation
 
@@ -57,7 +57,7 @@ uses
   JD.CmdLine;
 
 var
-  _Forms: TObjectList<TfrmMain>;
+  _Forms: TObjectList<TfrmAppWindow>;
   _AppSetup: TAppSetup;
 
 function AppSetup: TAppSetup;
@@ -67,18 +67,18 @@ begin
   Result:= _AppSetup;
 end;
 
-procedure RegisterForm(AForm: TfrmMain);
+procedure RegisterForm(AForm: TfrmAppWindow);
 begin
   _Forms.Add(AForm);
 end;
 
-procedure UnregisterForm(AForm: TfrmMain);
+procedure UnregisterForm(AForm: TfrmAppWindow);
 begin
   var I:= _Forms.IndexOf(AForm);
   _Forms.Delete(I);
 end;
 
-function RegisteredForms: TObjectList<TfrmMain>;
+function RegisteredForms: TObjectList<TfrmAppWindow>;
 begin
   Result:= _Forms;
 end;
@@ -106,7 +106,7 @@ begin
 
 
   //Create the initial "main" form...
-  var F:= TfrmMain.Create(Application, nil);
+  var F:= TfrmAppWindow.Create(Application, nil);
   F.Show;
 end;
 
@@ -120,8 +120,8 @@ begin
 
     if Trim(Cmd.OpenFilename) <> '' then  begin
       //TODO: Open filename as URI...
-      frmMain.OpenNewBrowserTab(Cmd.OpenFilename);
-      //  Can't do this because frmMain isn't created yet!
+      //frmAppWindow.OpenNewBrowserTab(Cmd.OpenFilename);
+      //  Can't do this because frmAppWindow isn't created yet!
 
     end else begin
       //TODO: Open new tab to default...
@@ -160,7 +160,7 @@ begin
 end;
 
 initialization
-  _Forms:= TObjectList<TfrmMain>.Create(False);
+  _Forms:= TObjectList<TfrmAppWindow>.Create(False);
 finalization
   FreeAndNil(_Forms);
 end.

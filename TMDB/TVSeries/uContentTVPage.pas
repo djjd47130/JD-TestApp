@@ -48,7 +48,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 { TfrmContentTVPage }
 
@@ -95,7 +95,7 @@ var
 begin
   inherited;
   M:= Obj as ITMDBTVSerie;
-  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentTVSerieDetail);
+  T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentTVSerieDetail);
   (T.Content as TfrmContentTVSerieDetail).LoadSeries(M.ID);
 end;
 

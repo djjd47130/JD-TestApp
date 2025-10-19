@@ -42,7 +42,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 { TfrmContentSearchMulti }
 

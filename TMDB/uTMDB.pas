@@ -82,7 +82,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   uAppSetup,
   System.IOUtils;
 

@@ -95,7 +95,7 @@ inherited frmTMDBSetup: TfrmTMDBSetup
         object txtAPIKey: TEdit
           Left = 16
           Top = 29
-          Width = 599
+          Width = 650
           Height = 26
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0

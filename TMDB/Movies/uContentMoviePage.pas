@@ -46,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   JD.TabController,
   uContentMovieDetail;
 
@@ -124,7 +124,7 @@ var
 begin
   inherited;
   M:= Obj as ITMDBMovie;
-  T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentMovieDetail, -1, M.ID);
+  T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentMovieDetail, -1, M.ID);
   (T.Content as TfrmContentMovieDetail).LoadMovie(M.ID);
 end;
 

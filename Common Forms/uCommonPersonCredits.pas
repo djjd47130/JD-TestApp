@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain;
+  uAppWindow;
 
 { TfrmCommonPersonCredits }
 

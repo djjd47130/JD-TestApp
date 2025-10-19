@@ -1,4 +1,4 @@
-unit uMain;
+unit uAppWindow;
 
 (*
   JD Test Application
@@ -43,7 +43,7 @@ const
   MAIN_MENU_WIDTH_CLOSED = 50;
 
 type
-  TfrmMain = class(TForm, IJDAppWindow)
+  TfrmAppWindow = class(TForm, IJDAppWindow)
     pTop: TPanel;
     pContent: TPanel;
     Stat: TStatusBar;
@@ -112,7 +112,7 @@ type
   end;
 
 var
-  frmMain: TfrmMain;
+  frmAppWindow: TfrmAppWindow;
 
 function TabController(const MainForm: TForm): TJDTabController;
 
@@ -139,20 +139,20 @@ end;
 
 function TabController(const MainForm: TForm): TJDTabController;
 begin
-  Result:= TfrmMain(MainForm).TabController;
+  Result:= TfrmAppWindow(MainForm).TabController;
 end;
 
 
 
-{ TfrmMain }
+{ TfrmAppWindow }
 
-constructor TfrmMain.Create(AOwner: TComponent; AAppController: IJDAppController);
+constructor TfrmAppWindow.Create(AOwner: TComponent; AAppController: IJDAppController);
 begin
   inherited Create(AOwner);
   FAppController:= AAppController;
 end;
 
-procedure TfrmMain.FormCreate(Sender: TObject);
+procedure TfrmAppWindow.FormCreate(Sender: TObject);
 begin
   {$IFDEF DEBUG}
   //ReportMemoryLeaksOnShutdown:= True;
@@ -208,20 +208,20 @@ begin
   RegisterForm(Self);
 end;
 
-procedure TfrmMain.FormDestroy(Sender: TObject);
+procedure TfrmAppWindow.FormDestroy(Sender: TObject);
 begin
 
   //Tabs
   FreeAndNil(FTabController);
 end;
 
-procedure TfrmMain.FormShow(Sender: TObject);
+procedure TfrmAppWindow.FormShow(Sender: TObject);
 begin
   //Main Menu
   Self.ShowMenu(True);
 end;
 
-procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmAppWindow.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   //If this is the last form, then terminate app...
   UnregisterForm(Self);
@@ -230,13 +230,13 @@ begin
     Application.Terminate;
 end;
 
-procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TfrmAppWindow.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   //Tabs
   CanClose:= TabController.CloseQuery;
 end;
 
-procedure TfrmMain.TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
+procedure TfrmAppWindow.TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
 begin
   //Tabs
   pContent.DisableAlign;
@@ -247,14 +247,14 @@ begin
   end;
 end;
 
-procedure TfrmMain.TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
+procedure TfrmAppWindow.TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
 begin
   //Tabs
   Handled:= True;
   OpenNewBrowserTab;
 end;
 
-function TfrmMain.OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
+function TfrmAppWindow.OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
 begin
   //Tabs
   var TURL:= URL;
@@ -265,7 +265,7 @@ begin
   ShowMenu(False);
 end;
 
-procedure TfrmMain.TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
+procedure TfrmAppWindow.TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
   var Close: Boolean);
 begin
   //Tabs
@@ -277,20 +277,20 @@ begin
 
 end;
 
-procedure TfrmMain.TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
+procedure TfrmAppWindow.TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
 begin
   //Tabs
   var Ref:= TabController.TabByTab(ATab);
   DragForm:= Ref.Content;
 end;
 
-procedure TfrmMain.TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
+procedure TfrmAppWindow.TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
 begin
 
   DragControl := pContent;
 end;
 
-procedure TfrmMain.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
+procedure TfrmAppWindow.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
   var HintTimeout: Integer);
 begin
   //Tabs
@@ -302,12 +302,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.ProcessDroppedTab(Sender: TObject; X, Y: Integer;
+procedure TfrmAppWindow.ProcessDroppedTab(Sender: TObject; X, Y: Integer;
   DragTabObject: IDragTabObject; Cancelled: Boolean;
   var TabDropOptions: TTabDropOptions);
 var
   WinX, WinY: Integer;
-  NewForm: TfrmMain;
+  NewForm: TfrmAppWindow;
 begin
   //Tabs
 
@@ -332,7 +332,7 @@ begin
 
     // Create a new form
     //TODO: Create from within tab handler...
-    NewForm := TfrmMain.Create(Application, nil); //TODO
+    NewForm := TfrmAppWindow.Create(Application, nil); //TODO
     NewForm.Position := poDesigned;
     NewForm.Left := WinX;
     NewForm.Top := WinY;
@@ -347,7 +347,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+procedure TfrmAppWindow.TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
   var TabDropOptions: TTabDropOptions);
 begin
   //Tabs
@@ -355,13 +355,13 @@ begin
   ProcessDroppedTab(Sender, X, Y, DragTabObject, Cancelled, TabDropOptions);
 end;
 
-procedure TfrmMain.AppEventsHint(Sender: TObject);
+procedure TfrmAppWindow.AppEventsHint(Sender: TObject);
 begin
   //UI
   Stat.Panels[0].Text:= Application.Hint;
 end;
 
-procedure TfrmMain.SetContentOnly(const Value: Boolean);
+procedure TfrmAppWindow.SetContentOnly(const Value: Boolean);
 begin
   //UI
   FContentOnly := Value;
@@ -370,7 +370,7 @@ begin
   Stat.Visible:= not Value;
 end;
 
-procedure TfrmMain.SetFullScreen(const Value: Boolean);
+procedure TfrmAppWindow.SetFullScreen(const Value: Boolean);
 var
   M: TMonitor;
 begin
@@ -393,7 +393,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.ShowMenu(const Value: Boolean);
+procedure TfrmAppWindow.ShowMenu(const Value: Boolean);
 begin
   //TODO: Change mechanism to populate menu with registered menu items...
 
@@ -412,7 +412,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.btnMenuClick(Sender: TObject);
+procedure TfrmAppWindow.btnMenuClick(Sender: TObject);
 begin
   //Main Menu
   case pMenu.Tag of
@@ -425,38 +425,38 @@ begin
   end;
 end;
 
-function TfrmMain.GetOwner: IJDAppController;
+function TfrmAppWindow.GetOwner: IJDAppController;
 begin
   Result:= FAppController;
 end;
 
-function TfrmMain.GetTab(const Index: Integer): IJDAppContentBase;
+function TfrmAppWindow.GetTab(const Index: Integer): IJDAppContentBase;
 begin
   //TODO: Return reference to tab at given index...
 end;
 
-function TfrmMain.GetTabCount: Integer;
+function TfrmAppWindow.GetTabCount: Integer;
 begin
   Result:= Tabs.Tabs.Count;
 end;
 
-function TfrmMain.MenuVisible: Boolean;
+function TfrmAppWindow.MenuVisible: Boolean;
 begin
   //Main Menu
   Result:= pMenu.Tag = 1;
 end;
 
-function TfrmMain.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase;
+function TfrmAppWindow.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase;
 begin
   //TODO: Move tab and content to destination...
 end;
 
-procedure TfrmMain.CloseTab(const TabIndex: Integer);
+procedure TfrmAppWindow.CloseTab(const TabIndex: Integer);
 begin
   //TODO: Close the tab at given index...
 end;
 
-function TfrmMain.CreateNewTab(const URI: WideString): IJDAppWindow;
+function TfrmAppWindow.CreateNewTab(const URI: WideString): IJDAppWindow;
 begin
   //TODO: Create new tab and navigate to URI...
   //var F:= TabController.CreateTab()

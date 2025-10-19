@@ -30,7 +30,8 @@ implementation
 
 {$R *.dfm}
 
-uses uMain;
+uses
+  uAppWindow;
 
 procedure TfrmTMDBContentBase.PrepAPI;
 begin

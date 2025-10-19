@@ -28,7 +28,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
+  uAppWindow,
   JD.TabController;
 
 { TfrmCommonVideos }
@@ -76,7 +76,7 @@ begin
     //TODO
   end;
   if U <> '' then begin
-    T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
+    T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
     (T.Content as TfrmContentBrowser).Navigate(U);
   end;
 end;

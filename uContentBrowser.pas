@@ -97,7 +97,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain, uAppController;
+  uAppWindow, uAppController;
 
 function IsValidURLPath(const Input: string): Boolean;
 const
@@ -134,14 +134,14 @@ end;
 
 procedure TfrmContentBrowser.SetFullscreen(const Value: Boolean);
 begin
-  frmMain.FullScreen:= Value;
-  frmMain.ContentOnly:= Value;
+  TfrmAppWindow(MainForm).FullScreen:= Value;
+  TfrmAppWindow(MainForm).ContentOnly:= Value;
   pTop.Visible:= not Value;
 end;
 
 function TfrmContentBrowser.Tab: TJDTabRef;
 begin
-  Result:= TfrmMain(MainForm).TabController.TabByForm(Self);
+  Result:= TfrmAppWindow(MainForm).TabController.TabByForm(Self);
 end;
 
 procedure TfrmContentBrowser.txtAddressDblClick(Sender: TObject);
@@ -223,7 +223,7 @@ begin
   inherited;
   Args.ArgsInterface.Set_Handled(1);
   if Args.ArgsInterface.Get_uri(URI) = S_OK then begin
-    T:= TfrmMain(MainForm).TabController.CreateTab(TfrmContentBrowser);
+    T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
     (T.Content as TfrmContentBrowser).Navigate(URI);
   end;
 end;

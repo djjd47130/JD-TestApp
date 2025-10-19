@@ -56,7 +56,6 @@ implementation
 {$R *.dfm}
 
 uses
-  uMain,
   JD.TabController;
 
 { TfrmContentSearchMovies }
