@@ -11,43 +11,18 @@ uses
   JD.TMDB.Intf,
 
   uAppSetup,
-  uTMDBHome,
-
   uContentBrowser,
-  uContentClock,
-  uContentFileBrowser,
-  uJDSysMonGaugesTest,
 
   Vcl.StdCtrls;
 
 type
   TfrmMainMenu = class(TfrmContentBase)
     SB: TScrollBox;
-    pFeatures: TPanel;
-    Label3: TLabel;
-    pConfig: TPanel;
-    Label4: TLabel;
-    btnMenuAppSetup: TJDFontButton;
-    btnMenuTMDB: TJDFontButton;
-    btnMenuLastFM: TJDFontButton;
     btnMenuTEST: TJDFontButton;
-    btnMenuMusicBrainz: TJDFontButton;
-    btnMenuDiscogs: TJDFontButton;
-    Panel1: TPanel;
-    Label1: TLabel;
-    btnMenuClock: TJDFontButton;
     Panel2: TPanel;
     Label2: TLabel;
     btnMenuWebBrowser: TJDFontButton;
-    btnMenuFileBrowser: TJDFontButton;
-    btnMenuSystemMonitor: TJDFontButton;
-    btnMenuCalculator: TJDFontButton;
-    btnMenuCalendar: TJDFontButton;
-    btnMenuRESTClient: TJDFontButton;
-    btnMenuWeatherUnderground: TJDFontButton;
-    JDFontButton1: TJDFontButton;
-    JDFontButton2: TJDFontButton;
-    JDFontButton3: TJDFontButton;
+    btnMenuAppSetup: TJDFontButton;
     procedure FormCreate(Sender: TObject);
     procedure btnMenuAppSetupClick(Sender: TObject);
     procedure CategoryPanelGroup1MouseWheelDown(Sender: TObject;
@@ -56,16 +31,7 @@ type
       Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
     procedure FormResize(Sender: TObject);
     procedure btnMenuWebBrowserClick(Sender: TObject);
-    procedure btnMenuTMDBClick(Sender: TObject);
-    procedure btnMenuWeatherUndergroundClick(Sender: TObject);
-    procedure btnMenuLastFMClick(Sender: TObject);
-    procedure btnMenuMusicBrainzClick(Sender: TObject);
-    procedure btnMenuDiscogsClick(Sender: TObject);
     procedure btnMenuWebBrowserKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure btnMenuClockClick(Sender: TObject);
-    procedure btnMenuFileBrowserClick(Sender: TObject);
-    procedure btnMenuCalendarClick(Sender: TObject);
-    procedure btnMenuSystemMonitorClick(Sender: TObject);
   private
     procedure CalcScrollHeight;
     procedure SetNarrowMode(const Value: Boolean);
@@ -222,13 +188,6 @@ begin
   SB.VertScrollBar.Position:= SB.VertScrollBar.Position - 20;
 end;
 
-procedure TfrmMainMenu.btnMenuCalendarClick(Sender: TObject);
-begin
-  inherited;
-
-  HideMenu;
-end;
-
 procedure TfrmMainMenu.btnMenuWebBrowserClick(Sender: TObject);
 begin
   inherited;
@@ -245,66 +204,10 @@ begin
   end;
 end;
 
-procedure TfrmMainMenu.btnMenuTMDBClick(Sender: TObject);
-begin
-  inherited;
-  TabController(MainForm).CreateTab(TfrmTMDBHome, -1, 0);
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuWeatherUndergroundClick(Sender: TObject);
-begin
-  inherited;
-
-  HideMenu;
-end;
-
 procedure TfrmMainMenu.btnMenuAppSetupClick(Sender: TObject);
 begin
   inherited;
   TabController(MainForm).CreateTab(TfrmAppSetup, -1, 0);
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuLastFMClick(Sender: TObject);
-begin
-  inherited;
-
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuMusicBrainzClick(Sender: TObject);
-begin
-  inherited;
-
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuDiscogsClick(Sender: TObject);
-begin
-  inherited;
-
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuClockClick(Sender: TObject);
-begin
-  inherited;
-  TabController(MainForm).CreateTab(TfrmContentClock, -1, 0);
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuFileBrowserClick(Sender: TObject);
-begin
-  inherited;
-  TabController(MainForm).CreateTab(TfrmContentFileBrowser, -1, 0);
-  HideMenu;
-end;
-
-procedure TfrmMainMenu.btnMenuSystemMonitorClick(Sender: TObject);
-begin
-  inherited;
-  TabController(MainForm).CreateTab(TfrmJDSSysMonGaugesTest, -1, 0);
   HideMenu;
 end;
 

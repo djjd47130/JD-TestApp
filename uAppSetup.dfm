@@ -122,6 +122,7 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 237
+              Height = 41
               Caption = 'SPACEBALLS: The Web Browser'
               ExplicitWidth = 237
             end
@@ -143,270 +144,11 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitLeft = 730
           end
         end
-        inline ListSwitchItem2: TListSwitchItem
-          Left = 0
-          Top = 148
-          Width = 815
-          Height = 55
-          Hint = 'Turn plugins on or off'
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-          ExplicitTop = 148
-          ExplicitWidth = 815
-          inherited Bevel1: TBevel
-            Width = 815
-            ExplicitWidth = 815
-          end
-          inherited pData: TPanel
-            Width = 402
-            Hint = 'Item'
-            ExplicitWidth = 402
-            inherited lblCaption: TLabel
-              Width = 212
-              Caption = 'The Movie DataBase (TMDB)'
-              ExplicitWidth = 212
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61448
-            Image.StandardColor = fcBlue
-            Overlay.Text = #61515
-            Overlay.Font.Height = -16
-            Overlay.StandardColor = fcGreen
-            Overlay.Position = foCenter
-          end
-          inherited btnRight: TJDFontButton
-            Left = 674
-            Hint = 'Configure Addon'
-            Visible = True
-            ExplicitLeft = 674
-          end
-          inherited ToggleSwitch2: TToggleSwitch
-            Left = 730
-            Hint = 'Enable or Disable Addon'
-            ThumbColor = clLime
-            ExplicitLeft = 730
-          end
-        end
-        inline ListSwitchItem5: TListSwitchItem
-          Left = 0
-          Top = 93
-          Width = 815
-          Height = 55
-          Hint = 'Turn plugins on or off'
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-          ExplicitTop = 93
-          ExplicitWidth = 815
-          inherited Bevel1: TBevel
-            Width = 815
-            ExplicitWidth = 815
-          end
-          inherited pData: TPanel
-            Width = 402
-            Hint = 'Item'
-            ExplicitWidth = 402
-            inherited lblCaption: TLabel
-              Width = 165
-              Caption = 'Weather Underground'
-              ExplicitWidth = 165
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61829
-            Image.StandardColor = fcOrange
-            Overlay.Text = #61515
-            Overlay.Font.Height = -16
-            Overlay.StandardColor = fcGreen
-          end
-          inherited btnRight: TJDFontButton
-            Left = 674
-            Hint = 'Configure Addon'
-            Visible = True
-            ExplicitLeft = 674
-          end
-          inherited ToggleSwitch2: TToggleSwitch
-            Left = 730
-            Hint = 'Enable or Disable Addon'
-            State = tssOff
-            ThumbColor = clBlue
-            ExplicitLeft = 730
-          end
-        end
-        inline ListSwitchItem6: TListSwitchItem
-          Left = 0
-          Top = 203
-          Width = 815
-          Height = 55
-          Hint = 'Turn plugins on or off'
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-          ExplicitTop = 203
-          ExplicitWidth = 815
-          inherited Bevel1: TBevel
-            Width = 815
-            ExplicitWidth = 815
-          end
-          inherited pData: TPanel
-            Width = 402
-            ExplicitWidth = 402
-            inherited lblCaption: TLabel
-              Width = 59
-              Caption = 'Last.FM'
-              ExplicitWidth = 59
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61954
-            Image.StandardColor = fcRed
-            Overlay.Text = #61515
-            Overlay.Font.Height = -16
-            Overlay.StandardColor = fcGreen
-          end
-          inherited btnRight: TJDFontButton
-            Left = 674
-            Hint = 'Configure Addon'
-            Visible = True
-            ExplicitLeft = 674
-          end
-          inherited ToggleSwitch2: TToggleSwitch
-            Left = 730
-            Hint = 'Enable or Disable Addon'
-            State = tssOff
-            ThumbColor = clBlue
-            ExplicitLeft = 730
-          end
-        end
-        inline ListSwitchItem7: TListSwitchItem
-          Left = 0
-          Top = 258
-          Width = 815
-          Height = 55
-          Hint = 'Turn plugins on or off'
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 4
-          ExplicitTop = 258
-          ExplicitWidth = 815
-          inherited Bevel1: TBevel
-            Width = 815
-            ExplicitWidth = 815
-          end
-          inherited pData: TPanel
-            Width = 402
-            Hint = 'Item'
-            ExplicitWidth = 402
-            inherited lblCaption: TLabel
-              Width = 91
-              Caption = 'MusicBrainz'
-              ExplicitWidth = 91
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61441
-            Image.StandardColor = fcPurple
-            Overlay.Text = #61515
-            Overlay.Font.Height = -16
-            Overlay.StandardColor = fcGreen
-          end
-          inherited btnRight: TJDFontButton
-            Left = 674
-            Hint = 'Configure Addon'
-            Visible = True
-            ExplicitLeft = 674
-          end
-          inherited ToggleSwitch2: TToggleSwitch
-            Left = 730
-            Hint = 'Enable or Disable Addon'
-            State = tssOff
-            ThumbColor = clBlue
-            ExplicitLeft = 730
-          end
-        end
-        inline ListSwitchItem8: TListSwitchItem
-          Left = 0
-          Top = 313
-          Width = 815
-          Height = 55
-          Hint = 'Turn plugins on or off'
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 5
-          ExplicitTop = 313
-          ExplicitWidth = 815
-          inherited Bevel1: TBevel
-            Width = 815
-            ExplicitWidth = 815
-          end
-          inherited pData: TPanel
-            Width = 402
-            Hint = 'Item'
-            ExplicitWidth = 402
-            inherited lblCaption: TLabel
-              Width = 58
-              Caption = 'Discogs'
-              ExplicitWidth = 58
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61619
-            Image.Font.Name = 'Webdings'
-            Image.StandardColor = fcGray
-            Overlay.Text = #61515
-            Overlay.Font.Height = -16
-            Overlay.StandardColor = fcGreen
-          end
-          inherited btnRight: TJDFontButton
-            Left = 674
-            Hint = 'Configure Addon'
-            Visible = True
-            ExplicitLeft = 674
-          end
-          inherited ToggleSwitch2: TToggleSwitch
-            Left = 730
-            Hint = 'Enable or Disable Addon'
-            State = tssOff
-            ThumbColor = clBlue
-            ExplicitLeft = 730
-          end
-        end
       end
     end
     object tabGeneral: TTabSheet
       Caption = '  General  '
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ScrollBox1: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -462,6 +204,7 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 118
+              Height = 41
               Hint = 'What to open when clicking the new tab button'
               Caption = 'New Tab Button'
               ExplicitWidth = 118
@@ -508,9 +251,9 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 811
           end
           inherited pData: TPanel
-            ExplicitTop = 2
             inherited lblCaption: TLabel
               Width = 88
+              Height = 41
               Hint = 'What to open when the application starts up'
               Caption = 'App Startup'
               ExplicitWidth = 88
@@ -561,6 +304,7 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 186
+              Height = 41
               Hint = 'Automatically collapse main menu when navigating'
               Caption = 'Auto Collapse Main Menu'
               ExplicitWidth = 186
@@ -589,10 +333,6 @@ inherited frmAppSetup: TfrmAppSetup
     object tabBrowser: TTabSheet
       Caption = '  Browser  '
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ScrollBox2: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -648,6 +388,7 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 106
+              Height = 41
               Hint = 'What search engine the browser should use'
               Caption = 'Search Engine'
               ExplicitWidth = 106
@@ -696,6 +437,7 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 83
+              Height = 41
               Hint = 'What to open by default in your browser'
               Caption = 'Home Page'
               ExplicitWidth = 83
@@ -744,6 +486,7 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 183
+              Height = 41
               Hint = 'Whether to enable browsing history'
               Caption = 'Enable Browsing History'
               ExplicitWidth = 183

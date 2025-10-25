@@ -115,9 +115,6 @@
         <DCCReference Include="uContentBase.pas">
             <Form>frmContentBase</Form>
         </DCCReference>
-        <DCCReference Include="uContentPageBase.pas">
-            <Form>frmContentPageBase</Form>
-        </DCCReference>
         <DCCReference Include="uContentListBase.pas">
             <Form>frmContentListBase</Form>
         </DCCReference>
@@ -131,166 +128,8 @@
         <DCCReference Include="uContentBrowser.pas">
             <Form>frmContentBrowser</Form>
         </DCCReference>
-        <DCCReference Include="TMDB\uTMDB.pas">
-            <Form>dmTMDB</Form>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBContentBase.pas">
-            <Form>frmTMDBContentBase</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBHome.pas">
-            <Form>frmTMDBHome</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBSetup.pas">
-            <Form>frmTMDBSetup</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBCommonFormBase.pas">
-            <Form>frmTMDBCommonFormBase</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBListItem.pas">
-            <Form>frmTMDBListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uTMDBMovieListItem.pas">
-            <Form>frmTMDBMovieListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonChipList.pas">
-            <Form>frmCommonChipList</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonImages.pas">
-            <Form>frmCommonImages</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonCredits.pas">
-            <Form>frmCommonCredits</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonReviews.pas">
-            <Form>frmCommonReviews</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonPersonCredits.pas">
-            <Form>frmCommonPersonCredits</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonVideos.pas">
-            <Form>frmCommonVideos</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonAlternativeTitles.pas">
-            <Form>frmCommonAlternativeTitles</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonChanges.pas">
-            <Form>frmContentChanges</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uCommonCollapsePanel.pas">
-            <Form>frmCommonCollapsePanel</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Certifications\uContentCertsMovies.pas">
-            <Form>frmContentCertsMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Certifications\uContentCertsTV.pas">
-            <Form>frmContentCertsTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Changes\uContentChangesMovies.pas">
-            <Form>frmContentChangesMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigCountries.pas">
-            <Form>frmContentConfigCountries</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigJobs.pas">
-            <Form>frmContentConfigJobs</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigLanguages.pas">
-            <Form>frmContentConfigLanguages</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Configuration\uContentConfigTimezones.pas">
-            <Form>frmContentConfigTimezones</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Discover\uContentDiscoverMovies.pas"/>
-        <DCCReference Include="TMDB\Movies\uContentMovieDetail.pas">
-            <Form>frmContentMovieDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Movies\uContentMoviePage.pas">
-            <Form>frmContentMoviePage</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Genres\uContentGenresMovie.pas">
-            <Form>frmContentGenresMovie</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Genres\uContentGenresTV.pas">
-            <Form>frmContentGenresTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\People\uContentPersonDetail.pas">
-            <Form>frmContentPersonDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchCollections.pas">
-            <Form>frmContentSearchCollections</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchCompanies.pas">
-            <Form>frmContentSearchCompanies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchKeywords.pas">
-            <Form>frmContentSearchKeywords</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchMovies.pas">
-            <Form>frmContentSearchMovies</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchMulti.pas">
-            <Form>frmContentSearchMulti</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchPeople.pas">
-            <Form>frmContentSearchPeople</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uContentSearchTV.pas">
-            <Form>frmContentSearchTV</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\TVSeries\uContentTVPage.pas">
-            <Form>frmContentTVPage</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\TVSeries\uContentTVSerieDetail.pas">
-            <Form>frmContentTVSerieDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\uTMDBLoginBrowser.pas">
-            <Form>frmTMDBLoginBrowser</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Movies\uTMDBVertMovieListItem.pas">
-            <Form>frmTMDBVertMovieListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uTMDBSearch.pas">
-            <Form>frmTMDBSearch</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\Search\uTMDBSearchListItem.pas">
-            <Form>frmTMDBSearchListItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="TMDB\Collections\uTMDBContentCollectionDetail.pas">
-            <Form>frmTMDBContentCollectionDetail</Form>
-        </DCCReference>
-        <DCCReference Include="TMDB\WatchProviders\uTMDBWatchProviderPage.pas">
-            <Form>frmTMDBWatchProviderPage</Form>
-        </DCCReference>
         <DCCReference Include="Plugins\uContentPluginBase.pas">
             <Form>frmContentPluginBase</Form>
-        </DCCReference>
-        <DCCReference Include="JDSysMon\uJDSysMonGaugesTest.pas">
-            <Form>frmJDSSysMonGaugesTest</Form>
-        </DCCReference>
-        <DCCReference Include="General\uContentClock.pas">
-            <Form>frmContentClock</Form>
-        </DCCReference>
-        <DCCReference Include="System\uContentFileBrowser.pas">
-            <Form>frmContentFileBrowser</Form>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uListItemBase.pas">
-            <Form>ListItemBase</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uSwitchListItem.pas">
-            <Form>ListSwitchItem</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Common Forms\uComboListItem.pas">
-            <Form>ComboListItem</Form>
-            <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="JD.ListController.pas"/>
         <DCCReference Include="Plugins\JD.Plugins.Intf.pas"/>
@@ -299,6 +138,31 @@
         <DCCReference Include="JD.AppController.Intf.pas"/>
         <DCCReference Include="JD.CmdLine.pas"/>
         <DCCReference Include="JD.AppController.Impl.pas"/>
+        <DCCReference Include="Common Forms\uComboListItem.pas">
+            <Form>ComboListItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uCommonChipList.pas">
+            <Form>frmCommonChipList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uCommonCollapsePanel.pas">
+            <Form>frmCommonCollapsePanel</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uListItemBase.pas">
+            <Form>ListItemBase</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Common Forms\uSwitchListItem.pas">
+            <Form>ListSwitchItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
