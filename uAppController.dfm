@@ -32,8 +32,8 @@ object frmAppController: TfrmAppController
     Left = 96
     Top = 72
   end
-  object ElTrayIcon1: TElTrayIcon
-    PopupMenu = PopupMenu1
+  object TrayIcon: TElTrayIcon
+    PopupMenu = pmTray
     StaticIcon.Data = {
       0000010006000000000001002000187400006600000080800000010020002808
       01007E740000404000000100200028420000A67C01003030000001002000A825
@@ -4108,15 +4108,15 @@ object frmAppController: TfrmAppController
     Left = 232
     Top = 264
   end
-  object PopupMenu1: TPopupMenu
+  object pmTray: TPopupMenu
     Left = 296
     Top = 264
-    object Show1: TMenuItem
+    object mShow: TMenuItem
       Caption = 'Show'
     end
-    object Show2: TMenuItem
+    object mExit: TMenuItem
       Caption = 'Exit'
-      OnClick = Show2Click
+      OnClick = mExitClick
     end
   end
 end

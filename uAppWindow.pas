@@ -203,7 +203,7 @@ begin
   Application.ProcessMessages;
 
   //TEMP: Handle commandline...
-  frmAppController.HandleCmdLine(System.CmdLine);
+  //frmAppController.HandleCmdLine(System.CmdLine);
 
   RegisterForm(Self);
 end;

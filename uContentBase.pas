@@ -47,16 +47,17 @@ type
   protected
 
   public
-    { Methods from IJDAppTabRef }
-    function GetTabCaption: WideString; stdcall;
-    procedure SetTabCaption(const Value: WideString); stdcall;
+
+    //Methods from IJDAppTabRef
+    function GetTabCaption: WideString stdcall;
+    procedure SetTabCaption(const Value: WideString) stdcall;
     function GetOwner: IJDAppController stdcall; reintroduce;
-    function GetParent: IJDAppWindow; stdcall;
-    function GetURI: WideString; stdcall;
-    function GetIndex: Integer; stdcall;
+    function GetParent: IJDAppWindow stdcall;
+    function GetURI: WideString stdcall;
+    function GetIndex: Integer stdcall;
     procedure RefreshData stdcall; virtual;
     function CanClose: Boolean stdcall; virtual;
-    procedure Navigate(const URI: WideString = ''); stdcall;
+    procedure Navigate(const URI: WideString = '') stdcall;
 
   public
     //TODO: Pass instance of IJDAppController...

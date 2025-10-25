@@ -22,6 +22,8 @@ uses
   ;
 
 type
+  IJDAppListItem = interface;
+  IJDAppListItems = interface;
   IJDAppController = interface;
   IJDAppWindow = interface;
   IJDAppContentBase = interface;
@@ -29,6 +31,7 @@ type
   IJDAppMenuItems = interface;
   IJDAppShellReg = interface;
   IJDAppShellRegs = interface;
+  IJDAppSetup = interface;
 
 
 
@@ -59,12 +62,15 @@ type
 
 
   //Overall app control
+  //  Implemented by TfrmAppController
   IJDAppController = interface
     ['{48EC9E4B-C5F6-4B41-B5BD-8D609B59FD0A}']
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
+    function GetAppSetup: IJDAppSetup stdcall;
 
     procedure Initialize stdcall;
+    procedure HandleCmdLine(const CmdLine: WideString) stdcall;
 
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;

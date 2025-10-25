@@ -26,18 +26,32 @@ type
     imgFavicons16: TImageList;
     Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
-    ElTrayIcon1: TElTrayIcon;
-    PopupMenu1: TPopupMenu;
-    Show1: TMenuItem;
-    Show2: TMenuItem;
+    TrayIcon: TElTrayIcon;
+    pmTray: TPopupMenu;
+    mShow: TMenuItem;
+    mExit: TMenuItem;
     procedure FormCreate(Sender: TObject);
-    procedure Show2Click(Sender: TObject);
+    procedure mExitClick(Sender: TObject);
     procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
   private
-    //Global instance of app controller
+    FWindows: TInterfaceList;
+    FAppSetup: IJDAppSetup;
+  protected
+    //From IJDAppController:
+    //function GetWindowCount: Integer stdcall;
+    //function GetWindow(const Index: Integer): IJDAppWindow stdcall;
+    //function GetAppSetup: IJDAppSetup stdcall;
+
+    procedure Initialize stdcall;
+    procedure HandleCmdLine(const CmdLine: WideString) stdcall;
+
+    //function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
+    //procedure CloseWindow(const Index: Integer) stdcall;
+
+    //property WindowCount: Integer read GetWindowCount;
+    //property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
   public
-    procedure InitAppController;
-    procedure HandleCmdLine(const CmdLine: String);
+
   end;
 
 var
@@ -60,6 +74,7 @@ var
   _Forms: TObjectList<TfrmAppWindow>;
   _AppSetup: TAppSetup;
 
+//TODO: OLD, migrage into TfrmAppController...
 function AppSetup: TAppSetup;
 begin
   if _AppSetup = nil then
@@ -99,8 +114,6 @@ begin
 
   //APPLICATION STARTUP LOGIC STARTS HEREp.
 
-  InitAppController;
-
   //TEMPORARILY DISABLED
   //HandleCmdLine(System.CmdLine);
 
@@ -110,7 +123,7 @@ begin
   F.Show;
 end;
 
-procedure TfrmAppController.HandleCmdLine(const CmdLine: String);
+procedure TfrmAppController.HandleCmdLine(const CmdLine: WideString);
 begin
 
   // Handle command line...
@@ -149,12 +162,12 @@ begin
   end;
 end;
 
-procedure TfrmAppController.InitAppController;
+procedure TfrmAppController.Initialize;
 begin
-  //TODO
+  //TODO: Initialize all internal stuff...
 end;
 
-procedure TfrmAppController.Show2Click(Sender: TObject);
+procedure TfrmAppController.mExitClick(Sender: TObject);
 begin
   Application.Terminate;
 end;
