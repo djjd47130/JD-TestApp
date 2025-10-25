@@ -74,6 +74,8 @@ type
 
     procedure Initialize stdcall;
     procedure Uninitialize stdcall;
+    procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
+    procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const CmdLine: WideString) stdcall;
 
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
@@ -82,6 +84,8 @@ type
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
   end;
+
+
 
   //One of possibly multiple windows (TfrmMain) with empty tabular interface.
   //  Manages all the tabs contained within.
@@ -93,6 +97,14 @@ type
     function GetOwner: IJDAppController stdcall;
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetLeft: Integer stdcall;
+    function GetTop: Integer stdcall;
+    function GetWidth: Integer stdcall;
+    function GetHeight: Integer stdcall;
+    procedure SetLeft(const Value: Integer) stdcall;
+    procedure SetTop(const Value: Integer) stdcall;
+    procedure SetWidth(const Value: Integer) stdcall;
+    procedure SetHeight(const Value: Integer) stdcall;
 
     procedure Show stdcall;
     procedure Close stdcall;
@@ -103,6 +115,11 @@ type
     property Owner: IJDAppController read GetOwner;
     property TabCount: Integer read GetTabCount;
     property Tabs[const Index: Integer]: IJDAppContentBase read GetTab; default;
+
+    property Left: Integer read GetLeft write SetLeft;
+    property Top: Integer read GetTop write SetTop;
+    property Width: Integer read GetTop write SetTop;
+    property Height: Integer read GetHeight write SetHeight;
   end;
 
 

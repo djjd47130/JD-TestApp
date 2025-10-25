@@ -85,10 +85,11 @@ var
 
 
 //TODO: Registered content forms for shell addresses - #8
+{
 function RegisteredContentForms: TList<TfrmContentBaseClass>;
 procedure RegisterContentForm(AClass: TfrmContentBaseClass);
 procedure UnregisterContentForm(AClass: TfrmContentBaseClass);
-
+}
 
 
 implementation
@@ -102,6 +103,7 @@ uses
 
 
 //TODO: Registered content forms for shell addresses - #8
+{
 var
   _RegisteredContentForms: TList<TfrmContentBaseClass>;
 
@@ -125,6 +127,8 @@ begin
   if I < 0 then
     RegisteredContentForms.Delete(I);
 end;
+}
+
 
 
 
@@ -193,7 +197,9 @@ end;
 
 function TfrmContentBase.GetIndex: Integer;
 begin
-  //TODO
+  //TODO: Return index of tab within window, or global registry???
+  //  Is this even necessary?
+
 end;
 
 function TfrmContentBase.GetOwner: IJDAppController;
@@ -213,17 +219,21 @@ end;
 
 procedure TfrmContentBase.Navigate(const URI: WideString);
 begin
+  //TODO
+  FURI:= URI;
+  //TODO: Reload content to new screen...
 
 end;
 
 function TfrmContentBase.CanClose: Boolean;
 begin
+  //Override supported
   Result:= True;
 end;
 
 procedure TfrmContentBase.RefreshData;
 begin
-
+  //Override expected
 end;
 
 procedure TfrmContentBase.SetTabCaption(const Value: WideString);
@@ -236,9 +246,9 @@ begin
 end;
 
 initialization
-  _RegisteredContentForms:= nil;
+  //_RegisteredContentForms:= nil;
 
 finalization
-  FreeAndNil(_RegisteredContentForms);
+  //FreeAndNil(_RegisteredContentForms);
 
 end.

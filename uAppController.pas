@@ -50,6 +50,8 @@ type
     //From IJDAppController:
     procedure Initialize stdcall;
     procedure Uninitialize stdcall;
+    procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
+    procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const URI: WideString) stdcall;
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
@@ -60,11 +62,12 @@ type
 var
   frmAppController: TfrmAppController;
 
-function AppSetup: TAppSetup;
+function AppController: IJDAppController;
 
-procedure RegisterForm(AForm: TfrmAppWindow);
-procedure UnregisterForm(AForm: TfrmAppWindow);
-function RegisteredForms: TObjectList<TfrmAppWindow>;
+
+
+
+function AppSetup: TAppSetup;
 
 implementation
 
@@ -74,7 +77,16 @@ uses
   JD.CmdLine;
 
 var
-  _Forms: TObjectList<TfrmAppWindow>;
+  _AppController: IJDAppController;
+
+function AppController: IJDAppController;
+begin
+  if _AppController = nil then
+    _AppController:= IJDAppController(frmAppController);
+  Result:= _AppController;
+end;
+
+var
   _AppSetup: TAppSetup;
 
 //TODO: OLD, migrage into TfrmAppController...
@@ -85,28 +97,14 @@ begin
   Result:= _AppSetup;
 end;
 
-procedure RegisterForm(AForm: TfrmAppWindow);
-begin
-  _Forms.Add(AForm);
-end;
-
-procedure UnregisterForm(AForm: TfrmAppWindow);
-begin
-  var I:= _Forms.IndexOf(AForm);
-  _Forms.Delete(I);
-end;
-
-function RegisteredForms: TObjectList<TfrmAppWindow>;
-begin
-  Result:= _Forms;
-end;
-
 { TfrmAppController }
 
 procedure TfrmAppController.FormCreate(Sender: TObject);
 begin
 
+  {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown:= True;
+  {$ENDIF}
 
   //APPLICATION STARTUP LOGIC STARTS HERE
   FPlugins:= TInterfaceList.Create;
@@ -149,17 +147,16 @@ end;
 
 procedure TfrmAppController.Initialize;
 begin
-  //Create the initial "main" form...
-  CreateNewWindow('');
-  //var F:= TfrmAppWindow.Create(Application, nil);
-  //F.Show;
+  //TODO: Load all plugins...
 
-  //Load saved windows / tabs...
+  //TODO: Load saved windows / tabs...
 
-  //Load icon cache...
+  //TODO: Load icon cache...
 
-  //Finally, handle the command line...
+  //Handle the command line, if any...
+  {$WARN SYMBOL_PLATFORM OFF}
   HandleCmdLine(System.CmdLine);
+  {$WARN SYMBOL_PLATFORM ON}
 end;
 
 procedure TfrmAppController.Uninitialize;
@@ -169,6 +166,8 @@ begin
   //TODO: Save window / tab states...
 
   //TODO: Destroy tabs and app windows...
+
+  //TODO: Unload all plugins...
 
 end;
 
@@ -185,7 +184,7 @@ begin
       HandleURI(Cmd.OpenFilename);
     end else begin
       //TODO: Open new tab to default...
-
+      CreateNewWindow('');
     end;
 
     if Cmd.Exists('private', True) or Cmd.Exists('p', True) then begin
@@ -213,18 +212,21 @@ end;
 procedure TfrmAppController.HandleURI(const URI: WideString);
 begin
   //Handle internal URI / Shell command...
+  CreateNewWindow(URI);
 
 end;
 
 procedure TfrmAppController.CloseWindow(const Index: Integer);
 begin
   var F:= GetWindow(Index);
+  FWindows.Delete(Index);
   F.Close;
 end;
 
 function TfrmAppController.CreateNewWindow(const URI: WideString): IJDAppWindow;
 begin
   Result:= TfrmAppWindow.Create(Application, nil);
+  FWindows.Add(Result);
   Result.Show;
 end;
 
@@ -240,8 +242,21 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmAppController.RegisterWindow(AWindow: IJDAppWindow);
+begin
+  FWindows.Add(AWindow);
+end;
+
+procedure TfrmAppController.UnregisterWindow(AWindow: IJDAppWindow);
+begin
+  var I:= FWindows.IndexOf(AWindow);
+  FWindows.Delete(I);
+  if WindowCount = 0 then
+    Application.Terminate;
+end;
+
 initialization
-  _Forms:= TObjectList<TfrmAppWindow>.Create(False);
+  _AppController:= nil;
 finalization
-  FreeAndNil(_Forms);
+  _AppController:= nil;
 end.

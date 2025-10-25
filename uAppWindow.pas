@@ -63,7 +63,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure AppEventsHint(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
@@ -77,6 +76,7 @@ type
     procedure TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
     procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FAppController: IJDAppController;
     FTabController: TJDTabController;
@@ -95,12 +95,25 @@ type
     function GetOwner: IJDAppController stdcall; reintroduce;
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetLeft: Integer stdcall;
+    function GetTop: Integer stdcall;
+    function GetWidth: Integer stdcall;
+    function GetHeight: Integer stdcall;
+    procedure SetLeft(const Value: Integer) stdcall;
+    procedure SetTop(const Value: Integer) stdcall;
+    procedure SetWidth(const Value: Integer) stdcall;
+    procedure SetHeight(const Value: Integer) stdcall;
 
     procedure Show stdcall; reintroduce;
     procedure Close stdcall; reintroduce;
     function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseTab(const TabIndex: Integer) stdcall;
     function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;
+
+    property Left: Integer read GetLeft write SetLeft;
+    property Top: Integer read GetTop write SetTop;
+    property Width: Integer read GetTop write SetTop;
+    property Height: Integer read GetHeight write SetHeight;
   public
     constructor Create(AOwner: TComponent; AAppController: IJDAppController); reintroduce; virtual;
 
@@ -156,19 +169,10 @@ end;
 
 procedure TfrmAppWindow.FormCreate(Sender: TObject);
 begin
-  {$IFDEF DEBUG}
-  //ReportMemoryLeaksOnShutdown:= True;
-  //MEMORY LEAKS! TEMPORARILY DISABLING TO HIDE MESSAGE! - Issue #5
-  //https://github.com/djjd47130/JD-TMDB/issues/5
-  {$ENDIF}
-
   FLoaded:= False;
 
   //UI
   //TODO: Add option for user to switch style...
-  //TODO: I like the style of "Windows10 Dark" when it comes to overall control styling,
-  //  especially the large system buttons in the top-right. However, need to create
-  //  a custom version with a dark-gray but not pure black base color.
   //TStyleManager.TrySetStyle('Carbon', False);
   TStyleManager.TrySetStyle('Windows10 DarkGray', False);
   //TStyleManager.TrySetStyle('Windows10 SlateGray', False);
@@ -197,6 +201,8 @@ begin
   //Give form its own taskbar icon...
   MakeFormIndependent(Self);
 
+  Position := poDesigned;
+
   FLoaded:= True;
 
   //Force form to show...
@@ -204,17 +210,13 @@ begin
   BringToFront;
   Application.ProcessMessages;
 
-  //TEMP: Handle commandline...
-  //frmAppController.HandleCmdLine(System.CmdLine);
-
-  RegisterForm(Self);
 end;
 
 procedure TfrmAppWindow.FormDestroy(Sender: TObject);
 begin
 
-  //Tabs
-  FreeAndNil(FTabController);
+  //TODO: WHY IS THIS NOT GETTING EXECUTED?!
+
 end;
 
 procedure TfrmAppWindow.FormShow(Sender: TObject);
@@ -225,11 +227,11 @@ end;
 
 procedure TfrmAppWindow.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  //If this is the last form, then terminate app...
-  UnregisterForm(Self);
   Action:= caFree;
-  if RegisteredForms.Count = 0 then
-    Application.Terminate;
+  AppController.UnregisterWindow(Self);
+
+  //Tabs
+  FreeAndNil(FTabController);
 end;
 
 procedure TfrmAppWindow.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -309,7 +311,7 @@ procedure TfrmAppWindow.ProcessDroppedTab(Sender: TObject; X, Y: Integer;
   var TabDropOptions: TTabDropOptions);
 var
   WinX, WinY: Integer;
-  NewForm: TfrmAppWindow;
+  NewForm: IJDAppWindow;
 begin
   //Tabs
 
@@ -334,8 +336,7 @@ begin
 
     // Create a new form
     //TODO: Create from within tab handler...
-    NewForm := TfrmAppWindow.Create(Application, nil); //TODO
-    NewForm.Position := poDesigned;
+    NewForm:= AppController.CreateNewWindow('');
     NewForm.Left := WinX;
     NewForm.Top := WinY;
     NewForm.Show;
@@ -395,6 +396,26 @@ begin
   end;
 end;
 
+procedure TfrmAppWindow.SetHeight(const Value: Integer);
+begin
+  inherited Height:= Value;
+end;
+
+procedure TfrmAppWindow.SetLeft(const Value: Integer);
+begin
+  inherited Left:= Value;
+end;
+
+procedure TfrmAppWindow.SetTop(const Value: Integer);
+begin
+  inherited Top:= Value;
+end;
+
+procedure TfrmAppWindow.SetWidth(const Value: Integer);
+begin
+  inherited Width:= Value;
+end;
+
 procedure TfrmAppWindow.Show;
 begin
   inherited Show;
@@ -432,6 +453,16 @@ begin
   end;
 end;
 
+function TfrmAppWindow.GetHeight: Integer;
+begin
+  Result:= inherited Height;
+end;
+
+function TfrmAppWindow.GetLeft: Integer;
+begin
+  Result:= inherited Left;
+end;
+
 function TfrmAppWindow.GetOwner: IJDAppController;
 begin
   Result:= FAppController;
@@ -445,6 +476,16 @@ end;
 function TfrmAppWindow.GetTabCount: Integer;
 begin
   Result:= Tabs.Tabs.Count;
+end;
+
+function TfrmAppWindow.GetTop: Integer;
+begin
+  Result:= inherited Top;
+end;
+
+function TfrmAppWindow.GetWidth: Integer;
+begin
+  Result:= inherited Width;
 end;
 
 function TfrmAppWindow.MenuVisible: Boolean;

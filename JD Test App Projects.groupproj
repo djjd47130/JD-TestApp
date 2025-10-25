@@ -6,9 +6,6 @@
         <Projects Include="JDTestApp.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Pkg\JDTestAppComponents.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj">
             <Dependencies/>
         </Projects>
@@ -29,15 +26,6 @@
     <Target Name="JDTestApp:Make">
         <MSBuild Projects="JDTestApp.dproj" Targets="Make"/>
     </Target>
-    <Target Name="JDTestAppComponents">
-        <MSBuild Projects="Pkg\JDTestAppComponents.dproj"/>
-    </Target>
-    <Target Name="JDTestAppComponents:Clean">
-        <MSBuild Projects="Pkg\JDTestAppComponents.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="JDTestAppComponents:Make">
-        <MSBuild Projects="Pkg\JDTestAppComponents.dproj" Targets="Make"/>
-    </Target>
     <Target Name="ChromeTabsDemoDX10_4">
         <MSBuild Projects="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj"/>
     </Target>
@@ -48,13 +36,13 @@
         <MSBuild Projects="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="JDTestApp;JDTestAppComponents;ChromeTabsDemoDX10_4"/>
+        <CallTarget Targets="JDTestApp;ChromeTabsDemoDX10_4"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="JDTestApp:Clean;JDTestAppComponents:Clean;ChromeTabsDemoDX10_4:Clean"/>
+        <CallTarget Targets="JDTestApp:Clean;ChromeTabsDemoDX10_4:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="JDTestApp:Make;JDTestAppComponents:Make;ChromeTabsDemoDX10_4:Make"/>
+        <CallTarget Targets="JDTestApp:Make;ChromeTabsDemoDX10_4:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
