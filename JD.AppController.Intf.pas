@@ -27,6 +27,8 @@ type
   IJDAppController = interface;
   IJDAppWindow = interface;
   IJDAppContentBase = interface;
+  IJDAppFavicon = interface;
+  IJDAppFavicons = interface;
   IJDAppMenuItem = interface;
   IJDAppMenuItems = interface;
   IJDAppShellReg = interface;
@@ -68,9 +70,11 @@ type
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
+    function GetFavicons: IJDAppFavicons stdcall;
 
     procedure Initialize stdcall;
-    procedure HandleCmdLine(const CmdLine: WideString) stdcall;
+    procedure Uninitialize stdcall;
+    procedure HandleURI(const CmdLine: WideString) stdcall;
 
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
@@ -83,7 +87,7 @@ type
   //  Manages all the tabs contained within.
   //  If all tabs are closed, the window closes.
   //  If all windows are closed, the app closes.
-  //  Implemented by TfrmMain.
+  //  Implemented by TfrmAppWindow.
   IJDAppWindow = interface
     ['{53FA7E8E-3C7E-4194-9D0F-6975C7A9457E}']
     function GetOwner: IJDAppController stdcall;

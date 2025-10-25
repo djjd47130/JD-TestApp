@@ -128,13 +128,8 @@
         <DCCReference Include="uContentBrowser.pas">
             <Form>frmContentBrowser</Form>
         </DCCReference>
-        <DCCReference Include="Plugins\uContentPluginBase.pas">
-            <Form>frmContentPluginBase</Form>
-        </DCCReference>
         <DCCReference Include="JD.ListController.pas"/>
-        <DCCReference Include="Plugins\JD.Plugins.Intf.pas"/>
         <DCCReference Include="JD.PluginManager.pas"/>
-        <DCCReference Include="Plugins\JD.Plugins.Impl.pas"/>
         <DCCReference Include="JD.AppController.Intf.pas"/>
         <DCCReference Include="JD.CmdLine.pas"/>
         <DCCReference Include="JD.AppController.Impl.pas"/>

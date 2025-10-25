@@ -33,17 +33,21 @@ type
     procedure FormCreate(Sender: TObject);
     procedure mExitClick(Sender: TObject);
     procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     FWindows: TInterfaceList;
     FAppSetup: IJDAppSetup;
+    procedure HandleCmdLine(const CmdLine: WideString);
   protected
     //From IJDAppController:
     //function GetWindowCount: Integer stdcall;
     //function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     //function GetAppSetup: IJDAppSetup stdcall;
+    //function GetFavicons: IJDAppFavicons stdcall;
 
     procedure Initialize stdcall;
-    procedure HandleCmdLine(const CmdLine: WideString) stdcall;
+    procedure Uninitialize stdcall;
+    procedure HandleURI(const URI: WideString) stdcall;
 
     //function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     //procedure CloseWindow(const Index: Integer) stdcall;
@@ -103,24 +107,45 @@ end;
 procedure TfrmAppController.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
   var Handled: Boolean);
 begin
-  //ReportMemoryLeaksOnShutdown:= True;
-
   //Tabs
   //TODO: Return image if not a web URL...
 end;
 
 procedure TfrmAppController.FormCreate(Sender: TObject);
 begin
+  //APPLICATION STARTUP LOGIC STARTS HERE
+  Initialize;
+end;
 
-  //APPLICATION STARTUP LOGIC STARTS HEREp.
+procedure TfrmAppController.FormDestroy(Sender: TObject);
+begin
+  Uninitialize;
+end;
 
-  //TEMPORARILY DISABLED
-  //HandleCmdLine(System.CmdLine);
-
+procedure TfrmAppController.Initialize;
+begin
+  //TODO: Initialize all internal stuff...
 
   //Create the initial "main" form...
   var F:= TfrmAppWindow.Create(Application, nil);
   F.Show;
+
+  //Load saved windows / tabs...
+
+  //Load icon cache...
+
+  //Finally, handle the command line...
+  HandleCmdLine(CmdLine);
+end;
+
+procedure TfrmAppController.Uninitialize;
+begin
+  //TODO: Save icon cache...
+
+  //TODO: Save window / tab states...
+
+  //TODO: Destroy tabs and app windows...
+
 end;
 
 procedure TfrmAppController.HandleCmdLine(const CmdLine: WideString);
@@ -133,9 +158,7 @@ begin
 
     if Trim(Cmd.OpenFilename) <> '' then  begin
       //TODO: Open filename as URI...
-      //frmAppWindow.OpenNewBrowserTab(Cmd.OpenFilename);
-      //  Can't do this because frmAppWindow isn't created yet!
-
+      HandleURI(Cmd.OpenFilename);
     end else begin
       //TODO: Open new tab to default...
 
@@ -157,14 +180,16 @@ begin
     end;
 
 
+
   finally
     Cmd.Free;
   end;
 end;
 
-procedure TfrmAppController.Initialize;
+procedure TfrmAppController.HandleURI(const URI: WideString);
 begin
-  //TODO: Initialize all internal stuff...
+  //Handle internal URI / Shell command...
+
 end;
 
 procedure TfrmAppController.mExitClick(Sender: TObject);
