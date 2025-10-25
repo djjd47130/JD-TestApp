@@ -15,7 +15,6 @@ uses
   uAppSetup in 'uAppSetup.pas' {frmAppSetup},
   uContentBrowser in 'uContentBrowser.pas' {frmContentBrowser},
   JD.ListController in 'JD.ListController.pas',
-  JD.PluginManager in 'JD.PluginManager.pas',
   JD.AppController.Intf in 'JD.AppController.Intf.pas',
   JD.CmdLine in 'JD.CmdLine.pas',
   JD.AppController.Impl in 'JD.AppController.Impl.pas',

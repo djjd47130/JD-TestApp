@@ -94,6 +94,8 @@ type
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppContentBase stdcall;
 
+    procedure Show stdcall;
+    procedure Close stdcall;
     function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseTab(const TabIndex: Integer) stdcall;
     function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;

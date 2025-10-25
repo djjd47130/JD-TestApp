@@ -22,7 +22,7 @@ uses
   Vcl.Menus, ElComponent, ElBaseComp, ElTray, Vcl.AppEvnts, System.ImageList, Vcl.ImgList;
 
 type
-  TfrmAppController = class(TForm {, IJDAppController} )
+  TfrmAppController = class(TForm, IJDAppController)
     imgFavicons16: TImageList;
     Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
@@ -35,27 +35,26 @@ type
     procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
     procedure FormDestroy(Sender: TObject);
   private
+    FPlugins: TInterfaceList;
     FWindows: TInterfaceList;
     FAppSetup: IJDAppSetup;
+    FFavicons: IJDAppFavicons;
     procedure HandleCmdLine(const CmdLine: WideString);
   protected
     //From IJDAppController:
-    //function GetWindowCount: Integer stdcall;
-    //function GetWindow(const Index: Integer): IJDAppWindow stdcall;
-    //function GetAppSetup: IJDAppSetup stdcall;
-    //function GetFavicons: IJDAppFavicons stdcall;
-
+    function GetWindowCount: Integer stdcall;
+    function GetWindow(const Index: Integer): IJDAppWindow stdcall;
+    function GetAppSetup: IJDAppSetup stdcall;
+    function GetFavicons: IJDAppFavicons stdcall;
+  public
+    //From IJDAppController:
     procedure Initialize stdcall;
     procedure Uninitialize stdcall;
     procedure HandleURI(const URI: WideString) stdcall;
-
-    //function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
-    //procedure CloseWindow(const Index: Integer) stdcall;
-
-    //property WindowCount: Integer read GetWindowCount;
-    //property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
-  public
-
+    function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
+    procedure CloseWindow(const Index: Integer) stdcall;
+    property WindowCount: Integer read GetWindowCount;
+    property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
   end;
 
 var
@@ -104,38 +103,63 @@ end;
 
 { TfrmAppController }
 
-procedure TfrmAppController.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
-  var Handled: Boolean);
-begin
-  //Tabs
-  //TODO: Return image if not a web URL...
-end;
-
 procedure TfrmAppController.FormCreate(Sender: TObject);
 begin
+
+  ReportMemoryLeaksOnShutdown:= True;
+
   //APPLICATION STARTUP LOGIC STARTS HERE
+  FPlugins:= TInterfaceList.Create;
+  FWindows:= TInterfaceList.Create;
+  //TODO: App Setup...
+  //TODO: Favicons...
+
   Initialize;
 end;
 
 procedure TfrmAppController.FormDestroy(Sender: TObject);
 begin
   Uninitialize;
+
+  //TODO: Favicons...
+  //TODO: App Setup...
+  FreeAndNil(FWindows);
+  FreeAndNil(FPlugins);
+end;
+
+function TfrmAppController.GetAppSetup: IJDAppSetup;
+begin
+  Result:= FAppSetup;
+end;
+
+function TfrmAppController.GetFavicons: IJDAppFavicons;
+begin
+  Result:= FFavicons;
+end;
+
+function TfrmAppController.GetWindow(const Index: Integer): IJDAppWindow;
+begin
+  Result:= IJDAppWindow(FWindows[Index]);
+end;
+
+function TfrmAppController.GetWindowCount: Integer;
+begin
+  Result:= FWindows.Count;
 end;
 
 procedure TfrmAppController.Initialize;
 begin
-  //TODO: Initialize all internal stuff...
-
   //Create the initial "main" form...
-  var F:= TfrmAppWindow.Create(Application, nil);
-  F.Show;
+  CreateNewWindow('');
+  //var F:= TfrmAppWindow.Create(Application, nil);
+  //F.Show;
 
   //Load saved windows / tabs...
 
   //Load icon cache...
 
   //Finally, handle the command line...
-  HandleCmdLine(CmdLine);
+  HandleCmdLine(System.CmdLine);
 end;
 
 procedure TfrmAppController.Uninitialize;
@@ -190,6 +214,25 @@ procedure TfrmAppController.HandleURI(const URI: WideString);
 begin
   //Handle internal URI / Shell command...
 
+end;
+
+procedure TfrmAppController.CloseWindow(const Index: Integer);
+begin
+  var F:= GetWindow(Index);
+  F.Close;
+end;
+
+function TfrmAppController.CreateNewWindow(const URI: WideString): IJDAppWindow;
+begin
+  Result:= TfrmAppWindow.Create(Application, nil);
+  Result.Show;
+end;
+
+procedure TfrmAppController.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
+  var Handled: Boolean);
+begin
+  //Tabs
+  //TODO: Return image if not a web URL...
 end;
 
 procedure TfrmAppController.mExitClick(Sender: TObject);

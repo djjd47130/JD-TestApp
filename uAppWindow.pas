@@ -96,6 +96,8 @@ type
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppContentBase stdcall;
 
+    procedure Show stdcall; reintroduce;
+    procedure Close stdcall; reintroduce;
     function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseTab(const TabIndex: Integer) stdcall;
     function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;
@@ -393,6 +395,11 @@ begin
   end;
 end;
 
+procedure TfrmAppWindow.Show;
+begin
+  inherited Show;
+end;
+
 procedure TfrmAppWindow.ShowMenu(const Value: Boolean);
 begin
   //TODO: Change mechanism to populate menu with registered menu items...
@@ -449,6 +456,11 @@ end;
 function TfrmAppWindow.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase;
 begin
   //TODO: Move tab and content to destination...
+end;
+
+procedure TfrmAppWindow.Close;
+begin
+  inherited Close;
 end;
 
 procedure TfrmAppWindow.CloseTab(const TabIndex: Integer);

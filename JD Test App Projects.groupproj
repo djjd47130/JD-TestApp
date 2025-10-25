@@ -9,13 +9,7 @@
         <Projects Include="Pkg\JDTestAppComponents.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Plugins\Clock\JDClock.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="New Test\NewTest.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -44,15 +38,6 @@
     <Target Name="JDTestAppComponents:Make">
         <MSBuild Projects="Pkg\JDTestAppComponents.dproj" Targets="Make"/>
     </Target>
-    <Target Name="JDClock">
-        <MSBuild Projects="Plugins\Clock\JDClock.dproj"/>
-    </Target>
-    <Target Name="JDClock:Clean">
-        <MSBuild Projects="Plugins\Clock\JDClock.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="JDClock:Make">
-        <MSBuild Projects="Plugins\Clock\JDClock.dproj" Targets="Make"/>
-    </Target>
     <Target Name="ChromeTabsDemoDX10_4">
         <MSBuild Projects="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj"/>
     </Target>
@@ -62,23 +47,14 @@
     <Target Name="ChromeTabsDemoDX10_4:Make">
         <MSBuild Projects="..\TChromeTabs\Demo\ChromeTabsDemoDX10_4.dproj" Targets="Make"/>
     </Target>
-    <Target Name="NewTest">
-        <MSBuild Projects="New Test\NewTest.dproj"/>
-    </Target>
-    <Target Name="NewTest:Clean">
-        <MSBuild Projects="New Test\NewTest.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="NewTest:Make">
-        <MSBuild Projects="New Test\NewTest.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="JDTestApp;JDTestAppComponents;JDClock;ChromeTabsDemoDX10_4;NewTest"/>
+        <CallTarget Targets="JDTestApp;JDTestAppComponents;ChromeTabsDemoDX10_4"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="JDTestApp:Clean;JDTestAppComponents:Clean;JDClock:Clean;ChromeTabsDemoDX10_4:Clean;NewTest:Clean"/>
+        <CallTarget Targets="JDTestApp:Clean;JDTestAppComponents:Clean;ChromeTabsDemoDX10_4:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="JDTestApp:Make;JDTestAppComponents:Make;JDClock:Make;ChromeTabsDemoDX10_4:Make;NewTest:Make"/>
+        <CallTarget Targets="JDTestApp:Make;JDTestAppComponents:Make;ChromeTabsDemoDX10_4:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
