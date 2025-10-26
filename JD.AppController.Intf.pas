@@ -72,8 +72,8 @@ type
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
 
-    procedure Initialize stdcall;
-    procedure Uninitialize stdcall;
+    //procedure Initialize stdcall;
+    //procedure Uninitialize stdcall;
     procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const CmdLine: WideString) stdcall;

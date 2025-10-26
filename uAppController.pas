@@ -30,10 +30,13 @@ type
     pmTray: TPopupMenu;
     mShow: TMenuItem;
     mExit: TMenuItem;
+    mNewWindow: TMenuItem;
     procedure FormCreate(Sender: TObject);
-    procedure mExitClick(Sender: TObject);
-    procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
     procedure FormDestroy(Sender: TObject);
+    procedure mExitClick(Sender: TObject);
+    procedure mShowClick(Sender: TObject);
+    procedure FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef; var Handled: Boolean);
+    procedure mNewWindowClick(Sender: TObject);
   private
     FPlugins: TInterfaceList;
     FWindows: TInterfaceList;
@@ -74,7 +77,8 @@ implementation
 {$R *.dfm}
 
 uses
-  JD.CmdLine;
+  JD.CmdLine,
+  IdURI;
 
 var
   _AppController: IJDAppController;
@@ -179,6 +183,12 @@ begin
   try
     Cmd.AsString:= CmdLine;
 
+    //TODO: Check for existing app instance...
+    //  If none found, proceed...
+    //  If instance found...
+    //  - If URI provided, show and open new tab in active window...
+    //  - If no URI provided, just show active window...
+
     if Trim(Cmd.OpenFilename) <> '' then  begin
       //TODO: Open filename as URI...
       HandleURI(Cmd.OpenFilename);
@@ -212,7 +222,25 @@ end;
 procedure TfrmAppController.HandleURI(const URI: WideString);
 begin
   //Handle internal URI / Shell command...
+  //TODO: Strategically decide how to handle URI. For example, some things might
+  //  want to prevent duplicate instances, and open the existing instance.
+
   CreateNewWindow(URI);
+
+end;
+
+function TfrmAppController.CreateNewWindow(const URI: WideString): IJDAppWindow;
+begin
+  Result:= TfrmAppWindow.Create(nil);
+  Result._AddRef;
+  FWindows.Add(Result);
+
+  Result.Show;
+  //Somehow this became necessary...?
+  Result.Width:= Screen.Width div 2;
+  Result.Height:= Screen.Height div 2;
+  Result.Left:= Screen.Width div 4;
+  Result.Top:= Screen.Height div 4;
 
 end;
 
@@ -223,23 +251,36 @@ begin
   F.Close;
 end;
 
-function TfrmAppController.CreateNewWindow(const URI: WideString): IJDAppWindow;
-begin
-  Result:= TfrmAppWindow.Create(Application, nil);
-  FWindows.Add(Result);
-  Result.Show;
-end;
-
 procedure TfrmAppController.FaviconsLookupFavicon(Sender: TObject; const URI: string; Ref: TJDFaviconRef;
   var Handled: Boolean);
 begin
   //Tabs
   //TODO: Return image if not a web URL...
+  var U:= TIdURI.Create(URI);
+  try
+    if (not SameText(U.Protocol, 'http')) and (not SameText(U.Protocol, 'https')) then begin
+      //Protocol is not HTTP or HTTPS, use different approach to fetch favicon...
+
+    end;
+  finally
+    U.Free;
+  end;
 end;
 
 procedure TfrmAppController.mExitClick(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmAppController.mNewWindowClick(Sender: TObject);
+begin
+  AppController.CreateNewWindow('');
+end;
+
+procedure TfrmAppController.mShowClick(Sender: TObject);
+begin
+  if AppController.WindowCount > 0 then
+    Self.Windows[0].Show;
 end;
 
 procedure TfrmAppController.RegisterWindow(AWindow: IJDAppWindow);

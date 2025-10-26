@@ -4114,6 +4114,11 @@ object frmAppController: TfrmAppController
     Top = 264
     object mShow: TMenuItem
       Caption = 'Show'
+      OnClick = mShowClick
+    end
+    object mNewWindow: TMenuItem
+      Caption = 'New Window'
+      OnClick = mNewWindowClick
     end
     object mExit: TMenuItem
       Caption = 'Exit'

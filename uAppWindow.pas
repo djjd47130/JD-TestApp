@@ -78,7 +78,7 @@ type
     procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    FAppController: IJDAppController;
+    //FAppController: IJDAppController;
     FTabController: TJDTabController;
     FMenu: TfrmMainMenu;
     FFullScreen: Boolean;
@@ -115,7 +115,7 @@ type
     property Width: Integer read GetTop write SetTop;
     property Height: Integer read GetHeight write SetHeight;
   public
-    constructor Create(AOwner: TComponent; AAppController: IJDAppController); reintroduce; virtual;
+    //constructor Create(AOwner: TComponent; AAppController: IJDAppController); reintroduce; virtual;
 
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
@@ -129,7 +129,7 @@ type
 var
   frmAppWindow: TfrmAppWindow;
 
-function TabController(const MainForm: TForm): TJDTabController;
+function TabController(const AppWindow: TForm): TJDTabController;
 
 implementation
 
@@ -142,30 +142,19 @@ uses
 
 {$R *.dfm}
 
-
 procedure MakeFormIndependent(Form: TForm);
 begin
   Application.MainFormOnTaskbar := False;
   ShowWindow(Application.Handle, SW_HIDE);
-
-
   SetWindowLong(Form.Handle, GWL_HWNDPARENT, 0);
 end;
 
-function TabController(const MainForm: TForm): TJDTabController;
+function TabController(const AppWindow: TForm): TJDTabController;
 begin
-  Result:= TfrmAppWindow(MainForm).TabController;
+  Result:= TfrmAppWindow(AppWindow).TabController;
 end;
-
-
 
 { TfrmAppWindow }
-
-constructor TfrmAppWindow.Create(AOwner: TComponent; AAppController: IJDAppController);
-begin
-  inherited Create(AOwner);
-  FAppController:= AAppController;
-end;
 
 procedure TfrmAppWindow.FormCreate(Sender: TObject);
 begin
@@ -181,6 +170,7 @@ begin
   ColorManager.BaseColor:= TStyleManager.ActiveStyle.GetStyleColor(TStyleColor.scWindow);
   pContent.Align:= alClient;
 
+  Position := poDesigned;
   Width:= 1200;
   Height:= 800;
 
@@ -200,8 +190,6 @@ begin
 
   //Give form its own taskbar icon...
   MakeFormIndependent(Self);
-
-  Position := poDesigned;
 
   FLoaded:= True;
 
@@ -229,6 +217,7 @@ procedure TfrmAppWindow.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action:= caFree;
   AppController.UnregisterWindow(Self);
+  Self._Release;
 
   //Tabs
   FreeAndNil(FTabController);
@@ -465,7 +454,7 @@ end;
 
 function TfrmAppWindow.GetOwner: IJDAppController;
 begin
-  Result:= FAppController;
+  Result:= AppController;
 end;
 
 function TfrmAppWindow.GetTab(const Index: Integer): IJDAppContentBase;

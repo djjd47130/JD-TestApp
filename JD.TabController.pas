@@ -4,7 +4,7 @@ unit JD.TabController;
   JD Tab Controller
 
   TODO
-  - Change to support multiple forms
+  - Eliminate this unit and move to use new App Controller structure
 
 *)
 
