@@ -104,6 +104,8 @@ type
     procedure SetWidth(const Value: Integer) stdcall;
     procedure SetHeight(const Value: Integer) stdcall;
 
+  public
+    //From IJDAppWindow
     procedure Show stdcall; reintroduce;
     procedure Close stdcall; reintroduce;
     function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
@@ -307,7 +309,7 @@ begin
   //Dragged tab has been dropped somewhere - determine where and how to handle...
   //Task #9
   //Three scenarios:
-  //  - Within its original container - Default handling
+  //  - Within its original container - Default handling - No action needed
   //  - Within container in another window - Move tab and content to other window's tabs tabs
   //  - Anywhere else - Move tab and content to new window
 
@@ -324,18 +326,20 @@ begin
     WinY := Mouse.CursorPos.Y - DragTabObject.DragCursorOffset.Y - (Height - ClientHeight) + ((Width - ClientWidth) div 2);
 
     // Create a new form
-    //TODO: Create from within tab handler...
     NewForm:= AppController.CreateNewWindow('');
     NewForm.Left := WinX;
     NewForm.Top := WinY;
-    NewForm.Show;
 
-    //TODO: Move content form and tab to new location...
-    //TabDropOptions := [tdDeleteDraggedTab]; //Tab controller already has its own delete method
-    var OldTab:= TabController.Tabs[DragTabObject.DropTabIndex];
-    //TODO
+    //TODO: MOVE content form and tab to new location...
+    TabDropOptions := [];
+    //var OldTab:= TabController.Tabs[DragTabObject.DropTabIndex];
     //NewForm.TabController.CreateTab()
-    TabController.DeleteTab(OldTab.Index);
+    //TabController.DeleteTab(DragTabObject.DropTabIndex);
+
+
+    //TODO: IMPLEMENT NEW METHOD:
+    //Self.MoveTab(DragTabObject.DropTabIndex, NewForm);
+
   end;
 end;
 

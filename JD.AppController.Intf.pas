@@ -69,11 +69,11 @@ type
     ['{48EC9E4B-C5F6-4B41-B5BD-8D609B59FD0A}']
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
+    function GetTabCount: Integer stdcall;
+    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
 
-    //procedure Initialize stdcall;
-    //procedure Uninitialize stdcall;
     procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const CmdLine: WideString) stdcall;
@@ -83,6 +83,8 @@ type
 
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
+    property TabCount: Integer read GetTabCount;
+    property Tabs[const Index: Integer]: IJDAppContentBase read GetTab;
   end;
 
 
@@ -216,7 +218,7 @@ type
 
 
 
-  TJDPluginExecuteEvent = procedure(Sender: TObject; Item: IJDAppMenuItem) of object;
+  TJDAppShellExecuteEvent = procedure(Sender: TObject; Item: IJDAppMenuItem) of object;
 
 
   /// <summary>
@@ -229,8 +231,8 @@ type
     procedure SetShellRoot(const Value: WideString); stdcall;
     function GetShellPath: WideString; stdcall;
     procedure SetShellPath(const Value: WideString); stdcall;
-    function GetOnExecute: TJDPluginExecuteEvent;
-    procedure SetOnExecute(const Value: TJDPluginExecuteEvent);
+    function GetOnExecute: TJDAppShellExecuteEvent;
+    procedure SetOnExecute(const Value: TJDAppShellExecuteEvent);
 
     /// <summary>
     /// Executes a shell command associated with this registered entry.
@@ -240,7 +242,7 @@ type
 
     property ShellRoot: WideString read GetShellRoot write SetShellRoot;
     property ShellPath: WideString read GetShellPath write SetShellPath;
-    property OnExecute: TJDPluginExecuteEvent read GetOnExecute write SetOnExecute;
+    property OnExecute: TJDAppShellExecuteEvent read GetOnExecute write SetOnExecute;
   end;
 
   /// <summary>
@@ -259,6 +261,8 @@ type
     property Items[const Index: Integer]: IJDAppShellReg read GetItem; default;
   end;
 
+
+
   /// <summary>
   /// Represents a single item to be listed in application's manu menu.
   /// Task #12
@@ -271,13 +275,13 @@ type
     function GetName: WideString; stdcall;
     procedure SetName(const Value: WideString); stdcall;
     procedure PaintIcon(const DC: HDC; const Rect: TRect); stdcall;
-    function GetOnClick: TJDPluginExecuteEvent; stdcall;
-    procedure SetOnClick(const Value: TJDPluginExecuteEvent); stdcall;
+    function GetOnClick: TJDAppShellExecuteEvent; stdcall;
+    procedure SetOnClick(const Value: TJDAppShellExecuteEvent); stdcall;
 
     property Owner: IJDAppMenuItems read GetOwner;
     property Caption: WideString read GetCaption write SetCaption;
     property Name: WideString read GetName write SetName;
-    property OnClick: TJDPluginExecuteEvent read GetOnClick write SetOnClick;
+    property OnClick: TJDAppShellExecuteEvent read GetOnClick write SetOnClick;
   end;
 
   /// <summary>

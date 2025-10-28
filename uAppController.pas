@@ -40,19 +40,22 @@ type
   private
     FPlugins: TInterfaceList;
     FWindows: TInterfaceList;
+    FTabs: TInterfaceList;
     FAppSetup: IJDAppSetup;
     FFavicons: IJDAppFavicons;
+    procedure Initialize stdcall;
+    procedure Uninitialize stdcall;
     procedure HandleCmdLine(const CmdLine: WideString);
   protected
     //From IJDAppController:
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
+    function GetTabCount: Integer stdcall;
+    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
   public
     //From IJDAppController:
-    procedure Initialize stdcall;
-    procedure Uninitialize stdcall;
     procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const URI: WideString) stdcall;
@@ -60,6 +63,8 @@ type
     procedure CloseWindow(const Index: Integer) stdcall;
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
+    property TabCount: Integer read GetTabCount;
+    property Tabs[const Index: Integer]: IJDAppContentBase read GetTab;
   end;
 
 var
@@ -113,6 +118,7 @@ begin
   //APPLICATION STARTUP LOGIC STARTS HERE
   FPlugins:= TInterfaceList.Create;
   FWindows:= TInterfaceList.Create;
+  FTabs:= TInterfaceList.Create;
   //TODO: App Setup...
   //TODO: Favicons...
 
@@ -125,6 +131,7 @@ begin
 
   //TODO: Favicons...
   //TODO: App Setup...
+  FreeAndNil(FTabs);
   FreeAndNil(FWindows);
   FreeAndNil(FPlugins);
 end;
@@ -137,6 +144,16 @@ end;
 function TfrmAppController.GetFavicons: IJDAppFavicons;
 begin
   Result:= FFavicons;
+end;
+
+function TfrmAppController.GetTab(const Index: Integer): IJDAppContentBase;
+begin
+  //TODO
+end;
+
+function TfrmAppController.GetTabCount: Integer;
+begin
+  //TODO
 end;
 
 function TfrmAppController.GetWindow(const Index: Integer): IJDAppWindow;
@@ -235,12 +252,15 @@ begin
   Result._AddRef;
   FWindows.Add(Result);
 
-  Result.Show;
   //Somehow this became necessary...?
-  Result.Width:= Screen.Width div 2;
-  Result.Height:= Screen.Height div 2;
-  Result.Left:= Screen.Width div 4;
-  Result.Top:= Screen.Height div 4;
+  Result.Width:= (Screen.Width div 4) * 3;
+  Result.Height:= (Screen.Height div 4) * 3;
+  Result.Left:= (Screen.Width div 2) - (Result.Width div 2);
+  Result.Top:= (Screen.Height div 2) - (Result.Height div 2);
+
+  Result.Show;
+
+  //TODO: Navigate to URI...
 
 end;
 
