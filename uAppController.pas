@@ -18,7 +18,9 @@ uses
   JD.Favicons,
   uAppWindow,
   uAppSetup,
+  XSuperObject,
   JD.AppController.Intf,
+  JD.AppController.Impl,
   Vcl.Menus, ElComponent, ElBaseComp, ElTray, Vcl.AppEvnts, System.ImageList, Vcl.ImgList;
 
 type
@@ -45,13 +47,18 @@ type
     FFavicons: IJDAppFavicons;
     procedure Initialize stdcall;
     procedure Uninitialize stdcall;
+    procedure InitPlugins;
+    procedure UninitPlugins;
     procedure HandleCmdLine(const CmdLine: WideString);
+    function PluginsRegFilename: WideString;
   protected
     //From IJDAppController:
+    function GetPluginCount: Integer stdcall;
+    function GetPlugin(const Index: Integer): IJDAppPlugin stdcall;
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     function GetTabCount: Integer stdcall;
-    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetTab(const Index: Integer): IJDAppTabContent stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
   public
@@ -61,19 +68,20 @@ type
     procedure HandleURI(const URI: WideString) stdcall;
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
+
+    property PluginCount: Integer read GetPluginCount;
+    property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
     property TabCount: Integer read GetTabCount;
-    property Tabs[const Index: Integer]: IJDAppContentBase read GetTab;
+    property Tabs[const Index: Integer]: IJDAppTabContent read GetTab;
+    property AppSetup: IJDAppSetup read GetAppSetup;
   end;
 
 var
   frmAppController: TfrmAppController;
 
 function AppController: IJDAppController;
-
-
-
 
 function AppSetup: TAppSetup;
 
@@ -83,7 +91,8 @@ implementation
 
 uses
   JD.CmdLine,
-  IdURI;
+  IdURI,
+  System.IOUtils;
 
 var
   _AppController: IJDAppController;
@@ -95,16 +104,20 @@ begin
   Result:= _AppController;
 end;
 
+
+
+//TODO: OLD, migrage into TfrmAppController using new IJDAppSetup...
 var
   _AppSetup: TAppSetup;
 
-//TODO: OLD, migrage into TfrmAppController...
 function AppSetup: TAppSetup;
 begin
   if _AppSetup = nil then
     _AppSetup:= TAppSetup.Create;
   Result:= _AppSetup;
 end;
+
+
 
 { TfrmAppController }
 
@@ -119,7 +132,8 @@ begin
   FPlugins:= TInterfaceList.Create;
   FWindows:= TInterfaceList.Create;
   FTabs:= TInterfaceList.Create;
-  //TODO: App Setup...
+  FAppSetup:= TJDAppSetup.Create;
+  FAppSetup._AddRef;
   //TODO: Favicons...
 
   Initialize;
@@ -130,10 +144,81 @@ begin
   Uninitialize;
 
   //TODO: Favicons...
-  //TODO: App Setup...
+  FAppSetup._Release;
+  FAppSetup:= nil;
   FreeAndNil(FTabs);
   FreeAndNil(FWindows);
   FreeAndNil(FPlugins);
+end;
+
+procedure TfrmAppController.Initialize;
+begin
+  InitPlugins;
+
+  //TODO: Load saved windows / tabs...
+
+  //TODO: Load icon cache...
+
+  //Handle the command line, if any...
+  {$WARN SYMBOL_PLATFORM OFF}
+  HandleCmdLine(System.CmdLine);
+  {$WARN SYMBOL_PLATFORM ON}
+
+  Self.Hide;
+end;
+
+procedure TfrmAppController.Uninitialize;
+begin
+  //TODO: Save icon cache...
+
+  //TODO: Save window / tab states...
+
+  //TODO: Destroy tabs and app windows...
+
+  UninitPlugins;
+end;
+
+function TfrmAppController.PluginsRegFilename: WideString;
+begin
+  Result:= ExtractFilePath(Application.ExeName);
+  Result:= TPath.Combine(Result, FAppSetup.PluginsReg);
+end;
+
+procedure TfrmAppController.InitPlugins;
+begin
+  //TODO: Load all registered plugins...
+  var O: ISuperObject:= TSuperObject.ParseFile(PluginsRegFilename);
+  var A: ISuperArray:= O.A['plugins'];
+  for var X := 0 to A.Length-1 do begin
+    var PO:= A.O[X];
+    var PluginFilename:= PO.S['path'];
+    var PluginEnabled:= PO.B['enabled'];
+    if PluginEnabled then begin
+      if FileExists(PluginFilename) then begin
+
+        //TODO: Load DLL and get proc addresses...
+
+        //TODO: Instantiate plugin object...
+
+        //TODO: Add to registered plugin list...
+
+      end else begin
+        //TODO: Plugin file not found...
+
+      end;
+    end;
+  end;
+
+end;
+
+procedure TfrmAppController.UninitPlugins;
+begin
+  //TODO: Unload all loaded plugins...
+  for var X := 0 to FPlugins.Count-1 do begin
+    var P:= Self.Plugins[X];
+    //TODO: Gracefully destruct plugin object...
+
+  end;
 end;
 
 function TfrmAppController.GetAppSetup: IJDAppSetup;
@@ -146,14 +231,24 @@ begin
   Result:= FFavicons;
 end;
 
-function TfrmAppController.GetTab(const Index: Integer): IJDAppContentBase;
+function TfrmAppController.GetPlugin(const Index: Integer): IJDAppPlugin;
 begin
-  //TODO
+  Result:= IJDAppPlugin(FPlugins[Index]);
+end;
+
+function TfrmAppController.GetPluginCount: Integer;
+begin
+  Result:= FPlugins.Count;
+end;
+
+function TfrmAppController.GetTab(const Index: Integer): IJDAppTabContent;
+begin
+  Result:= IJDAppTabContent(FTabs[Index]);
 end;
 
 function TfrmAppController.GetTabCount: Integer;
 begin
-  //TODO
+  Result:= FTabs.Count;
 end;
 
 function TfrmAppController.GetWindow(const Index: Integer): IJDAppWindow;
@@ -164,32 +259,6 @@ end;
 function TfrmAppController.GetWindowCount: Integer;
 begin
   Result:= FWindows.Count;
-end;
-
-procedure TfrmAppController.Initialize;
-begin
-  //TODO: Load all plugins...
-
-  //TODO: Load saved windows / tabs...
-
-  //TODO: Load icon cache...
-
-  //Handle the command line, if any...
-  {$WARN SYMBOL_PLATFORM OFF}
-  HandleCmdLine(System.CmdLine);
-  {$WARN SYMBOL_PLATFORM ON}
-end;
-
-procedure TfrmAppController.Uninitialize;
-begin
-  //TODO: Save icon cache...
-
-  //TODO: Save window / tab states...
-
-  //TODO: Destroy tabs and app windows...
-
-  //TODO: Unload all plugins...
-
 end;
 
 procedure TfrmAppController.HandleCmdLine(const CmdLine: WideString);

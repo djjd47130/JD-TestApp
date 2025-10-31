@@ -4,7 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentBase, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  uAppTabContent,
+  Vcl.StdCtrls, Vcl.ExtCtrls,
   XSuperObject,
   //JD.TMDB.Common,
   //JD.TMDB.Intf,
@@ -33,7 +35,7 @@ type
 
   end;
 
-  TfrmAppSetup = class(TfrmContentBase)
+  TfrmAppSetup = class(TfrmJDAppTabContent)
     btnSave: TJDFontButton;
     Pages: TPageControl;
     tabBrowser: TTabSheet;
@@ -52,6 +54,7 @@ type
     ComboListItem1: TComboListItem;
     ComboListItem4: TComboListItem;
     ListSwitchItem4: TListSwitchItem;
+    tabMainMenu: TTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);

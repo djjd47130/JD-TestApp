@@ -8,7 +8,7 @@ uses
   Vcl.Styles,
   uAppController in 'uAppController.pas' {frmAppController},
   uAppWindow in 'uAppWindow.pas' {frmAppWindow},
-  uContentBase in 'uContentBase.pas' {frmContentBase},
+  uAppTabContent in 'uAppTabContent.pas' {frmJDAppTabContent},
   uContentListBase in 'uContentListBase.pas' {frmContentListBase},
   JD.TabController in 'JD.TabController.pas',
   uMainMenu in 'uMainMenu.pas' {frmMainMenu},

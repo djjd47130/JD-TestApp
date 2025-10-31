@@ -26,7 +26,8 @@ type
   IJDAppListItems = interface;
   IJDAppController = interface;
   IJDAppWindow = interface;
-  IJDAppContentBase = interface;
+  IJDAppTabContent = interface;
+  IJDAppPlugin = interface;
   IJDAppFavicon = interface;
   IJDAppFavicons = interface;
   IJDAppMenuItem = interface;
@@ -41,6 +42,7 @@ type
   //Base for any list item app-wide.
   IJDAppListItem = interface
     ['{C868745A-4368-4494-A8EF-91125CFB66DE}']
+    function GetOwner: IJDAppListItems stdcall;
     function GetCaption: WideString stdcall;
     function GetIndex: Integer stdcall;
     function GetID: WideString stdcall;
@@ -56,6 +58,10 @@ type
     function GetCount: Integer stdcall;
     function GetItem(const Index: Integer): IJDAppListItem stdcall;
 
+    function IndexOf(const Item: IJDAppListItem): Integer stdcall;
+    procedure Clear stdcall;
+    procedure Delete(const Index: Integer) stdcall;
+
     property Count: Integer read GetCount;
     property Items[const Index: Integer]: IJDAppListItem read GetItem; default;
   end;
@@ -67,10 +73,12 @@ type
   //  Implemented by TfrmAppController
   IJDAppController = interface
     ['{48EC9E4B-C5F6-4B41-B5BD-8D609B59FD0A}']
+    function GetPluginCount: Integer stdcall;
+    function GetPlugin(const Index: Integer): IJDAppPlugin stdcall;
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     function GetTabCount: Integer stdcall;
-    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetTab(const Index: Integer): IJDAppTabContent stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
 
@@ -81,10 +89,12 @@ type
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
 
+    property PluginCount: Integer read GetPluginCount;
+    property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
     property TabCount: Integer read GetTabCount;
-    property Tabs[const Index: Integer]: IJDAppContentBase read GetTab;
+    property Tabs[const Index: Integer]: IJDAppTabContent read GetTab;
   end;
 
 
@@ -98,7 +108,7 @@ type
     ['{53FA7E8E-3C7E-4194-9D0F-6975C7A9457E}']
     function GetOwner: IJDAppController stdcall;
     function GetTabCount: Integer stdcall;
-    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetTab(const Index: Integer): IJDAppTabContent stdcall;
     function GetLeft: Integer stdcall;
     function GetTop: Integer stdcall;
     function GetWidth: Integer stdcall;
@@ -110,13 +120,13 @@ type
 
     procedure Show stdcall;
     procedure Close stdcall;
-    function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
+    function CreateNewTab(const URI: WideString = ''): IJDAppTabContent stdcall;
     procedure CloseTab(const TabIndex: Integer) stdcall;
-    function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;
+    function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppTabContent stdcall;
 
     property Owner: IJDAppController read GetOwner;
     property TabCount: Integer read GetTabCount;
-    property Tabs[const Index: Integer]: IJDAppContentBase read GetTab; default;
+    property Tabs[const Index: Integer]: IJDAppTabContent read GetTab; default;
 
     property Left: Integer read GetLeft write SetLeft;
     property Top: Integer read GetTop write SetTop;
@@ -129,7 +139,7 @@ type
   //Represents a single tab and its content.
   //  Can be moved between different app windows, or into its own new window.
   //  Implemented by TfrmContentBase.
-  IJDAppContentBase = interface
+  IJDAppTabContent = interface
     ['{A2F5D76D-99D6-4AFE-9D2A-12918478FE3C}']
     function GetOwner: IJDAppController stdcall;
     function GetParent: IJDAppWindow stdcall;
@@ -159,21 +169,6 @@ type
 
 
 
-  IJDAppFavicon = interface(IJDAppListItem)
-    ['{6037B0A3-CB0D-41E9-BB3C-A963D90141AF}']
-    function GetProtocol: WideString stdcall;
-    function GetDomain: WideString stdcall;
-
-  end;
-
-  IJDAppFavicons = interface(IJDAppListItems)
-    ['{C565C692-0866-4CDC-93D4-F8AFFCD94C74}']
-    function GetItem(const Index: Integer): IJDAppFavicon stdcall;
-
-  end;
-
-
-
   IJDAppSetup = interface
     ['{4813EFB1-1AC7-402E-ABD4-93BA1EE14E49}']
     function GetS(const N: WideString): WideString stdcall;
@@ -181,13 +176,56 @@ type
     function GetB(const N: WideString): Boolean stdcall;
     function GetF(const N: WideString): Double stdcall;
     function GetD(const N: WideString): TDateTime stdcall;
+
+    procedure SetS(const N: WideString; const Value: WideString) stdcall;
+    procedure SetI(const N: WideString; const Value: Integer) stdcall;
+    procedure SetB(const N: WideString; const Value: Boolean) stdcall;
+    procedure SetF(const N: WideString; const Value: Double) stdcall;
+    procedure SetD(const N: WideString; const Value: TDateTime) stdcall;
     //TODO
+
+    function GetPluginsReg: WideString stdcall;
+    function GetAppStartupCmd: WideString stdcall;
+    procedure SetAppStartupCmd(const Value: WideString) stdcall;
 
     function SetupFilename: WideString stdcall;
     procedure LoadSetup stdcall;
     procedure SaveSetup stdcall;
     function IsConfigured: Boolean stdcall;
 
+    /// <summary>
+    /// Full path and filename to JSON file containing plugin registration.
+    /// </summary>
+    property PluginsReg: WideString read GetPluginsReg;
+
+    /// <summary>
+    /// What command to execute on app startup, if any.
+    /// </summary>
+    property AppStartupCmd: WideString read GetAppStartupCmd write SetAppStartupCmd;
+    //TODO: New Tab Button...
+    //TODO: Auto Collapse Main Menu...
+
+  end;
+
+
+
+  IJDAppFavicon = interface(IJDAppListItem)
+    ['{6037B0A3-CB0D-41E9-BB3C-A963D90141AF}']
+    function GetProtocol: WideString stdcall;
+    function GetDomain: WideString stdcall;
+    function GetSize: Integer stdcall;
+    function GetBase64: WideString stdcall;
+
+  end;
+
+  IJDAppFavicons = interface(IJDAppListItems)
+    ['{C565C692-0866-4CDC-93D4-F8AFFCD94C74}']
+    function GetItem(const Index: Integer): IJDAppFavicon stdcall;
+
+    function FetchFavicon(const URI: WideString): IJDAppFavicon stdcall; overload;
+    function FetchFavicon(const Protocol, Domain: WideString): IJDAppFavicon stdcall; overload;
+
+    property Items[const Index: Integer]: IJDAppFavicon read GetItem; default;
   end;
 
 
@@ -201,7 +239,7 @@ type
   /// Does not directly instantiate actual features - simply provides access to them.
   /// Task #11
   /// </summary>
-  IJDPAppPlugin = interface
+  IJDAppPlugin = interface
     ['{341CC125-0FCC-44D7-9444-34BCAD491341}']
     function GetName: WideString; stdcall;
     function GetCaption: WideString; stdcall;

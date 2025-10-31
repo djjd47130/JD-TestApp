@@ -18,7 +18,7 @@ uses
   Vcl.Dialogs,
   ChromeTabs, ChromeTabsClasses
 
-  , uContentBase
+  , uAppTabContent
 
   ;
 
@@ -30,14 +30,14 @@ type
   TJDTabRef = class(TObject)
   private
     FOwner: TJDTabController;
-    FClass: TfrmContentBaseClass;
+    FClass: TfrmJDAppTabContentClass;
     FID: Int64;
-    FContent: TfrmContentBase;
+    FContent: TfrmJDAppTabContent;
     FChromeTab: TChromeTab;
     function GetCaption: String;
     procedure SetCaption(const Value: String);
   public
-    constructor Create(AOwner: TJDTabController; AClass: TfrmContentBaseClass); virtual;
+    constructor Create(AOwner: TJDTabController; AClass: TfrmJDAppTabContentClass); virtual;
     destructor Destroy; override;
 
     procedure Show;
@@ -45,10 +45,10 @@ type
 
     property Owner: TJDTabController read FOwner;
     function Index: Integer;
-    property FormClass: TfrmContentBaseClass read FClass;
+    property FormClass: TfrmJDAppTabContentClass read FClass;
     property Caption: String read GetCaption write SetCaption;
     property ID: Int64 read FID;
-    property Content: TfrmContentBase read FContent;
+    property Content: TfrmJDAppTabContent read FContent;
     property ChromeTab: TChromeTab read FChromeTab;
   end;
 
@@ -95,7 +95,7 @@ type
     /// The object referencing the tab to its corresponding content form.
     /// </returns>
     function CreateTab(
-      const AClass: TfrmContentBaseClass;
+      const AClass: TfrmJDAppTabContentClass;
       const AIndex: Integer = -1;
       const AID: Integer = -1): TJDTabRef;
 
@@ -107,7 +107,7 @@ type
     procedure HandleTabChanged(ATab: TChromeTab);
 
     function TabByID(const ID: Integer): TJDTabRef;
-    function TabByForm(AForm: TfrmContentBase): TJDTabRef;
+    function TabByForm(AForm: TfrmJDAppTabContent): TJDTabRef;
     function TabByTab(ATab: TChromeTab): TJDTabRef;
 
     function CloseQuery: Boolean;
@@ -157,7 +157,7 @@ end;
 
 { TJDTabRef }
 
-constructor TJDTabRef.Create(AOwner: TJDTabController; AClass: TfrmContentBaseClass);
+constructor TJDTabRef.Create(AOwner: TJDTabController; AClass: TfrmJDAppTabContentClass);
 begin
   FOwner:= AOwner;
   FClass:= AClass;
@@ -265,7 +265,7 @@ begin
 
 end;
 
-function TJDTabController.CreateTab(const AClass: TfrmContentBaseClass;
+function TJDTabController.CreateTab(const AClass: TfrmJDAppTabContentClass;
   const AIndex: Integer;
   const AID: Integer): TJDTabRef;
 var
@@ -354,7 +354,7 @@ begin
     ActiveTab:= TabByTab(ATab);
 end;
 
-function TJDTabController.TabByForm(AForm: TfrmContentBase): TJDTabRef;
+function TJDTabController.TabByForm(AForm: TfrmJDAppTabContent): TJDTabRef;
 var
   X: Integer;
 begin

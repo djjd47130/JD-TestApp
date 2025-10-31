@@ -10,8 +10,6 @@ unit uAppWindow;
     - Implement dragging tabs into new window
     - TTabController must be modified to account for multiple windows
   - Create "plugin" like concept
-  - Strip TMDB away into a plugin
-  - Introduce other plugins
 
 *)
 
@@ -31,12 +29,11 @@ uses
 
   uMainMenu,
 
-  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
+  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes
 
-  Vcl.Styles.Utils,
-  Vcl.Styles.Fixes,
-
-  NG.Dialogs;
+  , Vcl.Styles.Utils
+  , Vcl.Styles.Fixes
+  ;
 
 const
   MAIN_MENU_WIDTH_OPEN = 320;
@@ -51,15 +48,6 @@ type
     btnMenu: TJDFontButton;
     Tabs: TChromeTabs;
     AppEvents: TApplicationEvents;
-    Panel1: TPanel;
-    txtAddress: TEdit;
-    btnGo: TJDFontButton;
-    btnBack: TJDFontButton;
-    btnForward: TJDFontButton;
-    btnRefresh: TJDFontButton;
-    btnFavorites: TJDFontButton;
-    JDFontButton1: TJDFontButton;
-    NGTaskDialog1: TNGTaskDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -94,7 +82,7 @@ type
     //From IJDAppWindow
     function GetOwner: IJDAppController stdcall; reintroduce;
     function GetTabCount: Integer stdcall;
-    function GetTab(const Index: Integer): IJDAppContentBase stdcall;
+    function GetTab(const Index: Integer): IJDAppTabContent stdcall;
     function GetLeft: Integer stdcall;
     function GetTop: Integer stdcall;
     function GetWidth: Integer stdcall;
@@ -108,9 +96,9 @@ type
     //From IJDAppWindow
     procedure Show stdcall; reintroduce;
     procedure Close stdcall; reintroduce;
-    function CreateNewTab(const URI: WideString = ''): IJDAppWindow stdcall;
+    function CreateNewTab(const URI: WideString = ''): IJDAppTabContent stdcall;
     procedure CloseTab(const TabIndex: Integer) stdcall;
-    function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase stdcall;
+    function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppTabContent stdcall;
 
     property Left: Integer read GetLeft write SetLeft;
     property Top: Integer read GetTop write SetTop;
@@ -140,12 +128,14 @@ uses
   uContentBrowser,
   System.IOUtils,
   Vcl.Themes,
-  uAppController;
+  uAppController,
+  uAppTabContent;
 
 {$R *.dfm}
 
 procedure MakeFormIndependent(Form: TForm);
 begin
+  Application.ShowMainForm:= False;
   Application.MainFormOnTaskbar := False;
   ShowWindow(Application.Handle, SW_HIDE);
   SetWindowLong(Form.Handle, GWL_HWNDPARENT, 0);
@@ -176,8 +166,7 @@ begin
   Width:= 1200;
   Height:= 800;
 
-  //Tabs - TODO: Move TJDTabController to TfrmMain as installed component
-  //InitTabController;
+  //Tabs - TODO: Replace with new App Controller interface...
   FTabController:= TJDTabController.Create(nil);
   FTabController.MainForm:= Self;
   FTabController.ChromeTabs:= Tabs;
@@ -196,9 +185,9 @@ begin
   FLoaded:= True;
 
   //Force form to show...
-  Show;
-  BringToFront;
-  Application.ProcessMessages;
+  //Show;
+  //BringToFront;
+  //Application.ProcessMessages;
 
 end;
 
@@ -461,7 +450,7 @@ begin
   Result:= AppController;
 end;
 
-function TfrmAppWindow.GetTab(const Index: Integer): IJDAppContentBase;
+function TfrmAppWindow.GetTab(const Index: Integer): IJDAppTabContent;
 begin
   //TODO: Return reference to tab at given index...
 end;
@@ -487,7 +476,7 @@ begin
   Result:= pMenu.Tag = 1;
 end;
 
-function TfrmAppWindow.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppContentBase;
+function TfrmAppWindow.MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppTabContent;
 begin
   //TODO: Move tab and content to destination...
 end;
@@ -502,10 +491,11 @@ begin
   //TODO: Close the tab at given index...
 end;
 
-function TfrmAppWindow.CreateNewTab(const URI: WideString): IJDAppWindow;
+function TfrmAppWindow.CreateNewTab(const URI: WideString): IJDAppTabContent;
 begin
   //TODO: Create new tab and navigate to URI...
-  //var F:= TabController.CreateTab()
+  //Result:= TfrmJDAppTabContent.Create(nil, Self);
+
 end;
 
 end.

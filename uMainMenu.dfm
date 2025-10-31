@@ -76,7 +76,6 @@ inherited frmMainMenu: TfrmMainMenu
       Text = 'TEST'
       Visible = False
       OnKeyUp = btnMenuWebBrowserKeyUp
-      ExplicitTop = 952
     end
     object Panel2: TPanel
       Left = 0
@@ -88,8 +87,6 @@ inherited frmMainMenu: TfrmMainMenu
       BevelKind = bkSoft
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = -3
-      ExplicitTop = -3
       object Label2: TLabel
         AlignWithMargins = True
         Left = 8
@@ -214,8 +211,6 @@ inherited frmMainMenu: TfrmMainMenu
         Text = 'SPACEBALLS: The App Setup'
         OnClick = btnMenuAppSetupClick
         OnKeyUp = btnMenuWebBrowserKeyUp
-        ExplicitLeft = 32
-        ExplicitTop = 119
       end
     end
   end

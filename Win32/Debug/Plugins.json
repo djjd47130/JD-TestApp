@@ -1,0 +1,12 @@
+{
+	"plugins": [
+		{
+			"path": "Plugins\JDBrowser\JDBrowser.dll",
+			"enabled": true
+		},
+		{
+			"path": "Plugins\JDClock\JDClock.dll",
+			"enabled": true
+		}
+	]
+}

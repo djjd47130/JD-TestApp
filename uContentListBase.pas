@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
-  uContentBase, JD.Common, JD.Ctrls, JD.Ctrls.FontButton, Vcl.ExtCtrls,
+  uAppTabContent, JD.Common, JD.Ctrls, JD.Ctrls.FontButton, Vcl.ExtCtrls,
   uListItemBase, JD.ListController;
 
 type

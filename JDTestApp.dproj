@@ -112,8 +112,8 @@
         <DCCReference Include="uAppWindow.pas">
             <Form>frmAppWindow</Form>
         </DCCReference>
-        <DCCReference Include="uContentBase.pas">
-            <Form>frmContentBase</Form>
+        <DCCReference Include="uAppTabContent.pas">
+            <Form>frmJDAppTabContent</Form>
         </DCCReference>
         <DCCReference Include="uContentListBase.pas">
             <Form>frmContentListBase</Form>

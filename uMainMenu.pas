@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uContentBase, JD.Common, JD.Ctrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  uAppTabContent, JD.Common, JD.Ctrls,
   JD.Ctrls.FontButton, Vcl.ExtCtrls,
 
   JD.TMDB.Common,
@@ -16,7 +17,7 @@ uses
   Vcl.StdCtrls;
 
 type
-  TfrmMainMenu = class(TfrmContentBase)
+  TfrmMainMenu = class(TfrmJDAppTabContent)
     SB: TScrollBox;
     btnMenuTEST: TJDFontButton;
     Panel2: TPanel;

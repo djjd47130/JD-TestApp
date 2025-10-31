@@ -8,7 +8,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.ComCtrls,
   Vcl.Edge, Vcl.StdCtrls, Vcl.ExtCtrls,
-  uContentBase,
+  uAppTabContent,
   WebView2,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.TabController,
   ChromeTabsTypes,
@@ -16,7 +16,7 @@ uses
   System.NetEncoding;
 
 type
-  TfrmContentBrowser = class(TfrmContentBase)
+  TfrmContentBrowser = class(TfrmJDAppTabContent)
     Edge: TEdgeBrowser;
     pTop: TPanel;
     txtAddress: TEdit;

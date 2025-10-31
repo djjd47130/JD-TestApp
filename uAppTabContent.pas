@@ -1,4 +1,4 @@
-unit uContentBase;
+unit uAppTabContent;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
 
   ChromeTabs, ChromeTabsClasses, ChromeTabsTypes
-  , JD.AppController.Intf
+  , JD.AppController.Intf, JD.Common, JD.Ctrls, JD.Ctrls.FontButton
   ;
 
 type
@@ -35,11 +35,24 @@ type
 
 
 type
-  TfrmContentBase = class;
+  TfrmJDAppTabContent = class;
 
-  TfrmContentBaseClass = class of TfrmContentBase;
+  TfrmJDAppTabContentClass = class of TfrmJDAppTabContent;
 
-  TfrmContentBase = class(TForm, IJDAppContentBase)
+  TfrmJDAppTabContent = class(TForm, IJDAppTabContent)
+    pNav: TPanel;
+    txtNavURI: TEdit;
+    btnNavGo: TJDFontButton;
+    btnNavBack: TJDFontButton;
+    btnNavForward: TJDFontButton;
+    btnNavRefresh: TJDFontButton;
+    btnNavFavorites: TJDFontButton;
+    btnNavMenu: TJDFontButton;
+    procedure btnNavGoClick(Sender: TObject);
+    procedure btnNavRefreshClick(Sender: TObject);
+    procedure btnNavBackClick(Sender: TObject);
+    procedure btnNavForwardClick(Sender: TObject);
+    procedure btnNavFavoritesClick(Sender: TObject);
   private
     FOwner: IJDAppController;
     FMainForm: TForm;
@@ -80,16 +93,8 @@ type
   end;
 
 var
-  frmContentBase: TfrmContentBase;
+  frmJDAppTabContent: TfrmJDAppTabContent;
 
-
-
-//TODO: Registered content forms for shell addresses - #8
-{
-function RegisteredContentForms: TList<TfrmContentBaseClass>;
-procedure RegisterContentForm(AClass: TfrmContentBaseClass);
-procedure UnregisterContentForm(AClass: TfrmContentBaseClass);
-}
 
 
 implementation
@@ -99,36 +104,6 @@ implementation
 uses
   uAppWindow,
   JD.TabController;
-
-
-
-//TODO: Registered content forms for shell addresses - #8
-{
-var
-  _RegisteredContentForms: TList<TfrmContentBaseClass>;
-
-function RegisteredContentForms: TList<TfrmContentBaseClass>;
-begin
-  if _RegisteredContentForms = nil then
-    _RegisteredContentForms:= TList<TfrmContentBaseClass>.Create;
-  Result:= _RegisteredContentForms;
-end;
-
-procedure RegisterContentForm(AClass: TfrmContentBaseClass);
-begin
-  var I:= RegisteredContentForms.IndexOf(AClass);
-  if I < 0 then
-    RegisteredContentForms.Add(AClass);
-end;
-
-procedure UnregisterContentForm(AClass: TfrmContentBaseClass);
-begin
-  var I:= RegisteredContentForms.IndexOf(AClass);
-  if I < 0 then
-    RegisteredContentForms.Delete(I);
-end;
-}
-
 
 
 
@@ -149,44 +124,44 @@ begin
   FOnClick := Value;
 end;
 
-{ TfrmContentBase }
+{ TfrmJDAppTabContent }
 
-constructor TfrmContentBase.Create(AOwner: TComponent; AMainForm: TForm);
+constructor TfrmJDAppTabContent.Create(AOwner: TComponent; AMainForm: TForm);
 begin
   inherited Create(AOwner);
   FMainForm:= AMainForm;
   TabCaption:= Caption;
 end;
 
-destructor TfrmContentBase.Destroy;
+destructor TfrmJDAppTabContent.Destroy;
 begin
 
   inherited;
 end;
 
-function TfrmContentBase.GetImageIndex: Integer;
+function TfrmJDAppTabContent.GetImageIndex: Integer;
 begin
   Result:= -1;
 end;
 
-class function TfrmContentBase.GetShellPath: String;
+class function TfrmJDAppTabContent.GetShellPath: String;
 begin
   //Override expected
   Result:= '';
 end;
 
-class function TfrmContentBase.GetShellRoot: String;
+class function TfrmJDAppTabContent.GetShellRoot: String;
 begin
   //Override expected
   Result:= 'App';
 end;
 
-class procedure TfrmContentBase.ShellOpen(const Path: String);
+class procedure TfrmJDAppTabContent.ShellOpen(const Path: String);
 begin
   //Override expected
 end;
 
-function TfrmContentBase.GetTabCaption: WideString;
+function TfrmJDAppTabContent.GetTabCaption: WideString;
 var
   T: TJDTabRef;
 begin
@@ -195,29 +170,29 @@ begin
     Result:= T.Caption;
 end;
 
-function TfrmContentBase.GetIndex: Integer;
+function TfrmJDAppTabContent.GetIndex: Integer;
 begin
   //TODO: Return index of tab within window, or global registry???
   //  Is this even necessary?
 
 end;
 
-function TfrmContentBase.GetOwner: IJDAppController;
+function TfrmJDAppTabContent.GetOwner: IJDAppController;
 begin
   Result:= FOwner;
 end;
 
-function TfrmContentBase.GetParent: IJDAppWindow;
+function TfrmJDAppTabContent.GetParent: IJDAppWindow;
 begin
   Result:= IJDAppWindow(TfrmAppWindow(FMainForm));
 end;
 
-function TfrmContentBase.GetURI: WideString;
+function TfrmJDAppTabContent.GetURI: WideString;
 begin
   Result:= FURI;
 end;
 
-procedure TfrmContentBase.Navigate(const URI: WideString);
+procedure TfrmJDAppTabContent.Navigate(const URI: WideString);
 begin
   //TODO
   FURI:= URI;
@@ -225,30 +200,54 @@ begin
 
 end;
 
-function TfrmContentBase.CanClose: Boolean;
+procedure TfrmJDAppTabContent.btnNavBackClick(Sender: TObject);
+begin
+  //TODO: Go back in history...
+
+end;
+
+procedure TfrmJDAppTabContent.btnNavFavoritesClick(Sender: TObject);
+begin
+  //TODO: Show/Hide favorites menu...
+
+end;
+
+procedure TfrmJDAppTabContent.btnNavForwardClick(Sender: TObject);
+begin
+  //TODO: Go forward in history...
+
+end;
+
+procedure TfrmJDAppTabContent.btnNavGoClick(Sender: TObject);
+begin
+  //TODO: Navigate to shell URI...
+
+end;
+
+procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
+begin
+  Self.RefreshData;
+end;
+
+function TfrmJDAppTabContent.CanClose: Boolean;
 begin
   //Override supported
   Result:= True;
 end;
 
-procedure TfrmContentBase.RefreshData;
+procedure TfrmJDAppTabContent.RefreshData;
 begin
   //Override expected
 end;
 
-procedure TfrmContentBase.SetTabCaption(const Value: WideString);
+procedure TfrmJDAppTabContent.SetTabCaption(const Value: WideString);
 var
   T: TJDTabRef;
 begin
+  //TODO: Update to new App Controller mechanism...
   T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     T.Caption:= Value;
 end;
-
-initialization
-  //_RegisteredContentForms:= nil;
-
-finalization
-  //FreeAndNil(_RegisteredContentForms);
 
 end.
