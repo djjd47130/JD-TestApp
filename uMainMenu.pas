@@ -208,7 +208,12 @@ end;
 procedure TfrmMainMenu.btnMenuAppSetupClick(Sender: TObject);
 begin
   inherited;
+  {$IFNDEF NEW_TABS}
   TabController(MainForm).CreateTab(TfrmAppSetup, -1, 0);
+  {$ELSE}
+  //TODO: Use new app controller...
+
+  {$ENDIF}
   HideMenu;
 end;
 

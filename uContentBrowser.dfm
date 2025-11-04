@@ -11,11 +11,10 @@ inherited frmContentBrowser: TfrmContentBrowser
   inherited pNav: TPanel
     Width = 845
     TabOrder = 3
-    ExplicitLeft = 0
-    ExplicitTop = 0
     ExplicitWidth = 845
     inherited txtNavURI: TEdit
       Width = 644
+      ExplicitWidth = 644
     end
     inherited btnNavGo: TJDFontButton
       Left = 749

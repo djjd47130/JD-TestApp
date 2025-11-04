@@ -13,15 +13,19 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages,
-  System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
+  System.SysUtils, System.Variants, System.Classes, System.Generics.Collections, System.ImageList,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  JD.Favicons,
-  uAppWindow,
-  uAppSetup,
+  Vcl.Menus, Vcl.AppEvnts, Vcl.ImgList, Vcl.Themes,
   XSuperObject,
+  JD.Favicons, JD.Graphics,
+
+  ElComponent, ElBaseComp, ElTray,
+
   JD.AppController.Intf,
   JD.AppController.Impl,
-  Vcl.Menus, ElComponent, ElBaseComp, ElTray, Vcl.AppEvnts, System.ImageList, Vcl.ImgList;
+
+  uAppWindow,
+  uAppSetup;
 
 type
   TfrmAppController = class(TForm, IJDAppController)
@@ -68,6 +72,8 @@ type
     procedure HandleURI(const URI: WideString) stdcall;
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
+    procedure RegisterContent(AContent: IJDAppTabContent) stdcall;
+    procedure UnregisterContent(AContent: IJDAppTabContent) stdcall;
 
     property PluginCount: Integer read GetPluginCount;
     property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
@@ -135,6 +141,16 @@ begin
   FAppSetup:= TJDAppSetup.Create;
   FAppSetup._AddRef;
   //TODO: Favicons...
+
+  //TODO: Add option for user to switch style...
+  TStyleManager.TrySetStyle('Windows10 DarkGray', False);
+  //TStyleManager.TrySetStyle('Carbon', False);
+  //TStyleManager.TrySetStyle('Windows10 SlateGray', False);
+  //TStyleManager.TrySetStyle('Cobalt XEMedia', False);
+  //TStyleManager.TrySetStyle('Lime Graphite', False);
+  ColorManager.BaseColor:= TStyleManager.ActiveStyle.GetStyleColor(TStyleColor.scWindow);
+
+  ShowWindow(Self.Handle, SW_HIDE); //Attempted bug fix #22
 
   Initialize;
 end;
@@ -320,13 +336,6 @@ begin
   Result:= TfrmAppWindow.Create(nil);
   Result._AddRef;
   FWindows.Add(Result);
-
-  //Somehow this became necessary...?
-  Result.Width:= (Screen.Width div 4) * 3;
-  Result.Height:= (Screen.Height div 4) * 3;
-  Result.Left:= (Screen.Width div 2) - (Result.Width div 2);
-  Result.Top:= (Screen.Height div 2) - (Result.Height div 2);
-
   Result.Show;
 
   //TODO: Navigate to URI...
@@ -375,6 +384,18 @@ end;
 procedure TfrmAppController.RegisterWindow(AWindow: IJDAppWindow);
 begin
   FWindows.Add(AWindow);
+end;
+
+procedure TfrmAppController.RegisterContent(AContent: IJDAppTabContent);
+begin
+  FTabs.Add(AContent);
+end;
+
+procedure TfrmAppController.UnregisterContent(AContent: IJDAppTabContent);
+begin
+  var I:= FTabs.IndexOf(AContent);
+  FTabs.Delete(I);
+  //TODO
 end;
 
 procedure TfrmAppController.UnregisterWindow(AWindow: IJDAppWindow);

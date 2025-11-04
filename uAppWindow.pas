@@ -24,8 +24,11 @@ uses
   Vcl.ComCtrls, Vcl.Menus, Vcl.ImgList, Vcl.AppEvnts,
 
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton, JD.Graphics, JD.Favicons,
-  JD.TabController,
+
   JD.AppController.Intf,
+  {$IFNDEF NEW_TABS}
+  JD.TabController,
+  {$ENDIF}
 
   uMainMenu,
 
@@ -66,8 +69,9 @@ type
     procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    //FAppController: IJDAppController;
+    {$IFNDEF NEW_TABS}
     FTabController: TJDTabController;
+    {$ENDIF}
     FMenu: TfrmMainMenu;
     FFullScreen: Boolean;
     FRect: TRect;
@@ -79,6 +83,9 @@ type
     procedure ProcessDroppedTab(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
   protected
+
+    procedure CreateParams(var Params: TCreateParams); override;
+
     //From IJDAppWindow
     function GetOwner: IJDAppController stdcall; reintroduce;
     function GetTabCount: Integer stdcall;
@@ -102,24 +109,28 @@ type
 
     property Left: Integer read GetLeft write SetLeft;
     property Top: Integer read GetTop write SetTop;
-    property Width: Integer read GetTop write SetTop;
+    property Width: Integer read GetWidth write SetWidth;
     property Height: Integer read GetHeight write SetHeight;
   public
-    //constructor Create(AOwner: TComponent; AAppController: IJDAppController); reintroduce; virtual;
-
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
     procedure ShowMenu(const Value: Boolean);
     property FullScreen: Boolean read FFullScreen write SetFullScreen;
     property ContentOnly: Boolean read FContentOnly write SetContentOnly;
-    function OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
+    {$IFNDEF NEW_TABS}
     property TabController: TJDTabController read FTabController;
+    function OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
+    {$ELSE}
+    function OpenNewBrowserTab(const URL: String = ''): IJDAppTabContent;
+    {$ENDIF}
   end;
 
 var
   frmAppWindow: TfrmAppWindow;
 
+{$IFNDEF NEW_TABS}
 function TabController(const AppWindow: TForm): TJDTabController;
+{$ENDIF}
 
 implementation
 
@@ -141,10 +152,12 @@ begin
   SetWindowLong(Form.Handle, GWL_HWNDPARENT, 0);
 end;
 
+{$IFNDEF NEW_TABS}
 function TabController(const AppWindow: TForm): TJDTabController;
 begin
   Result:= TfrmAppWindow(AppWindow).TabController;
 end;
+{$ENDIF}
 
 { TfrmAppWindow }
 
@@ -153,24 +166,25 @@ begin
   FLoaded:= False;
 
   //UI
-  //TODO: Add option for user to switch style...
-  //TStyleManager.TrySetStyle('Carbon', False);
-  TStyleManager.TrySetStyle('Windows10 DarkGray', False);
-  //TStyleManager.TrySetStyle('Windows10 SlateGray', False);
-  //TStyleManager.TrySetStyle('Cobalt XEMedia', False);
-  //TStyleManager.TrySetStyle('Lime Graphite', False);
-  ColorManager.BaseColor:= TStyleManager.ActiveStyle.GetStyleColor(TStyleColor.scWindow);
   pContent.Align:= alClient;
 
   Position := poDesigned;
-  Width:= 1200;
-  Height:= 800;
+  Width:= (Screen.Width div 4) * 3;
+  Height:= (Screen.Height div 4) * 3;
+  Left:= (Screen.Width div 2) - (Width div 2);
+  Top:= (Screen.Height div 2) - (Height div 2);
 
-  //Tabs - TODO: Replace with new App Controller interface...
+  //Tabs
+  //TODO: Replace with new App Controller interface...
+  {$IFNDEF NEW_TABS}
   FTabController:= TJDTabController.Create(nil);
   FTabController.MainForm:= Self;
   FTabController.ChromeTabs:= Tabs;
   FTabController.Container:= pContent;
+  {$ELSE}
+  //TODO: Create new tab, if necessary...
+
+  {$ENDIF}
 
   //Main Menu
   FMenu:= TfrmMainMenu.Create(pMenu, Self);
@@ -184,11 +198,14 @@ begin
 
   FLoaded:= True;
 
-  //Force form to show...
-  //Show;
-  //BringToFront;
-  //Application.ProcessMessages;
+end;
 
+procedure TfrmAppWindow.CreateParams(var Params: TCreateParams);
+begin
+  inherited CreateParams(Params);
+  //Attempted bug fix #22
+  //Params.ExStyle := Params.ExStyle or WS_EX_APPWINDOW; // Ensure it appears in the taskbar
+  //Params.WndParent := 0; // Detach from the main application window
 end;
 
 procedure TfrmAppWindow.FormDestroy(Sender: TObject);
@@ -211,13 +228,23 @@ begin
   Self._Release;
 
   //Tabs
+  {$IFNDEF NEW_TABS}
   FreeAndNil(FTabController);
+  {$ELSE}
+  //TODO: Close all tabs within...
+
+  {$ENDIF}
 end;
 
 procedure TfrmAppWindow.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   //Tabs
+  {$IFNDEF NEW_TABS}
   CanClose:= TabController.CloseQuery;
+  {$ELSE}
+  //TODO: Query new app controller...
+
+  {$ENDIF}
 end;
 
 procedure TfrmAppWindow.TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
@@ -225,7 +252,12 @@ begin
   //Tabs
   pContent.DisableAlign;
   try
+    {$IFNDEF NEW_TABS}
     TabController.HandleTabChanged(ATab);
+    {$ELSE}
+    //TODO: Use new app controller to show tab content...
+
+    {$ENDIF}
   finally
     pContent.EnableAlign;
   end;
@@ -235,9 +267,15 @@ procedure TfrmAppWindow.TabsButtonAddClick(Sender: TObject; var Handled: Boolean
 begin
   //Tabs
   Handled:= True;
+  {$IFNDEF NEW_TABS}
   OpenNewBrowserTab;
+  {$ELSE}
+  //TODO
+
+  {$ENDIF}
 end;
 
+{$IFNDEF NEW_TABS}
 function TfrmAppWindow.OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
 begin
   //Tabs
@@ -248,13 +286,34 @@ begin
   (Result.Content as TfrmContentBrowser).Navigate(TURL);
   ShowMenu(False);
 end;
+{$ELSE}
+function TfrmAppWindow.OpenNewBrowserTab(const URL: String = ''): IJDAppTabContent;
+begin
+  //Tabs
+  var TURL:= URL;
+  if TURL = '' then
+    TURL:= 'https://google.com'; //TODO: Use default home page option...
+
+  //TODO: Use new app controller...
+
+  //Result:= TabController.CreateTab(TfrmContentBrowser);
+  //(Result.Content as TfrmContentBrowser).Navigate(TURL);
+
+  ShowMenu(False);
+end;
+{$ENDIF}
 
 procedure TfrmAppWindow.TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
   var Close: Boolean);
 begin
   //Tabs
   Close:= False;
+  {$IFNDEF NEW_TABS}
   TabController.DeleteTab(ATab.Index);
+  {$ELSE}
+  //TODO: Use new app controller...
+
+  {$ENDIF}
   //TODO: This closes wrong tab if one has been moved (wrong index)...
 
   //TODO: This often leaves behind a void where tab used to be...
@@ -264,8 +323,13 @@ end;
 procedure TfrmAppWindow.TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
 begin
   //Tabs
+  {$IFNDEF NEW_TABS}
   var Ref:= TabController.TabByTab(ATab);
   DragForm:= Ref.Content;
+  {$ELSE}
+  //TODO: Use new app controller...
+
+  {$ENDIF}
 end;
 
 procedure TfrmAppWindow.TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);

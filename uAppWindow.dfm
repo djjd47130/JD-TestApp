@@ -12,7 +12,6 @@ object frmAppWindow: TfrmAppWindow
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   Visible = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery

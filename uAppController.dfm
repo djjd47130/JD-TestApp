@@ -1,7 +1,7 @@
 object frmAppController: TfrmAppController
   Left = 0
   Top = 0
-  Caption = 'frmAppController'
+  Caption = 'App Controller'
   ClientHeight = 386
   ClientWidth = 497
   Color = clBtnFace

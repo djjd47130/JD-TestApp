@@ -17,9 +17,7 @@ uses
   Winapi.Windows, Winapi.Messages,
   Vcl.Controls, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Forms,
   Vcl.Dialogs,
-  ChromeTabs, ChromeTabsClasses
-
-  ;
+  ChromeTabs, ChromeTabsClasses;
 
 type
   IJDAppListItem = interface;
@@ -27,6 +25,7 @@ type
   IJDAppController = interface;
   IJDAppWindow = interface;
   IJDAppTabContent = interface;
+  IJDAppSetup = interface;
   IJDAppPlugin = interface;
   IJDAppFavicon = interface;
   IJDAppFavicons = interface;
@@ -34,10 +33,13 @@ type
   IJDAppMenuItems = interface;
   IJDAppShellReg = interface;
   IJDAppShellRegs = interface;
-  IJDAppSetup = interface;
 
 
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                  GENERAL LISTS                                     ///
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   //Base for any list item app-wide.
   IJDAppListItem = interface
@@ -69,6 +71,10 @@ type
 
 
 
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                    CORE UI                                         ///
+  //////////////////////////////////////////////////////////////////////////////////////////
+
   //Overall app control
   //  Implemented by TfrmAppController
   IJDAppController = interface
@@ -85,9 +91,10 @@ type
     procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
     procedure HandleURI(const CmdLine: WideString) stdcall;
-
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
+    procedure RegisterContent(AContent: IJDAppTabContent) stdcall;
+    procedure UnregisterContent(AContent: IJDAppTabContent) stdcall;
 
     property PluginCount: Integer read GetPluginCount;
     property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
@@ -169,6 +176,10 @@ type
 
 
 
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                   APP SETUP                                        ///
+  //////////////////////////////////////////////////////////////////////////////////////////
+
   IJDAppSetup = interface
     ['{4813EFB1-1AC7-402E-ABD4-93BA1EE14E49}']
     function GetS(const N: WideString): WideString stdcall;
@@ -208,6 +219,10 @@ type
   end;
 
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                    FAVICONS                                        ///
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   IJDAppFavicon = interface(IJDAppListItem)
     ['{6037B0A3-CB0D-41E9-BB3C-A963D90141AF}']
@@ -256,8 +271,11 @@ type
 
 
 
-  TJDAppShellExecuteEvent = procedure(Sender: TObject; Item: IJDAppMenuItem) of object;
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                 SHELL COMMANDS                                     ///
+  //////////////////////////////////////////////////////////////////////////////////////////
 
+  TJDAppShellExecuteEvent = procedure(Sender: TObject; Item: IJDAppMenuItem) of object;
 
   /// <summary>
   /// Represents a single possible shell object to be registered.
@@ -300,6 +318,10 @@ type
   end;
 
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                   MAIN MENU                                        ///
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   /// <summary>
   /// Represents a single item to be listed in application's manu menu.
@@ -365,6 +387,10 @@ type
 
 
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                     SEARCH                                         ///
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   //Represents a single registered search engine option.
   //Google, Yahoo, or any custom search option, etc.

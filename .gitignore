@@ -85,3 +85,9 @@ Win32/Debug/TMDBConfig.json
 Win32/Debug/JDTestApp.exe.WebView2
 Win32/Debug/*.nupkg
 Win32/Debug/*.lib
+
+Win32/New Tabs/AppConfig.json
+Win32/New Tabs/TMDBConfig.json
+Win32/New Tabs/JDTestApp.exe.WebView2
+Win32/New Tabs/*.nupkg
+Win32/New Tabs/*.lib

@@ -8,11 +8,31 @@ inherited frmMainMenu: TfrmMainMenu
   ExplicitHeight = 580
   PixelsPerInch = 96
   TextHeight = 18
+  inherited pNav: TPanel
+    Width = 475
+    TabOrder = 1
+    ExplicitWidth = 475
+    inherited txtNavURI: TEdit
+      Width = 274
+    end
+    inherited btnNavGo: TJDFontButton
+      Left = 379
+      ExplicitLeft = 379
+    end
+    inherited btnNavFavorites: TJDFontButton
+      Left = 411
+      ExplicitLeft = 411
+    end
+    inherited btnNavMenu: TJDFontButton
+      Left = 443
+      ExplicitLeft = 443
+    end
+  end
   object SB: TScrollBox
     Left = 0
-    Top = 0
+    Top = 33
     Width = 475
-    Height = 541
+    Height = 508
     VertScrollBar.Range = 1000
     VertScrollBar.Tracking = True
     Align = alClient

@@ -141,7 +141,12 @@ end;
 
 function TfrmContentBrowser.Tab: TJDTabRef;
 begin
+  {$IFNDEF NEW_TABS}
   Result:= TfrmAppWindow(MainForm).TabController.TabByForm(Self);
+  {$ELSE}
+  //TODO: Use new app controller...
+
+  {$ENDIF}
 end;
 
 procedure TfrmContentBrowser.txtAddressDblClick(Sender: TObject);
@@ -223,8 +228,13 @@ begin
   inherited;
   Args.ArgsInterface.Set_Handled(1);
   if Args.ArgsInterface.Get_uri(URI) = S_OK then begin
+    {$IFNDEF NEW_TABS}
     T:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
     (T.Content as TfrmContentBrowser).Navigate(URI);
+    {$ELSE}
+    //TODO: Use new app controller...
+
+    {$ENDIF}
   end;
 end;
 

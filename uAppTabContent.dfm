@@ -33,7 +33,6 @@ object frmJDAppTabContent: TfrmJDAppTabContent
       Height = 25
       Align = alClient
       TabOrder = 3
-      ExplicitWidth = 591
       ExplicitHeight = 26
     end
     object btnNavGo: TJDFontButton

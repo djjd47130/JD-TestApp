@@ -61,7 +61,6 @@ type
     procedure txtAPIKeyChange(Sender: TObject);
     procedure txtAccessTokenChange(Sender: TObject);
     procedure cboLanguageChange(Sender: TObject);
-    procedure Label9Click(Sender: TObject);
   private
 
   public
@@ -139,14 +138,6 @@ procedure TfrmAppSetup.FormShow(Sender: TObject);
 begin
   inherited;
   LoadSetup;
-end;
-
-procedure TfrmAppSetup.Label9Click(Sender: TObject);
-begin
-  inherited;
-  //Navigate to TMDB API page
-  var F:= TfrmAppWindow(MainForm).TabController.CreateTab(TfrmContentBrowser);
-  TfrmContentBrowser(F.Content).Navigate('https://www.themoviedb.org/settings/api');
 end;
 
 procedure TfrmAppSetup.LoadSetup;

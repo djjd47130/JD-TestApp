@@ -7,14 +7,14 @@ uses
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
 
-  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes
-  , JD.AppController.Intf, JD.Common, JD.Ctrls, JD.Ctrls.FontButton
-  ;
+  ChromeTabs, ChromeTabsClasses, ChromeTabsTypes,
+  JD.AppController.Intf, JD.Common, JD.Ctrls, JD.Ctrls.FontButton;
 
+
+
+//References to detail list items, and handling click events.
+//TODO: Find a better place for this...
 type
-
-  //References to detail list items, and handling click events.
-
   TDetailRef = class;
 
   TDetailRefEvent = reference to procedure(Ref: TDetailRef);
@@ -97,6 +97,7 @@ var
 
 
 
+
 implementation
 
 {$R *.dfm}
@@ -104,6 +105,7 @@ implementation
 uses
   uAppWindow,
   JD.TabController;
+
 
 
 
@@ -165,16 +167,14 @@ function TfrmJDAppTabContent.GetTabCaption: WideString;
 var
   T: TJDTabRef;
 begin
+  {$IFNDEF NEW_TABS}
   T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     Result:= T.Caption;
-end;
+  {$ELSE}
+  //TODO: Use new app controller...
 
-function TfrmJDAppTabContent.GetIndex: Integer;
-begin
-  //TODO: Return index of tab within window, or global registry???
-  //  Is this even necessary?
-
+  {$ENDIF}
 end;
 
 function TfrmJDAppTabContent.GetOwner: IJDAppController;
@@ -190,6 +190,43 @@ end;
 function TfrmJDAppTabContent.GetURI: WideString;
 begin
   Result:= FURI;
+end;
+
+procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
+begin
+  Self.RefreshData;
+end;
+
+function TfrmJDAppTabContent.CanClose: Boolean;
+begin
+  //Override supported
+  Result:= True;
+end;
+
+procedure TfrmJDAppTabContent.RefreshData;
+begin
+  //Override expected
+end;
+
+function TfrmJDAppTabContent.GetIndex: Integer;
+begin
+  //TODO: Return index of tab within window, or global registry???
+  //  Is this even necessary?
+
+end;
+
+procedure TfrmJDAppTabContent.SetTabCaption(const Value: WideString);
+var
+  T: TJDTabRef;
+begin
+  {$IFNDEF NEW_TABS}
+  T:= TabController(MainForm).TabByForm(Self);
+  if T <> nil then
+    T.Caption:= Value;
+  {$ELSE}
+  //TODO: Use new app controller...
+
+  {$ENDIF}
 end;
 
 procedure TfrmJDAppTabContent.Navigate(const URI: WideString);
@@ -222,32 +259,6 @@ procedure TfrmJDAppTabContent.btnNavGoClick(Sender: TObject);
 begin
   //TODO: Navigate to shell URI...
 
-end;
-
-procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
-begin
-  Self.RefreshData;
-end;
-
-function TfrmJDAppTabContent.CanClose: Boolean;
-begin
-  //Override supported
-  Result:= True;
-end;
-
-procedure TfrmJDAppTabContent.RefreshData;
-begin
-  //Override expected
-end;
-
-procedure TfrmJDAppTabContent.SetTabCaption(const Value: WideString);
-var
-  T: TJDTabRef;
-begin
-  //TODO: Update to new App Controller mechanism...
-  T:= TabController(MainForm).TabByForm(Self);
-  if T <> nil then
-    T.Caption:= Value;
 end;
 
 end.

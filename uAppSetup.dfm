@@ -83,6 +83,10 @@ inherited frmAppSetup: TfrmAppSetup
     object tabGeneral: TTabSheet
       Caption = '  General  '
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ScrollBox1: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -138,7 +142,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 118
-              Height = 41
               Hint = 'What to open when clicking the new tab button'
               Caption = 'New Tab Button'
               ExplicitWidth = 118
@@ -187,7 +190,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 88
-              Height = 41
               Hint = 'What to open when the application starts up'
               Caption = 'App Startup'
               ExplicitWidth = 88
@@ -238,7 +240,6 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 186
-              Height = 41
               Hint = 'Automatically collapse main menu when navigating'
               Caption = 'Auto Collapse Main Menu'
               ExplicitWidth = 186
@@ -267,6 +268,10 @@ inherited frmAppSetup: TfrmAppSetup
     object tabMainMenu: TTabSheet
       Caption = 'Main Menu'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object TabSheet1: TTabSheet
       Caption = '  Addons  '
@@ -331,7 +336,6 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 237
-              Height = 41
               Caption = 'SPACEBALLS: The Web Browser'
               ExplicitWidth = 237
             end
@@ -358,6 +362,10 @@ inherited frmAppSetup: TfrmAppSetup
     object tabBrowser: TTabSheet
       Caption = '  Browser  '
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ScrollBox2: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -413,7 +421,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 106
-              Height = 41
               Hint = 'What search engine the browser should use'
               Caption = 'Search Engine'
               ExplicitWidth = 106
@@ -462,7 +469,6 @@ inherited frmAppSetup: TfrmAppSetup
           inherited pData: TPanel
             inherited lblCaption: TLabel
               Width = 83
-              Height = 41
               Hint = 'What to open by default in your browser'
               Caption = 'Home Page'
               ExplicitWidth = 83
@@ -511,7 +517,6 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitWidth = 402
             inherited lblCaption: TLabel
               Width = 183
-              Height = 41
               Hint = 'Whether to enable browsing history'
               Caption = 'Enable Browsing History'
               ExplicitWidth = 183

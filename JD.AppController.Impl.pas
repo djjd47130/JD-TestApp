@@ -12,7 +12,7 @@ type
   TJDAppListItems = class;
   //IJDAppController implemented in uAppController.TJDAppController
   //IJDAppWindow implemented in uAppWindow.TJDAppWindow
-
+  //IJDAppTabContent implemented in uAppTabContent.TJDAppTabContent
 
 
 
