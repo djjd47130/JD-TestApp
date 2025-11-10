@@ -1,6 +1,6 @@
 # JD-TestApp
 
-Test Application for JD Solutions
+Test Application for JD Solutions. As of recent, a generalized application shell.
 
 ## IMPORTANT NOTE
 
