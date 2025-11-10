@@ -8,7 +8,7 @@ This project is currently in active develoment, and not guaranteed for use at th
 
 ## Summary
 
-This app aims to provide a general-purpose environment for many possible implementations. It's plugin-based, and works much like a web browser in the sense that you can have multiple tabs open in multiple windows, and drag those tabs between windows. It provides a shell-like command structure which uses URIs to navigate between different screens - either system-level or plugin-level. 
+This app aims to provide a general-purpose environment for many possible implementations. It's plugin-based, and works much like a web browser in the sense that you can have multiple tabs open in multiple windows, and drag those tabs between windows. It provides a shell-like command structure which uses URIs to navigate between different screens - either system-level or plugin-level. Everything is interface-based, stemming from the unit `JD.AppController.Intf.pas`. 
 
 It originated as just a test application for my TMDB API wrapper, but accidentally transformed into more of a general-purpose web browser sort of application. I've split it away from TMDB into its own thing, which I'm actively working to make it into a plugin-based application, where TMDB is just one of the many possible features. 
 
