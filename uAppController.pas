@@ -16,7 +16,13 @@ uses
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections, System.ImageList,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.Menus, Vcl.AppEvnts, Vcl.ImgList, Vcl.Themes,
+
+  ChromeTabs,
+  ChromeTabsTypes,
+  ChromeTabsClasses,
+
   XSuperObject,
+
   JD.Favicons, JD.Graphics,
 
   ElComponent, ElBaseComp, ElTray,
@@ -58,11 +64,12 @@ type
   protected
     //From IJDAppController:
     function GetPluginCount: Integer stdcall;
-    function GetPlugin(const Index: Integer): IJDAppPlugin stdcall;
+    function GetPlugin(const Index: Integer): IJDAppPluginRef stdcall;
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppTabContent stdcall;
+    function GetTabByID(const ID: Integer): IJDAppTabContent stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
   public
@@ -75,13 +82,16 @@ type
     procedure RegisterContent(AContent: IJDAppTabContent) stdcall;
     procedure UnregisterContent(AContent: IJDAppTabContent) stdcall;
 
+  public
+    property AppSetup: IJDAppSetup read GetAppSetup;
     property PluginCount: Integer read GetPluginCount;
-    property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
+    property Plugins[const Index: Integer]: IJDAppPluginRef read GetPlugin;
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
     property TabCount: Integer read GetTabCount;
     property Tabs[const Index: Integer]: IJDAppTabContent read GetTab;
-    property AppSetup: IJDAppSetup read GetAppSetup;
+    function IndexOfTab(ATab: IJDAppTabContent): Integer stdcall;
+    property TabByID[const ID: Integer]: IJDAppTabContent read GetTab;
   end;
 
 var
@@ -89,7 +99,7 @@ var
 
 function AppController: IJDAppController;
 
-function AppSetup: TAppSetup;
+//function AppSetup: TAppSetup;
 
 implementation
 
@@ -112,7 +122,8 @@ end;
 
 
 
-//TODO: OLD, migrage into TfrmAppController using new IJDAppSetup...
+//TODO: OLD, migrate into TfrmAppController using new IJDAppSetup...
+{
 var
   _AppSetup: TAppSetup;
 
@@ -122,6 +133,7 @@ begin
     _AppSetup:= TAppSetup.Create;
   Result:= _AppSetup;
 end;
+}
 
 
 
@@ -165,6 +177,11 @@ begin
   FreeAndNil(FTabs);
   FreeAndNil(FWindows);
   FreeAndNil(FPlugins);
+end;
+
+function TfrmAppController.IndexOfTab(ATab: IJDAppTabContent): Integer;
+begin
+  Result:= FTabs.IndexOf(ATAb);
 end;
 
 procedure TfrmAppController.Initialize;
@@ -213,8 +230,10 @@ begin
       if FileExists(PluginFilename) then begin
 
         //TODO: Load DLL and get proc addresses...
+        //var Lib:= LoadLibrary(PChar(PluginFilename));
 
         //TODO: Instantiate plugin object...
+        //var Plugin: IJDAppPlugin:= TJDAppPluginRef.
 
         //TODO: Add to registered plugin list...
 
@@ -247,9 +266,9 @@ begin
   Result:= FFavicons;
 end;
 
-function TfrmAppController.GetPlugin(const Index: Integer): IJDAppPlugin;
+function TfrmAppController.GetPlugin(const Index: Integer): IJDAppPluginRef;
 begin
-  Result:= IJDAppPlugin(FPlugins[Index]);
+  Result:= IJDAppPluginRef(FPlugins[Index]);
 end;
 
 function TfrmAppController.GetPluginCount: Integer;
@@ -260,6 +279,17 @@ end;
 function TfrmAppController.GetTab(const Index: Integer): IJDAppTabContent;
 begin
   Result:= IJDAppTabContent(FTabs[Index]);
+end;
+
+function TfrmAppController.GetTabByID(const ID: Integer): IJDAppTabContent;
+begin
+  Result:= nil;
+  for var X := 0 to TabCount-1 do begin
+    if Tabs[X].ID = ID then begin
+      Result:= Tabs[X];
+      Break;
+    end;
+  end;
 end;
 
 function TfrmAppController.GetTabCount: Integer;
@@ -386,6 +416,14 @@ begin
   FWindows.Add(AWindow);
 end;
 
+procedure TfrmAppController.UnregisterWindow(AWindow: IJDAppWindow);
+begin
+  var I:= FWindows.IndexOf(AWindow);
+  FWindows.Delete(I);
+  if WindowCount = 0 then
+    Application.Terminate;
+end;
+
 procedure TfrmAppController.RegisterContent(AContent: IJDAppTabContent);
 begin
   FTabs.Add(AContent);
@@ -398,16 +436,10 @@ begin
   //TODO
 end;
 
-procedure TfrmAppController.UnregisterWindow(AWindow: IJDAppWindow);
-begin
-  var I:= FWindows.IndexOf(AWindow);
-  FWindows.Delete(I);
-  if WindowCount = 0 then
-    Application.Terminate;
-end;
-
 initialization
-  _AppController:= nil;
+  //_AppController:= TfrmAppController.Create(nil);
+  //_AppController._AddRef;
 finalization
+  //_AppController._Release;
   _AppController:= nil;
 end.

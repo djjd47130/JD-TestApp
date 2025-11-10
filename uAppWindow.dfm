@@ -31,18 +31,18 @@ object frmAppWindow: TfrmAppWindow
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    object Tabs: TChromeTabs
+    object ChromeTabs: TChromeTabs
       Left = 0
       Top = 0
       Width = 792
       Height = 35
-      OnActiveTabChanged = TabsActiveTabChanged
-      OnButtonAddClick = TabsButtonAddClick
-      OnButtonCloseTabClick = TabsButtonCloseTabClick
-      OnNeedDragImageControl = TabsNeedDragImageControl
-      OnCreateDragForm = TabsCreateDragForm
-      OnShowHint = TabsShowHint
-      OnTabDragDrop = TabsTabDragDrop
+      OnActiveTabChanged = ChromeTabsActiveTabChanged
+      OnButtonAddClick = ChromeTabsButtonAddClick
+      OnButtonCloseTabClick = ChromeTabsButtonCloseTabClick
+      OnNeedDragImageControl = ChromeTabsNeedDragImageControl
+      OnCreateDragForm = ChromeTabsCreateDragForm
+      OnShowHint = ChromeTabsShowHint
+      OnTabDragDrop = ChromeTabsTabDragDrop
       ActiveTabIndex = -1
       Images = frmAppController.imgFavicons16
       Options.Display.CloseButton.Offsets.Vertical = 7
@@ -423,6 +423,7 @@ object frmAppWindow: TfrmAppWindow
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 41
   end
   object Stat: TStatusBar
     Left = 0

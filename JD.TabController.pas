@@ -162,14 +162,13 @@ begin
   FOwner:= AOwner;
   FClass:= AClass;
 
-  FID:= NewTabID;
-
   FContent:= FClass.Create(nil, AOwner.MainForm);
-  FContent.Tag:= FID;
+  FContent.Tag:= FContent.ID;
   FContent.Parent:= FOwner.FContainer;
   FContent.BorderStyle:= bsNone;
   FContent.Align:= alClient;
   FContent.Show;
+  FID:= FContent.ID;
 
   FChromeTab:= FOwner.ChromeTabs.Tabs.Add;
   FChromeTab.Tag:= FID;

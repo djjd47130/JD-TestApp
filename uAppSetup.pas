@@ -8,8 +8,6 @@ uses
   uAppTabContent,
   Vcl.StdCtrls, Vcl.ExtCtrls,
   XSuperObject,
-  //JD.TMDB.Common,
-  //JD.TMDB.Intf,
   JD.Common, JD.Ctrls, JD.Ctrls.FontButton,
   JD.TabController,
   uContentBrowser,
@@ -18,7 +16,7 @@ uses
 type
 
 
-
+                 {
   TAppSetup = class(TObject)
   private
     FAppSetup: ISuperObject;
@@ -34,6 +32,7 @@ type
     function IsConfigured: Boolean;
 
   end;
+  }
 
   TfrmAppSetup = class(TfrmJDAppTabContent)
     btnSave: TJDFontButton;
@@ -55,6 +54,11 @@ type
     ComboListItem4: TComboListItem;
     ListSwitchItem4: TListSwitchItem;
     tabMainMenu: TTabSheet;
+    tabTabs: TTabSheet;
+    Label2: TLabel;
+    ComboListItem5: TComboListItem;
+    ComboListItem6: TComboListItem;
+    ComboListItem7: TComboListItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
@@ -83,6 +87,7 @@ uses
 
 { TAppSetup }
 
+{
 constructor TAppSetup.Create;
 begin
   LoadSetup;
@@ -123,6 +128,7 @@ begin
   if FAppSetup <> nil then
     FAppSetup.SaveTo(SetupFilename, True);
 end;
+}
 
 { TfrmAppSetup }
 
@@ -142,7 +148,7 @@ end;
 
 procedure TfrmAppSetup.LoadSetup;
 begin
-
+  AppController.GetAppSetup.LoadSetup;
   //TODO
 
 end;
@@ -152,7 +158,7 @@ begin
 
   //TODO
 
-  AppSetup.SaveSetup;
+  AppController.GetAppSetup.SaveSetup;
 end;
 
 procedure TfrmAppSetup.btnSaveClick(Sender: TObject);

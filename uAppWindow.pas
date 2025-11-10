@@ -49,7 +49,7 @@ type
     Stat: TStatusBar;
     pMenu: TPanel;
     btnMenu: TJDFontButton;
-    Tabs: TChromeTabs;
+    ChromeTabs: TChromeTabs;
     AppEvents: TApplicationEvents;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -57,16 +57,16 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure AppEventsHint(Sender: TObject);
     procedure btnMenuClick(Sender: TObject);
-    procedure TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
-    procedure TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
+    procedure ChromeTabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
+    procedure ChromeTabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
       var Close: Boolean);
-    procedure TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
-    procedure TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
+    procedure ChromeTabsButtonAddClick(Sender: TObject; var Handled: Boolean);
+    procedure ChromeTabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
       var HintTimeout: Integer);
-    procedure TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
-    procedure TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+    procedure ChromeTabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
+    procedure ChromeTabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
-    procedure TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
+    procedure ChromeTabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     {$IFNDEF NEW_TABS}
@@ -82,6 +82,7 @@ type
     procedure SetContentOnly(const Value: Boolean);
     procedure ProcessDroppedTab(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
+    procedure HideContent;
   protected
 
     procedure CreateParams(var Params: TCreateParams); override;
@@ -107,6 +108,10 @@ type
     procedure CloseTab(const TabIndex: Integer) stdcall;
     function MoveTab(const TabIndex: Integer; ADest: IJDAppWindow): IJDAppTabContent stdcall;
 
+    property Owner: IJDAppController read GetOwner;
+    property TabCount: Integer read GetTabCount;
+    property Tabs[const Index: Integer]: IJDAppTabContent read GetTab; default;
+
     property Left: Integer read GetLeft write SetLeft;
     property Top: Integer read GetTop write SetTop;
     property Width: Integer read GetWidth write SetWidth;
@@ -117,11 +122,12 @@ type
     procedure ShowMenu(const Value: Boolean);
     property FullScreen: Boolean read FFullScreen write SetFullScreen;
     property ContentOnly: Boolean read FContentOnly write SetContentOnly;
-    {$IFNDEF NEW_TABS}
+    function ChromeTabByID(const ID: Integer): TChromeTab;
+    {$IFDEF NEW_TABS}
+    function OpenNewBrowserTab(const URL: String = ''): IJDAppTabContent;
+    {$ELSE}
     property TabController: TJDTabController read FTabController;
     function OpenNewBrowserTab(const URL: String = ''): TJDTabRef;
-    {$ELSE}
-    function OpenNewBrowserTab(const URL: String = ''): IJDAppTabContent;
     {$ENDIF}
   end;
 
@@ -146,6 +152,7 @@ uses
 
 procedure MakeFormIndependent(Form: TForm);
 begin
+  //TODO: Bug #22
   Application.ShowMainForm:= False;
   Application.MainFormOnTaskbar := False;
   ShowWindow(Application.Handle, SW_HIDE);
@@ -175,11 +182,11 @@ begin
   Top:= (Screen.Height div 2) - (Height div 2);
 
   //Tabs
-  //TODO: Replace with new App Controller interface...
   {$IFNDEF NEW_TABS}
+  //TODO: Replace with new App Controller interface...
   FTabController:= TJDTabController.Create(nil);
   FTabController.MainForm:= Self;
-  FTabController.ChromeTabs:= Tabs;
+  FTabController.ChromeTabs:= ChromeTabs;
   FTabController.Container:= pContent;
   {$ELSE}
   //TODO: Create new tab, if necessary...
@@ -231,8 +238,10 @@ begin
   {$IFNDEF NEW_TABS}
   FreeAndNil(FTabController);
   {$ELSE}
-  //TODO: Close all tabs within...
+  if GetTabCount > 0 then begin
+    //TODO: Close all tabs within...
 
+  end;
   {$ENDIF}
 end;
 
@@ -247,7 +256,26 @@ begin
   {$ENDIF}
 end;
 
-procedure TfrmAppWindow.TabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
+function TfrmAppWindow.ChromeTabByID(const ID: Integer): TChromeTab;
+begin
+  Result:= nil;
+  for var X := 0 to ChromeTabs.Tabs.Count-1 do begin
+    if ChromeTabs.Tabs[X].Tag = ID then begin
+      Result:= ChromeTabs.Tabs[X];
+      Break;
+    end;
+  end;
+end;
+
+procedure TfrmAppWindow.HideContent;
+begin
+  while pContent.ControlCount > 0 do begin
+    pContent.Controls[0].Hide;
+    //pContent.Controls[0].Parent:= nil;
+  end;
+end;
+
+procedure TfrmAppWindow.ChromeTabsActiveTabChanged(Sender: TObject; ATab: TChromeTab);
 begin
   //Tabs
   pContent.DisableAlign;
@@ -256,23 +284,23 @@ begin
     TabController.HandleTabChanged(ATab);
     {$ELSE}
     //TODO: Use new app controller to show tab content...
-
+    HideContent;
+    var ID:= ATab.Tag;
+    var Content:= AppController.TabByID[ID];
+    Content.SetParentWindow(pContent.Handle);
     {$ENDIF}
   finally
     pContent.EnableAlign;
   end;
 end;
 
-procedure TfrmAppWindow.TabsButtonAddClick(Sender: TObject; var Handled: Boolean);
+procedure TfrmAppWindow.ChromeTabsButtonAddClick(Sender: TObject; var Handled: Boolean);
 begin
   //Tabs
   Handled:= True;
-  {$IFNDEF NEW_TABS}
-  OpenNewBrowserTab;
-  {$ELSE}
-  //TODO
-
-  {$ENDIF}
+  //TODO: Use details...
+  var URI:= 'https://google.com';
+  OpenNewBrowserTab(URI);
 end;
 
 {$IFNDEF NEW_TABS}
@@ -285,6 +313,7 @@ begin
   Result:= TabController.CreateTab(TfrmContentBrowser);
   (Result.Content as TfrmContentBrowser).Navigate(TURL);
   ShowMenu(False);
+
 end;
 {$ELSE}
 function TfrmAppWindow.OpenNewBrowserTab(const URL: String = ''): IJDAppTabContent;
@@ -293,17 +322,12 @@ begin
   var TURL:= URL;
   if TURL = '' then
     TURL:= 'https://google.com'; //TODO: Use default home page option...
-
-  //TODO: Use new app controller...
-
-  //Result:= TabController.CreateTab(TfrmContentBrowser);
-  //(Result.Content as TfrmContentBrowser).Navigate(TURL);
-
+  Result:= Self.CreateNewTab(URL);
   ShowMenu(False);
 end;
 {$ENDIF}
 
-procedure TfrmAppWindow.TabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
+procedure TfrmAppWindow.ChromeTabsButtonCloseTabClick(Sender: TObject; ATab: TChromeTab;
   var Close: Boolean);
 begin
   //Tabs
@@ -312,7 +336,7 @@ begin
   TabController.DeleteTab(ATab.Index);
   {$ELSE}
   //TODO: Use new app controller...
-
+  CloseTab(ATab.Index);
   {$ENDIF}
   //TODO: This closes wrong tab if one has been moved (wrong index)...
 
@@ -320,7 +344,7 @@ begin
 
 end;
 
-procedure TfrmAppWindow.TabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
+procedure TfrmAppWindow.ChromeTabsCreateDragForm(Sender: TObject; ATab: TChromeTab; var DragForm: TForm);
 begin
   //Tabs
   {$IFNDEF NEW_TABS}
@@ -332,18 +356,18 @@ begin
   {$ENDIF}
 end;
 
-procedure TfrmAppWindow.TabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
+procedure TfrmAppWindow.ChromeTabsNeedDragImageControl(Sender: TObject; ATab: TChromeTab; var DragControl: TWinControl);
 begin
 
   DragControl := pContent;
 end;
 
-procedure TfrmAppWindow.TabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
+procedure TfrmAppWindow.ChromeTabsShowHint(Sender: TObject; HitTestResult: THitTestResult; var HintText: string;
   var HintTimeout: Integer);
 begin
   //Tabs
   if HitTestResult.HitTestArea in [THitTestArea.htTab, THitTestArea.htTabImage] then begin
-    var Tab:= Tabs.Tabs[HitTestResult.TabIndex];
+    var Tab:= ChromeTabs.Tabs[HitTestResult.TabIndex];
     Stat.Panels[0].Text:= Tab.Caption;
   end else begin
     Stat.Panels[0].Text:= Application.Hint;
@@ -396,7 +420,7 @@ begin
   end;
 end;
 
-procedure TfrmAppWindow.TabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
+procedure TfrmAppWindow.ChromeTabsTabDragDrop(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
   var TabDropOptions: TTabDropOptions);
 begin
   //Tabs
@@ -516,12 +540,14 @@ end;
 
 function TfrmAppWindow.GetTab(const Index: Integer): IJDAppTabContent;
 begin
-  //TODO: Return reference to tab at given index...
+  //Return reference to tab at given index...
+  var ID:= ChromeTabs.Tabs[Index].Tag;
+  Result:= AppController.GetTabByID(ID);
 end;
 
 function TfrmAppWindow.GetTabCount: Integer;
 begin
-  Result:= Tabs.Tabs.Count;
+  Result:= ChromeTabs.Tabs.Count;
 end;
 
 function TfrmAppWindow.GetTop: Integer;
@@ -558,8 +584,27 @@ end;
 function TfrmAppWindow.CreateNewTab(const URI: WideString): IJDAppTabContent;
 begin
   //TODO: Create new tab and navigate to URI...
-  //Result:= TfrmJDAppTabContent.Create(nil, Self);
+  Self.DisableAlign;
+  try
 
+    var T:= ChromeTabs.Tabs.Add;
+
+    var Frm: TfrmJDAppTabContent:= TfrmJDAppTabContent.Create(nil, Self);
+    Result:= Frm;
+
+    T.Caption:= Frm.TabCaption;
+    T.Tag:= Frm.ID;
+
+    Frm.Parent:= pContent;
+    Frm.Align:= alClient;
+    Frm.BorderStyle:= bsNone;
+    Frm.Show;
+    Frm.BringToFront;
+
+    Frm.Navigate(URI);
+  finally
+    Self.EnableAlign;
+  end;
 end;
 
 end.

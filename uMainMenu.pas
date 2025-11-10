@@ -50,8 +50,13 @@ implementation
 {$R *.dfm}
 
 uses
-  uAppWindow,
-  JD.TabController;
+  uAppWindow
+  {$IFNDEF NEW_TABS}
+  , JD.TabController
+  {$ELSE}
+  , JD.AppController.Intf
+  {$ENDIF}
+  ;
 
 type
   THackCategoryPanelGroup = class(TCategoryPanelGroup)
@@ -76,6 +81,7 @@ begin
   TabCaption:= 'Main Menu';
   CalcScrollHeight;
   SB.VertScrollBar.Position:= 0;
+  pNav.Visible:= False;
 end;
 
 procedure TfrmMainMenu.FormResize(Sender: TObject);
@@ -212,7 +218,7 @@ begin
   TabController(MainForm).CreateTab(TfrmAppSetup, -1, 0);
   {$ELSE}
   //TODO: Use new app controller...
-
+  TfrmAppWindow(MainForm).CreateNewTab('jd://system/setup');
   {$ENDIF}
   HideMenu;
 end;

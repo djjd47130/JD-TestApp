@@ -14,6 +14,7 @@ inherited frmMainMenu: TfrmMainMenu
     ExplicitWidth = 475
     inherited txtNavURI: TEdit
       Width = 274
+      ExplicitWidth = 274
     end
     inherited btnNavGo: TJDFontButton
       Left = 379

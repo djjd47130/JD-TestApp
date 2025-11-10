@@ -27,6 +27,7 @@ type
   IJDAppTabContent = interface;
   IJDAppSetup = interface;
   IJDAppPlugin = interface;
+  IJDAppPluginRef = interface;
   IJDAppFavicon = interface;
   IJDAppFavicons = interface;
   IJDAppMenuItem = interface;
@@ -80,28 +81,36 @@ type
   IJDAppController = interface
     ['{48EC9E4B-C5F6-4B41-B5BD-8D609B59FD0A}']
     function GetPluginCount: Integer stdcall;
-    function GetPlugin(const Index: Integer): IJDAppPlugin stdcall;
+    function GetPlugin(const Index: Integer): IJDAppPluginRef stdcall;
     function GetWindowCount: Integer stdcall;
     function GetWindow(const Index: Integer): IJDAppWindow stdcall;
     function GetTabCount: Integer stdcall;
     function GetTab(const Index: Integer): IJDAppTabContent stdcall;
+    function GetTabByID(const ID: Integer): IJDAppTabContent stdcall;
     function GetAppSetup: IJDAppSetup stdcall;
     function GetFavicons: IJDAppFavicons stdcall;
 
-    procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
-    procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
+    property AppSetup: IJDAppSetup read GetAppSetup;
     procedure HandleURI(const CmdLine: WideString) stdcall;
     function CreateNewWindow(const URI: WideString = ''): IJDAppWindow stdcall;
     procedure CloseWindow(const Index: Integer) stdcall;
+
+    procedure RegisterWindow(AWindow: IJDAppWindow) stdcall;
+    procedure UnregisterWindow(AWindow: IJDAppWindow) stdcall;
+
     procedure RegisterContent(AContent: IJDAppTabContent) stdcall;
     procedure UnregisterContent(AContent: IJDAppTabContent) stdcall;
 
     property PluginCount: Integer read GetPluginCount;
-    property Plugins[const Index: Integer]: IJDAppPlugin read GetPlugin;
+    property Plugins[const Index: Integer]: IJDAppPluginRef read GetPlugin;
+
     property WindowCount: Integer read GetWindowCount;
     property Windows[const Index: Integer]: IJDAppWindow read GetWindow; default;
+
     property TabCount: Integer read GetTabCount;
     property Tabs[const Index: Integer]: IJDAppTabContent read GetTab;
+    property TabByID[const ID: Integer]: IJDAppTabContent read GetTab;
+    function IndexOfTab(ATab: IJDAppTabContent): Integer stdcall;
   end;
 
 
@@ -154,6 +163,7 @@ type
     function GetIndex: Integer stdcall;
     function GetTabCaption: WideString stdcall;
     procedure SetTabCaption(const Value: WideString) stdcall;
+    function GetID: Integer stdcall;
 
     /// <summary>
     /// Virtual method to refresh any data within the form.
@@ -164,7 +174,7 @@ type
     /// Virtual function to return whether the form is allowed to close.
     /// </summary>
     function CanClose: Boolean stdcall;
-
+    procedure SetParentWindow(const Wnd: HWND) stdcall;
     procedure Navigate(const URI: WideString = '') stdcall;
 
     property Owner: IJDAppController read GetOwner;
@@ -172,6 +182,7 @@ type
     property URI: WideString read GetURI;
     property Index: Integer read GetIndex;
     property TabCaption: WideString read GetTabCaption write SetTabCaption;
+    property ID: Integer read GetID;
   end;
 
 
@@ -198,6 +209,8 @@ type
     function GetPluginsReg: WideString stdcall;
     function GetAppStartupCmd: WideString stdcall;
     procedure SetAppStartupCmd(const Value: WideString) stdcall;
+    function GetNewTabCmd: WideString stdcall;
+    procedure SetNewTabCmd(const Value: WideString) stdcall;
 
     function SetupFilename: WideString stdcall;
     procedure LoadSetup stdcall;
@@ -206,6 +219,7 @@ type
 
     /// <summary>
     /// Full path and filename to JSON file containing plugin registration.
+    /// This allows multiple different configurations based off of different registries.
     /// </summary>
     property PluginsReg: WideString read GetPluginsReg;
 
@@ -213,7 +227,12 @@ type
     /// What command to execute on app startup, if any.
     /// </summary>
     property AppStartupCmd: WideString read GetAppStartupCmd write SetAppStartupCmd;
-    //TODO: New Tab Button...
+
+    /// <summary>
+    /// What command to execute on creating new tab, if any.
+    /// </summary>
+    property NewTabCmd: WideString read GetNewTabCmd write SetNewTabCmd;
+
     //TODO: Auto Collapse Main Menu...
 
   end;
@@ -267,6 +286,16 @@ type
     property Publisher: WideString read GetPublisher;
     property MenuItems: IJDAppMenuItems read GetMenuItems;
     property ShellRegs: IJDAppShellRegs read GetShellRegs;
+  end;
+
+  //App-side reference to a plugin as listed in global registry.
+  IJDAppPluginRef = interface
+    ['{1D788B41-B014-4FD1-AB75-440A71B0CF1F}']
+    function GetOwner: IJDAppController stdcall;
+    function GetHandle: NativeUInt stdcall;
+    function GetPlugin: IJDAppPlugin stdcall;
+    function GetEnabled: Boolean stdcall;
+
   end;
 
 

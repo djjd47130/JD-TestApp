@@ -79,6 +79,8 @@ type
     function GetPluginsReg: WideString stdcall;
     function GetAppStartupCmd: WideString stdcall;
     procedure SetAppStartupCmd(const Value: WideString) stdcall;
+    function GetNewTabCmd: WideString stdcall;
+    procedure SetNewTabCmd(const Value: WideString) stdcall;
   public
     constructor Create; virtual;
     destructor Destroy; override;
@@ -98,8 +100,31 @@ type
 
     property PluginsReg: WideString read GetPluginsReg;
     property AppStartupCmd: WideString read GetAppStartupCmd write SetAppStartupCmd;
+    property NewTabCmd: WideString read GetNewTabCmd write SetNewTabCmd;
 
   end;
+
+
+
+  TJDAppPluginRef = class(TInterfacedObject, IJDAppPluginRef)
+  private
+    FOwner: IJDAppController;
+    FHandle: NativeUInt;
+    FPlugin: IJDAppPlugin;
+    FEnabled: Boolean;
+  protected
+    //From IJDAppPluginRef
+    function GetOwner: IJDAppController stdcall;
+    function GetHandle: NativeUInt stdcall;
+    function GetPlugin: IJDAppPlugin stdcall;
+    function GetEnabled: Boolean stdcall;
+  public
+    constructor Create(AOwner: IJDAppController; const Handle: NativeUInt); virtual;
+    destructor Destroy; override;
+
+  end;
+
+
 
 implementation
 
@@ -219,6 +244,11 @@ begin
   Result:= FObj.I[N];
 end;
 
+function TJDAppSetup.GetNewTabCmd: WideString;
+begin
+  Result:= GetS('new_tab_cmd');
+end;
+
 function TJDAppSetup.GetPluginsReg: WideString;
 begin
   Result:= GetS('plugins_reg');
@@ -276,6 +306,11 @@ begin
   FObj.I[N]:= Value;
 end;
 
+procedure TJDAppSetup.SetNewTabCmd(const Value: WideString);
+begin
+  SetS('new_tab_cmd', Value);
+end;
+
 procedure TJDAppSetup.SetS(const N: WideString; const Value: WideString);
 begin
   FObj.S[N]:= Value;
@@ -285,6 +320,40 @@ function TJDAppSetup.SetupFilename: WideString;
 begin
   Result:= ExtractFilePath(ParamStr(0));
   Result:= TPath.Combine(Result, 'AppConfig.json');
+end;
+
+{ TJDAppPluginRef }
+
+constructor TJDAppPluginRef.Create(AOwner: IJDAppController; const Handle: NativeUInt);
+begin
+  FOwner:= AOwner;
+  FHandle:= Handle;
+end;
+
+destructor TJDAppPluginRef.Destroy;
+begin
+  FOwner:= nil;
+  inherited;
+end;
+
+function TJDAppPluginRef.GetEnabled: Boolean;
+begin
+  Result:= FEnabled;
+end;
+
+function TJDAppPluginRef.GetHandle: NativeUInt;
+begin
+  Result:= FHandle;
+end;
+
+function TJDAppPluginRef.GetOwner: IJDAppController;
+begin
+  Result:= FOwner;
+end;
+
+function TJDAppPluginRef.GetPlugin: IJDAppPlugin;
+begin
+  Result:= FPlugin;
 end;
 
 end.

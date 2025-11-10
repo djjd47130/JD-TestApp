@@ -4,7 +4,7 @@
         <ProjectVersion>19.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">New Tabs</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -129,6 +129,7 @@
         <DCCReference Include="JD.AppController.Intf.pas"/>
         <DCCReference Include="JD.AppController.Impl.pas"/>
         <DCCReference Include="JD.ListController.pas"/>
+        <DCCReference Include="JD.TabController.pas"/>
         <DCCReference Include="JD.CmdLine.pas"/>
         <DCCReference Include="uAppController.pas">
             <Form>frmAppController</Form>
@@ -139,15 +140,14 @@
         <DCCReference Include="uAppTabContent.pas">
             <Form>frmJDAppTabContent</Form>
         </DCCReference>
-        <DCCReference Include="uContentListBase.pas">
-            <Form>frmContentListBase</Form>
-        </DCCReference>
-        <DCCReference Include="JD.TabController.pas"/>
         <DCCReference Include="uMainMenu.pas">
             <Form>frmMainMenu</Form>
         </DCCReference>
         <DCCReference Include="uAppSetup.pas">
             <Form>frmAppSetup</Form>
+        </DCCReference>
+        <DCCReference Include="uContentListBase.pas">
+            <Form>frmContentListBase</Form>
         </DCCReference>
         <DCCReference Include="uContentBrowser.pas">
             <Form>frmContentBrowser</Form>

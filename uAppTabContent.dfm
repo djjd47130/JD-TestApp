@@ -11,6 +11,7 @@ object frmJDAppTabContent: TfrmJDAppTabContent
   Font.Name = 'Tahoma'
   Font.Style = [fsBold]
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 18
   object pNav: TPanel
@@ -33,7 +34,8 @@ object frmJDAppTabContent: TfrmJDAppTabContent
       Height = 25
       Align = alClient
       TabOrder = 3
-      ExplicitHeight = 26
+      ExplicitLeft = 99
+      ExplicitTop = 5
     end
     object btnNavGo: TJDFontButton
       Left = 658

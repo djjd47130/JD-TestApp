@@ -53,8 +53,10 @@ type
     procedure btnNavBackClick(Sender: TObject);
     procedure btnNavForwardClick(Sender: TObject);
     procedure btnNavFavoritesClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     FOwner: IJDAppController;
+    FID: Integer;
     FMainForm: TForm;
     FURI: String;
   protected
@@ -64,10 +66,13 @@ type
     //Methods from IJDAppTabRef
     function GetTabCaption: WideString stdcall;
     procedure SetTabCaption(const Value: WideString) stdcall;
+    function GetID: Integer stdcall;
     function GetOwner: IJDAppController stdcall; reintroduce;
     function GetParent: IJDAppWindow stdcall;
     function GetURI: WideString stdcall;
     function GetIndex: Integer stdcall;
+
+    procedure SetParentWindow(const Wnd: HWND) stdcall;
     procedure RefreshData stdcall; virtual;
     function CanClose: Boolean stdcall; virtual;
     procedure Navigate(const URI: WideString = '') stdcall;
@@ -78,6 +83,8 @@ type
     destructor Destroy; override;
 
     property TabCaption: WideString read GetTabCaption write SetTabCaption;
+    property ID: Integer read GetID;
+    function ChromeTab: TChromeTab;
 
     //TODO: Favicons - #13
     function GetImageIndex: Integer; virtual;
@@ -87,7 +94,10 @@ type
     class function GetShellPath: String; virtual;
     class procedure ShellOpen(const Path: String); virtual;
 
+    //TODO: Main form shall become "Parent form".
     property MainForm: TForm read FMainForm;
+
+    //TODO: Browsing / Navigation History
 
 
   end;
@@ -103,8 +113,11 @@ implementation
 {$R *.dfm}
 
 uses
+  uAppController,
   uAppWindow,
-  JD.TabController;
+  JD.TabController
+  , IdURI
+  ;
 
 
 
@@ -126,19 +139,53 @@ begin
   FOnClick := Value;
 end;
 
+
+
+var
+  _TabLastID: Int64;
+
+function NewTabID: Int64;
+begin
+  _TabLastID:= _TabLastID + 1;
+  Result:= _TabLastID;
+end;
+
 { TfrmJDAppTabContent }
 
 constructor TfrmJDAppTabContent.Create(AOwner: TComponent; AMainForm: TForm);
 begin
   inherited Create(AOwner);
+  FID:= NewTabID;
   FMainForm:= AMainForm;
   TabCaption:= Caption;
+  {$IFDEF NEW_TABS}
+  AppController.RegisterContent(Self);
+  {$ELSE}
+
+  {$ENDIF}
 end;
 
 destructor TfrmJDAppTabContent.Destroy;
 begin
 
+  {$IFDEF NEW_TABS}
+  AppController.UnregisterContent(Self);
+  {$ENDIF}
   inherited;
+end;
+
+procedure TfrmJDAppTabContent.FormCreate(Sender: TObject);
+begin
+  {$IFDEF NEW_TABS}
+  pNav.Visible:= True;
+  {$ELSE}
+  pNav.Visible:= False;
+  {$ENDIF}
+end;
+
+function TfrmJDAppTabContent.GetID: Integer;
+begin
+  Result:= FID;
 end;
 
 function TfrmJDAppTabContent.GetImageIndex: Integer;
@@ -164,15 +211,29 @@ begin
 end;
 
 function TfrmJDAppTabContent.GetTabCaption: WideString;
-var
-  T: TJDTabRef;
 begin
   {$IFNDEF NEW_TABS}
-  T:= TabController(MainForm).TabByForm(Self);
+  var T:= TabController(MainForm).TabByForm(Self);
   if T <> nil then
     Result:= T.Caption;
   {$ELSE}
-  //TODO: Use new app controller...
+  //TODO: Use new app controller to fetch tab caption...
+  Result:= inherited Caption;
+  {$ENDIF}
+end;
+
+procedure TfrmJDAppTabContent.SetTabCaption(const Value: WideString);
+begin
+  {$IFNDEF NEW_TABS}
+  var T:= TabController(MainForm).TabByForm(Self);
+  if T <> nil then
+    T.Caption:= Value;
+  {$ELSE}
+  //TODO: Use new app controller to update tab caption...
+  var T:= Self.ChromeTab;
+  if T <> nil then
+    T.Caption:= Value;
+  //TODO: Also update form caption, if this is the active tab...
 
   {$ENDIF}
 end;
@@ -192,54 +253,43 @@ begin
   Result:= FURI;
 end;
 
-procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
-begin
-  Self.RefreshData;
-end;
-
 function TfrmJDAppTabContent.CanClose: Boolean;
 begin
   //Override supported
   Result:= True;
 end;
 
+function TfrmJDAppTabContent.ChromeTab: TChromeTab;
+begin
+  //Return TChromeTab associated with this content...
+  Result:= TfrmAppWindow(MainForm).ChromeTabByID(FID);
+end;
+
 procedure TfrmJDAppTabContent.RefreshData;
 begin
-  //Override expected
+  //Override supported
+  Self.Navigate(Self.FURI);
 end;
 
 function TfrmJDAppTabContent.GetIndex: Integer;
 begin
-  //TODO: Return index of tab within window, or global registry???
-  //  Is this even necessary?
-
+  //Return this content's tab index within global registry...
+  Result:= AppController.IndexOfTab(Self);
 end;
 
-procedure TfrmJDAppTabContent.SetTabCaption(const Value: WideString);
-var
-  T: TJDTabRef;
+procedure TfrmJDAppTabContent.SetParentWindow(const Wnd: HWND);
 begin
-  {$IFNDEF NEW_TABS}
-  T:= TabController(MainForm).TabByForm(Self);
-  if T <> nil then
-    T.Caption:= Value;
-  {$ELSE}
-  //TODO: Use new app controller...
-
-  {$ENDIF}
+  Winapi.Windows.SetParent(Self.Handle, Wnd);
 end;
 
-procedure TfrmJDAppTabContent.Navigate(const URI: WideString);
+procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
 begin
-  //TODO
-  FURI:= URI;
-  //TODO: Reload content to new screen...
-
+  RefreshData;
 end;
 
 procedure TfrmJDAppTabContent.btnNavBackClick(Sender: TObject);
 begin
-  //TODO: Go back in history...
+  //TODO: Go back in history (Soft Nav)...
 
 end;
 
@@ -251,14 +301,58 @@ end;
 
 procedure TfrmJDAppTabContent.btnNavForwardClick(Sender: TObject);
 begin
-  //TODO: Go forward in history...
+  //TODO: Go forward in history (Soft Nav)...
 
 end;
 
 procedure TfrmJDAppTabContent.btnNavGoClick(Sender: TObject);
 begin
-  //TODO: Navigate to shell URI...
+  //TODO: Navigate to shell URI (Hard Nav)...
+  Navigate(txtNavURI.Text);
+end;
 
+procedure TfrmJDAppTabContent.Navigate(const URI: WideString);
+begin
+  FURI:= URI;
+  txtNavURI.Text:= URI;
+  ChromeTab.SpinnerState:= TChromeTabSpinnerState.tssRenderedDownload;
+  try
+    DisableAlign;
+    try
+      //TODO: Unload whatever might be currently loaded...
+
+
+      //TODO: Migrate this logic to an app-level handler...
+
+
+      //TODO: Reload content to new screen (Hard Nav)...
+      var U:= TIdURI.Create(URI);
+      try
+        //Determine protocol / host name and handle accordingly...
+        if SameText(U.Protocol, 'jd') then begin
+          if SameText(U.Host, 'system') then begin
+            //TODO: Handle system-level command...
+
+          end;
+        end else
+        if SameText(U.Protocol, 'http') or SameText(U.Protocol, 'https') then begin
+          //TODO: Open in web browser...
+
+        end else begin
+          //TODO: Unknown protocol or command, lookup in plugins...
+
+          //TODO: Return error screen, if needed...
+
+        end;
+      finally
+        U.Free;
+      end;
+    finally
+      EnableAlign;
+    end;
+  finally
+    ChromeTab.SpinnerState:= TChromeTabSpinnerState.tssNone;
+  end;
 end;
 
 end.

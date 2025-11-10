@@ -1,5 +1,20 @@
 unit JD.ListController;
 
+(*
+JD List Controller Concept
+
+Lists are designed by means of a TCollection mechanism.
+
+- Group: "User Interface"
+  - Item: "App Startup" [Drop-down]
+  - Item: "New Tab Button [Drop-down]
+  - Item: "Auto Collapse Main Menu" [Switch]
+- Group: "Look and Feel"
+  - Item: "Main Background Color" [Color Drop-down]
+  - Item: "Secondary Background Color" [Color Drop-down]
+  - Item: "Accent Color" [Color Drop-down]
+*)
+
 interface
 
 uses
@@ -16,15 +31,19 @@ type
 
   TJDListOrientation = (loVertical, loHorizontal, loVerticalTile, loHorizontalTile);
 
-
+  /// <summary>
+  /// A single list item residing within a JD list.
+  /// </summary>
   TJDListItem = class(TCollectionItem)
   private
     FID: Int64;
     FCaption: TCaption;
     FData: Pointer;
+    FLayout: TJDListItemLayout;
     procedure SetCaption(const Value: TCaption);
     procedure SetData(const Value: Pointer);
     procedure SetID(const Value: Int64);
+    procedure SetLayout(const Value: TJDListItemLayout);
   protected
     function GetDisplayName: String; override;
   public
@@ -34,6 +53,8 @@ type
   published
     property Caption: TCaption read FCaption write SetCaption;
     property ID: Int64 read FID write SetID;
+    //A custom layout that overrides the parent list's layout.
+    property Layout: TJDListItemLayout read FLayout write SetLayout;
   end;
 
   TJDListItems = class(TOwnedCollection)
@@ -60,6 +81,7 @@ type
     FOnItemDeleted: TJDListItemEvent;
     FOnItemEdited: TJDListItemEvent;
     FOnItemAdded: TJDListItemEvent;
+    FOnItemGetData: TJDListItemEvent;
     procedure SetContainer(const Value: TScrollBox);
     procedure SetOrientation(const Value: TJDListOrientation);
     procedure SetItemHeight(const Value: Integer);
@@ -69,6 +91,7 @@ type
     procedure DoOnItemAdded(Item: TJDListItem); virtual;
     procedure DoOnItemEdited(Item: TJDListItem); virtual;
     procedure DoOnItemDeleted(Item: TJDListItem); virtual;
+    procedure DoOnItemGetData(Item: TJDListItem); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -86,13 +109,20 @@ type
     property OnItemAdded: TJDListItemEvent read FOnItemAdded write FOnItemAdded;
     property OnItemEdited: TJDListItemEvent read FOnItemEdited write FOnItemEdited;
     property OnItemDeleted: TJDListItemEvent read FOnItemDeleted write FOnItemDeleted;
+    property OnItemGetData: TJDListItemEvent read FOnItemGetData write FOnItemGetData;
   end;
 
+  /// <summary>
+  /// Allows you to define a custom template for items in a JD list.
+  ///
+  /// </summary>
   TJDListItemLayout = class(TComponent)
   private
     FContentControl: TCustomControl;
     procedure SetContentControl(const Value: TCustomControl);
   public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   published
     //TODO!!!
     property ContentControl: TCustomControl read FContentControl write SetContentControl;
@@ -169,6 +199,12 @@ procedure TJDListController.DoOnItemEdited(Item: TJDListItem);
 begin
   if Assigned(FOnItemEdited) then
     FOnItemEdited(Self, Item);
+end;
+
+procedure TJDListController.DoOnItemGetData(Item: TJDListItem);
+begin
+  if Assigned(FOnItemGetData) then
+    FOnItemGetData(Self, Item);
 end;
 
 function TJDListController.Add: TListItemBase;
@@ -324,7 +360,24 @@ begin
   FID := Value;
 end;
 
+procedure TJDListItem.SetLayout(const Value: TJDListItemLayout);
+begin
+  FLayout := Value;
+end;
+
 { TJDListItemLayout }
+
+constructor TJDListItemLayout.Create(AOwner: TComponent);
+begin
+  inherited;
+
+end;
+
+destructor TJDListItemLayout.Destroy;
+begin
+
+  inherited;
+end;
 
 procedure TJDListItemLayout.SetContentControl(const Value: TCustomControl);
 begin
