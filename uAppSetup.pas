@@ -45,7 +45,6 @@ type
     ScrollBox1: TScrollBox;
     ComboListItem2: TComboListItem;
     ComboListItem3: TComboListItem;
-    ListSwitchItem3: TListSwitchItem;
     Label1: TLabel;
     Label3: TLabel;
     ScrollBox2: TScrollBox;
@@ -54,11 +53,12 @@ type
     ComboListItem4: TComboListItem;
     ListSwitchItem4: TListSwitchItem;
     tabMainMenu: TTabSheet;
-    tabTabs: TTabSheet;
     Label2: TLabel;
     ComboListItem5: TComboListItem;
-    ComboListItem6: TComboListItem;
-    ComboListItem7: TComboListItem;
+    ScrollBox3: TScrollBox;
+    Label4: TLabel;
+    ListSwitchItem2: TListSwitchItem;
+    ComboListItem8: TComboListItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);

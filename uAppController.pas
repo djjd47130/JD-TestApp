@@ -31,18 +31,18 @@ uses
   JD.AppController.Impl,
 
   uAppWindow,
-  uAppSetup;
+  uAppSetup, Vcl.ExtCtrls;
 
 type
   TfrmAppController = class(TForm, IJDAppController)
     imgFavicons16: TImageList;
     Favicons: TJDFavicons;
     AppEvents: TApplicationEvents;
-    TrayIcon: TElTrayIcon;
     pmTray: TPopupMenu;
     mShow: TMenuItem;
     mExit: TMenuItem;
     mNewWindow: TMenuItem;
+    TrayIcon1: TTrayIcon;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure mExitClick(Sender: TObject);

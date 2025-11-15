@@ -82,7 +82,6 @@ type
     procedure SetContentOnly(const Value: Boolean);
     procedure ProcessDroppedTab(Sender: TObject; X, Y: Integer; DragTabObject: IDragTabObject; Cancelled: Boolean;
       var TabDropOptions: TTabDropOptions);
-    procedure HideContent;
   protected
 
     procedure CreateParams(var Params: TCreateParams); override;
@@ -117,6 +116,7 @@ type
     property Width: Integer read GetWidth write SetWidth;
     property Height: Integer read GetHeight write SetHeight;
   public
+    procedure HideContent;
     property Menu: TfrmMainMenu read FMenu;
     function MenuVisible: Boolean;
     procedure ShowMenu(const Value: Boolean);

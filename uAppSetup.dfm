@@ -2,7 +2,6 @@ inherited frmAppSetup: TfrmAppSetup
   Caption = 'App Setup'
   ClientHeight = 541
   ClientWidth = 867
-  OnCreate = FormCreate
   OnShow = FormShow
   ExplicitWidth = 883
   ExplicitHeight = 580
@@ -11,22 +10,22 @@ inherited frmAppSetup: TfrmAppSetup
   inherited pNav: TPanel
     Width = 867
     TabOrder = 2
-    ExplicitWidth = 829
+    ExplicitWidth = 867
     inherited txtNavURI: TEdit
       Width = 666
-      ExplicitWidth = 628
+      ExplicitWidth = 666
     end
     inherited btnNavGo: TJDFontButton
       Left = 771
-      ExplicitLeft = 733
+      ExplicitLeft = 771
     end
     inherited btnNavFavorites: TJDFontButton
       Left = 803
-      ExplicitLeft = 765
+      ExplicitLeft = 803
     end
     inherited btnNavMenu: TJDFontButton
       Left = 835
-      ExplicitLeft = 797
+      ExplicitLeft = 835
     end
   end
   object btnSave: TJDFontButton
@@ -71,8 +70,6 @@ inherited frmAppSetup: TfrmAppSetup
     TabOrder = 0
     Text = 'Save Setup'
     OnClick = btnSaveClick
-    ExplicitTop = 455
-    ExplicitWidth = 829
   end
   object Pages: TPageControl
     Left = 0
@@ -82,11 +79,9 @@ inherited frmAppSetup: TfrmAppSetup
     ActivePage = tabGeneral
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 829
     object tabGeneral: TTabSheet
       Caption = '  General  '
       ImageIndex = 2
-      ExplicitWidth = 821
       object ScrollBox1: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -104,13 +99,13 @@ inherited frmAppSetup: TfrmAppSetup
           AlignWithMargins = True
           Left = 8
           Top = 3
-          Width = 820
+          Width = 837
           Height = 32
           Margins.Left = 8
           Margins.Right = 8
           Align = alTop
           AutoSize = False
-          Caption = 'User Interface'
+          Caption = 'Tabular Interface'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -24
@@ -123,8 +118,8 @@ inherited frmAppSetup: TfrmAppSetup
         object Label2: TLabel
           AlignWithMargins = True
           Left = 8
-          Top = 206
-          Width = 820
+          Top = 151
+          Width = 837
           Height = 32
           Margins.Left = 8
           Margins.Right = 8
@@ -144,7 +139,7 @@ inherited frmAppSetup: TfrmAppSetup
         inline ComboListItem2: TComboListItem
           Left = 0
           Top = 93
-          Width = 836
+          Width = 853
           Height = 55
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
@@ -155,9 +150,9 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 0
           ExplicitTop = 93
-          ExplicitWidth = 815
+          ExplicitWidth = 836
           inherited Bevel1: TBevel
-            Width = 836
+            Width = 853
             ExplicitWidth = 811
           end
           inherited pData: TPanel
@@ -176,11 +171,15 @@ inherited frmAppSetup: TfrmAppSetup
             Image.Text = #61543
           end
           inherited btnRight: TJDFontButton
-            Left = 592
-            ExplicitLeft = 571
+            Left = 800
+            Image.Text = #61524
+            Image.StandardColor = fcGreen
+            Visible = True
+            ExplicitLeft = 800
+            ExplicitTop = 5
           end
           inherited ComboBox1: TComboBox
-            Left = 648
+            Left = 609
             Style = csDropDownList
             ItemIndex = 1
             Text = 'Web Browser'
@@ -190,13 +189,13 @@ inherited frmAppSetup: TfrmAppSetup
               'TMDB'
               'Discover Movies (TMDB)'
               'Discover TV (TMDB)')
-            ExplicitLeft = 627
+            ExplicitLeft = 648
           end
         end
         inline ComboListItem3: TComboListItem
           Left = 0
           Top = 38
-          Width = 836
+          Width = 853
           Height = 55
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
@@ -207,9 +206,9 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 1
           ExplicitTop = 38
-          ExplicitWidth = 815
+          ExplicitWidth = 836
           inherited Bevel1: TBevel
-            Width = 836
+            Width = 853
             ExplicitWidth = 811
           end
           inherited pData: TPanel
@@ -225,14 +224,18 @@ inherited frmAppSetup: TfrmAppSetup
             end
           end
           inherited btnLeft: TJDFontButton
-            Image.Text = #61537
+            Image.Text = #61461
           end
           inherited btnRight: TJDFontButton
-            Left = 592
-            ExplicitLeft = 571
+            Left = 800
+            Image.Text = #61524
+            Image.StandardColor = fcGreen
+            Visible = True
+            ExplicitLeft = 817
+            ExplicitTop = 5
           end
           inherited ComboBox1: TComboBox
-            Left = 648
+            Left = 609
             Style = csDropDownList
             ItemIndex = 0
             Text = '(None)'
@@ -242,13 +245,13 @@ inherited frmAppSetup: TfrmAppSetup
               'TMDB'
               'Discover Movies (TMDB)'
               'Discover TV (TMDB)')
-            ExplicitLeft = 627
+            ExplicitLeft = 648
           end
         end
-        inline ListSwitchItem3: TListSwitchItem
+        inline ComboListItem5: TComboListItem
           Left = 0
-          Top = 148
-          Width = 836
+          Top = 186
+          Width = 853
           Height = 55
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
@@ -258,10 +261,105 @@ inherited frmAppSetup: TfrmAppSetup
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
-          ExplicitTop = 148
-          ExplicitWidth = 815
+          ExplicitTop = 241
+          ExplicitWidth = 836
           inherited Bevel1: TBevel
-            Width = 836
+            Width = 853
+            ExplicitWidth = 811
+          end
+          inherited pData: TPanel
+            Width = 90
+            AutoSize = True
+            ExplicitWidth = 90
+            inherited lblCaption: TLabel
+              Width = 84
+              Height = 41
+              Hint = 'What to open when the application starts up'
+              Caption = 'Color Mode'
+              ExplicitWidth = 84
+            end
+          end
+          inherited btnLeft: TJDFontButton
+            Image.Text = #61506
+          end
+          inherited btnRight: TJDFontButton
+            Left = 609
+            Color = clBlack
+            Image.Text = #61507
+            Image.Font.Color = 2697513
+            Image.UseStandardColor = False
+            TabStop = False
+            ExplicitLeft = 609
+            ExplicitTop = 5
+          end
+          inherited ComboBox1: TComboBox
+            Left = 665
+            Style = csDropDownList
+            ItemIndex = 0
+            Text = 'System Default'
+            Items.Strings = (
+              'System Default'
+              'Light Mode'
+              'Dark Mode')
+            ExplicitLeft = 648
+          end
+        end
+      end
+    end
+    object tabMainMenu: TTabSheet
+      Caption = 'Main Menu'
+      ImageIndex = 3
+      ExplicitLeft = 0
+      object ScrollBox3: TScrollBox
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 853
+        Height = 394
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderStyle = bsNone
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
+        TabOrder = 0
+        object Label4: TLabel
+          AlignWithMargins = True
+          Left = 8
+          Top = 3
+          Width = 837
+          Height = 32
+          Margins.Left = 8
+          Margins.Right = 8
+          Align = alTop
+          AutoSize = False
+          Caption = 'Main Menu'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -24
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitTop = -5
+          ExplicitWidth = 795
+        end
+        inline ListSwitchItem2: TListSwitchItem
+          Left = 0
+          Top = 93
+          Width = 853
+          Height = 55
+          Align = alTop
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          ExplicitTop = 148
+          ExplicitWidth = 836
+          inherited Bevel1: TBevel
+            Width = 853
             ExplicitWidth = 811
           end
           inherited pData: TPanel
@@ -286,18 +384,18 @@ inherited frmAppSetup: TfrmAppSetup
             ExplicitLeft = 3
           end
           inherited btnRight: TJDFontButton
-            Left = 695
-            ExplicitLeft = 674
+            Left = 712
+            ExplicitLeft = 695
           end
           inherited ToggleSwitch2: TToggleSwitch
-            Left = 751
-            ExplicitLeft = 730
+            Left = 768
+            ExplicitLeft = 751
           end
         end
-        inline ComboListItem5: TComboListItem
+        inline ComboListItem8: TComboListItem
           Left = 0
-          Top = 241
-          Width = 836
+          Top = 38
+          Width = 853
           Height = 55
           Align = alTop
           Font.Charset = DEFAULT_CHARSET
@@ -306,213 +404,50 @@ inherited frmAppSetup: TfrmAppSetup
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 3
-          ExplicitLeft = 3
-          ExplicitTop = 318
-          ExplicitWidth = 815
+          TabOrder = 1
+          ExplicitTop = 46
+          ExplicitWidth = 853
           inherited Bevel1: TBevel
-            Width = 836
+            Width = 853
             ExplicitWidth = 811
           end
           inherited pData: TPanel
-            Width = 178
+            Width = 89
             AutoSize = True
-            ExplicitWidth = 178
+            ExplicitWidth = 89
             inherited lblCaption: TLabel
-              Width = 172
+              Width = 83
               Height = 41
               Hint = 'What to open when the application starts up'
-              Caption = 'Main Background Color'
-              ExplicitWidth = 172
+              Caption = 'Menu Style'
+              ExplicitWidth = 83
             end
           end
           inherited btnLeft: TJDFontButton
-            Image.Text = #61537
+            Image.Text = #61497
           end
           inherited btnRight: TJDFontButton
-            Left = 592
-            Color = clBlack
-            DrawStyle = fdThemed
-            Image.Text = #61507
-            Image.Font.Color = 2697513
-            Image.UseStandardColor = False
-            TabStop = False
-            Visible = True
-            ExplicitLeft = 571
+            Left = 609
+            ExplicitLeft = 592
           end
           inherited ComboBox1: TComboBox
-            Left = 648
+            Left = 665
             Style = csDropDownList
             ItemIndex = 1
-            Text = 'Dark Gray'
+            Text = 'Vertical Menu'
             Items.Strings = (
-              'Black'
-              'Dark Gray'
-              'White'
-              'Dark Blue'
-              'Light B lue'
-              'Dark Green'
-              'Light Green'
-              'Dark Red'
-              'Light Red'
-              'Dark Purple'
-              'Light Purple'
-              'Custom...')
-            ExplicitLeft = 627
-          end
-        end
-        inline ComboListItem6: TComboListItem
-          Left = 0
-          Top = 296
-          Width = 836
-          Height = 55
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 4
-          ExplicitLeft = 3
-          ExplicitTop = 343
-          ExplicitWidth = 853
-          inherited Bevel1: TBevel
-            Width = 836
-            ExplicitWidth = 811
-          end
-          inherited pData: TPanel
-            Width = 221
-            AutoSize = True
-            ExplicitWidth = 221
-            inherited lblCaption: TLabel
-              Width = 215
-              Height = 41
-              Hint = 'What to open when the application starts up'
-              Caption = 'Secondary Background Color'
-              ExplicitWidth = 215
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61537
-          end
-          inherited btnRight: TJDFontButton
-            Left = 592
-            Color = clBlack
-            DrawStyle = fdThemed
-            Image.Text = #61507
-            Image.Font.Color = 5460819
-            Image.UseStandardColor = False
-            TabStop = False
-            Visible = True
-            ExplicitLeft = 592
-            ExplicitTop = 5
-          end
-          inherited ComboBox1: TComboBox
-            Left = 648
-            Style = csDropDownList
-            ItemIndex = 11
-            Text = 'Custom...'
-            Items.Strings = (
-              'Black'
-              'Dark Gray'
-              'White'
-              'Dark Blue'
-              'Light B lue'
-              'Dark Green'
-              'Light Green'
-              'Dark Red'
-              'Light Red'
-              'Dark Purple'
-              'Light Purple'
-              'Custom...')
-            ExplicitLeft = 627
-          end
-        end
-        inline ComboListItem7: TComboListItem
-          Left = 0
-          Top = 351
-          Width = 836
-          Height = 55
-          Align = alTop
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 5
-          ExplicitLeft = 8
-          ExplicitTop = 357
-          ExplicitWidth = 853
-          inherited Bevel1: TBevel
-            Width = 836
-            ExplicitWidth = 811
-          end
-          inherited pData: TPanel
-            Width = 100
-            AutoSize = True
-            ExplicitWidth = 100
-            inherited lblCaption: TLabel
-              Width = 94
-              Height = 41
-              Hint = 'What to open when the application starts up'
-              Caption = 'Accent Color'
-              ExplicitWidth = 94
-            end
-          end
-          inherited btnLeft: TJDFontButton
-            Image.Text = #61537
-          end
-          inherited btnRight: TJDFontButton
-            Left = 592
-            Color = clBlack
-            DrawStyle = fdThemed
-            Image.Text = #61507
-            Image.Font.Color = clLime
-            Image.UseStandardColor = False
-            TabStop = False
-            Visible = True
-            ExplicitLeft = 592
-            ExplicitTop = 5
-          end
-          inherited ComboBox1: TComboBox
-            Left = 648
-            Style = csDropDownList
-            ItemIndex = 11
-            Text = 'Custom...'
-            Items.Strings = (
-              'Black'
-              'Dark Gray'
-              'White'
-              'Dark Blue'
-              'Light B lue'
-              'Dark Green'
-              'Light Green'
-              'Dark Red'
-              'Light Red'
-              'Dark Purple'
-              'Light Purple'
-              'Custom...')
-            ExplicitLeft = 627
+              '(None)'
+              'Vertical Menu'
+              'Horizontal Menu'
+              'Hamburger Menu')
+            ExplicitLeft = 648
           end
         end
       end
     end
-    object tabTabs: TTabSheet
-      Caption = '  Tabs  '
-      ImageIndex = 4
-      ExplicitWidth = 821
-    end
-    object tabMainMenu: TTabSheet
-      Caption = 'Main Menu'
-      ImageIndex = 3
-      ExplicitWidth = 821
-    end
     object TabSheet1: TTabSheet
       Caption = '  Addons  '
       ImageIndex = 2
-      ExplicitWidth = 821
       object sbItems: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -526,7 +461,6 @@ inherited frmAppSetup: TfrmAppSetup
         DoubleBuffered = True
         ParentDoubleBuffered = False
         TabOrder = 0
-        ExplicitWidth = 815
         object Label3: TLabel
           AlignWithMargins = True
           Left = 8
@@ -563,7 +497,7 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 0
           ExplicitTop = 38
-          ExplicitWidth = 815
+          ExplicitWidth = 853
           inherited Bevel1: TBevel
             Width = 853
             ExplicitWidth = 815
@@ -587,13 +521,13 @@ inherited frmAppSetup: TfrmAppSetup
             Left = 712
             Hint = 'Configure Addon'
             Visible = True
-            ExplicitLeft = 674
+            ExplicitLeft = 712
           end
           inherited ToggleSwitch2: TToggleSwitch
             Left = 768
             Hint = 'Enable or Disable Addon'
             ThumbColor = clLime
-            ExplicitLeft = 730
+            ExplicitLeft = 768
           end
         end
       end
@@ -601,7 +535,6 @@ inherited frmAppSetup: TfrmAppSetup
     object tabBrowser: TTabSheet
       Caption = '  Browser  '
       ImageIndex = 2
-      ExplicitWidth = 821
       object ScrollBox2: TScrollBox
         AlignWithMargins = True
         Left = 3
@@ -615,7 +548,6 @@ inherited frmAppSetup: TfrmAppSetup
         DoubleBuffered = True
         ParentDoubleBuffered = False
         TabOrder = 0
-        ExplicitWidth = 815
         object Label5: TLabel
           AlignWithMargins = True
           Left = 8
@@ -650,7 +582,7 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 0
           ExplicitTop = 93
-          ExplicitWidth = 815
+          ExplicitWidth = 853
           inherited Bevel1: TBevel
             Width = 853
             ExplicitWidth = 811
@@ -670,7 +602,7 @@ inherited frmAppSetup: TfrmAppSetup
           end
           inherited btnRight: TJDFontButton
             Left = 609
-            ExplicitLeft = 571
+            ExplicitLeft = 609
           end
           inherited ComboBox1: TComboBox
             Left = 665
@@ -682,7 +614,7 @@ inherited frmAppSetup: TfrmAppSetup
               'Google'
               'Yahoo!'
               'TMDB')
-            ExplicitLeft = 627
+            ExplicitLeft = 665
           end
         end
         inline ComboListItem4: TComboListItem
@@ -699,7 +631,7 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 1
           ExplicitTop = 38
-          ExplicitWidth = 815
+          ExplicitWidth = 853
           inherited Bevel1: TBevel
             Width = 853
             ExplicitWidth = 811
@@ -719,7 +651,7 @@ inherited frmAppSetup: TfrmAppSetup
           end
           inherited btnRight: TJDFontButton
             Left = 609
-            ExplicitLeft = 571
+            ExplicitLeft = 609
           end
           inherited ComboBox1: TComboBox
             Left = 665
@@ -729,7 +661,7 @@ inherited frmAppSetup: TfrmAppSetup
               '(None)'
               'www.google.com'
               '')
-            ExplicitLeft = 627
+            ExplicitLeft = 665
           end
         end
         inline ListSwitchItem4: TListSwitchItem
@@ -746,7 +678,7 @@ inherited frmAppSetup: TfrmAppSetup
           ParentFont = False
           TabOrder = 2
           ExplicitTop = 148
-          ExplicitWidth = 815
+          ExplicitWidth = 853
           inherited Bevel1: TBevel
             Width = 853
             ExplicitWidth = 811
@@ -773,11 +705,11 @@ inherited frmAppSetup: TfrmAppSetup
           end
           inherited btnRight: TJDFontButton
             Left = 712
-            ExplicitLeft = 674
+            ExplicitLeft = 712
           end
           inherited ToggleSwitch2: TToggleSwitch
             Left = 768
-            ExplicitLeft = 730
+            ExplicitLeft = 768
           end
         end
       end

@@ -17,6 +17,7 @@ uses
   Winapi.Windows, Winapi.Messages,
   Vcl.Controls, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Forms,
   Vcl.Dialogs,
+  XSuperObject,
   ChromeTabs, ChromeTabsClasses;
 
 type
@@ -273,7 +274,7 @@ type
   /// Does not directly instantiate actual features - simply provides access to them.
   /// Task #11
   /// </summary>
-  IJDAppPlugin = interface
+  IJDAppPlugin = interface(IJDAppListItem)
     ['{341CC125-0FCC-44D7-9444-34BCAD491341}']
     function GetName: WideString; stdcall;
     function GetCaption: WideString; stdcall;
@@ -288,13 +289,27 @@ type
     property ShellRegs: IJDAppShellRegs read GetShellRegs;
   end;
 
+  IJDAppPlugins = interface(IJDAppListItems)
+    ['{7AA691B1-CFE3-4222-BC26-2A92BFDEE16B}']
+    function GetItem(const Index: Integer): IJDAppPlugin;
+
+  end;
+
+
+
   //App-side reference to a plugin as listed in global registry.
-  IJDAppPluginRef = interface
+  IJDAppPluginRef = interface(IJDAppListItem)
     ['{1D788B41-B014-4FD1-AB75-440A71B0CF1F}']
     function GetOwner: IJDAppController stdcall;
     function GetHandle: NativeUInt stdcall;
     function GetPlugin: IJDAppPlugin stdcall;
     function GetEnabled: Boolean stdcall;
+
+  end;
+
+  IJDAppPluginRefs = interface(IJDAppListItems)
+    ['{1BCF3080-61BB-44B1-8FFB-AEEFB2DF9CB3}']
+    function GetItem(const Index: Integer): IJDAppPluginRefs;
 
   end;
 
@@ -306,6 +321,23 @@ type
 
   TJDAppShellExecuteEvent = procedure(Sender: TObject; Item: IJDAppMenuItem) of object;
 
+  TJDAppParamType = (ptString, ptInteger, ptFloat, ptDouble, ptDateTime, ptBoolean, ptObject, ptArray);
+
+  IJDAppShellParam = interface(IJDAppListItem)
+    ['{356DE813-8DA4-4DC3-ADAF-39F339FDE009}']
+    function GetName: WideString stdcall;
+    function GetRequired: Boolean stdcall;
+    function GetType: WideString stdcall; //TODO: Implement enum or constants...
+
+  end;
+
+  IJDAppShellParams = interface(IJDAppListItems)
+    ['{CB3AF117-BF28-4B7D-865D-2FBD4EA21E07}']
+    function GetItem(const Index: Integer): IJDAppShellParam stdcall;
+
+  end;
+
+
   /// <summary>
   /// Represents a single possible shell object to be registered.
   /// Task #8
@@ -316,6 +348,8 @@ type
     procedure SetShellRoot(const Value: WideString); stdcall;
     function GetShellPath: WideString; stdcall;
     procedure SetShellPath(const Value: WideString); stdcall;
+    function GetParams: IJDAppShellParams stdcall;
+    procedure SetParams(const Value: IJDAppShellParams) stdcall;
     function GetOnExecute: TJDAppShellExecuteEvent;
     procedure SetOnExecute(const Value: TJDAppShellExecuteEvent);
 
@@ -325,8 +359,10 @@ type
     /// </summary>
     procedure ShellExec(const Path: WideString); stdcall;
 
+    //TODO: Rename "Root" and "Path" to "Protocol", "Host", and "Path"...
     property ShellRoot: WideString read GetShellRoot write SetShellRoot;
     property ShellPath: WideString read GetShellPath write SetShellPath;
+    property Params: IJDAppShellParams read GetParams write SetParams;
     property OnExecute: TJDAppShellExecuteEvent read GetOnExecute write SetOnExecute;
   end;
 
@@ -371,6 +407,9 @@ type
     property Caption: WideString read GetCaption write SetCaption;
     property Name: WideString read GetName write SetName;
     property OnClick: TJDAppShellExecuteEvent read GetOnClick write SetOnClick;
+    //TODO: Change OnClick to target URI?
+    //TODO: Grouping...
+    //TODO: Sort Index...
   end;
 
   /// <summary>
@@ -400,17 +439,49 @@ type
   ///                                    HISTORY                                         ///
   //////////////////////////////////////////////////////////////////////////////////////////
 
-
-  IJDAppTabHistoryItem = interface
+  IJDAppHistoryItem = interface(IJDAppListItem)
     ['{7EB652B8-6279-416E-B342-019CF45F9DCC}']
-    function GetURI: Integer; stdcall;
+    function GetURI: Integer stdcall;
+    function GetTimestamp: TDateTime stdcall;
+    function GetFavicon: IJDAppFavicon stdcall;
 
   end;
 
-  IJDAppTabHistory = interface
+  IJDAppHistory = interface(IJDAppListItems)
     ['{F521D6F5-D3F7-4E8D-8DA4-CAA9420EC4CD}']
-    function GetMax: Integer; stdcall;
-    procedure SetMax(const Value: Integer); stdcall;
+    function GetMax: Integer stdcall;
+    procedure SetMax(const Value: Integer) stdcall;
+    function GetItem(const Index: Integer): IJDAppHistoryItem stdcall;
+
+    function AddToHistory(const URI: WideString;
+      const Timestamp: TDateTime = 0): IJDAppHistoryItem stdcall;
+
+  end;
+
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                     CACHE                                          ///
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  IJDAppCacheItem = interface
+    ['{65C6EF67-3649-49B1-B006-601B82B06AE8}']
+    function GetTimestamp: TDateTime stdcall;
+    function GetURI: WideString stdcall;
+    function GetData: ISuperObject stdcall;
+    function GetFavicon: IJDAppFavicon stdcall;
+
+  end;
+
+  IJDAppCache = interface
+    ['{44D12F28-EB9E-4BDC-8ABE-1A9659FD97E2}']
+    function GetCount: Integer stdcall;
+    function GetItem(const Index: Integer): IJDAppCacheItem stdcall;
+
+    function AddToCache(const URI: WideString; const Data: ISuperObject;
+      const Timestamp: TDateTime = 0): IJDAppCacheItem stdcall;
 
   end;
 
@@ -436,6 +507,41 @@ type
     function GetItem(const Index: Integer): IJDAppSearchEngine; stdcall;
 
   end;
+
+
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///                                     WIDGETS                                        ///
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  IJDAppWidgetRef = interface(IJDAppListItem)
+    ['{3803B830-BA86-4004-9BB6-C700AADF8D09}']
+    function GetParentWindow: HWND stdcall;
+    procedure SetParentWindow(const Value: HWND) stdcall;
+
+  end;
+
+  IJDAppWidgetRefs = interface(IJDAppListItems)
+    ['{69C268AF-5F9E-479E-9BD8-10D55D48D721}']
+
+  end;
+
+
+
+
+  IJDAppWidgetColumn = interface(IJDAppListItem)
+    ['{8AAB3761-5CF8-476B-BF0B-FBDC5E7C0D42}']
+
+  end;
+
+  IJDAppWidgetColumns = interface(IJDAppListItems)
+    ['{6984997D-739E-4106-AB70-49EA6AD6F580}']
+
+  end;
+
 
 
 

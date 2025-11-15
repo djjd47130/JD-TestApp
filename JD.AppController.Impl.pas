@@ -106,7 +106,7 @@ type
 
 
 
-  TJDAppPluginRef = class(TInterfacedObject, IJDAppPluginRef)
+  TJDAppPluginRef = class(TJDAppListItem, IJDAppPluginRef)
   private
     FOwner: IJDAppController;
     FHandle: NativeUInt;

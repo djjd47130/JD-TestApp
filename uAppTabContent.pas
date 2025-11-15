@@ -57,11 +57,13 @@ type
   private
     FOwner: IJDAppController;
     FID: Integer;
-    FMainForm: TForm;
+    {$IFDEF NEW_TABS}
+    FParent: IJDAppWindow;
+    {$ELSE}
+    FParentForm: TForm;
+    {$ENDIF}
     FURI: String;
   protected
-
-  public
 
     //Methods from IJDAppTabRef
     function GetTabCaption: WideString stdcall;
@@ -71,16 +73,20 @@ type
     function GetParent: IJDAppWindow stdcall;
     function GetURI: WideString stdcall;
     function GetIndex: Integer stdcall;
-
     procedure SetParentWindow(const Wnd: HWND) stdcall;
-    procedure RefreshData stdcall; virtual;
-    function CanClose: Boolean stdcall; virtual;
-    procedure Navigate(const URI: WideString = '') stdcall;
 
   public
     //TODO: Pass instance of IJDAppController...
-    constructor Create(AOwner: TComponent; AMainForm: TForm); reintroduce; virtual;
+    {$IFDEF NEW_TABS}
+    constructor Create(AOwner: IJDAppController; AParent: IJDAppWindow); reintroduce; virtual;
+    {$ELSE}
+    constructor Create(AOwner: TComponent; AParentForm: TForm); reintroduce; virtual;
+    {$ENDIF}
     destructor Destroy; override;
+
+    procedure RefreshData stdcall; virtual;
+    function CanClose: Boolean stdcall; virtual;
+    procedure Navigate(const URI: WideString = '') stdcall;
 
     property TabCaption: WideString read GetTabCaption write SetTabCaption;
     property ID: Integer read GetID;
@@ -95,7 +101,11 @@ type
     class procedure ShellOpen(const Path: String); virtual;
 
     //TODO: Main form shall become "Parent form".
-    property MainForm: TForm read FMainForm;
+    {$IFDEF NEW_TABS}
+    property Parent: IJDAppWindow read GetParent;
+    {$ELSE}
+    property MainForm: TForm read FParentForm;
+    {$ENDIF}
 
     //TODO: Browsing / Navigation History
 
@@ -152,18 +162,25 @@ end;
 
 { TfrmJDAppTabContent }
 
-constructor TfrmJDAppTabContent.Create(AOwner: TComponent; AMainForm: TForm);
+{$IFDEF NEW_TABS}
+constructor TfrmJDAppTabContent.Create(AOwner: IJDAppController; AParent: IJDAppWindow);
+begin
+  inherited Create(nil);
+  FID:= NewTabID;
+  Self.FOwner:= AOwner;
+  FParent:= AParent;
+  TabCaption:= Caption;
+end;
+{$ELSE}
+constructor TfrmJDAppTabContent.Create(AOwner: TComponent; AParentForm: TForm);
 begin
   inherited Create(AOwner);
   FID:= NewTabID;
-  FMainForm:= AMainForm;
+  FParentForm:= AParentForm;
   TabCaption:= Caption;
-  {$IFDEF NEW_TABS}
   AppController.RegisterContent(Self);
-  {$ELSE}
-
-  {$ENDIF}
 end;
+{$ENDIF}
 
 destructor TfrmJDAppTabContent.Destroy;
 begin
@@ -245,7 +262,11 @@ end;
 
 function TfrmJDAppTabContent.GetParent: IJDAppWindow;
 begin
-  Result:= IJDAppWindow(TfrmAppWindow(FMainForm));
+  {$IFDEF NEW_TABS}
+  Result:= FParent;
+  {$ELSE}
+  Result:= IJDAppWindow(TfrmAppWindow(FParentForm));
+  {$ENDIF}
 end;
 
 function TfrmJDAppTabContent.GetURI: WideString;
@@ -279,11 +300,13 @@ end;
 
 procedure TfrmJDAppTabContent.SetParentWindow(const Wnd: HWND);
 begin
+  //Set this window's parent control...
   Winapi.Windows.SetParent(Self.Handle, Wnd);
 end;
 
 procedure TfrmJDAppTabContent.btnNavRefreshClick(Sender: TObject);
 begin
+  //Refresh button clicked
   RefreshData;
 end;
 
@@ -313,6 +336,7 @@ end;
 
 procedure TfrmJDAppTabContent.Navigate(const URI: WideString);
 begin
+  //Navigate to Shell Address #8
   FURI:= URI;
   txtNavURI.Text:= URI;
   ChromeTab.SpinnerState:= TChromeTabSpinnerState.tssRenderedDownload;
